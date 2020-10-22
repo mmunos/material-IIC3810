@@ -1,0 +1,3249 @@
+\documentclass{beamer}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{epsfig}
+\usepackage{dpscolor}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usepackage{MnSymbol,wasysym}
+
+\mode<presentation>
+{
+
+\useinnertheme{sparql}
+\useoutertheme{onlyfoot}
+\usecolortheme{seahorse}
+\usecolortheme{rose}
+
+\setbeamercovered{transparent}
+
+}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{corolario}{Corolario}
+\newtheorem{definicion}{Definición}
+\newtheorem{notacion}{Notación}
+\newtheorem{lema}{Lema}
+
+\newenvironment{ejemplo}
+{\begin{exampleblock}{Ejemplo}}
+{\end{exampleblock}}
+
+\newenvironment{ejercicio}
+{\begin{exampleblock}{Ejercicio}}
+{\end{exampleblock}}
+
+\newcommand{\cyan}[1]{\textCyan #1\textBlack}
+\newcommand{\red}[1]{\textRed #1\textBlack}
+\newcommand{\green}[1]{\textGreen #1\textBlack}
+\newcommand{\blue}[1]{\textBlue #1\textBlack}
+\newcommand{\black}[1]{\textBlack #1\textBlack}
+\newcommand{\magenta}[1]{\textMagenta #1\textBlack}
+\newcommand{\brown}[1]{\textBrown #1\textBlack}
+\newcommand{\vs}[1]{\vspace{#1mm}}
+\newcommand{\ignore}{}
+\newcommand{\ri}[1]{\text{\red{#1}}}
+\newcommand{\hs}{\hat\sigma}
+\newcommand{\modelos}{{\it modelos}}
+\newcommand{\B}{{\tt B}}
+\newcommand{\nspace}{\text{NSPACE}}
+\newcommand{\logspace}{\text{LOGSPACE}}
+\newcommand{\nlogspace}{\text{NLOGSPACE}}
+\newcommand{\npspace}{\text{NPSPACE}}
+\newcommand{\pspace}{\text{PSPACE}}
+\newcommand{\ph}{\text{PH}}
+\newcommand{\expspace}{\text{EXPSPACE}}
+\newcommand{\nexpspace}{\text{NEXPSPACE}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\espacio}{{\it espacio}}
+\newcommand{\tiempo}{{\it tiempo}}
+\newcommand{\ptime}{\text{PTIME}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\nexptime}{\text{NEXPTIME}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\A}{{\cal A}}
+\newcommand{\BB}{{\cal B}}
+\newcommand{\sat}{\text{SAT}}
+\newcommand{\sdnf}{\#\text{DNF-SAT}}
+\newcommand{\scnf}{\#\text{CNF-SAT}}
+\newcommand{\tcnfu}{\text{3-CNF-SAT-UNSAT}}
+\newcommand{\usat}{\text{unique-SAT}}
+\newcommand{\np}{\text{NP}}
+\newcommand{\ntime}{\text{NTIME}}
+\newcommand{\crp}{\text{RP}}
+\newcommand{\bpp}{\text{BPP}}
+\newcommand{\cnf}{\text{CNF-SAT}}
+\newcommand{\tcnf}{\text{3-CNF-SAT}}
+\newcommand{\dcnf}{\text{2-CNF-SAT}}
+\newcommand{\horn}{\text{HORN-SAT}}
+\newcommand{\nhorn}{\text{NEG-HORN-SAT}}
+\newcommand{\co}{\text{co-}}
+\newcommand{\rp}{\leq^\text{\it p}_\text{\it m}}
+\newcommand{\tur}{\leq^\text{\it p}_\text{\it T}}
+\newcommand{\rpar}{\leq^\text{\it p}_\text{\it par}}
+\newcommand{\reach}{\text{CAMINO}}
+\newcommand{\pe}{\text{PROG-ENT}}
+\newcommand{\pl}{\text{PROG-LIN}}
+\newcommand{\cor}{\text{CONT-REG}}
+\newcommand{\er}{\text{EQUIV-REG}}
+\newcommand{\qbf}{\text{QBF}}
+\newcommand{\shp}{\text{Succinct-HP}}
+\newcommand{\hp}{\text{HP}}
+\newcommand{\cdp}{\text{DP}}
+\newcommand{\clique}{\text{CLIQUE}}
+\newcommand{\eclique}{\text{exact-CLIQUE}}
+\newcommand{\costo}{\text{costo}}
+\newcommand{\tsp}{\text{TSP}}
+\newcommand{\tspu}{\text{unique-TSP}}
+\newcommand{\no}{\text{NO}}
+\newcommand{\yes}{\text{YES}}
+\newcommand{\br}{\text{CERTAIN-ANSWERS}}
+
+\newcommand{\CROM}{\text{CROM}}
+\newcommand{\EVAL}{\text{EVAL}}
+\newcommand{\EQUIV}{\text{EQUIV}}
+\newcommand{\EQUIVP}{\text{EQUIV-POL}}
+
+\newcommand{\re}{\text{RE}}
+\newcommand{\dec}{\text{R}}
+\newcommand{\fp}{\text{FP}}
+\newcommand{\sharpp}{\#\text{P}}
+\newcommand{\acc}{\text{accept}}
+\newcommand{\ssat}{\#\text{SAT}}
+
+\newcommand{\pr}{{\rm {\bf Pr}}}
+\newcommand{\esp}{{\rm {\bf E}}}
+\newcommand{\vr}{{\rm {\bf Var}}}
+
+
+\newcommand{\ucnf}{\text{U-CNF-SAT}}
+\newcommand{\sucnf}{\#\text{U-CNF-SAT}}
+\newcommand{\shorn}{\#\text{HORN-SAT}}
+\newcommand{\sclique}{\#\text{CLIQUE}}
+\newcommand{\indsets}{\#\text{IS}}
+\newcommand{\is}{\text{GIS}}
+\newcommand{\sis}{\#\text{GIS}}
+\newcommand{\lis}{\text{LIS}}
+\newcommand{\slis}{\#\text{LIS}}
+\newcommand{\cs}{\#\text{CicloSimple}}
+\newcommand{\ham}{\text{HAM}}
+\newcommand{\ncis}{\text{IS}}
+\newcommand{\mis}{\text{MIS}}
+
+\newcommand{\afor}{{\bf for}\ }
+\newcommand{\afore}{{\bf for each}\ }
+\newcommand{\ato}{{\bf to}\ }
+\newcommand{\ado}{{\bf do}\ }
+\newcommand{\aif}{{\bf if}\ }
+\newcommand{\athen}{{\bf then}\ }
+\newcommand{\aelse}{{\bf else}\ }
+\newcommand{\areturn}{{\bf return}\ }
+\newcommand{\awhile}{{\bf while}\ }
+\newcommand{\aand}{{\bf and}\ }
+\newcommand{\aor}{{\bf or}\ }
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+
+\newcommand{\minr}{\text{Min}}
+\newcommand{\maxr}{\text{Max}}
+\newcommand{\exir}{\text{Exists}}
+\newcommand{\ks}{\text{KS}}
+\newcommand{\sks}{\#\text{KS}}
+\newcommand{\ber}{\text{\bf Ber}}
+
+\usetikzlibrary{arrows,positioning} 
+\tikzset{
+    circ/.style={
+           circle,
+           draw=black, 
+           thick,
+           text centered,
+           },
+    circw/.style={
+           circle,
+           draw=white, 
+           thick,
+           text centered,
+           },
+    arrout/.style={
+           ->,
+           -latex,
+           thick,
+           },
+    arrin/.style={
+           <-,
+           latex-,
+           thick,
+           },
+    arrw/.style={
+           -,
+           thick,
+           },
+    arrww/.style={
+           -,
+           thick,
+           draw=white, 
+           }
+}
+
+\title[Cadenas de Markov]
+{Cadenas de Markov}
+
+\author[IIC3810]
+{IIC3810\\
+\vs{2} Marcelo Arenas, Luis Alberto Croquevielle y Thomas Reisenegger}
+
+\institute[]
+{
+%  Department of Computer Science\\
+%  Pontificia Universidad Católica de Chile
+}
+
+\date{}
+
+%\subject{Theoretical Computer Science}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Motivación: una pregunta pendiente del capítulo anterior}
+
+{\footnotesize
+
+¿Cómo podemos construir un generador (casi) uniforme para una relación?
+
+\vs{8}
+
+\visible<2->{
+Recuerde el problema $\ks$ definido en el capítulo anterior y la relación:
+\begin{eqnarray*}
+R_{\ks} & = & \{ ((\vec a, b), \vec x) \mid \vec a \in \mathbb{N}^n, b \in \mathbb{Z}, \vec x \in \{0,1\}^n \text{ para } n \geq 1, \text{ y } \vec a \cdot \vec x \leq b \}
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+Vamos a responder primero una pregunta más específica: ¿Cómo podemos construir un generador (casi) uniforme para $R_{\ks}$?
+\begin{itemize}
+\item La respuesta a esta pregunta va a tener los ingredientes necesarios para responder la pregunta más general
+\end{itemize}
+}
+
+%\vs{8}
+
+%\visible<3->{
+%Pero antes tenemos que introducir la noción de cadena de Markov}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+{\small
+
+Fije $n \geq 1$, $\vec a \in \mathbb{N}^n$  y $b \in \mathbb{N}$
+\begin{itemize}
+\item Y suponga que $\Omega = \{ \vec x \in \{0,1\}^n \mid \vec a \cdot \vec x \leq b \}$
+\end{itemize}
+Nótese que $\Omega \neq \emptyset$
+
+\vs{8}
+
+\visible<2->{
+Considere una secuencia $\{ X_t \}_{t \in \mathbb{N}}$ de variables aleatorias con recorrido $\Omega$}
+\begin{itemize}
+\visible<3->{\item El dominio de cada variable $X_t$ es $D_t$, el cual no necesitamos definir}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+Decimos que $\Omega$ es el conjunto de estados de la secuencia $\{ X_t \}_{t \in \mathbb{N}}$
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+{\small
+
+Dado $t \in \mathbb{N}$ y $\vec x \in \Omega$, nos interesa calcular \alert{$\pr(X_t = \vec x)$}
+
+\vs{8}
+
+\visible<2->{
+Para calcular esta probabilidad necesitamos definir la dinámica de la~secuencia
+\begin{itemize}
+\item Vale decir, necesitamos definir cómo se cambio de estado al pasar de tiempo $t$ a tiempo $t+1$
+\end{itemize}
+}
+
+\vs{8}
+
+\visible<3->{
+De manera formal, dado $t \in \mathbb{N}$ y $\vec x, \vec y \in \Omega$, necesitamos definir:
+\begin{eqnarray*}
+\alert{\pr(X_{t+1} = \vec y \mid X_t = \vec x)}
+\end{eqnarray*}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+
+{\small
+
+Suponga que en tiempo $t$ estamos en el estado $\vec x = (x_1, \ldots, x_n)$
+
+\vs{8}
+
+\visible<2->{
+El estado $\vec y$ en el tiempo $t+1$ se obtiene utilizando el siguiente~procedimiento:
+\vs{-3}
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+{\bf GenerarSiguiente}($\vec x$)\\
+\> Escoja $c \in \{0,1\}$ con distribución uniforme\\
+\> \aif $c = 0$ \athen \areturn $\vec x$\\
+\> \aelse\\
+\> \> Escoja $i \in \{1, \ldots, n\}$ con distribución uniforme\\
+\> \> $\vec u := (x_1, \ldots, x_{i-1}, 1 - x_i, x_{i+1}, \ldots, x_n)$\\
+\> \> \aif $\vec a \cdot \vec u \leq b$ \athen \areturn $\vec u$\\
+\> \> \aelse \areturn $\vec x$
+\end{tabbing}
+\vs{1}
+Tenemos entonces que \alert{$\vec y = \text{\bf GenerarSiguiente}(\vec x)$}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de la secuencia}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+Sea $t \in \mathbb{N}$
+\vs{1}
+\begin{enumerate}
+\item Dados $\vec x, \vec y \in \Omega$, calcule $\pr(X_{t+1} = \vec y \mid X_t = \vec x)$
+\begin{itemize}
+\item Considere de manera separada los casos $\vec x \neq \vec y$ y $\vec x = \vec y$
+\end{itemize}
+
+\vs{3}
+
+\item Demuestre que para todo $\vec x, \vec y \in \Omega$, existe $t' > t$ tal que:
+\vs{-1}
+\begin{eqnarray*}
+\pr(X_{t'} = \vec y \mid X_t = \vec x) & > & 0
+\end{eqnarray*}
+
+\vs{2}
+
+\item Dados $\vec x_0, \vec x_1, \ldots, \vec x_t, \vec x_{t+1} \in \Omega$, demuestre que:
+\vs{-1}
+\begin{multline*}
+\pr(X_{t+1} = \vec x_{t+1} \mid X_0 = \vec x_0 \wedge X_1 = \vec x_1 \wedge \cdots \wedge X_t = \vec x_t) \ = \\ 
+\pr(X_{t+1} = \vec x_{t+1}  \mid X_t = \vec x_t)
+\end{multline*}
+
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿A qué converge la secuencia?}
+
+{\footnotesize
+
+Sea $\vec x$ un vector arbitrario en $\Omega$
+
+\vs{6}
+
+Suponga que en tiempo 0 estamos en el estado $\vec x$, y que en cada instante cambiamos de estado utilizando el procedimiento \text{\bf GenerarSiguiente}
+\begin{itemize}
+\visible<2->{\item ¿Cuáles son los estados a los que podríamos llegar en un tiempo $t \gg 0$? ¿Cuál es la probabilidad de estar en un estado específico en este tiempo $t$?}
+
+\visible<3->{\item ¿Es posible llegar a una distribución estacionaria, vale decir, un tiempo $t'$ tal que para todo $\vec y \in \Omega$ se tiene que $\pr(X_{t'+1} = \vec y) = \pr(X_{t'} = \vec y)$?}
+
+\visible<4->{\item ¿Existe una única distribución estacionaria?}
+\end{itemize}
+
+\vs{6}
+
+\visible<5->{
+¿Cuáles son las respuestas a las preguntas anteriores si cambiamos $\vec x$ por otro vector inicial?}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La secuencia converge a la distribución uniforme}
+
+{\footnotesize
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Dado $t \in \mathbb{N}$ y $\vec x \in \Omega$, demuestre que:
+\begin{eqnarray*}
+\sum_{\vec y \in \Omega} \pr(X_{t+1} = \vec y \mid X_{t} = \vec x) & = & 1\\
+\sum_{\vec y \in \Omega} \pr(X_{t+1} = \vec x \mid X_{t} = \vec y) & = & 1
+\end{eqnarray*}
+
+\vs{2}
+
+\item Demuestre que la distribución uniforme es una distribución estacionaria. 
+\begin{itemize}
+{\footnotesize
+\item Vale decir, demuestre que si para $t \in \mathbb{N}$ se tiene que $\pr(X_t = \vec x) = \frac{1}{|\Omega|}$ para cada $\vec x \in \Omega$, entonces:
+\begin{center}
+$\pr(X_{t+1} = \vec y) = \pr(X_{t} = \vec y)$ para cada $\vec y \in \Omega$
+\end{center}}
+\end{itemize}
+\end{enumerate}
+
+\end{exampleblock}
+
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Generando $R_{\ks}$ con distribución (casi) uniforme}
+
+{\small
+
+Para generar los elementos de $\Omega$ con distribución (casi) uniforme utilizamos el siguiente procedimiento:
+\vs{-3}
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+\> Sea $\vec x$ un elemento arbitrario de $\Omega$\\
+\> $t = f(|\vec a| + |b|)$\\
+\> \afor $i := 1$ \ato $t$ \ado\\
+\> \> $\vec x := \text{\bf GenerarSiguiente}(\vec x)$\\
+\> \areturn $\vec x$
+\end{tabbing}
+Donde $|\vec a| + |b|$ es el tamaño de la entrada $(\vec a,b)$
+
+\vs{8}
+
+\visible<2->{
+¿Qué condiciones deben cumplirse para que este procedimiento genere $\Omega$ con distribución (casi) uniforme y en tiempo polinomial?}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las condiciones  para la generación (casi) uniforme}
+
+{\small
+
+\begin{itemize}
+\item La secuencia debe converger a la distribución uniforme desde cualquier punto de partida $\vec x \in \Omega$
+
+\vs{4}
+
+\visible<2->{\item La distribución uniforme debe ser la única distribución a la que converge la secuencia}
+
+\vs{4}
+
+\visible<3->{\item $f(n)$ debe estar acotada superiormente por un polinomio}
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las condiciones para la generación (casi) uniforme}
+
+{\small
+
+\begin{itemize}
+\item Debe ser posible calcular $\text{\bf GenerarSiguiente}(\vec x)$ en tiempo polinomial
+
+\vs{4}
+
+\visible<2->{\item Después de ejecutar $t$ pasos se debe tener una garantía de que estamos cerca de la distribución uniforme
+\begin{itemize}
+\alert{\item Obtenemos entonces un generador casi uniforme para los elementos de $\Omega$}
+\end{itemize}}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+Todas estas condiciones han sido estudiadas para las cadenas de Markov.
+\begin{itemize}
+\item Vamos a introducir y estudiar este herramienta esencial para el muestreo de variables aleatorias
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las cadenas de Markov}
+
+{\small
+
+Considere una sucesión $\{ X_t \}_{t \in \mathbb{N}}$ de variables aleatorias.
+
+\vs{6}
+
+\visible<2->{
+\begin{definicion}
+$\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov con conjunto de estados $\Omega$ si:
+\vs{1}
+\begin{enumerate}
+\item $\Omega$ es un conjunto finito o infinito enumerable, y $X_t : D_t \to \Omega$ para cada $t \in \mathbb{N}$
+
+\vs{1}
+\item Existe $p: \Omega \times \Omega \to [0,1]$ tal que para cada $t \in \mathbb{N}$ y cada secuencia $a_0$, $\ldots$, $a_t$, $a_{t+1}$ de elementos de $\Omega$:
+\vs{-2}
+\begin{multline*}
+\alert{\pr(X_{t+1} = a_{t+1 }\mid X_{t} = a_{t} \wedge \cdots \wedge X_0 = a_0) \ =} \\ 
+\alert{\pr(X_{t + 1} = a_{t+1 }\mid X_{t} = a_{t}) \ = \ p(a_{t+1,} a_{t})}
+\end{multline*}
+\end{enumerate}
+\end{definicion}
+}
+
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las cadenas de Markov}
+
+{\footnotesize
+
+En una cadena de Markov la distribución de probabilidades en el tiempo $t+1$ sólo depende de la distribución de probabilidades en el tiempo $t$
+\begin{itemize}
+{\footnotesize
+\item Consideramos cadenas discretas: el tiempo es un conjunto infinito enumerable, y el conjunto de estados $\Omega$ es finito o infinito~enumerable}
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Además, consideramos cadenas de Markov donde las probabilidades de transición no dependen del tiempo.
+\begin{itemize}
+{\footnotesize
+\item Para cada $t_1, t_2 \in \mathbb{N}$ y $a,b \in \Omega$:
+\begin{eqnarray*}
+\pr(X_{t_1 + 1} = a \mid X_{t_1} = b) & = & \pr(X_{t_2 + 1} = a \mid X_{t_2} = b)
+\end{eqnarray*}}
+\end{itemize}}
+\visible<3->{
+Estos son llamadas cadenas de Markov homogéneas. 
+}
+
+\vs{6}
+
+\visible<4->{
+En general, consideramos cadenas de Markov con conjuntos finitos de estados.
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Representando una cadena de Markov}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$
+\begin{itemize}
+\item Suponemos además que $p : \Omega \times \Omega \to [0,1]$ es la función que define las probabilidades de transición.
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Podemos representar cada variable aleatoria $X_t$ como un vector $\vec x_t$ tal que:
+\begin{center}
+para cada $a \in \Omega$ se tiene que $\vec x_t[a] = \pr(X_t = a)$
+\end{center}
+}
+
+\vs{6}
+
+\visible<3->{
+Además, podemos representar la cadena de Markov como una matriz $P$ de~$|\Omega| \times |\Omega|$: 
+\begin{center}
+para cada $a,b \in \Omega$, se tiene que $P[a,b] = p(a,b)$
+\end{center}
+$P$ es llamada la matriz de transición de la cadena de Markov.
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Representando una cadena de Markov}
+
+{\small
+
+
+
+Dado $a \in \Omega$ y $t \in \mathbb{N}$, tenemos que:
+\begin{multline*}
+\pr(X_{t+1} = a) \ = \ \sum_{b \in \Omega} \pr(X_{t+1} = a \mid X_{t} = b) \cdot \pr(X_{t} = b) \ =
+\\ 
+\sum_{b \in \Omega} p(a,b) \cdot \pr(X_{t} = b) \ = \ \sum_{b \in \Omega} P[a,b] \cdot \pr(X_{t} = b)
+\end{multline*}
+
+\vs{8}
+
+\visible<2->{
+Dado que $\vec x_{t+1}[a] = \pr(X_{t+1} = a)$ y $\vec x_{t}[b] = \pr(X_{t} = b)$ para cada $a,b \in \Omega$ y $t \in \mathbb{N}$, concluimos que:
+\alert{
+\begin{eqnarray*}
+P \vec x_{t} & = & \vec x_{t+1}
+\end{eqnarray*}
+}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de la matriz de transición}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+Sea $P$ la matriz de transición de una cadena de Markov.
+\vs{1}
+\begin{enumerate}
+\item Demuestre que para cada columna de $P$, se tiene que la suma de sus valores es 1
+
+\vs{2}
+
+\item Para cada fila de $P$, ¿se debe tener que la suma de sus valores es 1?
+\begin{itemize}
+\item ¿Era cierta esta propiedad para la matriz $P$ de la cadena de Markov para $R_{\ks}$?
+\end{itemize}
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una cadena de Markov como un grafo}
+
+{\small
+
+
+
+La matriz de transición $P$ de una cadena de Markov con conjunto de estados $\Omega$ puede ser vista como un grafo $G_P$ con pesos:
+\vs{1}
+\begin{itemize}
+\item $\Omega$ es el conjunto de nodos de $G_P$
+
+\vs{1}
+
+\item Dados $a, b \in \Omega$, el peso del arco $(a,b)$ en $G$ es $P[b,a]$
+\begin{itemize}
+{\footnotesize
+\item Vale decir, el peso de $(a,b)$ representa la probabilidad de pasar al estado $b$ dado que estábamos en el estado $a$
+}
+\end{itemize}
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una cadena de Markov como un grafo: un ejemplo}
+
+{\footnotesize
+
+\begin{center}
+\begin{tabular}{ccc}
+$\Omega = \{1,2,3,4\}$
+&\ \ \ &
+$P = \ \begin{pmatrix}
+0\text{.}2 & 0 & 0\text{.}6 & 0\text{.}9\\
+0\text{.}3 & 1 & 0 & 0\\
+0\text{.}4 & 0 & 0\text{.}2 & 0\\
+0\text{.}1 & 0 & 0\text{.}2 & 0\text{.}1
+\end{pmatrix}$
+\end{tabular}
+
+\vs{4}
+
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$0\text{.}2$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$0\text{.}3$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$1$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$G_P = \  0\text{.}4$} (n1)
+edge[arrout, bend right = 15] node[right] {$0\text{.}6$} (n1)
+edge[arrout, in = 250, out = 200, loop] node[below] {$0\text{.}2$} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$0\text{.}1\ \ $} (n1)
+edge[arrout, bend right = 15] node[right] {$0\text{.}9$} (n1)
+edge[arrin, bend left = 15] node[below] {$0\text{.}2$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$0\text{.}1$} (n3);
+\end{tikzpicture}
+\end{center}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de las cadenas de Markov}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+\begin{itemize}
+\item Además, defina $P^0$ como la matriz identidad y $P^{t+1} = P P^t$ para todo $t \in \mathbb{N}$
+\end{itemize}
+
+
+\vs{6}
+
+\visible<2->{
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Demuestre que para cada $t \in \mathbb{N}$ y $a,b \in \Omega$ se tiene que:
+\begin{eqnarray*}
+\pr(X_{t} = a \mid X_0 = b) & = & P^t[a,b]
+\end{eqnarray*}
+
+\item Demuestre para cada $t_1,t_2 \in \mathbb{N}$ y $a,b \in \Omega$ se tiene que:
+\begin{eqnarray*}
+\pr(X_{t_1+t_2} = a \mid X_{t_1} = b) & = & \pr(X_{t_2} = a \mid X_0 = b)
+\end{eqnarray*}
+\end{enumerate}
+\end{exampleblock}
+}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La distribución estacionaria de una cadena de Markov}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+\begin{itemize}
+\item Y sea $\vec \pi \in [0,1]^{|\Omega|}$ tal que ${\displaystyle \sum_{a \in \Omega} \vec \pi[a] = 1}$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+$\vec \pi$  es una distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$ si \alert{$P \vec \pi = \vec \pi$}
+\end{definicion}
+}
+
+\vs{8}
+
+\visible<3->{
+Vale decir, $\vec \pi$ es una distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$ si esta distribución no cambia al realizar una transición de la cadena de Markov}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunos ejemplos de distribuciones estacionarias}
+
+{\footnotesize
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Considere una cadena de Markov con la siguiente matriz de transición:
+\begin{eqnarray*}
+P & = & \begin{pmatrix}
+0\text{.}5 & 0\text{.}5\\
+0\text{.}5 & 0\text{.}5
+\end{pmatrix}
+\end{eqnarray*}
+Muestre que esta cadena de Markov tiene una única distribución estacionaria, y construya esta distribución.
+
+\vs{2}
+
+\item Construya una cadena de Markov que tenga al menos dos distribuciones estacionarias.
+\begin{itemize}
+{\footnotesize
+\item El dominio de esta cadena debe ser finito
+}
+\end{itemize}
+
+\vs{2}
+
+\item Construya una cadena de Markov que no tenga distribución estacionaria.
+\begin{itemize}
+{\footnotesize
+\item El dominio de esta cadena debe ser infinito enumerable
+}
+\end{itemize}
+\end{enumerate}
+
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una primera propiedad fundamental: irreducibilidad}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+$\{ X_t \}_{t \in \mathbb{N}}$ es irreducible si $G_P$ es un grafo fuertemente conexo.
+\end{definicion}
+}
+
+\vs{8}
+
+\visible<3->{
+Tenemos que $\{ X_t \}_{t \in \mathbb{N}}$ es irreducible si y sólo si para cada $a, b \in \Omega$, existe $t > 0$ tal que:
+\begin{eqnarray*}
+\pr(X_t = a \mid X_0 = b) & > & 0
+\end{eqnarray*}
+}
+
+}
+
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una segunda propiedad fundamental: aperiodicidad}
+
+
+{\small
+
+Sea $a \in \Omega$. Si $\{ n > 0 \mid \pr(X_n = a \mid X_0 = a) > 0\}$ no es vacío, entonces el periodo de $a$ es definido como:
+\begin{eqnarray*}
+\text{MCD}\,\{ n > 0 \mid \pr(X_n = a \mid X_0 = a) > 0\}
+\end{eqnarray*}
+En caso contrario, el periodo de $a$ no está definido. 
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+Un estado $a \in \Omega$ es aperiódico si su periodo está definido y es igual a 1. Además, $\{ X_t \}_{t \in \mathbb{N}}$ es aperiódica si cada estado $b \in \Omega$ es aperiódico.
+\end{definicion}
+}
+
+}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Irreducibilidad y aperiodicidad: algunos ejemplos}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Muestre que la cadena de Markov definida para la relación $R_{\ks}$ es irreducible y aperiódica.
+
+\vs{2}
+
+\item Demuestre que en una cadena de Markov irreducible todos los estados tienen el mismo periodo.
+\begin{itemize}
+{\footnotesize \item Concluimos entonces que si una cadena de Markov irreducible tiene un estado aperiódico, entonces la cadena es aperiódica.}
+\end{itemize}
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible con conjunto de estados $\Omega$ y matriz de transición $P$, y sean $b,c \in \Omega$
+
+\vs{8}
+
+Suponemos que los periodos de $b$ y $c$ son $\ell_b$ y $\ell_c$, respectivamente.
+\begin{itemize}
+\item ¿Por qué sabemos que estos periodos existen?
+\end{itemize}
+
+\vs{8}
+
+Dado que $\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov irreducible:
+\begin{itemize}
+\item Existe un camino en $G_P$ desde $b$ a $c$ de largo $k_{b,c}$, y existe un camino en $G_P$ desde $c$ a $b$ de largo $k_{c,b}$
+\end{itemize}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Entonces existe un camino de $b$ a $b$ de largo $k_{b,c} + k_{c,b}$, de lo cual concluimos que $\pr(X_{k_{b,c} + k_{c,b}} = b \mid X_0 = b) > 0$
+\begin{itemize}
+\item Dado que $\ell_b$ es el periodo de $b$, concluimos que $\ell_b \mid (k_{b,c} + k_{c,b})$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $n > 0$ tal que $\pr(X_n = c \mid X_0 = c) > 0$
+\begin{itemize}
+\item Existe un camino en $G_P$ de $c$ a $c$ de largo $n$
+\end{itemize}
+}
+
+\vs{7}
+
+\visible<3->{
+Tenemos entonces que existe un camino en $G_P$ de $b$ a $b$ de largo $k_{b,c} + n + k_{c,b}$, por lo que $\pr(X_{k_{b,c} + n + k_{c,b}} = b \mid X_0 = b) > 0$
+\begin{itemize}
+\item Dado que $\ell_b$ es el periodo de $b$, concluimos que $\ell_b \mid (k_{b,c} + n + k_{c,b})$
+
+\visible<4->{\item Así, dado que $\ell_b \mid (k_{b,c} + k_{c,b})$, deducimos que \alert{$\ell_b \mid n$}}
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Por lo tanto, $\ell_b \mid n$ para cada $n > 0$ tal que $\pr(X_n = c \mid X_0 = c) > 0$
+\begin{itemize}
+\alert{\item De lo cual deducimos que $\ell_b \leq \ell_c$, puesto que $\ell_c = \text{MCD}\,\{ n > 0 \mid \pr(X_n = c \mid X_0 = c) > 0\}$}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+De la misma forma se puede demostrar que $\ell_c \leq \ell_b$, de lo cual concluimos que $\ell_b = \ell_c$ \qed
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia del límite en el caso finito: irreducibilidad y aperiodicidad}
+
+{\small
+
+Vamos a demostrar que irreducibilidad y aperiodicidad son condiciones suficientes para la convergencia de una cadena Markov con un conjunto finito de estados.
+\begin{itemize}
+\item La convergencia no depende del punto de partida
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+Esto nos va a permitir demostrar que una cadena de Markov irreducible, aperiódica y con un conjunto finito de estados tiene una única distribución estacionaria.
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia del límite}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible y aperiódica con conjunto finito de estados $\Omega$
+
+\vs{4}
+
+\begin{teorema}
+Si $a \in \Omega$, se tiene que:
+\vs{1}
+\begin{enumerate}
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}$ existe para cada $b \in \Omega$
+
+\vs{2}
+
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) =\lim_{n \to \infty} \pr(X_n = a \mid X_0 = c)}$ para cada~$b, c \in \Omega$
+\end{enumerate}
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+Antes de demostrar este teorema, vamos a estudiar en detalle sus consecuencias.}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso finito}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica y con conjunto finito de estados $\Omega$
+
+\vs{8}
+
+Dado $a \in \Omega$, definimos:
+\alert{
+\begin{eqnarray*}
+\lambda_a & = & \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b),
+\end{eqnarray*}}
+donde $b$ es un elemento arbitrario en $\Omega$
+
+\vs{8}
+
+\visible<2->{
+\begin{lema}
+${\displaystyle \sum_{a \in \Omega} \lambda_a = 1}$
+\end{lema}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del lema}
+
+{\small
+
+Fije un elemento $b \in \Omega$
+
+\vs{10}
+
+\visible<2->{
+Para cada $n \in \mathbb{N}$ tenemos que:
+\begin{eqnarray*}
+\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b) & = & 1
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+Por lo tanto tenemos que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \bigg(\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b)\bigg) & = & 1
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del lema}
+
+{\small
+
+Además, sabemos que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \bigg(\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b)\bigg) & = & 
+\sum_{a \in \Omega} \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)\\ & = & \sum_{a \in \Omega} \lambda_a
+\end{eqnarray*}
+
+
+\vs{8}
+
+\visible<2->{
+Concluimos que ${\displaystyle \sum_{a \in \Omega} \lambda_a = 1}$ \qed}
+
+
+}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso finito: una segunda propiedad fundamental}
+
+{\small
+
+\begin{lema}
+Si $\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov irreducible, aperiódica y con un conjunto finito de estados $\Omega$, entonces $\lambda_a > 0$ para cada $a \in \Omega$
+\end{lema}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el lema.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad de la distribución estacionaria en el caso finito}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica, con conjunto finito de estados $\Omega$ y matriz de transición $P$
+\begin{itemize}
+\item Y sea $\vec \pi \in [0,1]^{|\Omega|}$ un vector tal que $\vec \pi[a] = \lambda_a$ para cada $a \in \Omega$
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+$\vec \pi$ es la única distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$
+\end{teorema}
+}
+
+\vs{8}
+
+\visible<3->{
+{\bf Demostración:} Primero tenemos que demostrar que $P \vec \pi = \vec \pi$
+\begin{itemize}
+\item Vale decir, tenemos que demostrar que $(P \vec \pi)[a] = \vec \pi[a]$ para cada~$a \in\Omega$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+Dado $a \in \Omega$ y un estado arbitrario $c \in \Omega$, tenemos que:
+\begin{eqnarray*}
+(P \vec \pi)[a] & = & \sum_{b \in \Omega} P[a,b] \cdot \vec \pi[b]\\
+& = & \sum_{b \in \Omega} \bigg(\pr(X_1 = a \mid X_0 = b) \cdot \lim_{n \to \infty} \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \sum_{b \in \Omega}  \bigg(\pr(X_1 = a \mid X_0 = b) \cdot  \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \sum_{b \in \Omega}  \bigg(\pr(X_{n+1} = a \mid X_n = b) \cdot  \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \pr(X_{n+1} = a \mid X_0 = c)\\
+& = & \lim_{m \to \infty} \pr(X_{m} = a \mid X_0 = c)\\
+& \alert{=} & \alert{\lambda_a \ = \ \vec \pi[a]}
+\end{eqnarray*}
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+En segundo lugar, tenemos que demostrar que para toda distribución estacionaria $\vec \alpha$ para $\{ X_t \}_{t \in \mathbb{N}}$, se tiene que $\vec \alpha = \vec \pi$
+
+\vs{6}
+
+\visible<2->{Suponga que $P \vec \alpha = \vec \alpha$. Dado $a \in \Omega$ tenemos que:
+\begin{eqnarray*}
+\vec \alpha[a] & = & (P \vec \alpha)[a]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot \vec \alpha[b]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot (P \vec \alpha)[b]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot \bigg(\sum_{c \in \Omega} P[b,c] \cdot \vec \alpha[c]\bigg)\\
+& = & \sum_{b \in \Omega} \sum_{c \in \Omega} P[a,b] \cdot P[b,c] \cdot \vec \alpha[c]\\
+& = & \sum_{c \in \Omega} \bigg(\sum_{b \in \Omega} P[a,b] \cdot P[b,c]\bigg) \cdot \vec \alpha[c]
+\end{eqnarray*}}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+\begin{eqnarray*}
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot \vec \alpha[c]\\
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot (P \vec \alpha)[c]\\
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot \bigg(\sum_{d \in \Omega} P[c,d] \cdot \vec \alpha[d]\bigg)\\
+& = & \sum_{c \in \Omega} \sum_{d \in \Omega} P^2[a,c] \cdot P[c,d] \cdot \vec \alpha[d]\\
+& = & \sum_{d \in \Omega} \bigg(\sum_{c \in \Omega} P^2[a,c] \cdot P[c,d]\bigg) \cdot \vec \alpha[d]\\
+& = & \sum_{d \in \Omega} P^3[a,d] \cdot \vec \alpha[d]
+\end{eqnarray*}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+
+{\small
+
+Siguiendo con este proceso, concluimos que para todo $n \geq 1$:
+\begin{eqnarray*}
+\vec \alpha[a] & = & \sum_{b \in \Omega} P^n[a,b] \cdot \vec \alpha[b]
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto:
+\alert{
+\begin{eqnarray*}
+\vec \alpha[a] & = & \sum_{b \in \Omega} \pr(X_n = a \mid X_0 = b) \cdot \vec \alpha[b]\\
+\end{eqnarray*}}
+}
+
+
+
+
+}
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+Tomando el límite cuando $n$ tiende a infinito obtenemos:
+\begin{eqnarray*}
+\vec \alpha[a] & = & \lim_{n \to \infty} \bigg(\sum_{b \in \Omega} \pr(X_n = a \mid X_0 = b) \cdot \vec \alpha[b]\bigg)\\
+& = &  \sum_{b \in \Omega} \bigg(\lim_{n \to \infty}\pr(X_n = a \mid X_0 = b)\bigg) \cdot \vec \alpha[b]\\
+& = &  \sum_{b \in \Omega} \lambda_a \cdot \vec \alpha[b]\\
+& = &  \lambda_a \cdot  \sum_{b \in \Omega} \vec \alpha[b]\\
+& \alert{=} &  \alert{\lambda_a \cdot 1 \ = \ \lambda_a \ = \  \vec \pi[a]}
+\end{eqnarray*}
+
+\vs{6}
+
+Concluimos que $\vec \alpha = \vec \pi$, puesto que $\vec \alpha[a] = \vec \pi[a]$ para todo $a \in \Omega$\qed
+
+}
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+La estructura de links en una pequeña Web:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {} (n1)
+edge[arrout, bend left = 15] node[above] {} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {} (n1)
+edge[arrout, bend right = 15] node[right] {} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {} (n5);
+\end{tikzpicture}
+\end{center}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+La estructura de links vista como una caminata aleatoria:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$\frac{1}{4}$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$\frac{1}{4}$} (n1)
+edge[arrout, bend left = 15] node[below] {$\frac{1}{2}$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$\frac{1}{2}$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$\frac{1}{4}$} (n1)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{2}$} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$\frac{1}{4}$} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {$\frac{1}{2}$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$1$} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {$1$} (n5);
+\end{tikzpicture}
+\end{center}
+
+
+}
+
+\end{frame}
+
+
+
+
+
+
+
+\renewcommand{\arraystretch}{1.25}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Podemos representar la caminata aleatoria como una matriz $P$
+\begin{itemize}
+\item $P[i,j]$ es la probabilidad de ir de la página $j$ a la página $i$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+La matriz $P$ de nuestro ejemplo:
+\begin{center}
+$P = \ \begin{pmatrix}
+\frac{1}{4} & \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0\\
+\frac{1}{4} & \frac{1}{2} & 0 & 0 & 0 & 0\\
+\frac{1}{4} & 0 & 0 & 0 & 0 & 0 \\
+\frac{1}{4} & 0 & \frac{1}{2} & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0
+\end{pmatrix}$
+\end{center}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Esperamos que la caminata aleatoria no se detenga, lo cual no sucede en nuestra pequeña Web porque la página $6$ no tiene links de salida:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$\frac{1}{4}$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$\frac{1}{4}$} (n1)
+edge[arrout, bend left = 15] node[below] {$\frac{1}{2}$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$\frac{1}{2}$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$\frac{1}{4}$} (n1)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{2}$} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$\frac{1}{4}$} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {$\frac{1}{2}$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$1$} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {$1$} (n5);
+\end{tikzpicture}
+\end{center}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Para solucionar el problema, suponemos que la página $6$ no tiene preferencias al navegar y la conectamos con todas las páginas:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {} (n1)
+edge[arrout, bend left = 15] node[below] {} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {} (n1)
+edge[arrout, bend right = 15] node[right] {} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {} (n5)
+edge[arrout, bend right = 15] node[right] {} (n5)
+edge[arrout, bend left = 12] node[above] {} (n1)
+edge[arrout, bend right = 15] node[above] {} (n2)
+edge[arrout, bend right = 12] node[below] {} (n4)
+edge[arrout, in = 340, out = 290, loop] node[below] {} (n6)
+edge[arrout, bend left = 30] node[below] {} (n3);
+
+\end{tikzpicture}
+\end{center}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Obtenemos entonces el siguiente grafo para la caminata aleatoria:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$\frac{1}{4}$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$\frac{1}{4}$} (n1)
+edge[arrout, bend left = 15] node[below] {$\frac{1}{2}$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$\frac{1}{2}$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$\frac{1}{4}$} (n1)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{2}$} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$\frac{1}{4}$} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {$\frac{1}{2}$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$1$} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {$1$} (n5)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{6}$} (n5)
+edge[arrout, bend left = 12] node[above] {$\frac{1}{6}$} (n1)
+edge[arrout, bend right = 15] node[above] {$\frac{1}{6}$} (n2)
+edge[arrout, bend right = 12] node[below] {$\frac{1}{6}$} (n4)
+edge[arrout, in = 340, out = 290, loop] node[below] {$\frac{1}{6}$} (n6)
+edge[arrout, bend left = 43] node[below] {$\frac{1}{6}$} (n3);
+
+\end{tikzpicture}
+\end{center}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Así, consideramos la siguiente matriz en nuestro ejemplo:
+\begin{center}
+$P = \ \begin{pmatrix}
+\frac{1}{4} & \frac{1}{2} & \frac{1}{2} & 0 & 0 & \frac{1}{6}\\
+\frac{1}{4} & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{6}\\
+\frac{1}{4} & 0 & 0 & 0 & 0 & \frac{1}{6} \\
+\frac{1}{4} & 0 & \frac{1}{2} & 1 & 0 & \frac{1}{6}\\
+0 & 0 & 0 & 0 & 0 & \frac{1}{6}\\
+0 & 0 & 0 & 0 & 1 & \frac{1}{6}
+\end{pmatrix}$
+\end{center}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+El ranking de una página $i$ se define como la probabilidad $x_i$ de que el caminante aleatorio llegue a $i$
+\begin{itemize}
+\visible<2->{\item ¿Qué características de la Web influyen en el valor $x_i$?}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+En el ejemplo tenemos que:
+\vs{-2}
+\begin{eqnarray*}
+x_i & = & \sum_{j=1}^6 P[i,j] \cdot x_j
+\end{eqnarray*}
+}
+
+\vs{8}
+
+\visible<4->{
+Así, si $\vec x$ es un vector tal que $\vec x[i] = x_i$ para cada $i \in \{1, \ldots, 6\}$, entonces:
+\begin{eqnarray*}
+P \vec x  & = & \vec x
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{PageRank como una cadena de Markov}
+
+{\small
+
+El proceso anterior se puede generalizar para la Web real.
+\vs{1}
+\begin{itemize}
+\item Suponemos que la Web tiene $N$ páginas
+
+\item Cada página $i \in N$ que no tiene links de salida es conectada con cada página $j \in N$
+
+\item $P$ es una matriz de $N \times N$ construida a partir de la estructura de links generada, como fue mostrado en las transparencias anteriores
+\end{itemize}
+
+\vs{8}
+
+Además, definimos $\vec \pi$ como un vector tal que $\vec \pi[i]$ es la probabilidad de que el caminante aleatorio llegue a la página $i$, para cada $i \in \{1, \ldots, N\}$
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{PageRank como una cadena de Markov}
+
+{\small
+
+$P$ puede ser considerada como la matriz de transición de una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ con conjunto de estados $\Omega = \{1, \ldots, N\}$
+\begin{itemize}
+\visible<2->{\alert{\item El vector $\vec \pi$ es entonces  una distribución estacionaria de $\{ X_t \}_{t \in \mathbb{N}}$}}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+¿Cómo podemos asegurar que $\vec \pi$ existe y es único? ¿Cómo podemos calcular $\vec \pi$?}
+
+\vs{8}
+
+\visible<4->{
+¡Irreducibilidad y aperiodicidad son las propiedades que necesitamos!
+\begin{itemize}
+\item Dado que el conjunto de estados de la cadena de Markov es finito
+\end{itemize}}
+
+}
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Dos preguntas por responder:
+\begin{itemize}
+\item ¿Podemos asegurar que la cadena de Markov dada por $P$ es~irreducible? \visible<2->{{\bf No}}
+\item ¿Podemos asegurar que la cadena de Markov dada por $P$ es~aperiódica? \visible<3->{{\bf No}}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+¿Cómo solucionamos estos problemas?
+}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Para solucionar los problemas suponemos que el caminante aleatorio también puede decidir moverse a cualquier página sin considerar la estructura de la Web.
+\begin{itemize}
+\item Esto es controlado por un parámetro $\alpha$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $U$ una matriz de $N \times N$ tal que $U[i,j] = \frac{1}{N}$, y sea $\alpha \in (0,1)$
+}
+
+\vs{8}
+
+\visible<3->{
+Definimos una matriz $W_\alpha$ de $N \times N$ como:
+\alert{
+\begin{eqnarray*}
+W_\alpha & = & \alpha \cdot P + (1 - \alpha) \cdot U
+\end{eqnarray*}}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Con probabilidad $\alpha$ el caminante utiliza los links para moverse, y con probabilidad $(1 - \alpha)$ se mueve a cualquier página (sin considerar la estructura de la Web).
+\begin{itemize}
+\item Cuanto más grande es $\alpha$, más consideramos la estructura de la Web
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\alert{Tenemos que $W_\alpha$ define una cadena de Markov irreducible y aperiódica.}
+\begin{itemize}
+\item ¿Por qué?
+\end{itemize}
+}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La definición de PageRank}
+
+{\small
+
+Consideramos un valor fijo de $\alpha$
+\begin{itemize}
+\item En el artículo original sobre PageRank se consideraba $\alpha = 0\text{.}85$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Definimos entonces $\vec \pi$ como la distribución estacionaria de la cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ cuya matriz de transición es $W_\alpha$
+\begin{itemize}
+\item Esta distribución existe y es única porque la cadena de Markov es irreducible, aperiódica y tiene un conjunto finito de estados
+
+\item Además se tiene que $\vec \pi[i] > 0$ para cada $i \in \{1, \ldots, N\}$, por lo que ninguna página Web es considera absolutamente irrelevante {\large {\alert \smiley{}}}
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El cálculo de PageRank}
+
+{\small
+
+Para cada página $i$, calculamos $\vec \pi[i]$ considerado la igualdad:
+\begin{eqnarray*}
+\vec \pi[i] & = & \lim_{n \to \infty} \pr(X_n = i \mid X_0 = 1)
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Vale decir, la caminata comienza en la página 1 (una página arbitraria), y el valor $\vec \pi[i]$ se calcula utilizando un valor de $n$ suficientemente grande.}
+\begin{itemize}
+\visible<3->{\item Obtenemos una aproximación del valor de $\vec \pi[i]$}
+\end{itemize}
+
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El cálculo de PageRank}
+
+{\footnotesize
+
+Las ideas anteriores se traducen en la práctica en el siguiente algoritmo {\bf AproxPageRank} para aproximar $\vec \pi$
+
+\vs{7}
+
+En {\bf AproxPageRank} utilizamos un parámetro $\varepsilon \in (0,1)$ que indica cuándo debe detenerse el algoritmo.
+\begin{itemize}
+\item Si la distancia entre los últimos vectores generados es menor que $\varepsilon$ el algoritmo se detiene
+\end{itemize}
+
+\vs{7}
+
+En {\bf AproxPageRank} la similitud entre dos vectores $\vec a$ y $\vec b$ es medida a través de la distancia Manhattan:
+\vs{-3}
+\begin{eqnarray*}
+\|\vec a - \vec b\|_1 &=& \sum_{i=1}^N |\vec a[i] - \vec b[i]|
+\end{eqnarray*}
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El algoritmo {\bf AproxPageRank}}
+
+{\footnotesize
+
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+{\bf AproxPageRank}($\varepsilon$)\\
+\> Sea $\vec \pi_0$ tal que $\vec \pi_0[1]=1$ y $\vec \pi_0[i] = 0$ para cada $i \in \{2, \ldots, N\}$\\
+\> Sea $\vec \pi_1 = W_\alpha \vec \pi_0$\\
+\> \aif $\|\vec \pi_0 - \vec \pi_1\|_1 < \varepsilon$ \athen \areturn $\vec \pi_1$\\
+\> \aelse\\
+\> \> \afor $n := 2$ \ato $\infty$ \ado\\
+\> \> \> $\vec \pi_n = W_\alpha \vec \pi_{n-1}$\\
+\> \> \> \aif $\|\vec \pi_{n-1} - \vec \pi_n\|_1 < \varepsilon$ \athen \areturn $\vec \pi_n$
+\end{tabbing}
+
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible y aperiódica con un conjunto finito de estados $\Omega$
+
+\vs{8}
+
+En las transparencias anteriores utilizamos la siguiente propiedad para cada~$a \in \Omega$:
+\vs{1}
+\begin{enumerate}
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}$ existe para cada $b \in \Omega$
+
+\vs{2}
+
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) =\lim_{n \to \infty} \pr(X_n = a \mid X_0 = c)}$ para cada~$b, c \in \Omega$
+\end{enumerate}
+
+\vs{8}
+
+\visible<2->{
+En las siguientes transparencias vamos a demostrar esta propiedad.}
+
+}
+    
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La existencia del límite: una noción fundamental}
+
+{\small
+
+
+\begin{definicion}
+Dada una matriz $A$ de $\ell \times \ell$ de números reales.
+\vs{2}
+\begin{enumerate}
+    \item $A$ es no negativa si para todo $a, b \in \{1, \dots \ell\}$, se tiene que~$A[a, b] \geq 0$
+    
+    \vs{3}
+    
+    \visible<2->{
+    \item $A$ es cuasipositiva si $A$ es no negativa y existe un número natural~$n \geq 1$, tal que para todo $a, b \in \{1, \dots, \ell\}$, se tiene que~$A^{n}[a, b] > 0$
+    }
+\end{enumerate}
+\end{definicion}
+
+}
+    
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y cuasipositividad}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible y aperiódica con conjunto finito de estados $\Omega$ y matriz de transición $P$
+
+\vs{8}
+
+\begin{proposition}
+P es una matriz cuasipositiva
+\end{proposition}
+
+\vs{8}
+
+\visible<2->{
+{\bf Demostración:} Dado $a \in \Omega$, defina $J(a) = \{n \geq 1 \mid P^{n}[a, a] > 0\}$
+\alert{
+\begin{itemize}
+    \item Por aperiodicidad, se tiene que $\text{MCD}(J(a)) = 1$
+\end{itemize}
+}
+
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+Nótese que $P^{n+m}[a,a] \geq P^{n}[a,a] \cdot P^{m}[a,a]$
+\begin{itemize}
+    \item Por lo tanto, tenemos la siguiente propiedad de clausura: si $n, m \in J(a)$, entonces $n + m \in J(a)$ 
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+\begin{lema}
+Para todo $a \in \Omega$, existe una par de números consecutivos en $J(a)$
+\end{lema}
+}
+
+\vs{6}
+
+\visible<3->{
+{\bf Demostración:} suponga que existe $a \in \Omega$ tal que $J(a)$ no contiene algún par de números consecutivos
+\begin{itemize}
+    \item Hay una distancia mínima $k \geq 2$ entre los elementos de $J(a)$
+\end{itemize}
+}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+Tenemos entonces que existe $n_0 \in J(a)$ tal que $n_0+k \in J(a)$
+
+\vs{8}
+
+\visible<2->{
+Además, existe $n_1 \in J(a)$ tal que $n_1 = m \cdot k + d$, con $m \in \mathbb{N}$ y $1 \leq d \leq k-1$
+\begin{itemize}
+    \item De otra forma, se tendría que $k|n$ para cada $n \in J(a)$, lo cual implicaría que $\text{MCD(}J(a)) \geq k > 1$
+\end{itemize}
+}
+
+\vs{6}
+
+\visible<3->{
+Por lo tanto, por la propiedad de clausura: $(m+1) \cdot (n_0 + k) \in J(a)$ y $n_1 + (m+1) \cdot n_0 \in J(a)$
+}
+
+\vs{4}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+La distancia entre $(m+1) \cdot (n_0 + k)$ y $n_1 + (m+1) \cdot n_0$ es:
+\begin{eqnarray*}
+(m+1) \cdot (n_0 + k) - (n_1 + (m+1) \cdot n_0) &=& (m+1) \cdot k - n_1\\
+&=& k - (n_1 - m \cdot k)\\
+&=& k - d\\
+& < & k
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Encontramos entonces dos números en $J(a)$ cuya distancia es menor que~$k$, lo cual contradice el supuesto inicial.
+\begin{itemize}
+\item Concluimos que existe un par de números consecutivos en $J(a)$ \qed
+\end{itemize} 
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+\begin{lema}
+Dado $k \in \mathbb{N}$ con $k \geq 1$, existe $n_0 \in \mathbb{N}$ tal que $n_0 \geq 1$ y:
+\begin{eqnarray*}
+\{ n \in \mathbb{N} \mid n \geq n_0\} & \subseteq & \{ n_1 \cdot k + n_2 \cdot (k + 1) \mid n_1, n_2 \in \mathbb{N} \text{ y } n_1 \geq 1 \}
+\end{eqnarray*}
+\end{lema}
+
+\vs{8}
+
+\visible<2->{
+
+{\bf Demostración:} Dado $n \geq k^2$, existen $m \in \mathbb{N}$ y $d \in \{0, \ldots, k-1\}$ tales~que
+\begin{eqnarray*}
+n - k^2 &=& m \cdot k + d
+\end{eqnarray*}
+
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+Podemos entonces expresar $n$ como:
+\begin{eqnarray*}
+n &=& k^2 + m \cdot k + d\\
+& = & (k - d + m)\cdot k + d \cdot (k + 1)
+\end{eqnarray*}
+
+\vs{6}
+
+Dado que $k - d > 0$, concluimos que para $n_0 = k^2$ se tiene que $n_0 \geq 1$ y:
+\begin{eqnarray*}
+\{ n \in \mathbb{N} \mid n \geq n_0\} & \subseteq & \{ n_1 \cdot k + n_2 \cdot (k + 1) \mid n_1, n_2 \in \mathbb{N} \text{ y } n_1 \geq 1 \} 
+\end{eqnarray*} \qed
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+Fije $c \in \Omega$
+
+\vs{6}
+
+Por el primer lema, existe $k \in J(c)$ tal que $k + 1$ también es un elemento de $J(c)$
+\begin{itemize}
+\item Por la definición de $J(c)$ sabemos que $k \geq 1$
+\end{itemize}
+
+\vs{6}
+
+Por lo tanto, por el segundo lema existe $n_c \geq 1$ tal que:
+\begin{eqnarray*}
+\{ n \in \mathbb{N} \mid n \geq n_c\} & \subseteq & \{ n_1 \cdot k + n_2 \cdot (k + 1) \mid n_1, n_2 \in \mathbb{N} \text{ y } n_1 \geq 1\} \\
+&\subseteq& J(c)
+\end{eqnarray*}
+Nótese que la última inclusión es consecuencia de que $n + m \in J(c)$ si~$n,m \in J(c)$
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\footnotesize
+
+Sean $a,b \in \Omega$
+\begin{itemize}
+\item Como la cadena de Markov considerada es irreducible, existen $r_{a, c}, s_{c, b} \geq 1$ tales que $P^{r_{a,c}}[a, c] > 0$ y $P^{s_{c, b}}[c, b] > 0$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $n_{a,b} = r_{a, c} + n_c + s_{c,b}$
+}
+
+\vs{8}
+
+\visible<3->{
+Dado $n \geq n_{a,b}$ con $\ell = n - n_{a,b}$, tenemos que:
+\begin{eqnarray*}
+P^n[a,b] & = & P^{n_{a,b} + \ell}[a,b]\\
+& = & P^{r_{a, c} + n_c + \ell + s_{c,b}}[a, b]\\
+& \geq & P^{r_{a, c}}[a,c] \cdot P^{n_c + \ell}[c,c] \cdot P^{s_{c,b}}[c, b] \ > \ 0
+\end{eqnarray*}
+Nótese que $P^{n_c + \ell}[c,c] > 0$ dado que $\{ n \in \mathbb{N} \mid n \geq n_c\} \subseteq J(c)$
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+\alert{Para todo $a,b \in \Omega$ y para todo $n \geq n_{a,b}$, tenemos que $P^n[a,b] > 0$}
+
+\vs{8}
+
+\visible<2->{
+Sea ${\displaystyle n^\star  =  \max_{a,b \in \Omega} n_{a, b}}$
+}
+
+\vs{8}
+
+\visible<3->{
+Tenemos que $P^{n^\star}[a,b] > 0$ para todo $a,b \in \Omega$
+\begin{itemize}
+\item Concluimos que $P$ es cuasipositiva (dado que $P$ es no negativa) \qed
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia del límite: cuasipositividad}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto finito de estados $\Omega$ y matriz de transición $P$, donde $P$ es cuasipositiva.
+
+\vs{4}
+
+\begin{teorema}
+Si $a \in \Omega$, se tiene que:
+\vs{1}
+\begin{enumerate}
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}$ existe para cada $b \in \Omega$
+
+\vs{2}
+
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) =\lim_{n \to \infty} \pr(X_n = a \mid X_0 = c)}$ para cada~$b, c \in \Omega$
+\end{enumerate}
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+Obtenemos entonces como corolario el teorema que queríamos demostrar, dada la proposición anterior.}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+Fije $a \in \Omega$
+
+\vs{8}
+
+Dado $n \in \mathbb{N}$, definimos:
+\alert{
+\begin{eqnarray*}
+m_a^{(n)} & = & \min_{b \in \Omega} P^n[a, b] \\
+M_a^{(n)} & = & \max_{b \in \Omega} P^n[a, b]
+\end{eqnarray*}
+}
+
+}
+    
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Tenemos que $m_a^{(n)} \leq m_a^{(n+1)}$, puesto que:
+\begin{eqnarray*}
+m_a^{(n+1)} & = & \min_{b \in \Omega} P^{n+1}[a, b] \\
+& = & \min_{b \in \Omega} \sum_{c \in \Omega} P^n[a, c] \cdot P[c, b] \\
+& \geq & \min_{b \in \Omega} \sum_{c \in \Omega} \bigg(\min_{d \in \Omega} P^n[a, d]\bigg) P[c, b] \\
+& = & \min_{b \in \Omega} \bigg(\min_{d \in \Omega} P^n[a, d]\bigg) \sum_{c \in \Omega} P[c, b] \\
+& = & \min_{b \in \Omega} \bigg(\min_{d \in \Omega} P^n[a, d]\bigg)\\
+& = & \min_{d \in \Omega} P^n[a, d] \ = \ m_a^{(n)}
+\end{eqnarray*}
+
+\vs{4}
+
+\visible<2->{
+De la misma forma se puede demostrar que $M_a^{(n)} \geq M_a^{(n+1)}$
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+\begin{lema}
+Existen $r_a, s_a \in \mathbb{R}$ tales que:
+\begin{eqnarray*}
+\lim_{n \to \infty} m_a^{(n)} & = & r_a\\
+\lim_{n \to \infty} M_a^{(n)} & = & s_a
+\end{eqnarray*}
+\end{lema}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el lema considerando que $(m_a^{(n)})_{n \in \mathbb{N}}$ es una sucesión de números reales monotona creciente y acotada superiormente.
+\begin{itemize}
+\item ¿Qué propiedades debe usar el caso de la sucesión $(M_a^{(n)})_{n \in \mathbb{N}}$?
+\end{itemize}
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+Para demostrar el teorema basta entonces demostrar que:
+\begin{eqnarray*}
+\alert{\lim_{n \to \infty} \big(M_a^{(n)} - m_a^{(n)}\big)} & \alert{=} & \alert{0}
+\end{eqnarray*}
+
+\vs{8}
+
+De hecho, si esto se cumple, para cada $b \in \Omega$ se tiene que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) & = & r_a
+\end{eqnarray*}
+Dado que \ $\pr(X_n = a \mid X_0 = b) = P^n[a,b]$,\ $m_a^{(n)} \leq P^n[a,b] \leq M_a^{(n)}$ y~~$r_a = s_a$
+
+}
+
+\end{frame}
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Existencia de un límite: cuasipositividad}
+%
+%{\small
+%
+%A partir de lo anterior necesitamos demostrar que existe un número $L_a \in \mathbb{R}$ tal que para todo $\delta > 0$ existe un número $n_1 \in \mathbb{N}$ tal que para todo $n > n_1$
+%
+%\begin{eqnarray*}
+%M_a^{(n)} - L_a < \delta
+%\end{eqnarray*}
+%
+%\visible<2->{
+%
+%dado que de esta forma podemos concluir que
+%
+%\begin{eqnarray*}
+%L_a & = & {\displaystyle \lim_{n \to \infty}} M_a^{(n)} \\
+%& = & {\displaystyle \lim_{n \to \infty}} M_a^{(n)} - {\displaystyle \lim_{n \to \infty}} (M_a^{(n)} - m_a^{(n)}) \\
+%& = & {\displaystyle \lim_{n \to \infty}} (M_a^{(n)} - M_a^{(n)} + m_a^{(n)}) \\
+%& = & {\displaystyle \lim_{n \to \infty}} m_a^{(n)} \\
+%& = & {\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}
+%\end{eqnarray*}
+%
+%}
+%
+%}
+%
+%\end{frame}
+%
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Existencia de un límite: cuasipositividad}
+%
+%{\small
+%
+%Dado un $n \in \mathbb{N}$ y $a \in \Omega$, tenemos:
+%
+%\begin{eqnarray*}
+%M_a^{(1)} \geq M_a^{(2)} \geq \dots \geq M_a^{(n)} \geq m_a^{(n)} \geq \dots \geq m_a^{(1)}
+%\end{eqnarray*}
+%
+%\vs{4}
+%
+%\visible<2->{
+%
+%Ahora, escojamos un $L_a \in \mathbb{R}$ tal que para todo $n \in \mathbb{N}$
+%
+%\begin{eqnarray*}
+%M_a^{(n)} \geq L_a \geq m_a^{(n)}
+%\end{eqnarray*}
+%
+%}
+%
+%\vs{4}
+%
+%\visible<3->{
+%
+%Además, para $\delta > 0$, tomemos $\varepsilon = \delta$ y $n_1 = n_0$. Así, para todo $n > n_1$ tenemos:
+%
+%\begin{eqnarray*}
+%M_a^{(n)} - L_a \leq M_a^{(n)} - m_a^{(n)} < \varepsilon = \delta \qed
+%\end{eqnarray*}
+%
+%}
+%
+%}
+%
+%\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+Sea $\ell = |\Omega|$, y sea $n_0 \in \mathbb{N}$ tal que $n_0 \geq 1$ y $P^{n_0}[b,c] > 0$ para cada $b,c \in \Omega$
+\begin{itemize}
+\item Además, sea $t = {\displaystyle \min_{b,c \in \Omega} P^{n_0}[b,c]}$
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+Dados estados $b_0, c_0 \in \Omega$, defina:
+\begin{eqnarray*}
+\Omega_1 & = & \{d \in \Omega \mid P^{n_0}[d, b_0] \geq P^{n_0}[d, c_0]\} \\
+\Omega_2 & = & \Omega \smallsetminus \Omega_1
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Nótese que:
+\begin{eqnarray*}
+\sum_{d \in \Omega_1} P^{n_0}[d, b_0] + \sum_{d \in \Omega_2} P^{n_0}[d, b_0] & = & \sum_{d \in \Omega} P^{n_0}[d, b_0]\\
+& = & 1
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+A partir de lo cual obtenemos:
+\begin{eqnarray*}
+\sum_{d \in \Omega_1} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) & = & 1 - \sum_{d \in \Omega_2} P^{n_0}[d, b_0] - \sum_{c \in \Omega_1} P^{n_0}[d, c_0] \\
+& \leq & 1 - \sum_{d \in \Omega_2} t - \sum_{d \in \Omega_1} t \\
+& = & 1 - \ell \cdot t
+\end{eqnarray*}
+
+}
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Dado $n \geq 0$, tenemos que:
+\begin{eqnarray*}
+P^{n_0 + n}[a, b_0] - P^{n_0 + n}[a, c_0] & = & \sum_{d \in \Omega} P^{n}[a, d] \cdot P^{n_0}[d, b_0] - \sum_{d \in \Omega} P^{n}[a,d] \cdot P^{n_0}[d, c_0]\\
+& = & \sum_{d \in \Omega} P^{n}[a, d] \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) \\
+& = & \sum_{d \in \Omega_1} P^{n}[a, d] \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) + \\
+&& \hspace{41pt} \sum_{d \in \Omega_2} P^{n}[a, d] \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) \\
+& \leq & \sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) + \\
+&& \hspace{41pt} \sum_{d \in \Omega_2} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+\
+{\footnotesize
+
+Dado que:
+\begin{eqnarray*}
+\sum_{d \in \Omega_1} P^{n_0}[d, b_0] + \sum_{d \in \Omega_2} P^{n_0}[d, b_0] \ = \ 1 \ = \ 
+\sum_{d \in \Omega_1} P^{n_0}[d, c_0] + \sum_{d \in \Omega_2} P^{n_0}[d, c_0]
+\end{eqnarray*}
+
+\vs{6}
+
+Tenemos que:
+\begin{eqnarray*}
+\sum_{d \in \Omega_2} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) = - \sum_{d \in \Omega_1} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Concluimos entonces que:
+\begin{multline*}
+\sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) + \sum_{d \in \Omega_2} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) 
+\ = \\
+\sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) - \sum_{d \in \Omega_1} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) 
+\end{multline*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Así, dado que ${\displaystyle \sum_{d \in \Omega_1} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) \leq 1 - \ell \cdot t}$, obtenemos:
+\begin{eqnarray*}
+P^{n_0 + n}[a, b_0] - P^{n_0 + n}[a, c_0] & \leq & \sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) + \\
+&& \hspace{41pt} \sum_{d \in \Omega_2} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)\\
+& = & \sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) - \\
+&& \hspace{41pt} \sum_{d \in \Omega_1} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)\\
+& = & \big(M_a^{(n)} - m_a^{(n)}\big) \sum_{d \in \Omega_1} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)\\
+& \leq & \big(1 - \ell \cdot t\big) \cdot \big(M_a^{(n)} - m_a^{(n)}\big)
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+En particular, escogemos $b_0, c_0$ tales que
+\begin{eqnarray*}
+M_a^{(n_0 + n)} & = & P^{n_0 + n}[a, b_0]\\
+m_a^{(n_0 + n)} & = & P^{n_0 + n}[a, c_0]
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+De esta forma, obtenemos:
+\begin{eqnarray*}
+\alert{M_a^{(n_0 + n)} -  m_a^{(n_0 + n)}} & \alert{\leq} & \alert{\big(1 - \ell \cdot t\big) \cdot \big(M_a^{(n)} - m_a^{(n)}\big)}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+
+
+Para cada $k \geq 1$, tenemos que:
+\begin{eqnarray*}
+M_a^{(k\cdot n_0 + n)} - m_a^{(k\cdot n_0 + n)} & = & M_a^{(n_0 + (k-1) \cdot n_0 + n)} - m_a^{(n_0 + (k-1) \cdot n_0 + n)}\\
+& \leq & \big(1 - \ell \cdot t\big)\cdot \big(M_a^{((k-1)\cdot n_0 + n)} - m_a^{((k-1)\cdot n_0 + n)}\big)  \\
+& = & \big(1 - \ell \cdot t\big)\cdot \big(M_a^{(n_0 + (k-2)\cdot n_0 + n)} - m_a^{(n_0 + (k-2)\cdot n_0 + n)}\big)  \\
+& \leq & \big(1 - \ell \cdot t\big)^2 \cdot \big(M_a^{((k-2)\cdot n_0 + n)} - m_a^{((k-2)\cdot n_0 + n)}\big)  \\
+& \leq & \cdots \\
+& \leq & \big(1 - \ell \cdot t\big)^k \cdot \big(M_a^{(n)} - m_a^{(n)}\big)
+\end{eqnarray*}
+
+\vs{6}
+
+Notése que la desigualdad también es válida para $k=0$
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Considerando $n=0$, obtenemos la sub-sucesión $\big(M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}\big)_{k \in \mathbb{N}}$ de la sucesión $\big(M_a^{(n)} - m_a^{(n)}\big)_{n \in \mathbb{N}}$
+
+\vs{8}
+
+Dado que $0 \leq (1 - \ell \cdot t) < 1$ (ya que $t, \ell > 0$), para esta sub-sucesión se tiene que:
+\begin{eqnarray*}
+0 \leq \lim_{k \to \infty} (M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}) \ \leq 
+\lim_{k \to \infty} \big(1 - \ell \cdot t\big)^k \cdot \big(M_c^{(n)} - m_c^{(n)}\big) \ = \ 0
+\end{eqnarray*}
+
+\vs{6}
+
+Vale decir,
+\begin{eqnarray*}
+\lim_{k \to \infty} (M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}) & = & 0
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+Para todo $n \in \mathbb{N}$ se tiene que:
+\begin{itemize}
+\item $m_a^{(n)} \leq m_a^{(n+1)}$
+\item $M_a^{(n)} \geq M_a^{(n+1)}$
+\item $m_a^{(n)} \leq M_a^{(n)}$
+\end{itemize}
+
+\vs{8}
+
+Por lo tanto, para todo $n \in \mathbb{N}$ se tiene que:
+\begin{itemize}
+\item $M_a^{(n)} - m_a^{(n)} \geq 0$
+\item $M_a^{(n+1)} - m_a^{(n+1)} \leq M_a^{(n)} - m_a^{(n)}$
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Dado que $\big(M_a^{(n)} - m_a^{(n)}\big)_{n \in \mathbb{N}}$ es una sucesión de números reales monótona decreciente y acotada inferiormente, concluimos que existe $u \in \mathbb{R}$ tal que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \big(M_a^{(n)} - m_a^{(n)}\big) & = & u
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Además, para la sub-sucesión $\big(M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}\big)_{k \in \mathbb{N}}$ de $\big(M_a^{(n)} - m_a^{(n)}\big)_{n \in \mathbb{N}}$ se cumple que:
+\begin{eqnarray*}
+\lim_{k \to \infty} (M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}) & = & 0
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{\alert{¡Concluimos que $u = 0$!}}
+\begin{itemize}
+\visible<4->{\item ¿Cómo se demuestra que las dos sucesiones tienen el mismo límite? ¿Por qué es importante aquí que $n_0 \geq 1$? \qed}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Irreducibilidad y aperiodicidad: una propiedad del límite}
+%
+%{\small
+%
+%Dado $a \in \Omega$, definimos:
+%\alert{
+%\begin{eqnarray*}
+%\lambda_a & = & \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b),
+%\end{eqnarray*}}
+%donde $b$ es un elemento arbitrario en $\Omega$
+%
+%\vs{8}
+%
+%\visible<2->{
+%\begin{lema}
+%Si existe $a \in \Omega$ tal que $\lambda_a = 0$, entonces $\lambda_b = 0$ para todo $b \in \Omega$
+%\end{lema}}
+%
+%\vs{8}
+%
+%\visible<3->{
+%\begin{ejercicio}
+%Demuestre el lema.
+%\end{ejercicio}
+%}
+%
+%}
+%
+%\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso infinito}
+
+{\small
+
+Irreducibilidad y aperiodicidad {\bf no} son condiciones suficientes para asegurar que una cadena de Markov con un conjunto infinito (enumerable) de estados tiene una distribución estacionaria única.
+\begin{itemize}
+\item De hecho, bajo estas condiciones ni siquiera se puede asegurar que la cadena tiene una distribución estacionaria
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\begin{exampleblock}{Ejercicio}
+Construya una cadena de Markov irreducible, aperiódica, con un conjunto infinito de estados y que no tenga distribución estacionaria.
+\end{exampleblock}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+{\small
+
+Considere la siguiente cadena de Markov con conjunto de estado $\Omega = \mathbb{N}$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$0$}
+edge[arrout, in = 200, out = 160, loop] node[left] {$\frac{1}{4}$} (n1);
+\node[circ, right=15mm of n1] (n2) {$1$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n1)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n1);
+\node[circ, right=15mm of n2] (n3) {$2$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n2)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n2);
+\node[circ, right=15mm of n3] (n4) {$3$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n3)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n3);
+\node[circw, right=15mm of n4] (n5) {$\ldots$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n4)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n4);
+%\node[circw, right=15mm of n4] (n5) {}
+%edge[arrww] node {{\large $\ldots$}} (n4);
+\end{tikzpicture}
+\end{center}
+
+\vs{8}
+
+Esta cadena de Markov es irreducible y aperiódica.
+\begin{itemize}
+{\footnotesize \item Es fácil ver que el estado 0 es aperiódico, de lo cual se concluye que la cadena de Markov es aperiódica dado que es irreducible}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+{\small
+
+Suponga que $P$ es la matriz de transición de la cadena de Markov, y $\vec \lambda$ es una distribución estacionaria para ella, vale decir,
+\begin{eqnarray*}
+P \vec \lambda &=& \vec \lambda
+\end{eqnarray*}
+
+\vs{8}
+
+Además, suponga que $\vec \lambda[i] = \lambda_i$ para cada $i \in \mathbb{N}$
+\begin{itemize}
+\item Tenemos que ${\displaystyle \sum_{i \in \mathbb{N}} \lambda_i = 1}$
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+
+{\small
+
+
+Considerando las definiciones de $P$ y $\vec \lambda$ obtenemos:
+\begin{eqnarray*}
+\lambda_0 & = & \frac{1}{4} \cdot \lambda_0 + \frac{1}{4} \cdot \lambda_1
+\end{eqnarray*}
+
+\vs{6}
+
+Por lo tanto: \alert{$3 \cdot \lambda_0 = \lambda_1$}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+{\small
+
+Considere $i > 0$ y suponga que $3 \cdot \lambda_{i-1} = \lambda_i$
+
+\vs{8}
+
+Tenemos que:
+\begin{eqnarray*}
+\lambda_{i} & = & \frac{3}{4} \cdot \lambda_{i-1} + \frac{1}{4} \cdot \lambda_{i+1}\\
+& = & \frac{3}{4} \cdot \frac{1}{3} \cdot \lambda_{i} + \frac{1}{4} \cdot \lambda_{i+1}\\
+& = & \frac{1}{4} \cdot  \lambda_{i} + \frac{1}{4} \cdot \lambda_{i+1}
+\end{eqnarray*}
+
+\vs{8}
+
+Por lo tanto: \alert{$3 \cdot \lambda_i = \lambda_{i+1}$}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+{\small
+
+\alert{Concluimos que $\lambda_i = 3^i \cdot \lambda_{0}$ para cada $i \in \mathbb{N}$}
+
+\vs{10}
+
+\visible<2->{
+Así, dado que $\lambda_i \leq 1$ para cada $i \in \mathbb{N}$, se debe tener que $\lambda_0 = 0$}
+
+\vs{10}
+
+\visible<3->{
+Concluimos entonces que $\lambda_i = 0$ para cada $i \in \mathbb{N}$, lo cual contradice la condición ${\displaystyle \sum_{i \in \mathbb{N}} \lambda_i = 1}$
+\begin{itemize}
+\item No podemos entonces tener una distribución estacionaria para $P$ \qed
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Un último comentario: el caso infinito }
+%
+%{\small
+%
+%Considere nuevamente la siguiente cadena de Markov con conjunto de estados $\Omega = \mathbb{N}$:
+%\begin{center}
+%\begin{tikzpicture}
+%\node[circ] (n1) {$0$}
+%edge[arrout, in = 200, out = 160, loop] node[left] {$\frac{1}{4}$} (n1);
+%\node[circ, right=15mm of n1] (n2) {$1$}
+%edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n1)
+%edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n1);
+%\node[circ, right=15mm of n2] (n3) {$2$}
+%edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n2)
+%edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n2);
+%\node[circ, right=15mm of n3] (n4) {$3$}
+%edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n3)
+%edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n3);
+%\node[circw, right=15mm of n4] (n5) {$\ldots$}
+%edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n4)
+%edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n4);
+%%\node[circw, right=15mm of n4] (n5) {}
+%%edge[arrww] node {{\large $\ldots$}} (n4);
+%\end{tikzpicture}
+%\end{center}
+%
+%\vs{8}
+%
+%Demostramos que para esta cadena de Markov se tiene que $\lambda_i = 0$ para todo $i \in \mathbb{N}$
+%\begin{itemize}
+%\item Queremos definir una condición que nos asegure que los valores $\lambda_i$ forman una distribución estacionaria para la cadena de Markov
+%\end{itemize}
+%
+%}
+%
+%\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cómo podemos asegurar convergencia en el caso infinito?}
+
+{\small
+
+Vamos a ver que irreducibilidad y  aperiodicidad sí son condiciones útiles en el caso infinito, pero cuando con consideradas junto con una tercera propiedad fundamental.
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de estado recurrente}
+
+{\footnotesize
+
+Sea $b$ un estado en una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ 
+
+\vs{8}
+
+\visible<2->{
+Definimos $T_b$ como una variable aleatoria que registra el primer instante de tiempo mayor a $0$ en que llegamos a $b$, suponiendo que en el tiempo $0$ estábamos~en~$b$
+\begin{itemize}
+\item Vale decir, si el valor de $T_b$ es $n$, con $n \geq 1$, entonces $X_0 = b$, $X_1 \neq b$, $\ldots$, $X_{n-1} \neq b$ y $X_n = b$
+\end{itemize}
+Este tiempo de retorno a $b$ es llamado {\em hitting time}
+}
+
+\vs{8}
+
+\visible<3->{
+\begin{definicion}
+$b$ es recurrente si \alert{${\displaystyle \sum_{n \geq 1} \pr(T_b = n)  = 1}$}, y $b$ es transitorio en caso contrario.
+\end{definicion}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una caracterización de los estado recurrentes}
+{\small
+
+Sea $b$ un estado en una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ 
+
+\vs{8}
+
+Defina:
+\vs{-2}
+\begin{eqnarray*}
+p_b & = & \sum_{n \geq 1} \pr(T_b = n)
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre que $p_b \in [0,1]$
+\vs{1}
+\begin{itemize}
+{\footnotesize \item Nótese que no estamos asumiendo que $b$ es recurrente
+
+\item ¿Es posible tener una cadena de Markov donde $p_b = 0$?
+}
+\end{itemize}
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una caracterización de los estado recurrentes}
+{\footnotesize
+
+Suponga que la matriz de transición de $\{ X_t \}_{t \in \mathbb{N}}$ es $P$, y recuerde que $G_P$ es grafo que representa a $P$
+
+\vs{6}
+
+Partiendo desde el estado $b$, consideramos caminatas sobre $G_P$ que sólo utilizan arcos con probabilidad mayor a cero y tiene largo infinito.
+\begin{itemize}
+\item Podemos realizar estas caminatas incluso si $\{ X_t \}_{t \in \mathbb{N}}$ tiene un conjunto finito de estados
+\end{itemize}
+
+\vs{6}
+
+Defina una variable aleatoria $V_b$ que cuenta el número total de veces que $b$ es visitado en las caminatas.
+\begin{itemize}
+\item El punto de partida $b$ es considerado como la primera visita a este estado
+\end{itemize}
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una caracterización de los estado recurrentes}
+{\footnotesize
+
+Dado un número natural $n \geq 1$, tenemos que:
+\alert{
+\begin{eqnarray*}
+\pr(V_b = n) & = & p_b^{n-1} \cdot (1 - p_b)
+\end{eqnarray*}}
+
+
+\visible<2->{
+\begin{proposition}
+$b$ es recurrente si y sólo si $\esp[V_b] = \infty$
+\end{proposition}}
+
+\vs{4}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre la proposición.
+\end{ejercicio}}
+
+\vs{6}
+
+\visible<4->{
+¡Tenemos entonces que $b$ es recurrente si y sólo si $b$ es visitado una cantidad infinita de veces!
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una segunda caracterización de los estado recurrentes}
+{\footnotesize
+
+Partiendo desde el estado $b$,  nuevamente consideramos caminatas sobre $G_P$ que sólo utilizan arcos con probabilidad mayor a cero y tiene largo~infinito.
+
+\vs{8}
+
+Dado $n \in \mathbb{N}$, sea $V_b^{(n)}$ una variable aleatoria tal que $V_b^{(n)} = 1$ si el estado en la caminata es $b$ después de recorrer $n$ arcos en $G_P$, y $V_b^{(n)} = 0$ en caso contrario.
+
+\vs{8}
+
+Tenemos que:
+\begin{eqnarray*}
+V_b & = & \sum_{n \in \mathbb{N}} V_b^{(n)}
+\end{eqnarray*}
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una segunda caracterización de los estado recurrentes}
+{\footnotesize
+
+Concluimos que:
+\begin{eqnarray*}
+\esp[V_b] & = & \sum_{n \in \mathbb{N}} \esp[V_b^{(n)}]
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Así, dado que $V_b^{(n)} \sim \ber(\pr(X_n = b \mid X_0 = b))$, concluimos que:
+\begin{eqnarray*}
+\alert{\esp[V_b]} & \alert{=} & \alert{\sum_{n \in \mathbb{N}} \pr(X_n = b \mid X_0=b)}
+\end{eqnarray*}}
+
+\vs{6}
+
+\visible<3->{
+\begin{corolario}
+$b$ es recurrente si y sólo si 
+\begin{eqnarray*}
+\sum_{n \in \mathbb{N}} \pr(X_n = b \mid X_0=b) & = & \infty
+\end{eqnarray*}
+\end{corolario}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una tercera propiedad fundamental: estados recurrentes positivos}
+
+{\small
+
+\begin{definition}
+Un estado $b$ en una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ es recurrente positivo si $b$ es recurrente y \alert{$\esp[T_b] \in \mathbb{R}$}
+\end{definition}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+De una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ con conjunto de estados $\Omega$ y un estado $b \in \Omega$ tal que $b$ es recurrente pero no recurrente positivo.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución para el ejercicio}
+
+{\footnotesize
+
+Considere la siguiente cadena de Markov con conjunto de estados $\Omega = \mathbb{N}$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$0$};
+\node[circ, right=15mm of n1] (n2) {$1$}
+edge[arrin, bend right = 20] node[above] {$\frac{1}{2}$} (n1)
+edge[arrout, bend left = 20] node[below] {$1$} (n1);
+\node[circw, below=9mm of n1] (n3) {};
+\node[circ, right=5mm of n3] (n4) {$2$}
+edge[arrin, bend right = 20] node[left] {$\frac{1}{4}$\,} (n1);
+\node[circ, below=9mm of n3] (n5) {$3$}
+edge[arrin, bend right = 20] node[left] {$1$} (n4);
+\node[circ, left=5mm of n3] (n6) {$4$}
+edge[arrin, bend right = 20] node[left] {$1$} (n5)
+edge[arrout, bend left = 20] node[left] {$1$} (n1);
+\node[circw, left=10mm of n1] (n7) {};
+\node[circ, above=4mm of n7] (n8) {$5$}
+edge[arrin, bend right = 20] node[below] {$\frac{1}{8}$} (n1);
+\node[circw, left=10mm of n8] (n9) {};
+\node[circw, above=4mm of n9] (n10) {$\ldots$}
+edge[arrin, bend right = 20] node[below] {$1$} (n8);
+\node[circw, right=3mm of n8] (n11) {};
+\node[circ, above=2mm of n11] (n12) {{\scriptsize $11$}}
+edge[arrout, bend left = 20] node[left] {$1$} (n1);
+\node[circw, left=10mm of n12] (n12a) {};
+\node[circw, above=4mm of n12a] (n12b) {$\ldots$}
+edge[arrout, bend left = 20] node[above] {$1$} (n12);
+\node[circ, right=7mm of n12] (n13) {{\scriptsize $12$}}
+edge[arrin, bend right = 20] node[right] {$\frac{1}{16}$}(n1);
+\node[circw, right=10mm of n13] (n13a) {};
+\node[circw, above=4mm of n13a] (n13b) {$\ldots$}
+edge[arrin, bend right = 20] node[above] {$1$} (n13);
+\end{tikzpicture}
+\end{center}
+\visible<2->{Tenemos que $0$ es un estado recurrente pero no recurrente positivo.}
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad de la distribución estacionaria: el caso general}
+
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica y \alert{donde cada estado es recurrente positivo}
+\begin{itemize}
+\item  Y sea $\vec \pi \in [0,1]^{|\Omega|}$ un vector tal que $\vec \pi[a] = \lambda_a$ para cada $a \in \Omega$, donde $\Omega$ es el conjunto de estados de $\{ X_t \}_{t \in \mathbb{N}}$
+\begin{itemize}
+{\footnotesize 
+\item Nótese que $\Omega$ puede ser un conjunto infinito enumerable
+
+\item $\lambda_a = \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)$, vale decir, $\lambda_a$ es definido como en el caso finito considerando un estado arbitrario $b \in \Omega$ (todos los puntos de partida dan el mismo resultado)}
+\end{itemize}
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+$\vec \pi$ es la única distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$
+\end{teorema}
+}
+
+
+
+}
+
+\end{frame}
+
+\end{document}

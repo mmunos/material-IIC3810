@@ -1,0 +1,1132 @@
+\documentclass{beamer}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{epsfig}
+\usepackage{dpscolor}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+
+\mode<presentation>
+{
+
+\useinnertheme{sparql}
+\useoutertheme{onlyfoot}
+\usecolortheme{seahorse}
+\usecolortheme{rose}
+
+\setbeamercovered{transparent}
+
+}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{corolario}{Corolario}
+\newtheorem{definicion}{Definición}
+\newtheorem{notacion}{Notación}
+\newtheorem{lema}{Lema}
+
+\newenvironment{ejemplo}
+{\begin{exampleblock}{Ejemplo}}
+{\end{exampleblock}}
+
+\newenvironment{ejercicio}
+{\begin{exampleblock}{Ejercicio}}
+{\end{exampleblock}}
+
+\newcommand{\cyan}[1]{\textCyan #1\textBlack}
+\newcommand{\red}[1]{\textRed #1\textBlack}
+\newcommand{\green}[1]{\textGreen #1\textBlack}
+\newcommand{\blue}[1]{\textBlue #1\textBlack}
+\newcommand{\black}[1]{\textBlack #1\textBlack}
+\newcommand{\magenta}[1]{\textMagenta #1\textBlack}
+\newcommand{\brown}[1]{\textBrown #1\textBlack}
+\newcommand{\vs}[1]{\vspace{#1mm}}
+\newcommand{\ignore}{}
+\newcommand{\ri}[1]{\text{\alert{#1}}}
+\newcommand{\hs}{\hat\sigma}
+\newcommand{\modelos}{{\it modelos}}
+\newcommand{\B}{{\tt B}}
+\newcommand{\nspace}{\text{NSPACE}}
+\newcommand{\logspace}{\text{LOGSPACE}}
+\newcommand{\nlogspace}{\text{NLOGSPACE}}
+\newcommand{\npspace}{\text{NPSPACE}}
+\newcommand{\pspace}{\text{PSPACE}}
+\newcommand{\expspace}{\text{EXPSPACE}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\espacio}{{\it espacio}}
+\newcommand{\tiempo}{{\it tiempo}}
+\newcommand{\ptime}{\text{PTIME}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\sat}{\text{SAT}}
+\newcommand{\np}{\text{NP}}
+\newcommand{\ntime}{\text{NTIME}}
+\newcommand{\cnf}{\text{CNF-SAT}}
+\newcommand{\tcnf}{\text{3-CNF-SAT}}
+\newcommand{\dcnf}{\text{2-CNF-SAT}}
+\newcommand{\horn}{\text{HORN-SAT}}
+\newcommand{\nhorn}{\text{NEG-HORN-SAT}}
+\newcommand{\nexptime}{\text{NEXPTIME}}
+\newcommand{\nexpspace}{\text{NEXPSPACE}}
+\newcommand{\co}{\text{co-}}
+\newcommand{\rp}{\leq^{\text{\it p}}_{\text{\it m}}}
+\newcommand{\reach}{\text{CAMINO}}
+\newcommand{\pe}{\text{PROG-ENT}}
+\newcommand{\pl}{\text{PROG-LIN}}
+\newcommand{\cor}{\text{CONT-REG}}
+\newcommand{\er}{\text{EQUIV-REG}}
+\newcommand{\tr}{\text{TOTAL-REG}}
+\newcommand{\qbf}{\text{QBF}}
+\newcommand{\shp}{\text{Succinct-HP}}
+\newcommand{\hp}{\text{HP}}
+
+\title[Repaso de algunos conceptos básicos]
+{Repaso de algunos conceptos básicos}
+
+\author[IIC3810]
+{IIC3810}
+
+\institute[]
+{
+%  Department of Computer Science\\
+%  Pontificia Universidad Cat\'olica de Chile
+}
+
+\date{}
+
+%\subject{Theoretical Computer Science}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Complejidad Computacional}
+%
+%Objetivo: Medir la \alert{complejidad computacional} de un problema.
+%
+%\vs{6}
+%
+%Vale decir: Medir la cantidad de \alert{recursos computacionales}
+%necesarios para solucionar un problema. 
+%\vs{1}
+%\begin{itemize}
+%\item Tiempo
+%\vs{1}
+%
+%\item Espacio
+%\vs{1}
+%
+%\item ...
+%\end{itemize}
+%
+%\vs{6}
+%
+%Para hacer esto primero tenemos que introducir la noción de
+%\alert{problema.} 
+%
+%\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Problemas de decisión}
+
+Alfabeto \alert{$\Sigma$:} Conjunto finito de símbolos.
+\begin{itemize}
+\item Ejemplo: $\Sigma = \{0,1\}$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Palabra \alert{$w$:} Secuencia finita de símbolos de $\Sigma$
+\begin{itemize}
+\item Ejemplo: $w = 01101$
+\end{itemize}
+}
+
+\vs{6}
+
+\visible<3->{
+\alert{$\Sigma^*$:} Conjunto de todas las palabras construidas con símbolos
+de $\Sigma$}
+
+\vs{6}
+
+\visible<4->{
+Lenguaje \alert{$L$:} Conjunto de palabras.
+\begin{itemize}
+\item Ejemplo: $L = \{ 0^n1^n \mid n \in \mathbb{N} \}$
+\end{itemize}}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Problemas de decisión}
+
+{\small
+
+Problema de decisión asociado a un lenguaje $L$: \alert{Dado $w \in \Sigma^*$,
+decidir si $w \in L$}
+
+\vs{4}
+
+\visible<2->{
+\begin{ejemplo}
+Recuerde que 
+\vs{-1}
+\begin{eqnarray*}
+\alert{\sat} & \alert{=} & \alert{\{ \varphi \mid \varphi \text{ es una fórmula en lógica
+proposicional satisfacible}\}}
+\end{eqnarray*}
+Podemos ver \sat\ como un problema de decisión.
+\vs{1}
+
+\begin{itemize}
+\item $\Sigma = \{x, \_, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, \neg, \wedge, \vee, \rightarrow,
+\leftrightarrow, (,)\}$
+
+\vs{1}
+
+Algunas palabras de $\Sigma^*$ tales como $(\neg x\_0)$ y $(x\_31 \wedge x\_27)$ representan fórmulas,
+mientras que otras tales como $\neg \neg$  y $x_1 \neg x_2 \wedge \wedge$ no representan fórmulas
+
+\vs{2}
+
+\item \sat\ = $\{ w \in \Sigma^* \mid w$ representa una fórmula y $w$ es satisfacible$\}$
+\end{itemize}
+\end{ejemplo}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Complejidad de un problema de decisión}
+
+La complejidad de un lenguaje $L$ es la complejidad del problema de
+decisión asociado a $L$.
+
+\vs{6}
+
+¿Cuándo decimos que $L$ puede ser solucionado eficientemente?
+\begin{itemize}
+\item Cuando existe un \alert{algoritmo eficiente} que decide $L$
+\end{itemize}
+
+\vs{6}
+
+¿Cuándo decimos que $L$ es un problema difícil?
+\begin{itemize}
+\item Cuando \alert{{\bf no existe}} un algoritmo eficiente que decide
+$L$
+\end{itemize}
+
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Máquinas de Turing}
+%
+%¿Cómo podemos demostrar que un problema es difícil?
+%\begin{itemize}
+%\item Para hacer esto, primero tenemos que formalizar la noción de
+%algoritmo
+%\end{itemize}
+%
+%\vs{8}
+%
+%\visible<2->{
+%¿Qué es un algoritmo? ¿Podemos formalizar este concepto?
+%\begin{itemize}
+%\alert{\item Máquinas de Turing:} Intento por formalizar
+%este concepto
+%\end{itemize}
+%}
+%
+%\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing: Formalización}
+
+\begin{definicion}
+Máquina de Turing (MT) determinista: \alert{$(Q, \Sigma, \Gamma, q_0,
+\delta, F)$} 
+\vs{1}
+\begin{itemize}
+\item \alert{$Q$} es un conjunto finito de estados
+\vs{1}
+
+\item \alert{$\Sigma$} es un alfabeto tal que $\vdash, \B
+\not\in \Sigma$
+\vs{1}
+
+\item \alert{$\Gamma$} es un alfabeto tal que $\Sigma \cup
+\{\vdash, \B\} \subseteq \Gamma$
+\vs{1}
+
+\item \alert{$q_0 \in Q$} es el estado inicial
+\vs{1}
+
+\item \alert{$F \subseteq Q$} es un conjunto de estados finales
+\vs{1}
+
+\item \alert{$\delta$} es una función parcial:
+\begin{eqnarray*}
+\delta &:& Q \times \Gamma \rightarrow Q \times \Gamma \times \{\leftarrow,\Box,\rightarrow\}
+\end{eqnarray*}
+$\delta$ es llamada función de transición
+\end{itemize}
+\end{definicion}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing: Funcionamiento}
+
+La cinta de la máquina de Turing es infinita hacia la derecha.
+\begin{itemize}
+\item  El símbolo $\vdash$ es usado para demarcar la posición 0 de la cinta
+\end{itemize}
+
+\vs{7}
+
+\begin{block}{Supuestos}
+\begin{itemize}
+\item Si $\delta(q,\vdash)$ está definido: \alert{$\delta(q,\vdash) =
+(q',\vdash,X)$, con $X \in \{\rightarrow,\Box\}$}
+\vs{1}
+
+\item Si $a \in (\Gamma \smallsetminus \{\vdash\})$ y $\delta(q,a)$ está
+definido: \alert{$\delta(q,a) = (q',b,X)$, con $b \in (\Gamma
+\smallsetminus \{\vdash\})$}    
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing: Funcionamiento}
+
+$\Sigma$ es el alfabeto de entrada y $\Gamma$ es el
+alfabeto de la cinta.
+\vs{1}
+\begin{itemize}
+\item Una palabra $w \in \Sigma^*$ de entrada de largo $n$ es colocada en
+las posiciones 1, $\ldots$, $n$ de la cinta
+\vs{1}
+
+\item Las posiciones siguientes ($n+1$, $n+2$, $\ldots$) contienen el
+símbolo $\B$
+\end{itemize}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing: Funcionamiento}
+
+Al comenzar a funcionar, la máquina se encuentra en el estado $q_0$ y
+su cabeza lectora está en la posición 1 de la cinta.
+
+\vs{6}
+
+En cada instante la máquina se encuentra en un estado \alert{$q$} y su
+cabeza lectora está en una posición \alert{$p$}
+\vs{1}
+\begin{itemize}
+\item Si el símbolo en la posición $p$ es \alert{$a$} y
+\alert{$\delta(q,a) = (q',b,X)$,} entonces:
+\vs{1} 
+\begin{itemize}
+\visible<2->{\alert{\item La máquina escribe el símbolo $b$ en la
+posición $p$ de la cinta}} 
+
+\vs{1}
+
+\visible<3->{\alert{\item Cambia de estado desde $q$ a $q'$}}
+
+\vs{1}
+
+\visible<4->{\alert{\item Mueve la cabeza lectora a la posición $p-1$
+si $X$ es $\leftarrow$, y a la posición $p+1$ si $X$ es
+$\rightarrow$. Si $X$ es $\Box$, entonces la cabeza lectora permanece
+en la posición $p$}}
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing: Aceptación}
+
+Los estados de $F$ son utilizados como estados de aceptación.
+\begin{itemize}
+\item Una palabra $w$ es aceptada por una máquina $M$ si y sólo si la
+ejecución de $M$ con entrada $w$ se detiene en un estado de $F$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+Lenguaje aceptado por una máquina de Turing $M$:
+\vs{-2}
+\begin{eqnarray*}
+\alert{L(M)} & \alert{=} & \alert{\{ w \in \Sigma^* \mid M \text{
+acepta } w \}} 
+\end{eqnarray*}
+\end{definicion}
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Máquinas de Turing: Ejercicios}
+
+
+\begin{enumerate}
+\item Construya una Máquina de Turing que acepte el lenguaje de las palabras $w \in \{0,1\}^*$ tal que $w$ contiene un número par de símbolos  0.
+
+\vs{6}
+
+\item Construya una máquina de Turing que acepte el lenguaje de las palabras $w \in \{0,1\}^*$ tal que $w$ es un palíndromo.
+\end{enumerate}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Complejidad de un algoritmo}
+
+Una Máquina de Turing puede no detenerse en alguna entrada.
+\begin{itemize}
+\alert{\item Primera noción de algoritmo: MT que se
+detiene en todas las entradas}
+\end{itemize}
+
+\vs{6}
+
+¿Cómo se mide el tiempo de ejecución de un algoritmo?
+
+\vs{6}
+
+Para una MT con alfabeto $\Sigma$:
+\vs{1}
+\begin{itemize}
+\item \alert{Paso de $M$:} Ejecutar una instrucción de
+la función de transición
+\vs{1}
+
+\item \alert{$\tiempo_M(w)$:} Número de pasos
+ejecutados por $M$ con entrada $w \in \Sigma^*$
+\end{itemize}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Complejidad de un algoritmo}
+
+\begin{definicion}
+El tiempo de funcionamiento de una MT $M$ en el \alert{peor caso} es
+definido por la función $t_M$:
+\vs{-2}
+\begin{eqnarray*}
+\alert{t_M(n)} & \alert{=} & \alert{\max\{\ \tiempo_M(w)\ \mid\ w \in
+\Sigma^* \text{ y } |w|=n\ \}.} 
+\end{eqnarray*}
+\end{definicion}
+
+\vs{8}
+
+\begin{ejercicio}
+Construya una máquina de Turing que funcione en tiempo $O(n^2)$ y
+acepte el lenguaje $L = \{ w \in \{0,1\}^* \mid w$ es un
+palíndromo$\}$
+\end{ejercicio}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MT determinista: complejidad de un lenguaje}
+
+Un lenguaje $L$ es aceptado por una MT $M$ en \alert{tiempo $O(t(n))$}
+si $L = L(M)$ y \alert{$t_M(n)$ es $O(t(n))$}
+\vs{2}
+\begin{itemize}
+\item La definición es idéntica para el caso de $\Omega(t(n))$ y
+$\Theta(t(n))$
+\end{itemize}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ingrediente necesario: No determinismo}
+
+\begin{definicion}
+Máquina de Turing no determinista: $(Q, \Sigma, \Gamma, q_0,
+\delta, F)$
+\vs{1}
+
+\begin{itemize}
+\item $Q$ es un conjunto finito de estados 
+\vs{1}
+
+\item $\Sigma$ es un alfabeto finito tal que $\vdash, \B
+\not\in \Sigma$
+\vs{1}
+
+\item $\Gamma$ es un alfabeto finito tal que $\Sigma \cup
+\{\vdash, \B\} \subseteq \Gamma$
+\vs{1}
+
+\item $q_0 \in Q$ es el estado inicial
+\vs{1}
+
+\item $F \subseteq Q$ es un conjunto de estados finales
+\vs{1}
+
+\item \alert{$\delta$ es una relación de transición:
+\begin{eqnarray*}
+\delta &\subseteq& Q \times \Gamma \times Q \times \Gamma \times \{\leftarrow,\Box,\rightarrow\}
+\end{eqnarray*}}
+\end{itemize}
+\end{definicion}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing no determinista: Funcionamiento}
+
+
+La inicialización es igual que para el caso determinista.
+\vs{1}
+\begin{itemize}
+\item Al comenzar a funcionar, la máquina se encuentra en el estado
+$q_0$ y su cabeza lectora está en la posición 1 de la cinta
+\end{itemize}
+
+\vs{6}
+
+En cada instante la máquina se encuentra en un estado $q$ y su cabeza
+lectora está en una posición $p$ que contiene un símbolo $a$.
+\vs{1}
+\begin{itemize}
+\item Sea \alert{$T = \{ (q',b,X)$ $\mid$ $(q,a,q',b,X) \in \delta
+\}$}. Si $T \neq  \emptyset$, entonces la máquina elije $(q',b,X) \in
+T$ y: 
+\vs{1} 
+\begin{itemize}
+\visible<2->{\alert{\item escribe el símbolo $b$ en la
+posición $p$ de la cinta}} 
+
+\vs{1}
+
+\visible<3->{\alert{\item cambia de estado desde $q$ a $q'$}}
+
+\vs{1}
+
+\visible<4->{\alert{\item mueve la cabeza lectora a la posición $p-1$
+si $X$ es $\leftarrow$, y a la posición $p+1$ si $X$ es
+$\rightarrow$. Si $X$ es $\Box$, entonces la cabeza lectora permanece en
+la posición $p$}} 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing no deterministas: Aceptación}
+
+Una palabra $w$ es aceptada por una MT no determinista $M$ si y sólo
+si \alert{existe} una ejecución de $M$ con entrada $w$ que se detiene
+en un estado de $F$. 
+
+\vs{8}
+
+\begin{definicion}
+Lenguaje aceptado por una MT no determinista $M$:
+\vs{-2}
+\begin{eqnarray*}
+\alert{L(M)} & \alert{=} & \alert{\{ w \in \Sigma^* \mid M \text{
+acepta } w \}} 
+\end{eqnarray*}
+\end{definicion}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Determinismo vs no determinismo}
+
+¿Es posible aceptar más lenguajes con las MTs no deterministas?
+
+\vs{4}
+
+\visible<2->{
+\begin{teorema}
+Si un lenguaje $L$ es aceptado por una MT no determinista $M_1$,
+entonces $L$ es aceptado por una MT determinista $M_2$.
+\end{teorema}}
+
+\vs{6}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre el teorema.
+\begin{itemize}
+\item ¿Cuál es la diferencia de complejidad entre $M_1$ y $M_2$?
+\end{itemize}
+\end{ejercicio}}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing no deterministas: Complejidad}
+
+Para una MT no determinista:
+\vs{2}
+\begin{itemize}
+\item \alert{Paso de $M$:} Ejecutar una instrucción de
+la \alert{relación} de transición
+
+\vs{4}
+
+\item \alert{$\tiempo_M(w)$:} Número de pasos de $M$ con entrada $w$
+en la ejecución más corta que acepta a $w$
+
+\vs{4}
+
+Sólo está definido para palabras aceptadas por $M$
+\end{itemize}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing no deterministas: Complejidad}
+
+\begin{definicion}
+El tiempo de funcionamiento de una MT no determinista $M$ en el
+\alert{peor caso} es definido por la función $t_M$: 
+\vs{-2}
+\begin{multline*}
+\alert{t_M(n)} \ \alert{=} \ \alert{\max\bigg[\{n\} \cup \{
+\tiempo_M(w)\ \mid\ w \in \Sigma^*,}\\ \alert{|w|=n \text{ y } M 
+\text{ acepta a } w \}\bigg]}
+\end{multline*}
+\end{definicion}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MT no determinista: complejidad de un lenguaje}
+
+Un lenguaje $L$ es aceptado por una MT no determinista $M$ en tiempo $O(t(n))$
+si $L = L(M)$ y $t_M(n)$ es $O(t(n))$
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Clases de complejidad deterministas}
+
+Dado: Alfabeto $\Sigma$
+
+\vs{4}
+
+\alert{\dtime($t$):} conjunto de todos los lenguajes $L \subseteq \Sigma^*$
+que pueden ser aceptados en tiempo $O(t)$ por una MT determinista.
+
+\vs{4}
+
+Dos clases fundamentales:
+\alert{
+\begin{eqnarray*}
+\ptime &=& \bigcup_{k \in \mathbb{N}} \dtime(n^k)\\
+\exptime &=& \bigcup_{k \in \mathbb{N}} \dtime(2^{n^k})
+\end{eqnarray*}
+}
+
+\visible<2->{
+\alert{\ptime: Conjunto de todos los problemas que pueden ser
+solucionados ``eficientemente''.}}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Clases de complejidad no deterministas}
+
+\alert{\ntime($t$):} conjunto de todos los lenguajes $L \subseteq \Sigma^*$
+que pueden ser aceptados en tiempo $O(t)$ por una MT no determinista.
+
+\vs{4}
+
+Una clase fundamental:
+\alert{
+\begin{eqnarray*}
+\np &=& \bigcup_{k \in \mathbb{N}} \ntime(n^k)
+\end{eqnarray*}
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cuál es la relación entre las clases anteriores?}
+
+Tenemos que:
+\alert{
+\begin{center}
+$\ptime \ \ \subseteq \ \ \np \ \ \subseteq \ \ \exptime$
+\end{center}}
+
+\vs{8}
+
+Además sabemos que:
+\alert{
+\begin{center}
+$\ptime \ \ \subsetneq \ \ \exptime$
+\end{center}}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Problemas en una clase de complejidad}
+
+Una clase de complejidad contiene un conjunto de problemas de decisión.
+\begin{itemize}
+\visible<2->{\item ¿Hay alguno de estos problemas que {\em represente}
+a la clase?} 
+\end{itemize}
+
+\vs{6}
+
+\visible<3->{Un caso muy conocido: $\sat$ representa a la clase
+$\np$.} 
+\begin{itemize}
+\visible<4->{\item ¿En qué sentido la representa?}
+
+\visible<5->{\item ¿Qué sucede si encontramos un algoritmo eficiente
+para $\sat$?} 
+\end{itemize}
+
+
+\vs{6}
+
+\visible<6->{Vamos a definir las nociones necesarias para estudiar
+cuando un problema representa a una clase de complejidad.}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de reducción: Máquinas que calculan}
+
+\begin{definicion}
+Una MT calculadora (MTC): $(Q, \Sigma, \Gamma, q_0, \delta)$
+
+\begin{itemize}
+\item $Q$ es un conjunto finito de estados
+
+\item $\Sigma$ es un alfabeto finito tal que $\vdash, \B \not\in
+\Sigma$
+
+\item $\Gamma$ es un alfabeto finito tal que $\Sigma \cup \{\vdash,
+\B\} \subseteq \Gamma$
+
+\item $q_0 \in Q$ es el estado inicial
+
+\item $\delta$ es una función parcial:
+\begin{eqnarray*}
+\alert{\delta} & \alert{:}&\ \alert{Q \times \Gamma \rightarrow Q \times \Gamma \times \{\leftarrow, \Box, \rightarrow\} \times (\Sigma \cup \{\B\})} 
+\end{eqnarray*}
+$\delta$ es llamada función de transición
+\end{itemize}
+\end{definicion}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MT calculadora: Funcionamiento}
+
+La máquina tiene \alert{dos cintas} infinitas hacia la derecha.
+\vs{1}
+\begin{itemize}
+\item La primera cinta es de lectura y \alert{la segundo de escritura}
+
+\vs{1}
+
+\item  El símbolo $\vdash$ es usado para demarcar la posición 0 de
+cada cinta
+\end{itemize}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MT calculadora: Funcionamiento}
+
+$\Sigma$ es el alfabeto de entrada y \alert{salida}, y $\Gamma$ es el
+alfabeto de las cintas.
+\begin{itemize}
+\item Una palabra $w \in \Sigma^*$ de entrada de largo $n$ es colocada
+en las posiciones 1, $\ldots$, $n$ de la primera cinta
+
+\item Las siguientes posiciones ($n+1$, $n+2$, $\ldots$) de la primera
+cinta contienen el símbolo $\B$
+
+\item La segunda cinta contienen el símbolo $\B$ en las posiciones
+1, 2, 3, $\ldots$
+\end{itemize}
+
+\vs{5}
+
+La máquina tiene una cabeza lectora por cinta.
+\begin{itemize}
+\item Al comenzar, la máquina se encuentra en el estado
+$q_0$, y cada cabeza lectora está en la posición 1 de su cinta
+\end{itemize}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MT calculadora: Funcionamiento}
+
+{\small
+
+En cada instante la máquina se encuentra en un estado $q$ y su
+cabeza lectora $i$ ($i = 1,2$) se encuentra en la posición $p_i$.
+\begin{itemize}
+\item Si el símbolo en la posición $p_i$ es $a_i$ y
+$\delta(q,a_1,a_2) =$ $(q',b_1, X_1,b_2)$, entonces: 
+\vs{2} 
+\begin{itemize}
+\visible<2->{\item Cambia de estado desde $q$ a $q'$}
+
+\vs{2}
+
+\visible<3->{\item Escribe el símbolo $b_1$ en la posición $p_1$ de la primera cinta}
+
+\vs{2}
+
+\visible<4->{\item Mueve la cabeza lectora de la primera cinta a la posición $p_1-1$ si
+$X_1$ es $\leftarrow$, y a la posición $p_1+1$ si $X_1$ es
+$\rightarrow$. Si $X_1$ es $\Box$, entonces la máquina no mueve la cabeza
+lectora de la primera cinta} 
+
+\vs{2}
+
+\visible<5->{\alert{\item Si $b_{2} \in \Sigma$, entonces escribe el símbolo $b_{2}$ en la posición $p_{2}$ de la segunda cinta, 
+y mueve la cabeza lectora de esta cinta a la posición
+$p_{2}+1$. Si $b_{2} = \B$, entonces no cambia la
+configuración de la segunda cinta}}
+\end{itemize}
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MTC: Función calculada}
+
+{\small
+
+El tiempo ocupado por una MTC se define de la misma forma que para una MT (determinista)
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+Una función $f : \Sigma^* \to \Sigma^*$ puede ser calculada en tiempo
+$O(t(n))$ si existe una MTC $M$ tal que:
+\begin{itemize}
+\item $M$ para en todas las entradas
+
+\item $t_M$ es $O(t(n))$
+
+\item Con entrada $w \in \Sigma^*$$:$ $M$ se detiene en una
+configuración que tiene en la \alert{segunda cinta a $f(w)$, precedido
+por el símbolo $\vdash$ y seguido por una cadena de símbolos $\B$} 
+\end{itemize}
+\end{definicion}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de reducción polinomial}
+
+Dados lenguajes $L_1$ y $L_2$ con alfabeto $\Sigma$
+
+\vs{6}
+
+\begin{definicion}
+$L_1$ es reducible en tiempo polinomial a $L_2$, denotado como
+\alert{$L_1 \rp L_2$}, si existe una función $f$ computable en tiempo $O(n^k)$ para una constante $k$ tal que para todo $w \in \Sigma^*$: 
+\begin{center}
+\alert{$w \in L_1$ si y sólo si $f(w) \in L_2$}
+\end{center}
+\end{definicion}
+
+
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de completitud}
+
+{\small
+
+\begin{definicion}[Hardness]
+Dada una clase de complejidad $\CC$, un
+lenguaje $L$ es \alert{hard} para $\CC$ si para todo $L' \in \CC$ existe
+una reducción polinomial de $L'$ a $L$. 
+\end{definicion}
+
+\vs{6}
+
+\visible<2->{
+\begin{definicion}[Completitud]
+Dada una clase de complejidad $\CC$, un
+lenguaje $L$ es \alert{completo} para $\CC$ si \alert{$L \in \CC$} y $L$
+es hard para $\CC$.
+\end{definicion}}
+
+\vs{4}
+
+\visible<3->{
+\begin{notacion}
+Si un lenguaje $L$ es completo para una clase de complejidad $\CC$,
+decimos que $L$ es $\CC$-completo.
+\end{notacion}}
+
+}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Completitud en $\np$}
+
+
+
+\begin{teorema}[Cook-Levin]
+\sat\ es $\np$-completo.
+\end{teorema}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Reducción polinomial: Una propiedad fundamental}
+
+\begin{proposition}
+Si $L_1 \rp L_2$ y $L_2 \rp L_3$, entonces $L_1 \rp L_3$.
+\end{proposition}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Otros problemas completos para $\np$}
+
+La propiedad anterior nos dice que si tenemos un problema $L$ completo para una clase $\CC$, entonces es
+más simple encontrar otros problemas $\CC$-completos.
+\begin{itemize}
+\item $L'$ es $\CC$-completo si $L'\in \CC$ y \alert{$L \rp L'$}
+\end{itemize}
+
+\vs{6}
+
+Vamos a usar esta idea para mostrar otros problemas completos para $\np$.
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un problema $\np$-completo: \cnf}
+
+Un problema muy útil al hacer reducciones:
+\begin{multline*}
+\alert{\cnf} \ \alert{=} \ \alert{\{ \varphi \mid \varphi \text{ es una
+conjunción de}}\\ \alert{\text{cláusulas y } \varphi \text{ es
+satisfacible}\}}
+\end{multline*}
+
+\vs{6}
+
+\begin{teorema}
+\cnf\ es $\np$-completo.
+\end{teorema}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Otro problema $\np$-completo: \tcnf}
+
+\begin{notacion}
+Una $k$-clausula es una clausula con a lo más $k$ literales.
+\end{notacion}
+
+\vs{2}
+
+Un problema \alert{aun más útil} al hacer reducciones:
+\vs{-2}
+\begin{multline*}
+\tcnf \ = \ \{ \varphi \mid \varphi \text{ es una
+conjunción de} \\ \text{\alert{3-cláusulas} y } \varphi \text{ es
+satisfacible}\}
+\end{multline*}
+
+\begin{teorema}
+\tcnf\ es $\np$-completo.
+\end{teorema}
+
+
+\end{frame}
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Un tercer problema $\np$-completo: Programación entera} 
+%
+%Un sistema de ecuaciones lineales enteras es de la forma:
+%\begin{eqnarray*}
+%\alert{A \vec x} & \alert{\leq} & \alert{\vec b}
+%\end{eqnarray*}
+%donde:
+%\begin{itemize}
+%\item $A$ es una matriz de números enteros de orden $m \times n$
+%
+%\item $\vec x$ es un vector de variables de orden $n \times 1$
+%
+%\item $\vec b$ es un vector de números enteros de orden $m \times 1$
+%\end{itemize}
+%
+%\vs{6}
+%
+%Un vector $\vec c$ de números enteros de orden $n \times 1$ es una solución para el sistema si \alert{$A \vec c \leq \vec b$.} 
+%
+%\end{frame}
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Un tercer problema $\np$-completo: Programación entera} 
+%
+%Un problema muy estudiado por su utilidad práctica:
+%\begin{multline*}
+%\alert{\pe} \ \alert{=} \ \alert{\{(A,\vec b) \mid A \vec x \leq \vec
+%b \text{ es un sistema de}}\\ \alert{\text{ecuaciones lineales enteras
+%que tiene solución}\}}
+%\end{multline*}
+%
+%\vs{4}
+%
+%\begin{teorema}
+%$\pe$ es $\np$-completo.
+%\end{teorema}
+%
+%\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Clases de complejidad: Complemento}
+
+Dado un lenguaje $L$ sobre un alfabeto $\Sigma$:
+\begin{eqnarray*}
+\overline{L} & = & \{w \in \Sigma^* \mid w \not\in L\}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+\begin{definicion}
+Dada una clase de complejidad $\CC$, el conjunto de los complementos
+de $\CC$ se define como: \alert{$\co\CC \ = \ \{ \overline{L} \mid L
+\in \CC \}$} 
+\end{definicion}}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La clase $\co\np$}
+
+Esta es una clase de complejidad muy estudiada. 
+\vs{2}
+\begin{itemize}
+\item ¿Puede identificar algún problema en esta clase?
+
+\vs{2}
+
+\item ¿Puede identificar algún problema $\co\np$-completo?
+
+\vs{2}
+
+\item ¿Es esta clase igual a $\np$? 
+\end{itemize}
+
+\end{frame}
+
+\end{document}

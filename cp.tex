@@ -1,0 +1,2018 @@
+\documentclass{beamer}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{epsfig}
+\usepackage{dpscolor}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+
+\mode<presentation>
+{
+
+\useinnertheme{sparql}
+\useoutertheme{onlyfoot}
+\usecolortheme{seahorse}
+\usecolortheme{rose}
+
+\setbeamercovered{transparent}
+
+}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{corolario}{Corolario}
+\newtheorem{definicion}{Definición}
+\newtheorem{notacion}{Notación}
+\newtheorem{lema}{Lema}
+
+\newenvironment{ejemplo}
+{\begin{exampleblock}{Ejemplo}}
+{\end{exampleblock}}
+
+\newenvironment{ejercicio}
+{\begin{exampleblock}{Ejercicio}}
+{\end{exampleblock}}
+
+\newcommand{\cyan}[1]{\textCyan #1\textBlack}
+\newcommand{\red}[1]{\textRed #1\textBlack}
+\newcommand{\green}[1]{\textGreen #1\textBlack}
+\newcommand{\blue}[1]{\textBlue #1\textBlack}
+\newcommand{\black}[1]{\textBlack #1\textBlack}
+\newcommand{\magenta}[1]{\textMagenta #1\textBlack}
+\newcommand{\brown}[1]{\textBrown #1\textBlack}
+\newcommand{\vs}[1]{\vspace{#1mm}}
+\newcommand{\ignore}{}
+\newcommand{\ri}[1]{\text{\red{#1}}}
+\newcommand{\hs}{\hat\sigma}
+\newcommand{\modelos}{{\it modelos}}
+\newcommand{\B}{{\tt B}}
+\newcommand{\nspace}{\text{NSPACE}}
+\newcommand{\logspace}{\text{LOGSPACE}}
+\newcommand{\nlogspace}{\text{NLOGSPACE}}
+\newcommand{\npspace}{\text{NPSPACE}}
+\newcommand{\pspace}{\text{PSPACE}}
+\newcommand{\ph}{\text{PH}}
+\newcommand{\expspace}{\text{EXPSPACE}}
+\newcommand{\nexpspace}{\text{NEXPSPACE}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\espacio}{{\it espacio}}
+\newcommand{\tiempo}{{\it tiempo}}
+\newcommand{\ptime}{\text{PTIME}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\nexptime}{\text{NEXPTIME}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\sat}{\text{SAT}}
+\newcommand{\tcnfu}{\text{3-CNF-SAT-UNSAT}}
+\newcommand{\usat}{\text{unique-SAT}}
+\newcommand{\np}{\text{NP}}
+\newcommand{\ntime}{\text{NTIME}}
+\newcommand{\crp}{\text{RP}}
+\newcommand{\zpp}{\text{ZPP}}
+\newcommand{\bpp}{\text{BPP}}
+\newcommand{\cnf}{\text{CNF-SAT}}
+\newcommand{\tcnf}{\text{3-CNF-SAT}}
+\newcommand{\dcnf}{\text{2-CNF-SAT}}
+\newcommand{\horn}{\text{HORN-SAT}}
+\newcommand{\nhorn}{\text{NEG-HORN-SAT}}
+\newcommand{\co}{\text{co-}}
+\newcommand{\rp}{\leq^\text{\it p}_\text{\it m}}
+\newcommand{\tur}{\leq^\text{\it p}_\text{\it T}}
+\newcommand{\reach}{\text{CAMINO}}
+\newcommand{\pe}{\text{PROG-ENT}}
+\newcommand{\pl}{\text{PROG-LIN}}
+\newcommand{\cor}{\text{CONT-REG}}
+\newcommand{\er}{\text{EQUIV-REG}}
+\newcommand{\qbf}{\text{QBF}}
+\newcommand{\shp}{\text{Succinct-HP}}
+\newcommand{\hp}{\text{HP}}
+\newcommand{\cdp}{\text{DP}}
+\newcommand{\clique}{\text{CLIQUE}}
+\newcommand{\eclique}{\text{exact-CLIQUE}}
+\newcommand{\costo}{\text{costo}}
+\newcommand{\tsp}{\text{TSP}}
+\newcommand{\tspu}{\text{unique-TSP}}
+\newcommand{\no}{\text{NO}}
+\newcommand{\yes}{\text{YES}}
+\newcommand{\br}{\text{CERTAIN-ANSWERS}}
+
+\newcommand{\CROM}{\text{CROM}}
+\newcommand{\EVAL}{\text{EVAL}}
+\newcommand{\EQUIV}{\text{EQUIV}}
+\newcommand{\EQUIVP}{\text{EQUIV-POL}}
+
+\newcommand{\re}{\text{RE}}
+\newcommand{\dec}{\text{R}}
+
+\newcommand{\pr}{{\rm {\bf Pr}}}
+
+\newcommand{\afor}{{\bf for}\ }
+\newcommand{\afore}{{\bf for each}\ }
+\newcommand{\ato}{{\bf to}\ }
+\newcommand{\ado}{{\bf do}\ }
+\newcommand{\aif}{{\bf if}\ }
+\newcommand{\athen}{{\bf then}\ }
+\newcommand{\aelse}{{\bf else}\ }
+\newcommand{\areturn}{{\bf return}\ }
+\newcommand{\awhile}{{\bf while}\ }
+\newcommand{\aand}{{\bf and}\ }
+\newcommand{\aor}{{\bf or}\ }
+
+\usetikzlibrary{arrows,positioning} 
+\tikzset{
+    rect/.style={
+           rectangle,
+           rounded corners,
+           draw=black, 
+           thick,
+           text centered},
+    rectw/.style={
+           rectangle,
+           rounded corners,
+           draw=white, 
+           thick,
+           text centered},
+    arrout/.style={
+           ->,
+           -latex,
+           thick,
+           },
+    arrin/.style={
+           <-,
+           latex-,
+           thick,
+           }
+}
+
+\title[Clases de complejidad aleatorizadas]
+{Clases de complejidad aleatorizadas}
+
+\author[IIC3810]
+{IIC3810}
+
+\institute[]
+{
+%  Department of Computer Science\\
+%  Pontificia Universidad Cat\'olica de Chile
+}
+
+\date{}
+
+%\subject{Theoretical Computer Science}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo: equivalencia de polinomios}
+{\small
+
+Consideramos polinomios en varias variables en $\mathbb{Q}$
+
+\vs{6}
+
+Un monomio es una expresión de la forma $c x_1^{\ell_1} \cdots x_n^{\ell_n}$, donde $c \in \mathbb{Q}$ y cada $\ell_i \in \mathbb{N}$.
+
+\vs{6}
+
+Un monomio $c x_1^{\ell_1} \cdots x_n^{\ell_n}$ es nulo si $c = 0$
+\begin{itemize}
+\item No es nulo si $c \neq 0$
+\end{itemize}
+
+\vs{6}
+
+El grado de un monomio $c x_1^{\ell_1} \cdots x_n^{\ell_n}$ no nulo es $\ell_1 + \cdots + \ell_n$.
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Polinomios en varias variables}
+{\small
+
+Un polinomio es una expresión de la forma:
+\begin{eqnarray*}
+\alert{p(x_1,\ldots,x_n)} & \alert{=} & \alert{\sum_{i=1}^\ell\prod_{j=1}^{m_i} \bigg(\sum_{k = 1}^{n} a_{i,j,k} x_k + a_{i,j,n+1}\bigg)}
+\end{eqnarray*}
+donde cada $a_{i,j,k} \in \mathbb{Q}$ y cada $a_{i,j,n+1} \in \mathbb{Q}$
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Polinomios en varias variables}
+{\small
+
+La forma canónica de un polinomio $p(x_1,\ldots,x_n)$ es única, y es igual a 0 o a una suma de monomios que satisface las siguiente propiedades:
+\begin{itemize}
+\item cada monomio en la forma canónica es de la forma $c x_1^{\ell_1} \cdots x_n^{\ell_n}$ con $c \neq 0$
+
+\item si  $c x_1^{\ell_1} \cdots x_n^{\ell_n}$ y $d x_1^{m_1} \cdots x_n^{m_n}$ son dos monomios distintos en la forma canónica, entonces $\ell_i \neq m_i$ para algún $i \in \{1, \ldots, n\}$
+\end{itemize}
+
+\vs{6}
+
+Un polinomio $p(x_1,\ldots,x_n)$ es nulo si su forma canónica es 0
+
+\vs{6}
+
+El grado de un polinomio $p(x_1,\ldots,x_n)$ no nulo es el mayor grado de los monomios en su forma canónica.
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Equivalencia de polinomios en varias variables}
+
+{\small
+
+Dos polinomios $p(x_1, \ldots, x_n)$ y $q(x_1, \ldots, x_n)$ son idénticos si para cada secuencia $a_1, \ldots, a_n \in \mathbb{Q}$ se tiene que:
+\begin{eqnarray*}
+p(a_1, \ldots, a_n) & = & q(a_1, \ldots, a_n)
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Queremos verificar si dos polinomios son idénticos, para lo cual definimos el siguiente lenguaje:
+\begin{multline*}
+\alert{\EQUIVP} \ \alert{=} \ \alert{\{ (p(x_1,\ldots,x_n),q(x_1,\ldots,x_n)) \mid}\\
+\alert{p(x_1,\ldots,x_n) \text{ y } q(x_1,\ldots,x_n) \text{ son polinomios idénticos}\}}
+\end{multline*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Equivalencia de polinomios en varias variables}
+
+{\small
+
+¿Podemos resolver $\EQUIVP$ en tiempo polinomial?
+
+\vs{8}
+
+\visible<2->{
+Tenemos un problema: calcular la forma canónica de un polinomio toma tiempo exponencial}
+
+\vs{8}
+
+\visible<3->{
+Vamos a construir un algoritmo aleatorizado para $\EQUIVP$
+\begin{itemize}
+\item El ingrediente principal del algoritmo es el lema de Schwartz-Zippel
+\end{itemize}}
+
+}
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El ingrediente principal}
+
+{\small
+
+\begin{block}{Lema de Schwartz-Zippel}
+Sea $p(x_1, \ldots, x_n)$ un polinomio no nulo de grado $k$, y sea $A$ un subconjunto finito y no vacío de $\mathbb{Q}$. Si $a_1, \ldots, a_n$ son elegidos de manera uniforme e independiente desde $A$, entonces
+\begin{eqnarray*}
+\alert{\pr(p(a_1, \ldots, a_n) = 0)} & \alert{\leq} & \alert{\frac{k}{|A|}}
+\end{eqnarray*}
+\end{block}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el lema de Schwartz-Zippel por inducción en $n$
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un algoritmo aleatorizado para $\EQUIVP$}
+
+{\small
+
+Vamos a dar un algoritmo aleatorizado para el problema de verificar si dos polinomios en varias variables son equivalentes.
+
+\vs{8}
+
+\visible<2->{
+Suponga que la entrada del algoritmo está dada por los siguientes~polinomios:
+\vs{-2}
+\begin{eqnarray*}
+p(x_1, \ldots, x_n) & = & \sum_{i=1}^\ell\prod_{j=1}^{m_i} \bigg(\sum_{k = 1}^{n} a_{i,j,k} x_k + a_{i,j,n+1}\bigg)\\
+q(x_1, \ldots, x_n) & = & \sum_{i=1}^r\prod_{j=1}^{s_i} \bigg(\sum_{k = 1}^{n} b_{i,j,k} x_k + b_{i,j,n+1}\bigg)
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un algoritmo aleatorizado para $\EQUIVP$}
+
+{\small
+
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+{\bf EquivPolAleatorizado}($p(x_1, \ldots, x_n)$, $q(x_1, \ldots, x_n)$)\\
+\> $k := 1+ \max \, \{m_1, \ldots, m_\ell, s_1, \ldots, s_r\}$\\
+\> $A := \{1, ..., 100 \cdot k \}$\\
+\> \alert{sea $a_1, \ldots, a_n$ una secuencia de números elegidos de}\\
+\> \phantom{\alert{sea $a_1, \ldots, a_n$}} \alert{manera uniforme e independiente desde $A$}\\
+\> \aif $p(a_1, \ldots, a_n) = q(a_1, \ldots, a_n)$ \athen \areturn sí\\
+\> \aelse \areturn no
+\end{tabbing}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Utilizando el lema de Schwartz-Zippel}
+
+{\footnotesize
+
+Vamos a calcular la probabilidad de error del algoritmo. 
+
+\vs{2}
+
+\begin{itemize}
+\visible<2->{\item Si los polinomios $p(x_1, \ldots, x_n)$ y $q(x_1, \ldots, x_n)$ son equivalentes, entonces el algoritmo responde {\bf sí} sin cometer error}
+
+\vs{4}
+
+\visible<3->{\item Si los polinomios $p(x_1, \ldots, x_n)$ y $q(x_1, \ldots, x_n)$ no son equivalentes, el algoritmo puede responder {\bf sí} al escoger una secuencia de números $a_1, \ldots, a_n$ desde $A$ tales que $p(a_1, \ldots, a_n) = q(a_1, \ldots, a_n)$
+\begin{itemize}
+{\footnotesize \item Donde $A = \{1, \ldots, 100 \cdot k\}$}
+\end{itemize}}
+
+\vs{4}
+
+\visible<4->{Esto significa que $(a_1, \ldots, a_n)$ es una raíz del polinomio $r(x_1, \ldots, x_n) = p(x_1, \ldots, x_n) - q(x_1, \ldots, x_n)$}
+\end{itemize}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Utilizando el lema de Schwartz-Zippel}
+
+{\footnotesize
+
+\begin{itemize}
+\item[]
+$r(x_1, \ldots, x_n)$ no es el polinomio nulo y es de grado $t$ con $t < k$
+\begin{itemize}
+{\footnotesize \item Dado que $k =1 +  \max \, \{m_1, \ldots, m_\ell, s_1, \ldots, s_r\}$}
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+Utilizando el lema de Schwartz-Zippel obtenemos: 
+\begin{eqnarray*}
+\pr(r(a_1, \ldots, a_n) = 0) \ \leq \ \frac{t}{|A|} \ \leq \ \frac{k}{|A|} \ = \ \frac{k}{100 \cdot k} \ = \ \frac{1}{100}
+\end{eqnarray*}}
+
+\vs{6}
+
+\visible<3->{
+La probabilidad de error del algoritmo está entonces acotada por~\alert{$\frac{1}{100}$}}
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un mejor algoritmo aleatorizado para el problema general}
+
+{\footnotesize
+
+\begin{ejercicio}
+De un algoritmo aleatorizado que resuelva el problema de equivalencia de polinomios en varias variables.
+\vs{2}
+\begin{itemize}
+\item La probabilidad de error del algoritmo debe estar acotada por $\frac{1}{100^{10}}$
+
+\vs{2}
+
+\item Debe existir una constante $k$ tal que el algoritmo en el peor caso es $O(m^k)$, donde $m$ es el tamaño de la entrada
+\begin{itemize}
+{\footnotesize \item Si consideramos $p(x_1, \ldots, x_n)$ y $q(x_1, \ldots, x_n)$ como palabras sobre un cierto alfabeto, entonces $m = |p(x_1, \ldots, x_n)| + |q(x_1, \ldots, x_n)|$}
+\end{itemize}
+\end{itemize}
+\end{ejercicio}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución para el ejercicio}
+
+{\small
+
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+{\bf EquivPolAleatorizado}($p(x_1, \ldots, x_n)$, $q(x_1, \ldots, x_n)$)\\
+\> $k := 1 + \max \, \{m_1, \ldots, m_\ell, s_1, \ldots, s_r\}$\\
+\> $A := \{1, ..., 100 \cdot k \}$\\
+\> \afor $i := 1$ \ato 10 \ado\\
+\> \> \alert{sea $a_1, \ldots, a_n$ una secuencia de números elegidos de}\\
+\> \> \phantom{\alert{sea $a_1, \ldots, a_n$}} \alert{manera uniforme e independiente desde $A$}\\
+\> \> \aif $p(a_1, \ldots, a_n) \neq q(a_1, \ldots, a_n)$ \athen \areturn no\\
+\> \aelse \areturn sí
+\end{tabbing}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algoritmos probabilísticos y Máquinas de Turing}
+
+¿Cómo podemos formalizar la idea de un algoritmo probabilístico utilizando la noción de MT?
+
+\vs{6}
+
+¿Podemos definir clases de complejidad basados en los algoritmos probabilísticos?
+
+\vs{6}
+
+\visible<2->{
+Vamos a responder a esta preguntas en las siguientes transparencias.
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MT probabilística}
+
+\begin{definicion}
+Una MT probabilística es una tupla $M = (Q, \Sigma, \Gamma, q_0, \delta, F)$ tal que:
+
+\begin{itemize}
+\item $Q$ es un conjunto finito de estados
+
+\item $\Sigma$ es un alfabeto finito tal que $\vdash, \B \not\in
+\Sigma$
+
+\item $\Gamma$ es un alfabeto finito tal que $\Sigma \cup \{\vdash,
+\B\} \subseteq \Gamma$
+
+\item $q_0 \in Q$ es el estado inicial
+
+\item $F \subseteq Q$ es un conjunto de estados finales
+
+\item $\delta$ es una función parcial:
+\begin{eqnarray*}
+\delta & : & Q \times \Gamma \times \alert{\{0,1\}}
+\rightarrow Q \times \Gamma \times \{\leftarrow, \Box, \rightarrow\}  
+\end{eqnarray*}
+\end{itemize}
+\end{definicion}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MT probabilística: Funcionamiento}
+
+{\small
+
+La entrada de una MT probabilística $M$ consiste de un string $w \in \Sigma^*$ y un string $s \in \{0,1\}^\omega$
+\begin{itemize}
+\item $w$ es el input que se quiere aceptar o rechazar
+
+\item $s$ es un string infinito de símbolos 0 y 1, el cual es considerado como un string de bits aleatorios
+\end{itemize}
+
+\vs{6}
+
+En el estado inicial:
+\begin{itemize}
+\item $M$ tiene en la primera cinta $\vdash w \B \cdots$ y en la segunda cinta $\vdash s$
+
+\item $M$ está en el estado $q_0$
+
+\item Las cabezas lectoras de ambas cintas están en la posición 1
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{MT probabilística: Funcionamiento}
+
+{\small
+
+En cada instante la máquina se encuentra en un estado $q$ y sus
+cabezas lectoras están en posiciones $p_1$ y $p_2$
+\vs{1}
+\begin{itemize}
+\item Si el símbolo en la posición $p_i$ ($i = 1,2$) es $a_i$ y
+$\delta(q,a_1,a_2) = (q',b,X)$, entonces:
+\vs{1} 
+\begin{itemize}
+\item La máquina escribe el símbolo $b$ en la
+posición $p_1$ de la primera cinta
+
+\vs{1}
+
+\item Cambia de estado desde $q$ a $q'$
+
+\vs{1}
+
+\item Mueve la cabeza lectora de la primera cinta a la posición $p_1-1$
+si $X$ es $\leftarrow$, y a la posición $p_1+1$ si $X$ es
+$\rightarrow$. Si $X$ es $\Box$, entonces esta cabeza lectora permanece
+en la posición $p_1$
+
+\vs{1}
+
+\visible<2->{\alert{\item Mueve la cabeza lectora de la segunda cinta a la posición $p_2+1$}}
+\end{itemize}
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El tiempo de ejecución de una MT probabilística}
+
+{\small
+
+La entrada de una MT probabilística $M$ con alfabeto $\Sigma$ consiste de dos strings $w \in \Sigma^*$ y $s \in \{0,1\}^\omega$
+\begin{itemize}
+\item Utilizamos la notación $M(w,s)$ para indicar las entradas de $M$
+
+\item Decimos que $M(w,s)$ acepta si $M$ con entrada $(w,s)$ se detiene en un estado final
+\begin{itemize}
+{\footnotesize \item El caso en que $M(w,s)$ rechaza se define de forma similar}
+\end{itemize}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\begin{block}{Primer supuesto}
+Consideramos una MT probabilística $M$ que se detiene en todas sus entradas $(w,s)$
+\end{block}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El tiempo de ejecución de una MT probabilística}
+
+{\small
+
+Un paso de una MT probabilística $M$ consiste en ejecutar una instrucción de
+la función de transición
+\begin{itemize}
+\visible<2->{\item Definimos \alert{$\tiempo_M(w,s)$} como el número de pasos
+ejecutados por $M$ con entrada $(w,s)$}
+\end{itemize}
+
+\vs{6}
+
+\visible<3->{
+\begin{block}{Segundo supuesto}
+Existe una función $f : \Sigma^* \to \mathbb{N}$ tal que para cada $w \in \Sigma^*$ y $s \in \{0,1\}^\omega$:
+\vs{-2}
+\begin{eqnarray*}
+\alert{\tiempo_M(w,s)} & \alert{\leq} & \alert{f(w)}
+\end{eqnarray*}
+\end{block}
+}
+
+\vs{6}
+
+\visible<4->{
+Vale decir, hay una cantidad máxima de bits aleatorios que deben ser utilizados con entrada $w$, la cual sólo depende de $w$}
+
+}
+
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El tiempo de ejecución de una MT probabilística}
+
+Para estudiar el peor caso necesitamos la siguiente definición:
+\begin{eqnarray*}
+\tiempo_M(w) & = & \max\{\tiempo_M(w,s) \mid s \in \{0,1\}^\omega\}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Con esto tenemos que el tiempo de funcionamiento de $M$ en el peor caso es
+definido por la función $t_M$:
+\vs{-2}
+\begin{eqnarray*}
+t_M(n) & = & \max\{\tiempo_M(w) \mid w \in \Sigma^* \text{ y } |w|=n\}
+\end{eqnarray*}
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de aceptar en una MT probabilística}
+
+{\small
+
+\begin{block}{Tercer supuesto}
+Si para una MT probabilística $M$ con alfabeto $\Sigma$ se tiene que $t_M(n) \leq g(n)$ para todo $n \in \mathbb{N}$, entonces suponemos que las entradas de $M$ son de la forma $(w,s)$ con $w \in \Sigma^*$, $s \in \{0,1\}^*$ y $|s| = g(n)$.
+\end{block}
+
+\vs{8}
+
+Dado el tiempo de ejecución de $M$ no podemos usar más de $g(n)$ bits aleatorios para una entrada $w$ de largo $n$. 
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de aceptar en una MT probabilística}
+
+{\small
+
+Sea $M$ una MT probabilística con alfabeto $\Sigma$ y tal que $t_M(n) \leq g(n)$ para todo $n \in \mathbb{N}$. 
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+Para cada $w \in \Sigma^*$ tal que $|w| = n$, la probabilidad de que $M$ acepte $w$ es definida de la siguiente forma:
+\begin{eqnarray*}
+\alert{\pr_s(M \text{ acepte } w)} & \alert{=} & \alert{\frac{|\{ s \in \{0,1\}^* \mid |s|= g(n) \text{ y } M(w,s) \text{ acepta}\}|}{2^{g(n)}}}
+\end{eqnarray*}
+\end{definicion}}
+
+}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Clases de complejidad probabilísticas}
+
+{\small
+
+Vamos a definir una primera clase de complejidad considerando los algoritmos probabilísticos
+\begin{itemize}
+\item Esto nos va a permitir decir cuando un lenguaje es {\em aceptado} por una MT probabilística
+\end{itemize}
+
+\vs{4}
+
+\visible<2->{
+\begin{definicion}
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$. Entonces $L$ está en $\crp$ si existe una MT probabilística $M$ tal que $t_M(n)$ es $O(n^k)$ y para cada $w \in \Sigma^*$:
+\begin{itemize}
+\item Si $w \in L$, entonces $\pr(M \text{ acepte } w) \geq \frac{3}{4}$
+
+\item Si $w \not\in L$, entonces $\pr(M \text{ acepte } w) = 0$
+\end{itemize}
+\end{definicion}}
+
+\vs{4}
+
+\visible<3->{
+Vale decir, para los lenguaje en $\crp$ tenemos algoritmos probabilísticos que pueden cometer errores sólo para los elementos que están en $L$}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La clase $\crp$: un ejemplo}
+
+\begin{ejercicio}
+Muestre que $\overline{\EQUIVP} \in \crp$
+\end{ejercicio}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Por qué utilizamos la probabilidad $\frac{3}{4}$?}
+
+{\small
+
+El valor $\frac{3}{4}$ es arbitrario
+\begin{itemize}
+\item Podemos utilizar valores arbitrariamente más pequeños
+\end{itemize}
+
+\vs{4}
+
+\visible<2->{
+\begin{block}{Lema de amplificación}
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$.  Si $L \in \crp$, entonces para cada $\ell \in \mathbb{N}$, existe una MT probabilística $M$ tal que 
+$t_M(n)$ es $O(n^k)$ y para cada $w \in \Sigma^*$:
+\begin{itemize}
+\item Si $w \in L$, entonces $\pr(M \text{ acepte } w) \geq 1 - \frac{1}{4^\ell}$
+
+\item Si $w \not\in L$, entonces $\pr(M \text{ acepte } w) = 0$
+\end{itemize}
+\end{block}}
+
+\vs{4}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre el lema de amplificación
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Dónde está la clase $\crp$?}
+
+\begin{teorema}
+$\ptime \subseteq \crp \subseteq \np$
+\end{teorema}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el teorema.
+\end{ejercicio}}
+
+\vs{6}
+
+\visible<3->{
+\begin{corolario}
+$\ptime \subseteq \co\crp \subseteq \co\np$
+\end{corolario}
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Qué sabemos sobre $\crp$ y $\co\crp$?}
+
+{\small
+
+Son problemas abiertos si $\ptime = \crp$ o $\crp = \co\crp$
+
+\vs{8}
+
+\visible<2->{
+Pero se cree que $\ptime = \crp$
+\begin{itemize}
+{\footnotesize
+\item Puesto que si $L \in \crp$, entonces hay un algoritmo para resolver $L$ puede ser usado en la {\em práctica} como un algoritmo de tiempo polinomial
+
+\item De esto se concluiría que $\crp = \co\crp = \ptime$
+}
+\end{itemize}
+}
+
+\vs{8}
+
+\visible<3->{
+$\overline{\EQUIVP}$ es un ejemplo de un problema que está en $\crp$ y para el cual no se sabe si está en $\ptime$.
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Qué sabemos sobre $\crp \cap \co\crp$?}
+
+Tenemos que $\ptime \subseteq \crp \cap \co\crp$
+
+\vs{7}
+
+¿Podemos demostrar que $\ptime = \crp \cap \co\crp$?
+\begin{itemize}
+\visible<2->{\item Este es un problema abierto}
+\end{itemize}
+
+\vs{7}
+
+\visible<3->{Pero podemos demostrar que para cada problema en $\crp \cap \co\crp$ existe un algoritmo que lo decide en tiempo polinomial {\em esperado}.}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un algoritmo de tiempo polinomial esperado}
+
+{\footnotesize
+
+Sea $L \in \crp \cap \co\crp$ con alfabeto $\Sigma$
+
+\vs{8}
+
+\visible<2->{
+Entonces existen MTs probabilísticas $M_1$ y $M_2$ tales que:
+\vs{1}
+\begin{itemize}
+\item $t_{M_1}(n)$ es $O(n^k)$ y para cada $w \in \Sigma^*$:
+\begin{itemize}
+{\footnotesize
+\item Si $w \in L$, entonces $\pr(M_1 \text{ acepte } w) \geq \frac{3}{4}$
+
+\item Si $w \not\in L$, entonces $\pr(M_1 \text{ acepte } w) = 0$}
+\end{itemize}
+
+\vs{1}
+
+\item $t_{M_2}(n)$ es $O(n^\ell)$ y para cada $w \in \Sigma^*$:
+\begin{itemize}
+{\footnotesize
+\item Si $w \in \overline{L}$, entonces $\pr(M_2 \text{ acepte } w) \geq \frac{3}{4}$
+
+\item Si $w \not\in \overline{L}$, entonces $\pr(M_2 \text{ acepte } w) = 0$}
+\end{itemize}
+\end{itemize}
+}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un algoritmo de tiempo polinomial esperado}
+
+{\small
+
+Sea $g(n) = \max\{ t_{M_1}(n), t_{M_2}(n) \}$
+
+\vs{8}
+
+\visible<2->{
+Considere el siguiente algoritmo para decidir si $w \in L$:
+\begin{enumerate}
+\item \label{alg-p-e-0} Escoja al azar y con distribución uniforme un string $s \in \{0,1\}^*$ tal que $|s| = g(|w|)$
+
+\item Verifique si $M_1(w,s)$ acepta. Si es así retorne {\bf sí}, sino vaya al paso \ref{alg-p-e-1}
+
+\item \label{alg-p-e-1} Verifique si $M_2(w,s)$ acepta. Si es así retorne {\bf no}, sino vaya al paso \ref{alg-p-e-0}
+\end{enumerate}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un algoritmo de tiempo polinomial esperado}
+
+{\small
+
+El algoritmo anterior puede no detenerse.
+\begin{itemize}
+\item Si se detiene entrega el resultado correcto
+\end{itemize}
+
+\vs{8}
+ 
+\visible<2->{¿Cuál es el tiempo {\em esperado} de funcionamiento del algoritmo?}
+\begin{itemize}
+\visible<3->{\item Calcular el número esperado de veces que se ejecuta la secuencia de pasos \ref{alg-p-e-0} al \ref{alg-p-e-1} se reduce a calcular la esperanza de una variable aleatoria con distribución geométrica de parámetro  $\frac{3}{4}$
+}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+Concluimos que el algoritmo funciona en tiempo polinomial esperado.
+}
+
+}
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una clase de complejidad probabilística más general}
+
+
+\visible<2->{
+\begin{definicion}
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$. Entonces $L$ está en $\bpp$ si existe una MT probabilística $M$ tal que $t_M(n)$ es $O(n^k)$ y para cada $w \in \Sigma^*$:
+\begin{itemize}
+\item Si $w \in L$, entonces $\pr(M \text{ acepte } w) \geq \frac{3}{4}$
+
+\item Si $w \not\in L$, entonces $\pr(M \text{ acepte } w) \leq \frac{1}{4}$
+\end{itemize}
+\end{definicion}}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Dónde está la clase $\bpp$?}
+
+
+\begin{teorema}
+$\bpp = \co\bpp$ 
+\end{teorema}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el teorema.
+\end{ejercicio}}
+
+\vs{6}
+
+\visible<3->{
+\begin{corolario}
+$\crp \subseteq \bpp$  y $\co\crp \subseteq \bpp$ 
+\end{corolario}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Dónde está la clase $\bpp$?}
+
+Es un problema abierto si $\ptime = \bpp$
+\begin{itemize}
+\visible<2->{
+\item De esto se concluiría que $\bpp= \crp = \co\crp = \ptime$}
+\end{itemize}
+
+
+\vs{8}
+
+\visible<3->{
+Vamos a demostrar que $\bpp$ está contenida en la jerarquía~polinomial.
+\begin{itemize}
+\item En esta demostración vamos a considerar una versión equivalente pero más simple de la definición de $\bpp$
+\end{itemize}
+}
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Simplificando la definición de $\bpp$}
+
+{\small
+
+Sea $M$ una MT probabilística con alfabeto de entrada $\Sigma$
+                                
+\vs{8}
+
+\visible<2->{
+Dado $w \in \Sigma^*$ y $s \in \{0,1\}^*$ tal que $t_M(|w|) \leq |s|$, decimos que $M(w,s)$ es incorrecto si:
+\vs{-2}
+\begin{center}
+$w \in L$ y $M(w,s)$ rechaza\\
+o\\ 
+$w \not\in L$ y $M(w,s)$ acepta
+\end{center}}
+
+\vs{8}
+
+\visible<3->{
+Vamos a utilizar esta noción para dar una definición más simple de $\bpp$}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una definición equivalente de $\bpp$}
+
+
+\begin{definicion}
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$. Entonces $L$ está en $\bpp$ si existe una MT probabilística $M$ tal que $t_M(n)$ es $O(n^k)$ y para cada $w \in \Sigma^*$:
+\begin{eqnarray*}
+\alert{\pr_s(M(w,s) \text{ es incorrecto})} & \alert{\leq} & \alert{\frac{1}{4}}
+\end{eqnarray*}
+\end{definicion}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un lema de amplificación para $\bpp$}
+
+{\small
+
+Al igual que para el caso de $\crp$, el valor $\frac{1}{4}$ en la definición de $\bpp$ pueden ser reemplazado por un valor  arbitrariamente más pequeño.
+
+\vs{6}
+
+\visible<2->{
+\begin{block}{Lema de amplificación para $\bpp$}
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$.  Si $L \in \bpp$, entonces para cada $\ell \in \mathbb{N}$, existe una MT probabilística $M$ tal que $t_M(n)$ es $O(n^k)$ y para cada $w \in \Sigma^*$:
+\begin{eqnarray*}
+\pr_s(M(w,s) \text{ es incorrecto}) & \leq & \bigg(\frac{3}{4}\bigg)^\ell
+\end{eqnarray*}
+\end{block}}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración del lema de amplificación para $\bpp$}
+
+
+{\small
+
+%Como $L \in \bpp$, existe una MT probabilística $M_1$ tal que $t_{M_1}(n)$ es $O(n^{k_1})$ y para cada $w \in \Sigma^*$:
+%\begin{itemize}
+%\item Si $w \in L$, entonces $\pr(M_1 \text{ acepte } w) \geq \frac{3}{4}$
+%
+%\item Si $w \not\in L$, entonces $\pr(M_1 \text{ acepte } w) \leq \frac{1}{4}$
+%\end{itemize}
+
+Como $L \in \bpp$, existe una MT probabilística $M_1$ tal que $t_{M_1}(n)$ es $O(n^{k_1})$ y para cada $w \in \Sigma^*$:
+\begin{eqnarray*}
+\pr_s(M_1(w,s) \text{ es incorrecto}) & \leq & \frac{1}{4}
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Utilizamos la MT $M_1$ para construir la MT $M$ mencionada en el enunciado del lema de amplificación.
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración del lema de amplificación para $\bpp$}
+
+{\footnotesize
+
+Considere el siguiente algoritmo que recibe como entrada $w \in \Sigma^*$:
+\vs{1}
+\begin{enumerate}
+{\footnotesize
+
+\item Escoja al azar con distribución uniforme y de manera independiente strings $s_1$, $s_2$, $\ldots$ $s_{2 \ell + 1}$ en $\{0,1\}^*$ y tales que $|s_1| = |s_2| = \cdots = |s_{2\ell+1}| = t_{M_1}(|w|)$
+
+\vs{2}
+
+\item Construya el conjunto $A = \{ i \in \{1, \ldots, 2\ell+1\} \mid M_1(w,s_i)$ acepta$\}$
+
+\vs{2}
+
+\item Si $|A| \geq \ell + 1$, entonces retorne {\bf sí}, sino retorne {\bf no}
+}
+\end{enumerate}
+
+\vs{6}
+
+\visible<2->{
+Suponga que $M$ es una MT probabilística que implementa este algoritmo
+\begin{itemize}
+{\footnotesize
+\visible<3->{\item Se tiene que $t_M(n)$ es $O(n^k)$ para una constante $k$ ya que $t_{M_1}(n)$ es $O(n^{k_1})$ para una constante $k_1$}}
+\end{itemize}}
+
+\vs{6}
+
+\visible<4->{Vamos a demostrar que $M$ satisface la condición del lema}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración del lema de amplificación para $\bpp$}
+
+{\small
+
+Dado $w \in \Sigma^*$, tenemos que:
+\begin{eqnarray*}
+\pr_s(M_1(w,s) \text{ es incorrecto}) & = & q
+\end{eqnarray*}
+
+\vs{-3}
+
+con $q \leq \frac{1}{4}$
+
+\vs{8}
+
+\visible<2->{
+Además suponemos que $0 < q$
+\begin{itemize}
+\item Si $q = 0$ entonces $\pr_s(M(w,s) \text{ es incorrecto}) = 0 \leq (\frac{3}{4})^\ell$. \\ ¿Por qué?
+\end{itemize}
+}
+
+\vs{8}
+
+\visible<3->{
+Tenemos entonces que: 
+\begin{eqnarray*}
+\alert{\pr_s(M(w,s) \text{ es incorrecto})} & \alert{=} & \alert{\sum_{i=0}^{\ell} \binom{2\ell+1}{i} (1-q)^i q^{2 \ell + 1 -i}}
+\end{eqnarray*}
+}
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración del lema de amplificación para $\bpp$}
+
+{\small
+
+Como $0 < q \leq \frac{1}{4}$, tenemos que $1 \leq \frac{1-q}{q}$
+
+\vs{8}
+
+
+Entonces para $i \in \{0, \ldots, \ell\}$ tenemos que:
+\vs{-1}
+\begin{eqnarray*}
+(1-q)^i q^{2 \ell + 1 -i} & \leq & (1-q)^i q^{2 \ell + 1 -i}\bigg(\frac{1-q}{q}\bigg)^{\ell - i}\\
+ & = & (1-q)^\ell q^{\ell + 1}
+\end{eqnarray*}
+
+}
+
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración del lema de amplificación para $\bpp$}
+
+{\small
+
+Por lo tanto:
+\begin{eqnarray*}
+\sum_{i=0}^{\ell} \binom{2\ell+1}{i} (1-q)^i q^{2 \ell + 1 -i} & \leq & \sum_{i=0}^{\ell} \binom{2\ell+1}{i} (1-q)^\ell q^{\ell + 1}\\
+& = & (1-q)^\ell q^{\ell + 1} \sum_{i=0}^{\ell} \binom{2\ell+1}{i} \\
+& \leq & (1-q)^\ell q^{\ell + 1} 2^{2\ell+1}\\
+\end{eqnarray*}
+
+\vs{4}
+
+\visible<2->{
+El mayor valor de la función $f(x) = x (1 - x)$ en el intervalo $(0,\frac{1}{4}]$ se alcanza en $x = \frac{1}{4}$}
+\begin{itemize}
+\visible<3->{\alert{\item Concluimos que $(1-q)q \leq \frac{3}{4} \cdot \frac{1}{4}$}}
+\end{itemize}
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración del lema de amplificación para $\bpp$}
+
+{\footnotesize
+
+Concluimos que:
+\begin{eqnarray*}
+\sum_{i=0}^{\ell} \binom{2\ell+1}{i} (1-q)^i q^{2 \ell + 1 -i} & \leq & (1-q)^\ell q^{\ell + 1} 2^{2\ell+1}\\
+& = & ((1-q)q)^\ell q 2^{2\ell+1}\\
+& \leq & \bigg(\frac{3}{4} \cdot \frac{1}{4}\bigg)^\ell  \cdot \frac{1}{4} 2^{2\ell+1}\\
+& = & \frac{3^\ell}{4^{2\ell+1}} 2^{2\ell+1}\\
+& = & 2 \frac{3^\ell}{4^{2\ell+1}} 4^\ell\\
+& = &  \frac{1}{2} \cdot \frac{3^\ell}{4^{\ell}}\\
+& \alert{\text{$<$}} &   \alert{\bigg(\frac{3}{4}\bigg)^\ell}
+\end{eqnarray*}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración del lema de amplificación para $\bpp$}
+
+{\small
+
+Poniendo todo junto concluimos que:
+\begin{eqnarray*}
+\pr_s(M(w,s) \text{ es incorrecto}) & = & \sum_{i=0}^{\ell} \binom{2\ell+1}{i} (1-q)^i q^{2 \ell + 1 -i}\\
+& \alert{\leq} & \alert{\bigg(\frac{3}{4}\bigg)^\ell}
+\end{eqnarray*}
+\qed
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\bpp$ está en la jerarquía polinomial}
+
+\begin{teorema}[Gács-Sipser-Lautemann]
+$\bpp \subseteq \Sigma^P_2 \cap \Pi^P_2$
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+Como sabemos que $\bpp = \co\bpp$, nos basta demostrar que $\bpp \subseteq  \Sigma^P_2$}
+\begin{itemize}
+\visible<3->{\item Antes de realizar esta demostración vamos a ver dos ingredientes necesarios para ella}
+\end{itemize}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una generalización de la noción de lenguaje}
+
+{\small
+
+Sea $\Sigma$ un alfabeto.
+
+\vs{6}
+
+Un lenguaje $L$ puede tener como elementos pares de strings sobre $\Sigma$
+\begin{itemize}
+\item Tenemos entonces que $L \subseteq \Sigma^* \times \Sigma^*$
+\end{itemize}
+
+\vs{6}
+
+$L$ es un lenguaje como los que habíamos definido antes puesto que un par de strings también es un string
+\begin{itemize}
+\item Podemos representar $(x,y)$ como un string $x\#y$ donde $\#$ es un símbolo nuevo
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+En las siguientes transparencias vamos a considerar lenguajes que consisten de pares o tuplas de strings.}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una caracterización de $\np$}
+
+{\small
+
+\begin{proposition}
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$. Entonces $L$ está en $\np$ si y sólo si existe un lenguaje $A \subseteq \Sigma^*\times \Sigma^*$ y un polinomio $p(n)$ tales que $A \in \ptime$ y para todo $u \in \Sigma^*$:
+\begin{center}
+\alert{$u \in L$ \ si y sólo si \ $(\exists v \in \Sigma^*, |v| = p(|u|)) : (u,v) \in A$}
+\end{center}
+\end{proposition}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre la proposición.
+\end{ejercicio}
+}
+
+}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Primer ingrediente: una caracterización de $\Sigma^P_2$}
+
+{\small
+
+\begin{proposition}
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$. Entonces $L$ está en $\Sigma^P_2$ si y sólo si existe un lenguaje $B \subseteq \Sigma^*\times \Sigma^* \times \Sigma^*$ y un polinomio $q(n)$ tales que $B \in \ptime$ y para todo $u \in \Sigma^*$:
+\vs{-2}
+\begin{multline*}
+\alert{u \in L \text{ \ si y sólo si }}\\
+\alert{(\exists v_1 \in \Sigma^*, |v_1| = q(|u|)) (\forall v_2 \in \Sigma^*, |v_2| = q(|u|)) : (u,v_1,v_2) \in B}
+\end{multline*}
+\end{proposition}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre la dirección $(\Leftarrow)$ de la proposición.
+\begin{itemize}
+\item Esta es la dirección que vamos a utilizar para demostrar que~$\bpp \subseteq \Sigma^P_2$
+\end{itemize}
+\end{ejercicio}
+}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Segundo ingrediente: una versión más fuerte del lema de amplificación}
+
+{\small
+
+
+\begin{proposition}
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$. Si $L \in \bpp$,  entonces existe una MT probabilística $M$ tal que $t_M(n)$ es $O(n^k)$ y para cada $w \in \Sigma^*$:
+\begin{eqnarray*}
+\pr_s(M(w,s) \text{ es incorrecto}) & \leq & \frac{1}{3 t_M(|w|)}
+\end{eqnarray*}
+\end{proposition}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de la versión más fuerte}
+
+{\small 
+
+Como $L \in \bpp$, sabemos que  existe una MT probabilística $M_1$ tal que $t_{M_1}(n)$ es $O(n^{k_1})$ y para cada $w \in \Sigma^*$:
+\begin{eqnarray*}
+\pr_s(M_1(w,s) \text{ es incorrecto}) & \leq & \frac{1}{4}
+\end{eqnarray*}
+
+%
+\vs{8}
+
+Suponemos que $t_{M_1}(n)$ es $\Omega(n)$ y $t_{M_1}(n) \geq 2$ para todo $n \in \mathbb{N}$
+\begin{itemize}
+\item ¿Por qué podemos suponer esto?
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de la versión más fuerte}
+
+{\small 
+
+Sea \alert{$a = \frac{4}{3}$} 
+
+\vs{6}
+
+Como en la demostración del lema de amplificación, defina una MT probabilística $M$ que con entrada $w \in \Sigma^*$  realiza los siguientes pasos:
+\begin{enumerate}
+\item realiza $(2 \ell + 1)$ ejecuciones de la MT probabilística $M_1$, donde \alert{$\ell = 2 \lceil \log_a (t_{M_1}(|w|)) \rceil$}
+
+\item retorna {\bf sí} si al menos $(\ell + 1)$ de las ejecuciones dieron respuesta {\bf sí}, y {\bf no} en caso contrario
+\end{enumerate}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de la versión más fuerte}
+
+{\small 
+
+Como en la demostración del lema de amplificación, obtenemos que:
+\begin{eqnarray*}
+\pr_s(M(w,s) \text{ es incorrecto}) & \leq & \bigg(\frac{3}{4}\bigg)^\ell
+\end{eqnarray*}
+
+\vs{8}
+
+Vamos a utilizar esta relación y la definición de $\ell$ para demostrar la versión más fuerte del lema de amplificación
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de la versión más fuerte}
+
+{\footnotesize
+
+Sea $k(n) = 2  \lceil \log_a (t_{M_1}(n)) \rceil$
+
+\vs{8}
+
+Tenemos que:
+\begin{eqnarray*}
+3 (2 k(n) + 1) t_{M_1}(n) & = & 3 (4  \lceil \log_a (t_{M_1}(n)) \rceil+ 1) t_{M_1}(n)\\
+& \leq & 15  \lceil \log_a (t_{M_1}(n)) \rceil  t_{M_1}(n) 
+\end{eqnarray*}
+puesto que $t_{M_1}(n) \geq 2$ para todo $n \in \mathbb{N}$. 
+
+\vs{8}
+
+Además, existe una constante $n_0$ tal que para todo $n \geq n_0$:
+\begin{eqnarray*}
+15  \lceil \log_a (t_{M_1}(n)) \rceil  t_{M_1}(n) & \leq & t_{M_1}(n)^2
+\end{eqnarray*}
+puesto que $t_{M_1}(n)$ es $\Omega(n)$. 
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de la versión más fuerte}
+
+{\footnotesize
+
+Por lo tanto para todo $n \geq n_0$:
+\begin{eqnarray*}
+3 (2 k(n) + 1) t_{M_1}(n) & \leq  &  t_{M_1}(n)^2\\
+& = & a^{\log_a (t_{M_1}(n)^2)}\\
+& =  & a^{2 \log_a (t_{M_1}(n))}\\
+& \leq & a^{2 \lceil \log_a (t_{M_1}(n)) \rceil}\\
+& = & a^{k(n)}
+\end{eqnarray*}
+
+\vs{6}
+
+Dado que $a = \frac{4}{3}$, concluimos que para todo $n \geq n_0$:
+\begin{eqnarray*}
+3 (2 k(n) + 1) t_{M_1}(n) & \leq & \bigg(\frac{4}{3}\bigg)^{k(n)}
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de la versión más fuerte}
+
+{\footnotesize
+
+Suponga que $|w| \geq n_0$
+\begin{itemize}
+\item Vamos a consider el caso $|w| < n_0$ por separado
+\end{itemize}
+
+\vs{8}
+
+De la conclusión en la transparencia anterior obtenemos lo siguiente considerando que $\ell = k(|w|)$:
+\begin{eqnarray*}
+\pr_s(M(w,s) \text{ es incorrecto}) & \leq & \bigg(\frac{3}{4}\bigg)^\ell\\
+& \leq & \frac{1}{3 (2 \ell + 1) t_{M_1}(|w|)}
+\end{eqnarray*}
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de la versión más fuerte}
+
+{\footnotesize
+
+Dado que $t_M(|w|) = (2 \ell + 1) t_{M_1}(|w|)$, tenemos que:
+\begin{eqnarray*}
+\alert{\pr_s(M(w,s) \text{ es incorrecto})} & \alert{\leq} & \alert{\frac{1}{3 t_{M}(|w|)}}
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Para concluir la demostración necesitamos considerar el caso $|w| < n_0$}
+
+\vs{8} 
+
+\visible<3->{
+En este caso podemos modificar $M$ para que satisfaga la condición:
+\begin{eqnarray*}
+&& \alert{\pr_s(M(w,s) \text{ es incorrecto}) \ = \ 0 \ < \ \frac{1}{3 t_{M}(|w|)}} 
+\end{eqnarray*}
+¿Por qué podemos hacer esto? \qed}
+
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de $\bpp \subseteq \Sigma^P_2$}
+
+{\small
+
+Sea $L$ un lenguaje sobre un alfabeto $\Sigma$, y suponga que $L \in \bpp$
+
+\vs{8}
+
+\visible<2->{
+Por lema de amplificación existe una MT probabilística $M$ tal que $t_M(n)$ es $O(n^k)$ y para cada $w \in \Sigma^*$:
+\begin{eqnarray*}
+\pr_s(M(w,s) \text{ es incorrecto}) & \leq & \frac{1}{3 t_M(|w|)}
+\end{eqnarray*}
+}
+
+\vs{8}
+
+\visible<3->{
+Además podemos suponer que $t_M(n) > 0$ para cada $n \in \mathbb{N}$
+\begin{itemize}
+\item ¿Por qué?
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de $\bpp \subseteq \Sigma^P_2$}
+
+{\footnotesize
+
+\begin{block}{Notación}
+Usamos $s \in \{0,1\}^m$ para indicar que $s \in \{0,1\}^*$ y $|s| = m$
+
+\vs{6}
+
+Dados $a$ y $b$ en $\{0,1\}$, la operación $a \oplus b$ es definida como $(a + b) \ \text{mod}\ 2$
+\begin{itemize}
+\item Vale decir, $\oplus$ es el o exclusivo 
+\end{itemize}
+
+\vs{6}
+
+Dados $x,y \in \{0,1\}^m$ con $x = a_1 a_2 \cdots a_m$ e $y = b_1 b_2 \cdots b_m$, la operación $x \oplus y$ da como resultado el siguiente string en $\{0,1\}^m$:
+\begin{eqnarray*}
+(a_1 \oplus b_1) (a_2 \oplus b_2) \cdots (a_m \oplus b_m)
+\end{eqnarray*}
+\end{block}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de $\bpp \subseteq \Sigma^P_2$}
+
+{\footnotesize
+
+
+Defina el lenguaje $A$ de la siguiente forma:
+\alert{
+\begin{align*}
+A \ = \ \{ (w,y_1, \ldots, y_m,z) \mid \ & w \in \Sigma^*, m = t_M(|w|),\\ 
+&y_i \in\{0,1\}^m \text{ para cada } i \in \{1, \ldots, m\}, z \in \{0,1\}^m\\
+&\text{y } M(w,y_j \oplus z) \text{ acepta para algún } j \in \{1, \ldots, m\} \ \}
+\end{align*}
+}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre que $A \in \ptime$
+\end{ejercicio}}
+
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Demostración de $\bpp \subseteq \Sigma^P_2$}
+
+{\footnotesize
+
+Dada la caracterización de $\Sigma^P_2$ en las transparencias anteriores, para demostrar que $L \in \Sigma^P_2$ basta demostrar la siguiente condición:
+
+\vs{4}
+
+\begin{block}{}
+Para cada $w \in \Sigma^*$ tal que $t_M(|w|) = m$:
+
+\vs{-4}
+
+\begin{multline*}
+\alert{w \in L \ \text{ si y sólo si }} \\ \alert{\exists y_1 \in \{0,1\}^m \cdots \exists y_m \in \{0,1\}^m \, \forall z \in \{0,1\}^m \, (w,y_1,\ldots,y_m,z) \in A}
+\end{multline*}
+\end{block}
+
+\vs{8}
+
+\visible<2->{
+Para hacer esta demostración vamos a utilizar el método probabilístico.
+\begin{itemize}
+{\footnotesize \item Para demostrar que un objeto con ciertas propiedades existe, en lugar de construirlo demostramos que la probabilidad de que exista es mayor que 0
+}
+\end{itemize}
+
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La dirección ($\Rightarrow$) de la equivalencia}
+
+{\footnotesize
+
+Suponga que $w \in L$ y $t_M(|w|) = m$
+
+\vs{8}
+
+\visible<2->{
+Tenemos que:
+\begin{align*}
+&\pr_{y_1, \ldots, y_m}\bigg(\exists z \in \{0,1\}^m  \, \bigwedge_{i=1}^m M(w, y_i \oplus z) \text{ rechaza}\bigg) \ \leq\\
+&\hspace{80pt}\sum_{z \in \{0,1\}^m}\pr_{y_1, \ldots, y_m}\bigg(\bigwedge_{i=1}^m M(w, y_i \oplus z) \text{ rechaza}\bigg) \ =\\
+&\hspace{80pt}\sum_{z \in \{0,1\}^m} \prod_{i=1}^m \pr_{y_i}\bigg(M(w, y_i \oplus z) \text{ rechaza}\bigg)
+\end{align*}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La dirección ($\Rightarrow$) de la equivalencia}
+
+{\footnotesize
+
+Dado $a \in \{0,1\}^m$, la función $f : \{0,1\}^m \to \{0,1\}^m $ definida como $f(x) = x \oplus a$ es \alert{inyectiva}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto dado que $w \in L$, concluimos que:
+\begin{eqnarray*}
+\alert{\pr_{y_i}\bigg(M(w, y_i \oplus z) \text{ rechaza}\bigg)} & \alert{\leq} & \alert{\frac{1}{3m}}
+\end{eqnarray*}
+}
+ 
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La dirección ($\Rightarrow$) de la equivalencia}
+
+{\footnotesize
+
+Dado que $m > 0$ concluimos que:
+\begin{align*}
+&\pr_{y_1, \ldots, y_m}\bigg(\exists z \in \{0,1\}^m  \, \bigwedge_{i=1}^m M(w, y_i \oplus z) \text{ rechaza}\bigg) \ \leq\\
+&\hspace{80pt}\sum_{z \in \{0,1\}^m} \prod_{i=1}^m \pr_{y_i}\bigg(M(w, y_i \oplus z) \text{ rechaza}\bigg) \ \leq\\
+&\hspace{80pt}\sum_{z \in \{0,1\}^m} \prod_{i=1}^m \frac{1}{3m} \ =\\
+&\hspace{80pt}\sum_{z \in \{0,1\}^m} \frac{1}{(3m)^m} \ =\\
+&\alert{\hspace{80pt}\frac{2^m}{(3m)^m} \ < \ 1}\\
+\end{align*}
+ 
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La dirección ($\Rightarrow$) de la equivalencia}
+
+{\footnotesize
+
+Por lo tanto existen $y_1 \in \{0,1\}^m$, $\ldots$,  $y_m \in \{0,1\}^m$ tales que la siguiente condición es cierta:
+\begin{eqnarray*}
+&& \forall z \in \{0,1\}^m  \, \bigvee_{i=1}^m M(w, y_i \oplus z) \text{ acepta}
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Concluimos que:
+\begin{eqnarray*}
+\alert{\exists y_1 \in \{0,1\}^m \cdots \exists y_m \in \{0,1\}^m \, \forall z \in \{0,1\}^m \, (w,y_1,\ldots,y_m,z) \in A}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La dirección ($\Rightarrow$) de la equivalencia}
+
+{\footnotesize
+
+¿Es  necesario el uso de $z$ para esta dirección de la demostración?
+
+\vs{7}
+
+\visible<2->{
+Dado que $w \in L$ y $m > 0$ tenemos que:
+\begin{eqnarray*}
+\pr_{y_1, \ldots, y_m}\bigg(\bigwedge_{i=1}^m M(w, y_i) \text{ rechaza}\bigg) & = & \prod_{i=1}^m \pr_{y_i}\bigg(M(w, y_i) \text{ rechaza}\bigg)\\
+& \leq & \prod_{i=1}^m \frac{1}{3m} \ =\\
+& \alert{=} & \alert{\frac{1}{(3m)^m} \ < 1}\\
+\end{eqnarray*}}
+
+\vs{1}
+ 
+ \visible<3->{
+Por lo que el uso de $z$ no es estrictamente necesario para esta parte de la demostración.
+\begin{itemize}
+\item Pero sí es necesario para la otra dirección
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La dirección ($\Leftarrow$) de la equivalencia}
+
+{\footnotesize
+
+Suponga que $w \not\in L$ y $t_M(|w|) = m$
+\begin{itemize}
+\item Para demostrar la dirección ($\Leftarrow$)  consideramos el contrapositivo 
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Además, suponga que $y_1 \in \{0,1\}^m$, $\ldots$, $y_m \in \{0,1\}^m$
+}
+
+\vs{6}
+
+\visible<3->{
+Dado que $w \not\in L$  y $m >0$ tenemos que:
+\begin{eqnarray*}
+\pr_{z}\bigg(\bigvee_{i=1}^m M(w, y_i \oplus z) \text{ acepta}\bigg) & \leq & \sum_{i=1}^m \pr_{z}\bigg(M(w, y_i \oplus z) \text{ acepta}\bigg)\\
+& \leq & \sum_{i=1}^m \frac{1}{3m}\\
+& = & \frac{m}{3m}\\
+& = & \frac{1}{3}
+\end{eqnarray*}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La dirección ($\Leftarrow$) de la equivalencia}
+
+{\footnotesize
+
+Se concluye que:
+\begin{eqnarray*}
+\pr_{z}\bigg(\bigwedge_{i=1}^m M(w, y_i \oplus z) \text{ rechaza}\bigg) & = & 1 - \pr_{z}\bigg(\bigvee_{i=1}^m M(w, y_i \oplus z) \text{ acepta}\bigg) \\
+& \geq & 1 - \frac{1}{3}\\
+& = & \frac{2}{3}
+\end{eqnarray*}
+ 
+ \vs{8}
+ 
+
+ 
+ \visible<2->{
+Por lo tanto tenemos que existe $z \in \{0,1\}^m$ tal que $M(w, y_i \oplus z)$ rechaza para cada $i \in \{1, \ldots, m\}$
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La dirección ($\Leftarrow$) de la equivalencia}
+
+{\footnotesize
+
+Dado que $y_1$, $\ldots$, $y_m$ son elementos arbitrarios en el conjunto $\{0,1\}^m$, tenemos finalmente que:
+\begin{eqnarray*}
+\alert{\forall y_1 \in \{0,1\}^m \cdots \forall y_m \in \{0,1\}^m \, \exists z \in \{0,1\}^m \, (w,y_1,\ldots,y_m,z) \not\in A}
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{La dirección ($\Leftarrow$) de la equivalencia}
+
+{\footnotesize
+
+En esta dirección de la demostración si es necesario el uso de $z$
+
+\vs{8}
+
+\visible<2->{
+Si existe $y \in \{0,1\}^m$ tal que $M(w,y)$ acepta, entonces existen $y_1 \in \{0,1\}^m$, $\ldots$, $y_m \in \{0,1\}^m$  tales que la siguiente condición es \alert{falsa:}
+\begin{eqnarray*}
+\bigwedge_{i=1}^m M(w, y_i) \text{ rechaza}
+\end{eqnarray*}}
+
+\vs{8}
+
+\visible<3->{
+Concluimos que la idea de la demostración no funciona sin la utilización de $z$ para $m$ elementos arbitrarios $y_1$, $\ldots$, $y_m$ del conjunto $\{0,1\}^m$ \qed
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las clases de complejidad probabilísticas en una figura}
+
+
+{\footnotesize
+\begin{center}
+\begin{tikzpicture}
+\node[rectw] (ptime) {$\ptime$};
+\node[rectw, above=7mm of ptime] (rpcorp) {$\zpp = \crp \cap \co\crp$}
+edge[arrin] (ptime); 
+\node[rectw, above=7mm of rpcorp] (a) {};
+\node[rectw, left=10mm of a] (rp) {$\crp$}
+edge[arrin] (rpcorp); 
+\node[rectw, right=10mm of a] (corp) {$\co\crp$}
+edge[arrin] (rpcorp); 
+\node[rectw, above=10mm of rp] (np) {$\np$}
+edge[arrin] (rp); 
+\node[rectw, above=10mm of corp] (conp) {$\co\np$}
+edge[arrin] (corp);
+\node[rectw, above=7mm of a] (bpp) {$\bpp$}
+edge[arrin] (rp)
+edge[arrin] (corp);
+\node[rectw, above=10mm of bpp] (sp2) {$\Sigma^P_2 \cap \Pi^P_2$}
+edge[arrin] (np)
+edge[arrin] (conp)
+edge[arrin] (bpp);
+\node[rectw, above=16mm of np] (s2) {$\Sigma^P_2$}
+edge[arrin] (sp2);
+\node[rectw, above=16mm of conp] (p2) {$\Pi^P_2$}
+edge[arrin] (sp2);
+
+
+
+%\node[rect, below left=8mm of n1] (n2) {$L[i] < a$}
+%   edge[arrin] node[above] {no} (n1); 
+%\node[rect, fill = green, below right=8mm of n1] (n3) {\areturn $i$}
+%   edge[arrin] node[above] {sí} (n1); 
+%\node[rectw, below left=8mm of n2] (n4) {$\ldots$}
+%   edge[arrin] node[above] {no} (n2);    
+%\node[rect, below right=8mm of n2] (n5) {$L[k] < a$}
+%   edge[arrin] node[above] {sí} (n2);    
+%\node[rect, fill = green, below left=8mm of n5] (n6) {\areturn no}
+%   edge[arrin] node[above] {no} (n5);    
+%\node[rect, below right=8mm of n5] (n7) {$L[\ell] > a$}
+%   edge[arrin] node[above] {sí} (n5);  
+%\node[rectw, below left=8mm of n7] (n8) {$\ldots$}
+%   edge[arrin] node[above] {no} (n7);   
+%\node[rectw, below right=8mm of n7] (n9) {$\ldots$}
+%   edge[arrin] node[above] {sí} (n7);   
+\end{tikzpicture}
+\end{center}
+
+}
+
+
+\end{frame}
+\end{document}

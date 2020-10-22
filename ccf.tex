@@ -1,0 +1,4457 @@
+\documentclass{beamer}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{epsfig}
+\usepackage{dpscolor}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+
+\mode<presentation>
+{
+
+\useinnertheme{sparql}
+\useoutertheme{onlyfoot}
+\usecolortheme{seahorse}
+\usecolortheme{rose}
+
+\setbeamercovered{transparent}
+
+}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{corolario}{Corolario}
+\newtheorem{definicion}{Definición}
+\newtheorem{notacion}{Notación}
+\newtheorem{lema}{Lema}
+
+\newenvironment{ejemplo}
+{\begin{exampleblock}{Ejemplo}}
+{\end{exampleblock}}
+
+\newenvironment{ejercicio}
+{\begin{exampleblock}{Ejercicio}}
+{\end{exampleblock}}
+
+\newcommand{\cyan}[1]{\textCyan #1\textBlack}
+\newcommand{\red}[1]{\textRed #1\textBlack}
+\newcommand{\green}[1]{\textGreen #1\textBlack}
+\newcommand{\blue}[1]{\textBlue #1\textBlack}
+\newcommand{\black}[1]{\textBlack #1\textBlack}
+\newcommand{\magenta}[1]{\textMagenta #1\textBlack}
+\newcommand{\brown}[1]{\textBrown #1\textBlack}
+\newcommand{\vs}[1]{\vspace{#1mm}}
+\newcommand{\ignore}{}
+\newcommand{\ri}[1]{\text{\red{#1}}}
+\newcommand{\hs}{\hat\sigma}
+\newcommand{\modelos}{{\it modelos}}
+\newcommand{\B}{{\tt B}}
+\newcommand{\nspace}{\text{NSPACE}}
+\newcommand{\logspace}{\text{LOGSPACE}}
+\newcommand{\nlogspace}{\text{NLOGSPACE}}
+\newcommand{\npspace}{\text{NPSPACE}}
+\newcommand{\pspace}{\text{PSPACE}}
+\newcommand{\ph}{\text{PH}}
+\newcommand{\expspace}{\text{EXPSPACE}}
+\newcommand{\nexpspace}{\text{NEXPSPACE}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\espacio}{{\it espacio}}
+\newcommand{\tiempo}{{\it tiempo}}
+\newcommand{\ptime}{\text{PTIME}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\nexptime}{\text{NEXPTIME}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\A}{{\cal A}}
+\newcommand{\BB}{{\cal B}}
+\newcommand{\sat}{\text{SAT}}
+\newcommand{\sdnf}{\#\text{DNF-SAT}}
+\newcommand{\scnf}{\#\text{CNF-SAT}}
+\newcommand{\tcnfu}{\text{3-CNF-SAT-UNSAT}}
+\newcommand{\usat}{\text{unique-SAT}}
+\newcommand{\np}{\text{NP}}
+\newcommand{\ntime}{\text{NTIME}}
+\newcommand{\crp}{\text{RP}}
+\newcommand{\bpp}{\text{BPP}}
+\newcommand{\cnf}{\text{CNF-SAT}}
+\newcommand{\tcnf}{\text{3-CNF-SAT}}
+\newcommand{\dcnf}{\text{2-CNF-SAT}}
+\newcommand{\horn}{\text{HORN-SAT}}
+\newcommand{\nhorn}{\text{NEG-HORN-SAT}}
+\newcommand{\co}{\text{co-}}
+\newcommand{\rp}{\leq^\text{\it p}_\text{\it m}}
+\newcommand{\tur}{\leq^\text{\it p}_\text{\it T}}
+\newcommand{\rpar}{\leq^\text{\it p}_\text{\it par}}
+\newcommand{\reach}{\text{CAMINO}}
+\newcommand{\pe}{\text{PROG-ENT}}
+\newcommand{\pl}{\text{PROG-LIN}}
+\newcommand{\cor}{\text{CONT-REG}}
+\newcommand{\er}{\text{EQUIV-REG}}
+\newcommand{\qbf}{\text{QBF}}
+\newcommand{\shp}{\text{Succinct-HP}}
+\newcommand{\hp}{\text{HP}}
+\newcommand{\cdp}{\text{DP}}
+\newcommand{\clique}{\text{CLIQUE}}
+\newcommand{\eclique}{\text{exact-CLIQUE}}
+\newcommand{\costo}{\text{costo}}
+\newcommand{\tsp}{\text{TSP}}
+\newcommand{\tspu}{\text{unique-TSP}}
+\newcommand{\no}{\text{NO}}
+\newcommand{\yes}{\text{YES}}
+\newcommand{\br}{\text{CERTAIN-ANSWERS}}
+
+\newcommand{\CROM}{\text{CROM}}
+\newcommand{\EVAL}{\text{EVAL}}
+\newcommand{\EQUIV}{\text{EQUIV}}
+\newcommand{\EQUIVP}{\text{EQUIV-POL}}
+
+\newcommand{\re}{\text{RE}}
+\newcommand{\dec}{\text{R}}
+\newcommand{\fp}{\text{FP}}
+\newcommand{\sharpp}{\#\text{P}}
+\newcommand{\acc}{\text{accept}}
+\newcommand{\ssat}{\#\text{SAT}}
+
+\newcommand{\pr}{{\rm {\bf Pr}}}
+\newcommand{\esp}{{\rm {\bf E}}}
+\newcommand{\vr}{{\rm {\bf Var}}}
+
+
+\newcommand{\ucnf}{\text{U-CNF-SAT}}
+\newcommand{\sucnf}{\#\text{U-CNF-SAT}}
+\newcommand{\shorn}{\#\text{HORN-SAT}}
+\newcommand{\sclique}{\#\text{CLIQUE}}
+\newcommand{\indsets}{\#\text{IS}}
+\newcommand{\is}{\text{GIS}}
+\newcommand{\sis}{\#\text{GIS}}
+\newcommand{\lis}{\text{LIS}}
+\newcommand{\slis}{\#\text{LIS}}
+\newcommand{\cs}{\#\text{CicloSimple}}
+\newcommand{\ham}{\text{HAM}}
+
+\newcommand{\afor}{{\bf for}\ }
+\newcommand{\afore}{{\bf for each}\ }
+\newcommand{\ato}{{\bf to}\ }
+\newcommand{\ado}{{\bf do}\ }
+\newcommand{\aif}{{\bf if}\ }
+\newcommand{\athen}{{\bf then}\ }
+\newcommand{\aelse}{{\bf else}\ }
+\newcommand{\areturn}{{\bf return}\ }
+\newcommand{\awhile}{{\bf while}\ }
+\newcommand{\aand}{{\bf and}\ }
+\newcommand{\aor}{{\bf or}\ }
+
+\usetikzlibrary{arrows,positioning} 
+\tikzset{
+    circ/.style={
+           circle,
+           draw=black, 
+           thick,
+           text centered,
+           },
+    circw/.style={
+           circle,
+           draw=white, 
+           thick,
+           text centered,
+           },
+     circnw/.style={
+           circle,
+           thick,
+           text centered,
+    },       
+    arrout/.style={
+           ->,
+           -latex,
+           thick,
+           },
+    arrin/.style={
+           <-,
+           latex-,
+           thick,
+           },
+    arrw/.style={
+           -,
+           thick,
+           },
+    arrww/.style={
+           -,
+           thick,
+           draw=white, 
+           }
+}
+
+\title[La clase de complejidad de funciones $\sharpp$]
+{La clase de complejidad de funciones $\sharpp$}
+
+\author[IIC3810]
+{IIC3810\\
+\vs{2} Marcelo Arenas y Luis Alberto Croquevielle}
+
+\institute[]
+{
+%  Department of Computer Science\\
+%  Pontificia Universidad Cat\'olica de Chile
+}
+
+\date{}
+
+%\subject{Theoretical Computer Science}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Calculando una función}
+{\small
+
+Dado un alfabeto $\Sigma$, consideramos funciones $f : \Sigma^* \to \mathbb{N}$
+
+\vs{8}
+
+Representamos cada número natural como un string sobre el alfabeto~$\{0,\ldots,9\}$
+\begin{itemize}
+\item Si una MTC calcula una función $f : \Sigma^* \to \mathbb{N}$, entonces para cada $w \in \Sigma^*$ suponemos que $f(w)$ es retornado en la cinta de salida como un string sobre el alfabeto 
+$\{0,\ldots,9\}$
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las funciones computables en tiempo polinomial}
+{\small
+
+\begin{definicion}
+Una función $f : \Sigma^* \to \mathbb{N}$ está en la clase \alert{$\fp$} si y sólo si existe una MTC que funciona en tiempo polinomial y calcula $f$
+\end{definicion}
+
+\vs{8}
+
+\visible<2->{
+¿Qué funciones son difíciles de computar?}
+\begin{itemize}
+\visible<3->{\item Consideramos funciones tales que si son computables en tiempo polinomial, entonces nos dan algoritmos polinomiales para resolver problemas~$\np$-completos}
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La clase de funciones $\sharpp$}
+{\footnotesize
+
+Sea $M$ una MT no determinista con alfabeto de entrada $\Sigma$
+
+\vs{8}
+
+\visible<2->{
+\begin{block}{{\small Supuesto}}
+Si decimos que $M$ funciona en tiempo polinomial, entonces suponemos que existe un polinomio $p(n)$ tal que para cada $w \in \Sigma^*$ y cada ejecución de $M$ con entrada $w$,  el número de pasos en la ejecución es menor o igual a $p(|w|)$
+\begin{itemize}
+\visible<3->{\footnotesize {\item ¿Por qué podemos realizar este supuesto sin perdida de generalidad?}}
+\end{itemize}
+\end{block}}
+
+\vs{8}
+
+\visible<4->{
+Dado $w \in \Sigma^*$, definimos $\acc_M(w)$ como el número de ejecuciones de $M$ con entrada $w$ que se detienen en un estado final.
+\begin{itemize}
+\item En particular, $w \in L(M)$ si y sólo si $\acc_M(w) > 0$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La clase de funciones $\sharpp$}
+{\small
+
+\begin{definicion}
+Una función $f : \Sigma^* \to \mathbb{N}$ está en \alert{$\sharpp$} si y sólo si existe una MT no determinista $M$ con alfabeto de entrada $\Sigma$, que funciona en tiempo polinomial y tal que para cada $w \in \Sigma^*$: \alert{$f(w) = \acc_M(w)$}
+\end{definicion}
+
+\vs{8}
+
+{\footnotesize
+\visible<2->{
+\begin{ejercicio}
+Sea $\ssat$ una función tal que, dada una fórmula proposicional $\varphi$, retorna el número de valuaciones que satisfacen $\varphi$. Demuestre que $\ssat \in \sharpp$
+\end{ejercicio}}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Para pensar $\ldots$}
+{\small
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Demuestre que si $f,g \in \sharpp$, entonces $f+1 \in \sharpp$ y $f+g \in \sharpp$
+
+\vs{4}
+
+\item Demuestre que si $f,g \in \sharpp$, entonces $f \cdot g \in \sharpp$
+
+\vs{4}
+
+\item Demuestre que $\fp \subseteq \sharpp$
+\end{enumerate}
+\end{exampleblock}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una primera noción de reducción para funciones}
+
+{\small
+
+\begin{definicion}
+Dadas funciones $f,g : \Sigma^* \to \mathbb{N}$, decimos que $f$ se puede reducir a $g$ de forma parsimoniosa, denotado como \alert{$f \rpar g$}, si existe una función $h : \Sigma^* \to \Sigma^*$ tal que $h$ puede ser calculada en tiempo polinomial y para todo $w \in \Sigma^*$:
+\vspace{-3mm}
+\begin{eqnarray*}
+\alert{f(w)} & \alert{=} & \alert{g(h(w))}
+\end{eqnarray*}
+\end{definicion}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre que si $f_1 \rpar f_2$ y $f_2 \rpar f_3$, entonces $f_1 \rpar f_3$
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una noción de reducción  más general para funciones}
+
+{\small
+
+Al igual que para las máquinas de Turing con oráculos para problemas de decisión, podemos definir las máquinas de Turing con oráculos para funciones
+\begin{itemize}
+\item ¿Cómo debería funcionar la cinta de consulta en este caso?
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Dada una función $f :\Sigma^* \to \mathbb{N}$, denotamos como $M^f$ a una MT que tiene a $f$ como oráculo}
+\begin{itemize}
+\visible<3->{\item $M^f$ también puede ser una MTC}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una noción de reducción más general para funciones }
+
+{\small
+
+Dadas funciones $f,g :\Sigma^* \to \mathbb{N}$, decimos que $f \in \fp^g$ si existe una MTC $M^g$ que funciona en tiempo polinomial y calcula $f$
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+Dadas funciones $f,g : \Sigma^* \to \mathbb{N}$, decimos que $f$ se puede reducir a $g$ en tiempo polinomial, denotado como \alert{$f \tur g$}, si $f \in \fp^{\,g}$
+\end{definicion}
+}
+
+\vs{8}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre que si $f_1 \tur f_2$ y $f_2 \tur f_3$, entonces $f_1 \tur f_3$
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una noción de completitud para $\sharpp$}
+
+{\small
+
+\begin{definicion}
+Una función $f : \Sigma^* \to \mathbb{N}$ es $\sharpp$-hard si para cada $g \in \sharpp$ se tiene que $g \tur f$. Sí adicionalmente $f \in \sharpp$, entonces $f$ se dice $\sharpp$-completo.
+\end{definicion}
+
+\vs{8}
+
+\visible<2->{
+Si $\tur$ es reemplazado por $\rpar$ en la definición anterior, entonces decimos que $f$ es $\sharpp$-hard o $\sharpp$-completo \alert{bajo reducciones parsimoniosas}}
+\begin{itemize}
+\visible<3->{\item Si $f$ es $\sharpp$-hard bajo reducciones parsimoniosas entonces también es $\sharpp$-hard, puesto que $f \rpar g$ implica $f \tur g$}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un primer problema $\sharpp$-completo}
+
+{\small
+
+\begin{teorema}
+$\ssat$ es $\sharpp$-completo bajo reducciones parsimoniosas.
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el teorema.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un segundo problema $\sharpp$-completo}
+
+{\small
+
+Sea $\scnf$ una función que, dada una formula proposicional $\varphi$ en CNF, retorna el número de valuaciones que satisfacen $\varphi$
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+$\scnf$ es $\sharpp$-completo bajo reducciones parsimoniosas.
+\end{teorema}
+}
+
+\vs{8}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre el teorema.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un tercer problema $\sharpp$-completo}
+
+{\footnotesize
+
+Sea $\sdnf$ una función que, dada una formula proposicional $\varphi$ en DNF, retorna el número de valuaciones que satisface $\varphi$
+
+\vs{6}
+
+\visible<2->{
+\begin{teorema}
+$\sdnf$ es $\sharpp$-completo
+\end{teorema}
+}
+
+\vs{6}
+
+\visible<3->{
+{\bf Demostración:} vamos a demostrar que $\scnf \tur \sdnf$
+
+\vs{4}
+
+Sea $\varphi$ una fórmula proposicional en CNF, y sea $\psi$ una fórmula proposicional en DNF que es equivalente a $\neg \varphi$
+\begin{itemize}
+\item $\psi$ puede ser construida en tiempo polinomial a partir de $\varphi$
+\end{itemize}
+
+}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del teorema}
+
+{\footnotesize
+
+Definimos $\text{nv}(\cdot)$ como una función que retorna el número de variables de una fórmula proposicional $\varphi$
+\vs{1}
+\begin{itemize}
+\item Por ejemplo, $\text{nv}((p \vee q) \wedge \neg r) = 3$ y $\text{nv}((r \vee q) \wedge \neg r) = 2$
+\end{itemize}
+\vs{1}
+La función $\text{nv}(\cdot)$ es computable en tiempo polinomial
+
+\vs{8}
+
+\visible<2->{
+Tenemos que:
+\vs{-1}
+\begin{eqnarray*}
+\alert{\scnf(\varphi)} & \alert{ = } & \alert{2^{\text{nv}(\psi)} - \sdnf(\psi)}
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+Concluimos entonces que $\scnf \in \fp^{\sdnf}$
+\begin{itemize}
+\item Por lo tanto, $\scnf \tur \sdnf$ \qed
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Sobre la completitud de $\sdnf$}
+
+{\small
+
+¿Se puede demostrar que $\sdnf$ es $\sharpp$-completo bajo reducciones parsimoniosas?
+
+\vs{8}
+
+\visible<2->{
+Para responder esta pregunta, defina para cada función $f : \Sigma^* \to \mathbb{N}$ el siguiente problema de decisión:
+\begin{eqnarray*}
+\alert{L_f} & \alert{=} & \alert{\{ w \in \Sigma^* \mid f(w) > 0 \}}
+\end{eqnarray*}
+}
+
+\vs{5}
+
+\visible<3->{
+\begin{ejemplo}
+Tenemos que $L_{\ssat} = \sat$
+\end{ejemplo}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Sobre la completitud de $\sdnf$}
+
+{\small
+
+\begin{proposition}
+Si $f \rpar g$ y $L_g \in \ptime$, entonces $L_f \in \ptime$
+\end{proposition}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre la proposición.
+\end{ejercicio}}
+
+\vs{8}
+
+\visible<3->{
+Concluimos que $\sdnf$ no puede ser $\sharpp$-completo bajo reducciones parsimoniosas, a menos que $\ptime = \np$
+\begin{itemize}
+\item Puesto que si $\ssat \rpar \sdnf$, entonces $\sat \in \ptime$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cómo podemos calcular una función $\sharpp$-completa?}
+
+{\small
+
+Sea $f : \Sigma^* \to \mathbb{N}$ una función en $\sharpp$
+
+\vs{8}
+
+Si la función $f$ es $\sharpp$-completa entonces no esperamos tener un algoritmo polinomial para calcularla.
+
+\vs{8}
+
+\visible<2->{
+Pero el hecho de que $f$ sea $\sharpp$-completa no implica que el valor de $f$ no pueda ser aproximado de manera eficiente.}
+\begin{itemize}
+\visible<3->{\item Vamos a estudiar una noción de aproximación aleatorizada para funciones en $\sharpp$
+}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Aproximación aleatorizada de funciones}
+
+{\small
+
+Sea $f : \Sigma^* \to \mathbb{N}$
+%\begin{itemize}
+%\item Y sea $(0,1)$ el conjunto de los números reales mayores a 0
+%\end{itemize}
+
+\vs{4}
+
+\visible<2->{
+\begin{definicion}
+Un algoritmo aleatorizado $\A : \Sigma^* \times (0,1) \to \mathbb{N}$ es un {\bf fully polynomial randomized approximation scheme (FPRAS)} para $f$ si existe un polinomio $p(x,y)$ tal que para cada $w \in \Sigma^*$ y $\varepsilon \in (0,1)$:
+\vs{2}
+\begin{enumerate}
+\item El número de pasos ejecutados por $\A(w,\varepsilon)$ es menor o igual~a~$p(|w|,\frac{1}{\varepsilon})$
+
+\vs{2}
+
+\alert{\item $\pr(|\A(w,\varepsilon) - f(w)| \leq \varepsilon \cdot f(w)) \geq \frac{3}{4}$}
+\end{enumerate}
+\end{definicion}
+}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Un enfoque general para construir un FPRAS}
+
+{\small
+
+Dada una función $f : \Sigma^* \to \mathbb{N}$, $w \in \Sigma^*$ y $\varepsilon \in (0,1)$, definimos una variable aleatoria $X$ tal que $\esp[X] = f(w)$
+\begin{itemize}
+\item Para tener una estimación de $f(w)$ nos basta muestrear la variable aleatoria $X$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Debe ser posible muestrear $X$ en tiempo polinomial en $|w|$ y $\frac{1}{\varepsilon}$, y además debemos tener que $\pr(|X - f(w)| \leq \varepsilon \cdot f(w)) \geq \frac{3}{4}$
+\begin{itemize}
+\item Debemos entonces acotar inferiormente \alert{$\pr(|X - \esp[X]| \leq \varepsilon \cdot \esp[X])$}
+\end{itemize}}
+
+\vs{6}
+
+\visible<3->{
+Vamos a estudiar entonces algunas desigualdades útiles para obtener una cota inferior para $\pr(|X - \esp[X]| \leq \varepsilon \cdot \esp[X])$}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{La desigualdad de Markov}
+
+{\small
+
+\begin{teorema}
+Sea $X$ una variable aleatoria no negativa. Para cada $a \in \mathbb{R}^+$ se tiene que:
+\begin{eqnarray*}
+\pr(X \geq a) & \leq & \frac{\esp[X]}{a}
+\end{eqnarray*}
+\end{teorema}
+
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{Una demostración de la desigualdad de Markov}
+
+{\footnotesize
+
+Suponemos que el recorrido de $X$ es un conjunto finito $\Omega \subseteq \mathbb{R}^+_0$:
+\begin{eqnarray*}
+\esp(X) & = & \sum_{r \in \Omega} r \cdot \pr(X = r)\\
+& = & \bigg(\sum_{r \in \Omega \,:\, r < a} r \cdot \pr(X = r)\bigg) + \bigg(\sum_{s \in \Omega \,:\, s \geq a} s \cdot \pr(X = s)\bigg)\\
+& \geq & \sum_{s \in \Omega \,:\, s \geq a} s \cdot \pr(X = s)\\
+& \geq & \sum_{s \in \Omega \,:\, s \geq a} a \cdot \pr(X = s)\\
+& = & a \cdot \bigg(\sum_{s \in \Omega \,:\, s \geq a} \pr(X = s)\bigg)\\
+& = & a \cdot \pr(X \geq a)
+\end{eqnarray*}
+
+\vs{4}
+
+\visible<2->{
+Concluimos que $\pr(X \geq a) \leq \frac{\esp(X)}{a}$ \qed
+}
+
+}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{La desigualdad de Chebyshev}
+
+{\small
+
+\begin{teorema}
+\vs{-3}
+\begin{eqnarray*}
+\pr(|X - \esp[X]| \geq a) & \leq & \frac{\vr[X]}{a^2}
+\end{eqnarray*}
+\end{teorema}
+
+\vs{6}
+
+\visible<2->{
+{\bf Demostración.} Utilizando la desigualdad de Markov obtenemos:
+\begin{eqnarray*}
+\pr(|X - \esp[X]| \geq a) & = & \pr((X - \esp[X])^2 \geq a^2)\\
+& \leq & \frac{\esp[(X - \esp[X])^2]}{a^2}\\
+& = & \frac{\vr[X]}{a^2} 
+\end{eqnarray*} \qed
+}
+
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{Utilizando la desigualdad de Chebyshev}
+
+{\small
+
+A partir de la desigualdad de Chebyshev obtenemos:
+\begin{eqnarray*}
+\pr(|X - \esp[X]| \leq \varepsilon \cdot \esp[X]) & \geq & 
+1- \frac{\vr[X]}{\varepsilon^2 \cdot \esp[X]^2}
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Es posible mejorar esta cota inferior considerando el promedio de $k \geq 2$ muestras de $X$ obtenidas de manera independiente.
+\begin{itemize}
+\item Así reducimos el impacto de las muestras alejadas de $\esp[X]$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Utilizando la desigualdad de Chebyshev}
+
+{\footnotesize
+
+Por la desigualdad de Chebyshev:
+\vs{-1}
+\begin{eqnarray*}
+\pr\bigg(\bigg|\frac{1}{k}\cdot\sum_{i=1}^k X_i- \esp\bigg[\frac{1}{k}\cdot\sum_{i=1}^k X_i\bigg]\bigg| \geq \varepsilon \cdot \esp\bigg[\frac{1}{k}\cdot\sum_{i=1}^k X_i\bigg]\bigg) & \leq &  \frac{\vr\bigg[{\displaystyle \frac{1}{k}\cdot\sum_{i=1}^k X_i}\bigg]}{{\displaystyle \varepsilon^2 \cdot \esp\bigg[\frac{1}{k}\cdot\sum_{i=1}^k X_i\bigg]^2}}
+\end{eqnarray*}
+
+\vs{4}
+
+Además, tenemos que:
+\begin{eqnarray*}
+\esp\bigg[\frac{1}{k}\cdot\sum_{i=1}^k X_i\bigg] & = & \frac{1}{k}\cdot\esp\bigg[\sum_{i=1}^k X_i\bigg]\\
+& = & \frac{1}{k}\cdot\sum_{i=1}^k \esp[X_i]\\
+& = & \frac{1}{k}\cdot\sum_{i=1}^k \esp[X]\\
+& = & \esp[X]
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Utilizando la desigualdad de Chebyshev}
+
+{\footnotesize
+
+\begin{eqnarray*}
+\vr\bigg[\frac{1}{k}\cdot\sum_{i=1}^k X_i\bigg] & = & \frac{1}{k^2}\cdot\vr\bigg[\sum_{i=1}^k X_i\bigg]\\
+& = & \frac{1}{k^2}\cdot\sum_{i=1}^k \vr[X_i]\\
+& = & \frac{1}{k^2}\cdot\sum_{i=1}^k \vr[X]\\
+& = & \frac{1}{k}\cdot\vr[X]
+\end{eqnarray*}
+
+
+\vs{4}
+
+De lo cual concluimos que:
+\begin{eqnarray*}
+\pr\bigg(\bigg|\frac{1}{k}\cdot\sum_{i=1}^k X_i- \esp[X]\bigg| \geq \varepsilon \cdot \esp[X]\bigg) & \leq &  \frac{\vr[X]}{{\displaystyle k \cdot \varepsilon^2 \cdot \esp[X]^2}}
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Utilizando la desigualdad de Chebyshev}
+
+{\small
+
+Realizando $k$ muestras independientes de la variable aleatoria $X$ obtenemos entonces:
+\alert{
+\begin{eqnarray*}
+\pr\bigg(\bigg|\frac{1}{k}\cdot\sum_{i=1}^k X_i- \esp[X]\bigg| \leq \varepsilon \cdot \esp[X]\bigg) & \geq &  1- \frac{\vr[X]}{{\displaystyle k \cdot \varepsilon^2 \cdot \esp[X]^2}}
+\end{eqnarray*}
+}
+
+
+\vs{8}
+
+\visible<2->{
+Podemos entonces ajustar el valor de $k$ para obtener un FPRAS.
+\begin{itemize}
+\item El valor de $\vr[X]$ debe ser polinomial en el tamaño de la entrada para obtener un FPRAS. 
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Construyendo un FPRAS para $\sdnf$}
+
+{\small
+
+Sea $\varphi = D_1 \vee \cdots \vee D_m$ una formula proposicional en DNF 
+\begin{itemize}
+\item Cada $D_i$ es una conjunción de literales
+
+\item $\varphi$ menciona $n$ variables proposicionales, vale decir, $\text{nv}(\varphi) = n$
+\end{itemize}
+
+\vs{8}
+
+Suponemos que cada $D_i$ no tiene literales repetidos ni complementarios
+\begin{itemize}
+\item ¿Por qué podemos suponer esto?
+
+\item Sea $\ell_i$ el número de literales mencionados en $D_i$
+\end{itemize}
+
+}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: primer intento}
+
+{\small
+
+Suponga que las asignaciones de valores de verdad $\sigma$ para $\varphi$ son escogidas con distribución uniforme:
+\begin{eqnarray*}
+\pr(\sigma) & = & \frac{1}{2^n}
+\end{eqnarray*}
+
+\vs{8}
+
+Y considere la siguiente variable aleatoria:
+\begin{eqnarray*}
+X(\sigma) & = &
+\begin{cases}
+2^n & \sigma(\varphi) = 1\\
+0 & \sigma(\varphi) = 0
+\end{cases}
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: primer intento}
+
+{\footnotesize
+
+Tenemos que:
+\begin{eqnarray*}
+\esp[X] & = & \sum_{\sigma} X(\sigma) \cdot \pr(\sigma)\\
+& = & \sum_{\sigma\,:\, \sigma(\varphi) = 1} 2^n \cdot \frac{1}{2^n}\\
+& = & \sum_{\sigma\,:\, \sigma(\varphi) = 1} 1\\
+& = & \sdnf(\varphi)
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Tenemos entonces que $\esp[X] = \sdnf(\varphi)$, el primer requisito para la variable aleatoria que queremos construir
+\begin{itemize}
+\item Además se puede muestrear $X$ en tiempo polinomial en $n$
+\begin{itemize}
+{\footnotesize \item ¿Cómo se hace esto?}
+\end{itemize}
+\end{itemize}
+}
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: primer intento}
+
+{\footnotesize
+
+Nos falta calcular $\vr[X]$ para saber si podemos obtener un FPRAS.
+
+\vs{4}
+
+\visible<2->{
+Tenemos que:
+\vs{-1}
+\begin{eqnarray*}
+\esp[X^2] & = & \sum_{\sigma} X^2(\sigma) \cdot \pr(\sigma)\\
+& = & \sum_{\sigma\,:\, \sigma(\varphi) = 1} 2^{2\cdot n} \cdot \frac{1}{2^n}\\
+& = & \sum_{\sigma\,:\, \sigma(\varphi) = 1} 2^n\\
+& = & 2^n \cdot \sdnf(\varphi)
+\end{eqnarray*}
+}
+
+\vs{4}
+
+\visible<3->{
+Por lo tanto:
+\vs{-1}
+\begin{eqnarray*}
+\vr[X] & = & \esp[X^2] -\esp[X]^2\\
+&=& 2^n \cdot \sdnf(\varphi) - \sdnf(\varphi)^2\\
+&=& (2^n - \sdnf(\varphi))\cdot \sdnf(\varphi)
+\end{eqnarray*}
+}
+
+
+}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: primer intento}
+
+{\footnotesize
+
+Realizando $k$ muestras independientes de $X$ obtenemos entonces:
+\begin{align*}
+\pr\bigg(\bigg|\frac{1}{k}\cdot\sum_{i=1}^k X_i- \esp[X]\bigg| \geq \varepsilon \cdot \esp[X]\bigg) & \leq  \frac{\vr[X]}{{\displaystyle k \cdot \varepsilon^2 \cdot \esp[X]^2}}\\
+& = \frac{(2^n - \sdnf(\varphi))\cdot \sdnf(\varphi)}{k \cdot \varepsilon^2 \cdot \sdnf(\varphi)^2}\\
+& = \frac{2^n - \sdnf(\varphi)}{k \cdot \varepsilon^2 \cdot \sdnf(\varphi)}
+\end{align*}
+
+\vs{6}
+
+\visible<2->{
+Por lo tanto, para obtener $\pr(|\frac{1}{k}\cdot\sum_{i=1}^k X_i- \esp[X]| \geq \varepsilon \cdot \esp[X]) \leq \frac{1}{4}$ necesitamos imponer la siguiente restricción sobre $k$:
+\begin{eqnarray*}
+\frac{4 \cdot(2^n - \sdnf(\varphi))}{\varepsilon^2 \cdot \sdnf(\varphi)} & \leq & k
+\end{eqnarray*}}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: primer intento}
+
+{\small
+
+Tomando entonces:
+\alert{
+\begin{eqnarray*}
+k & = & \bigg\lceil \frac{4 \cdot(2^n - \sdnf(\varphi))}{\varepsilon^2 \cdot \sdnf(\varphi)} \bigg\rceil
+\end{eqnarray*}}
+obtenemos la cota superior deseada para la probabilidad de error.
+
+\vs{8}
+
+\visible<2->{
+{\bf ¡Pero el valor de $k$ puede ser exponencial en $n$, lo cual significa que el algoritmo aleatorizado resultante es de tiempo exponencial!}
+\begin{itemize}
+\item Por ejemplo, si $\sdnf(\varphi)$ es polinomial en $n$
+\end{itemize}}
+
+\vs{8}
+
+\visible<3->{
+Vamos a estudiar un segundo enfoque que sí da el resultado deseado.
+\begin{itemize}
+\item El primer enfoque no utilizaba el hecho de que $\varphi$ está en DNF
+\end{itemize} 
+}
+
+}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: segundo intento}
+
+{\footnotesize
+
+Recuerde que $\varphi = D_1 \vee \cdots \vee D_m$
+\begin{itemize}
+\item Donde cada $D_i$ menciona $\ell_i$ literales, y no contiene literales repetidos ni complementarios
+\end{itemize}
+
+\vs{8}
+
+Para cada $i \in \{1, \ldots, m\}$ sea $S_i = |\{ \sigma \mid \sigma(D_i) = 1 \}|$, y sea ${\displaystyle M = \sum_{i=1}^m S_i}$
+\begin{itemize}
+\item Tenemos que $S_i = 2^{n - \ell_i}$
+\end{itemize}
+
+\vs{8}
+
+Además, para cada valuación $\sigma$ sea $d(\sigma) = |\{ i \in \{1, \ldots, m\} \mid \sigma(D_i) = 1\}|$
+\begin{itemize}
+\item Tenemos que $\sigma(\varphi) = 1$ si y sólo si $d(\sigma) \geq 1$
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: segundo intento}
+
+{\footnotesize
+
+Suponga que las asignaciones de valores de verdad $\sigma$ para $\varphi$ son escogidas de manera que:
+\begin{eqnarray*}
+\pr(\sigma) & = & \frac{d(\sigma)}{M}
+\end{eqnarray*}
+Nótese que esta probabilidad está bien definida puesto que $1 \leq M$ y $d(\sigma) \leq M$
+
+\vs{8}
+
+Y considere la siguiente variable aleatoria:
+\begin{eqnarray*}
+Y(\sigma) & = &
+\begin{cases}
+\frac{M}{d(\sigma)} & \sigma(\varphi) = 1\\
+0 & \sigma(\varphi) = 0
+\end{cases}
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: segundo intento}
+
+{\footnotesize
+
+Tenemos que:
+\begin{eqnarray*}
+\esp[Y] & = & \sum_{\sigma} Y(\sigma) \cdot \pr(\sigma)\\
+& = & \sum_{\sigma\,:\, \sigma(\varphi) = 1} \frac{M}{d(\sigma)} \cdot \frac{d(\sigma)}{M}\\
+& = & \sum_{\sigma\,:\, \sigma(\varphi) = 1} 1\\
+& = & \sdnf(\varphi)
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Tenemos entonces que $\esp[Y] = \sdnf(\varphi)$, el primer requisito que debemos cumplir
+\begin{itemize}
+\item ¿Cómo podemos muestrear $Y$ en tiempo polinomial en el tamaño de $\varphi$?
+\end{itemize}
+}
+
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Muestreando $Y$ en tiempo polinomial}
+
+{\footnotesize
+
+Para obtener un valor de $Y$ realizamos los siguientes pasos:
+\begin{enumerate}
+\item \label{y-p1} Escoja $i \in \{1, \ldots, m \}$ con probabilidad ${\displaystyle \frac{S_i}{M}}$
+
+\item \label{y-p2} Escoja $\sigma$ tal que $\sigma(D_i) = 1$ con distribución uniforme
+
+\item \label{y-p3} Retorne $Y(\sigma)$
+\end{enumerate}
+
+\vs{8}
+
+\visible<2->{
+¿Cómo se realiza el paso \ref{y-p1} en tiempo polinomial en el tamaño de $\varphi$?}
+\begin{itemize}
+\visible<3->{\item ¿Por qué no se puede hacer algo similar y escoger directamente $\sigma$ con probabilidad $ \frac{d(\sigma)}{M}$?}
+\end{itemize}
+
+
+
+}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Muestreando $Y$ en tiempo polinomial}
+
+{\footnotesize
+
+Nos falta calcular la probabilidad de escoger $\sigma$ en los pasos \ref{y-p1} y \ref{y-p2}
+
+\vs{5}
+
+\visible<2->{
+Tenemos que:
+\vs{-1}
+\begin{eqnarray*}
+\pr(\sigma) & = & \sum_{i=1}^m \pr(\sigma \mid D_i) \cdot \pr(D_i)\\
+& = & \sum_{i \,:\, \sigma(D_i) = 1} \pr(\sigma \mid D_i) \cdot \pr(D_i)\\
+& = & \sum_{i \,:\, \sigma(D_i) = 1} \frac{1}{S_i} \cdot \frac{S_i}{M}\\
+& = & \sum_{i \,:\, \sigma(D_i) = 1} \frac{1}{M}\\
+& = & \frac{1}{M} \cdot \sum_{i \,:\, \sigma(D_i) = 1} 1\\
+& \alert{=} & \alert{\frac{d(\sigma)}{M}}
+\end{eqnarray*}}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: segundo intento}
+
+{\small
+
+Nos falta calcular $\vr[Y]$ para saber si podemos obtener un FPRAS.
+\visible<2->{
+\begin{itemize}
+\item En lugar de hacer esto, vamos a acotar superiormente ${\displaystyle \frac{\vr[Y]}{\esp[Y]^2}}$
+\end{itemize}}
+
+\vs{6}
+
+\visible<3->{
+Si $\sigma(\varphi) = 1$ tenemos que ${\displaystyle \frac{M}{m} \leq Y(\sigma) \leq M}$
+\begin{itemize}
+\item Por lo tanto ${\displaystyle \frac{M}{m} \leq \esp[Y] \leq M}$
+\end{itemize}
+
+\vs{7}
+
+Concluimos que:
+\vs{-1}
+\begin{eqnarray*}
+&&\frac{M}{m} - M \leq Y - \esp[Y] \leq M - \frac{M}{m}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: segundo intento}
+
+{\footnotesize
+
+Tenemos entonces que:
+\vs{-2}
+\begin{eqnarray*}
+|Y - \esp[Y]| & \leq & \frac{M}{m} \cdot (m-1)
+\end{eqnarray*}
+
+\vs{7}
+
+De lo cual se concluye que $(Y - \esp[Y])^2 \leq (\frac{M}{m})^2 \cdot (m-1)^2$
+\vs{1}
+\begin{itemize}
+\item Por lo tanto \alert{$\vr[Y] \leq (\frac{M}{m})^2 \cdot (m-1)^2$}
+\end{itemize}
+
+\vs{7}
+
+\visible<2->{
+Como $\frac{M}{m} \leq \esp[Y]$, sabemos que \alert{$\frac{1}{\esp[Y]} \leq \frac{m}{M}$}
+
+\vs{7}
+
+Concluimos que: \ \alert{${\displaystyle \frac{\vr[Y]}{\esp[Y]^2} \ \leq \ \bigg(\frac{m}{M}\bigg)^2 \cdot \bigg(\frac{M}{m}\bigg)^2 \cdot (m-1)^2 \ = \ (m-1)^2}$}
+}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: segundo intento}
+
+{\footnotesize
+
+Realizando $k$ muestras independientes de $Y$ obtenemos entonces:
+\begin{eqnarray*}
+\pr\bigg(\bigg|\frac{1}{k}\cdot\sum_{i=1}^k Y_i- \esp[Y]\bigg| \geq \varepsilon \cdot \esp[Y]\bigg) & \leq &  \frac{\vr[Y]}{{\displaystyle k \cdot \varepsilon^2 \cdot \esp[Y]^2}}\\
+& \leq & \frac{(m-1)^2}{k \cdot \varepsilon^2}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Por lo tanto, para obtener $\pr(|\frac{1}{k}\cdot\sum_{i=1}^k Y_i- \esp[Y]| \geq \varepsilon \cdot \esp[Y]) \leq \frac{1}{4}$ imponemos la siguiente restricción sobre $k$:
+\begin{eqnarray*}
+\frac{4 \cdot (m-1)^2}{\varepsilon^2} & \leq & k
+\end{eqnarray*}}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Un FPRAS para $\sdnf$: segundo intento}
+
+{\small
+
+Tomando entonces:
+\alert{
+\begin{eqnarray*}
+k & = & \bigg\lceil  \frac{4 \cdot (m-1)^2}{\varepsilon^2} \bigg\rceil
+\end{eqnarray*}}
+obtenemos la cota superior deseada para la probabilidad de error.
+
+\vs{8}
+
+\visible<2->{
+{\bf ¡El algoritmo aleatorizado resultante funciona en tiempo polinomial en el tamaño de $\varphi$ y $\frac{1}{\varepsilon}$!}}
+\vs{1}
+\visible<3->{
+\begin{itemize}
+\item Debemos realizar $k$ muestras independientes de $Y$, donde $k$ depende polinomialmente de $m$  y $\frac{1}{\varepsilon}$
+
+\item Cada una de las muestras puede ser obtenida en tiempo polinomial en el tamaño de $\varphi$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{¿Toda función en $\sharpp$ admite un FPRAS?}
+
+{\footnotesize
+
+\visible<2->{
+\begin{proposition}
+Si una función $f$ admite un FPRAS, entonces $L_f \in \bpp$
+\end{proposition}}
+
+\vs{6}
+
+\visible<3->{
+{\bf Demostración:} Suponga que $f : \Sigma^* \to \mathbb{N}$, y sea $\A : \Sigma^* \times (0,1) \to \mathbb{N}$ un FPRAS para $f$
+
+\vs{6}
+
+Dado $w \in \Sigma^*$, considere el siguiente algoritmo aleatorizado $\BB$ para verificar si~$w \in L_f$:
+\begin{enumerate}
+\item Sea $k$ el resultado de ejecutar $\A(w,\frac{1}{2})$
+
+\item Si $k > 0$ entonces retorne {\bf sí}, en caso contrario retorne {\bf no}
+\end{enumerate}
+}
+
+}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Una demostración de la proposición}
+
+{\footnotesize
+
+Necesitamos calcular la probabilidad de error del algoritmo $\BB$
+
+\vs{6}
+
+Suponga primero que $w \in L_f$, vale decir, $f(w) > 0$
+
+\vs{6}
+
+Dado que $\A$ es un FPRAS para $f$, tenemos que:
+\begin{eqnarray*}
+\pr(|\A(w,\frac{1}{2}) - f(w)| \leq \frac{1}{2} \cdot f(w)) & \geq & \frac{3}{4}
+\end{eqnarray*}
+
+\vs{6}
+
+Lo cual es equivalente a:
+\begin{eqnarray*}
+\pr(\frac{1}{2} \cdot f(w) \leq \A(w,\frac{1}{2}) \leq \frac{3}{2} \cdot f(w)) & \geq & \frac{3}{4}
+\end{eqnarray*}
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Una demostración de la proposición}
+
+{\footnotesize
+
+Concluimos entonces que:
+\begin{eqnarray*}
+\pr(\frac{1}{2} \cdot f(w) \leq \A(w,\frac{1}{2})) & \geq & \frac{3}{4}
+\end{eqnarray*}
+
+\vs{6}
+
+Dado que $f(w) > 0$, tenemos que $\frac{1}{2} \cdot f(w) > 0$, por lo que tenemos lo siguiente:
+\begin{eqnarray*}
+\pr(0 < \A(w,\frac{1}{2})) & \geq & \frac{3}{4}
+\end{eqnarray*}
+
+\vs{6}
+
+Vale decir, \alert{$\pr(\BB \text{ retorne sí})  \geq  \frac{3}{4}$}
+
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Una demostración de la proposición}
+
+{\footnotesize
+
+Suponga ahora que $w \not\in L_f$, vale decir, $f(w) = 0$
+
+\vs{6}
+
+Sabemos que:
+\begin{eqnarray*}
+\pr(\frac{1}{2} \cdot f(w) \leq \A(w,\frac{1}{2}) \leq \frac{3}{2} \cdot f(w)) & \geq & \frac{3}{4}
+\end{eqnarray*}
+
+\vs{6}
+
+Dado que $f(w) = 0$, concluimos entonces que $\pr(\A(w,\frac{1}{2}) = 0)  \geq  \frac{3}{4}$
+
+\vs{6}
+
+Vale decir, \alert{$\pr(\BB \text{ retorne no}) \geq \frac{3}{4}$}
+
+\vs{6}
+
+\visible<2->{
+De los dos casos concluimos que \alert{$\pr(\BB \text{ retorne un resultado incorrecto}) \leq \frac{1}{4}$} \qed}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{¿Qué funciones en $\sharpp$ tienen FPRAS? }
+
+{\small
+
+Por la proposición anterior no esperamos tener FPRAS para $\ssat$ y $\scnf$
+\begin{itemize}
+\item A menos que $\np \subseteq \bpp$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+¿Cada función $f \in \sharpp$ tal que $L_f \in \bpp$ admite un FPRAS?}
+\begin{itemize}
+\visible<3->{\item ¿Al menos esto se cumple para cada función $g \in \sharpp$ tal que~$L_g \in \ptime$?}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+Para responder esta pregunta necesitamos considerar otros problemas~$\sharpp$-completos}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Conjuntos independientes de un grafo}
+
+{\small
+
+Dado un grafo $G = (N,A)$, decimos que $S \subseteq N$ es un conjunto independiente si para cada $a,b \in S$ se tiene que $(a,b) \not\in A$
+\begin{itemize}
+\item Vale decir, los nodos mencionados en $S$ no están conectados entre sí en el grafo
+\end{itemize}
+
+\vs{8}
+
+Sea $\is = \{ (G,k) \mid G$ tiene un conjunto independiente $S$ con $|S| \geq k\}$
+
+\vs{8}
+
+\begin{ejercicio}
+Demuestre que $\is$ es $\np$-completo
+\end{ejercicio}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Contando el número de conjuntos independientes}
+
+{\small
+
+Sea $\sis$ una función que, dado un grafo $G$ y un número natural $k$, retorna el número de conjuntos independientes $S$ de $G$ tales que $|S| \geq k$
+
+\vs{8}
+
+\visible<2->{
+\begin{proposition}
+$\sis$ es $\sharpp$-completo bajo reducciones parsimoniosas.
+\end{proposition}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una función de conteo más simple}
+
+{\small
+
+Sea $\slis$ una función que, dado un grafo $G$ y un número natural $k$, retorna el número de conjuntos independientes $S$ de $G$ tales que $|S| \leq k$
+
+\vs{8}
+
+\visible<2->{
+\begin{proposition}
+$\slis$ es $\sharpp$-completo.
+\end{proposition}
+}
+
+\vs{8}
+
+\visible<3->{
+\begin{ejercicio}
+Muestre que $L_{\slis} \in \ptime$
+\begin{itemize}
+\item Es posible entonces que $\slis$ tenga un FPRAS
+\end{itemize}
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\slis$ es $\sharpp$-completo: demostración}
+
+{\small
+
+Dado un grafo $G$ con $n$ nodos, y un número natural $k \geq 1$, se tiene que:
+\alert{
+\begin{eqnarray*}
+\sis(G,k) & = & \slis(G,n) - \slis(G,k-1)
+\end{eqnarray*}}
+
+\vs{6}
+
+\visible<2->{
+Concluimos entonces que $\sis \in \fp^{\slis}$, vale decir, $\sis \tur \slis$
+\begin{itemize}
+\item Tenemos que $\slis$ es $\sharpp$-hard
+
+\item Dado que $\slis \in \sharpp$, tenemos entonces que $\slis$ es $\sharpp$-completo 
+\end{itemize}
+\qed
+
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Existe un FPRAS para $\slis$?}
+
+{\small
+
+\visible<2->{
+Vamos a dar una respuesta negativa a esta pregunta basada en una suposición de complejidad.
+\begin{itemize}
+\item Este resultado nos va a ayudar a identificar otros problemas que no admiten FPRAS
+\end{itemize}}
+
+\vs{8}
+
+\visible<3->{
+\begin{teorema}
+Si existe un FPRAS para $\slis$, entonces $\np = \crp$
+\end{teorema}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\slis$ no admite un FPRAS: demostración}
+
+{\footnotesize
+
+Vamos a demostrar que si existe un FPRAS para $\slis$, entonces~$\is \in \bpp$
+\begin{itemize}
+\item Dado que  $\is$ es $\np$-completo, se concluye que~$\np \subseteq \bpp$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Para terminar la demostración necesitamos el siguiente resultado:
+\vs{1}
+\begin{teorema}
+Si $\np \subseteq \bpp$, entonces $\np = \crp$
+\end{teorema}
+}
+
+\vs{7}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre el teorema.
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Técnica de demostración: construyendo un grafo aumentado}
+
+{\small
+
+
+Sea $G = (N,A)$ un grafo con $|N| = n$, y sea $k \geq 1$ un número natural.
+\begin{itemize}
+\item $(G,k)$ es una entrada de $\is$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Consideramos un número natural $r$, cuyo valor definiremos más tarde, y para cada $v \in N$ definimos un nuevo conjunto de $r$ nodos:
+\begin{eqnarray*}
+    C_v & = & \{v_1, v_2, \ldots, v_r\}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Técnica de demostración: construyendo un grafo aumentado}
+{\small
+
+Usamos $r$ para definir un nuevo grafo $G^r =(N^r, A^r)$:
+\begin{eqnarray*}
+N^r & = & \bigcup_{v\in N} C_v\\
+    A^r & = & \bigcup_{(u,v)\in A} \{(a, b) \mid a\in C_u \text{ y }  b \in C_v\}
+\end{eqnarray*}
+
+\vs{8}
+
+$G^r$ es un grafo con $r \cdot n$ nodos, donde dos nodos son adyacentes si y sólo si sus nodos de origen en $G$ son adyacentes.  
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de testigo}
+
+{\footnotesize
+
+\begin{definicion}
+Dados conjuntos independientes $S$ de $G$ y $T$de $G^r$, decimos que $T$ es un testigo para $S$ si:
+\begin{eqnarray*}
+    S & = & \{v\in N \mid C_v \cap T \neq \emptyset\}
+\end{eqnarray*}
+\end{definicion}
+
+\vs{7}
+
+\visible<2->{
+Un conjunto independiente de $G^r$ es testigo de un único conjunto independiente de $G$
+\begin{itemize}
+\item  Un conjunto independiente de $G$ puede tener muchos testigos en $G^r$
+\end{itemize}}
+
+\vs{7}
+
+\visible<3->{
+Dado un conjunto independiente $T$ de $G^r$, denotamos como $S_T$ al único independiente de $G$ que tiene como testigo a $T$}
+}
+
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{La noción de testigo}
+%
+%{\small
+%
+%La conexión fundamental entre los grafos: 
+%\begin{center}
+%\alert{$(G,k) \in \is$ \ si y sólo si \ $(G^r, k \cdot r) \in \is$}
+%\end{center}
+%
+%\vs{8}
+%
+%\visible<2->{
+%Utilizando esta conexión y eligiendo un valor adecuado para $r$ vamos a construir un algoritmo aleatorizado de tiempo polinomial para $\is$
+%\begin{itemize}
+%\item Teniendo como hipótesis la existencia de un FPRAS para $\slis$
+%\end{itemize}}
+%
+%}
+%
+%\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El número de testigos}
+
+{\footnotesize
+
+Definimos los conjuntos: 
+\begin{eqnarray*}
+    I^r(G,k) & = & \{T \mid T \text{ es un conjunto independiente de } G^r \text{ tal que }  |S_T| = k\}\\
+    M^r(G,k)  & = & \{T \mid T \text{ es un conjunto independiente de } G^r \text{ tal que } |S_T| < k\}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+La conexión fundamental: 
+\begin{center}
+\alert{$(G,k) \in \is$ si y sólo si $I^r(G,k) \neq \emptyset$}
+\end{center}
+}
+
+\vs{6}
+
+\visible<3->{
+Suponiendo que existe un FPRAS para $\slis$, vamos a desarrollar un algoritmo aleatorizado de tiempo polinomial para verificar si $I^r(G,k) \neq \emptyset$
+\begin{itemize}
+\item Obtenemos un algoritmo aleatorizado de tiempo polinomial para $\is$
+\end{itemize}
+
+}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El número de testigos}
+
+{\small
+
+Para $ \ell \in\{0, 1, \ldots, k\}$ definimos $t_\ell$ como la cantidad de testigos en $G^r$ para un conjunto independiente de $G$ con $\ell$ nodos. 
+
+\vs{6}
+
+\visible<2->{
+Por la definición de $G^r$ tenemos que $t_\ell = (2^r -1)^\ell$
+\begin{itemize}
+\item ¿Por qué?
+\end{itemize}}
+
+\vs{6}
+
+\visible<3->{
+Además, $G$ tiene a lo más ${n\choose \ell}$ conjuntos independientes con $\ell$ nodos
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El número de testigos}
+
+{\small
+
+A partir de lo anterior concluimos que:
+\begin{eqnarray*}
+    |M^r(G,k)| & \leq & \sum_{\ell=0}^{k-1} \binom{n}{\ell} t_\ell \\
+                        & \leq & \sum_{\ell=0}^{k-1} {n\choose \ell} t_{k-1} \\
+                        & \leq & t_{k-1} \sum_{\ell=0}^{n} {n\choose \ell} \\
+                        & = & 2^n \cdot t_{k-1} \\
+                        & = & 2^n \cdot (2^r-1)^{k-1}
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Técnica de demostración: aumentando las diferencias}
+
+{\footnotesize
+
+Por otra parte, si $(G,k)\in\is$ tenemos que:
+\begin{eqnarray*}
+    |I^r(G,k)| \ \geq \ t_k \ = \ (2^r-1)^k
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Concluimos que:
+\vs{1}
+\begin{itemize}
+    \item Si $(G,k)\not\in\is$: \ \alert{$\slis(G^r,k \cdot r) \ = \ |M^r(G,k)| \ \leq \ 2^n(2^r-1)^{k-1}$}
+    
+    \vs{1}
+    
+    \item Si $(G,k)\in\is$: \ \alert{$\slis(G^r,k \cdot r) \ \geq  \ |I^r(G,k)| \ \geq \ (2^r-1)^k$}
+\end{itemize}
+}
+
+
+\vs{6}
+
+\visible<3->{
+En particular, eligiendo $r=n+3$:
+\vs{1}
+\begin{itemize}
+    \item Si $(G,k)\not\in\is$: \ \alert{$\slis(G^{n+3},k \cdot (n+3)) \ \leq \ 2^n(2^{n+3}-1)^{k-1}$}
+    
+    \vs{1}
+    
+    \item Si $(G,k)\in\is$: \ \alert{$\slis(G^{n+3},k \cdot (n+3)) \ \geq \ (2^{n+3}-1)^k$}
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un algoritmo aleatorizado para $\is$} 
+{\footnotesize
+
+Suponemos que existe un FPRAS $\A$ para $\slis$, y mostramos como esto puede ser utilizado para obtener que $\is \in \bpp$ 
+
+\vs{6}
+
+\visible<2->{
+Definimos el siguiente algoritmo aleatorizado $\BB$ para $\is$:
+\begin{enumerate}
+\item Dada la entrada $(G,k)$, donde $G$ es un grafo con $n$ nodos, si $k = 0$ retorne {\bf sí}, en otro caso vaya al paso \ref{gis-p2}
+
+    \item \label{gis-p2} Genere el grafo $G^{n+3}$ 
+    
+    \item Sea $s$ el resultado de ejecutar $\A(G^{n+3},k \cdot (n+3),\frac{1}{2})$ 
+
+    \item Si $s > (1+\frac{1}{2}) \cdot 2^n(2^{n+3}-1)^{k-1}$, entonces retorne {\bf sí}, en caso contrario retorne~{\bf no}
+\end{enumerate}
+}
+
+\vs{6}
+
+\visible<3->{
+Nótese que $\BB$ funciona en tiempo polinomial en el tamaño de la entrada $(G,k)$
+\begin{itemize}
+\item Dado que el tamaño de $G^{n+3}$ es polinomial en el tamaño de $G$ ($G^{n+3}$ tiene $n \cdot (n+3)$ nodos), $\A$ es un FPRAS y $\varepsilon = \frac{1}{2}$ cuando se ejecuta $\A$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error del algoritmo}
+
+{\footnotesize
+
+Si $(G,k)\not\in\is$ obtenemos que $\pr(\BB(G,k) \text{ retorne {\bf sí}})$ es igual a:
+\vs{1}
+\visible<2->{
+\begin{align*}
+    &\pr(\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) > (1+\frac{1}{2}) \cdot 2^n(2^{n+3}-1)^{k-1}) \\
+    &\leq  \pr(\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) > (1+\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3))) \\
+    &\leq \pr(\A(G^{n+3},k \cdot (n+3), \frac{1}{2}) > (1+\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3)) \ \vee\\
+    &  \hspace{70pt}\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) < (1-\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3))) \\
+    & =  1- \pr(\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) \leq (1+\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3)) \ \wedge\\
+    &  \hspace{70pt}\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) \geq (1-\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3))) \\
+    & =  1- \pr(|\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) - \slis(G^{n+3},k \cdot (n+3))| \ \leq\\
+    & \hspace{70pt} \frac{1}{2} \cdot \slis(G^{n+3},k \cdot (n+3)))\\
+    & \alert{\leq}  \alert{1- \frac{3}{4} \ = \ \frac{1}{4}}
+\end{align*}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error del algoritmo}
+
+{\small
+
+Consideramos ahora el caso en que $(G,k)\in\is$
+
+\vs{8}
+
+\visible<2->{
+Primero debemos demostrar que:
+\begin{eqnarray*}
+    (1-\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3)) & > & (1+\frac{1}{2})\cdot 2^n(2^{n+3}-1)^{k-1}
+\end{eqnarray*}
+
+\vs{8}
+
+Dado que $\slis(G^{n+3},k \cdot (n+3)) \geq (2^{n+3}-1)^k$, basta demostrar que:
+\begin{eqnarray*}
+    (1-\frac{1}{2}) \cdot (2^{n+3}-1)^k & > & (1+\frac{1}{2}) \cdot 2^n(2^{n+3}-1)^{k-1}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error del algoritmo}
+
+{\footnotesize
+
+Tenemos que:
+\begin{eqnarray*}
+&& (1-\frac{1}{2}) \cdot (2^{n+3}-1)^k  \ >  \ (1+\frac{1}{2}) \cdot 2^n(2^{n+3}-1)^{k-1}  \\
+& \Leftrightarrow &
+\frac{1}{2} \cdot (2^{n+3}-1)^k  \ > \ \frac{3}{2} \cdot 2^n(2^{n+3}-1)^{k-1} \\
+    & \Leftrightarrow &
+    \frac{1}{2} \cdot (2^{n+3}-1)  \ >  \ \frac{3}{2} \cdot 2^n \\
+    & \Leftrightarrow &
+    2^{n+3}-1  \ >  \ 3\cdot 2^n \\
+    & \Leftrightarrow &
+    2^n(2^3-3) - 1  \ > \ 0  \\
+    & \Leftrightarrow &
+    5\cdot 2^n - 1 \ > \ 0
+\end{eqnarray*}
+
+\vs{6}
+
+Esta última condición es cierta para todo $n\geq 0$, de lo cual concluimos que 
+$(1-\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3))  >  (1+\frac{1}{2})\cdot 2^n(2^{n+3}-1)^{k-1}$
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error del algoritmo}
+
+{\footnotesize
+
+Si $(G,k) \in\is $ obtenemos que $\pr(\BB(G,k)  \text{ retorne {\bf no}})$ es igual a:
+\vs{1}
+\visible<2->{
+\begin{align*}
+    &\pr(\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) \leq (1+\frac{1}{2}) \cdot 2^n(2^{n+3}-1)^{k-1}) \\
+    &\leq  \pr(\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) < (1-\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3))) \\
+    &\leq \pr(\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) < (1-\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3)) \ \vee\\
+    &  \hspace{70pt}\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) > (1+\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3))) \\
+    & =  1- \pr(\A(G^{n+3},k \cdot (n+3), \frac{1}{2}) \geq (1-\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3)) \ \wedge\\
+    &  \hspace{70pt}\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) \leq (1+\frac{1}{2}) \cdot \slis(G^{n+3},k \cdot (n+3))) \\
+    & =  1- \pr(|\A(G^{n+3},k \cdot (n+3),\frac{1}{2}) - \slis(G^{n+3},k \cdot (n+3))| \ \leq\\
+    & \hspace{70pt} \frac{1}{2} \cdot \slis(G^{n+3},k \cdot (n+3)))\\
+    & \alert{\leq}  \alert{1- \frac{3}{4} \ = \ \frac{1}{4}}
+\end{align*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\slis$ no admite un FPRAS: conclusión}
+
+{\small
+
+Tenemos que en ambos casos el error del algoritmo $\BB$ está acotado superiormente por $\frac{1}{4}$
+
+\vs{8}
+
+Concluimos entonces que $\is\in\bpp$
+\begin{itemize}
+\item Por lo tanto $\np \subseteq \bpp$ \qed
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Utilizando la técnica anterior en otros problemas}
+
+{\small
+
+Sea $\indsets$ una función que, dado un grafo $G$, retorna el número de conjuntos independientes de $G$
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+Si existe un FPRAS para $\indsets$, entonces $\np = \crp$
+\end{teorema}
+}
+
+\vs{8}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre el teorema utilizando la técnica usada para el caso de $\slis$
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución del ejercicio}
+
+{\footnotesize
+
+Al igual que para el caso de $\slis$, demostramos que si existe un FPRAS para $\indsets$, entonces~$\is \in \bpp$
+\begin{itemize}
+\item Dado que  $\is$ es $\np$-completo, se concluye que~$\np \subseteq \bpp$
+\item Concluimos entonces que $\np = \crp$, dado que $\np \subseteq \bpp$ implica que~$\np = \crp$
+\end{itemize}
+
+\vs{7}
+
+\visible<2->{
+Dada una entrada $(G,k)$ de $\is$, definimos $G^r$, $I^r(G,k)$ y $M^r(G,k)$ como para el caso de $\slis$
+}
+
+\vs{7}
+
+\visible<3->{
+Tenemos entonces que:
+\vs{1}
+\begin{itemize}
+    \item Si $(G,k)\not\in\is$: \ \alert{$\indsets(G^r) \ = \ |M^r(G,k)| \ \leq \ 2^n(2^r-1)^{k-1}$}
+    
+    \vs{1}
+    
+    \item Si $(G,k)\in\is$: \ \alert{$\indsets(G^r) \ \geq  \ |I^r(G,k)| \ \geq \ (2^r-1)^k$}
+\end{itemize}
+}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución del ejercicio}
+
+{\footnotesize
+
+Concluimos entonces que para $r=n+3$:
+\vs{1}
+\begin{itemize}
+    \item Si $(G,k)\not\in\is$: \ \alert{$\indsets(G^{n+3}) \ \leq \ 2^n(2^{n+3}-1)^{k-1}$}
+    
+    \vs{1}
+    
+    \item Si $(G,k)\in\is$: \ \alert{$\indsets(G^{n+3}) \ \geq \ (2^{n+3}-1)^k$}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Al igual que para el caso de $\slis$, suponemos que existe un FPRAS para $\indsets$, y mostramos como esto puede ser utilizado para obtener que $\is \in \bpp$ 
+\vs{1}
+\begin{itemize}
+\item El algoritmo aleatorizado de tiempo polinomial para $\is$ es definido de la misma forma que para el caso de $\slis$
+
+\vs{1}
+
+\item Las cotas mencionadas arriba son utilizadas para demostrar que el error de este algoritmo está acotado superiormente por $\frac{1}{4}$  \qed
+\end{itemize}
+}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cuál es la idea central en la técnica mostrada?}
+
+{\footnotesize
+
+Sea $(G,k)$ una entrada de $\is$ con $k \geq 1$
+\begin{itemize}
+\item Sabemos que $(G,k) \in \is$ si y sólo si $|I^1(G,k)| \geq 1$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Dado que $|I^1(G,k)| = \slis(G,k) - \slis(G,k-1)$, podemos intentar utilizar un FPRAS para $\slis$ para determinar si $(G,k) \in \is$}
+\begin{itemize}
+\visible<3->{\item Generamos así un algoritmo aleatorizado de tiempo polinomial para $\is$}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{El éxito de este enfoque depende de qué tan grande sea el valor de $\slis(G,k) - \slis(G,k-1)$}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Qué tan grande es $\slis(H,k) - \slis(H,k-1)$?}
+
+{\footnotesize
+Considere el siguiente grafo $H$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ, minimum size=11mm] (n1) {{\scriptsize $1$}};
+\node[circ, minimum size=11mm, right=10mm of n1] (n2) {{\scriptsize $k$}}
+edge[arrw] (n1); 
+\node[circ, minimum size=11mm, below=5mm of n1] (n3) {{\scriptsize $2$}};
+\node[circ, minimum size=11mm, right=10mm of n3] (n4) {{\scriptsize $k+1$}}
+edge[arrw] (n3); 
+\node[circw, minimum size=11mm, below=0mm of n3] (n5) {};
+\node[circw, minimum size=11mm, right=10mm of n5] (n6) {}
+edge[arrww] node {{\large $\ldots$}} (n5); 
+\node[circ, minimum size=11mm,  below=0mm of n5] (n7) {{\scriptsize $k-1$}};
+\node[circ, minimum size=11mm, right=10mm of n7] (n8) {{\scriptsize $2k-2$}}
+edge[arrw] (n7); 
+\node[circ, minimum size=11mm, right=12mm of n4] (n9) {{\scriptsize $2k-1$}}
+edge[arrw] (n2)
+edge[arrw] (n4) 
+edge[arrw] (n8); 
+\end{tikzpicture}
+\end{center}
+
+\vs{3}
+
+\visible<2->{
+En este caso tenemos que \alert{$|I^1(H,k)| = \slis(H,k) - \slis(H,k-1) = 1$}
+\begin{itemize}
+\item Además, $\slis(H,k-1) \geq 3^{k-1}$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Amplificando la diferencia}
+
+{\small
+
+La diferencia entre $\slis(G,k)$ y $\slis(G,k-1)$ puede ser pequeña.
+\begin{itemize}
+{\footnotesize
+\item La utilización de un FPRAS para $\slis$ no nos garantiza la existencia de un algoritmo aleatorizado de tiempo polinomial para $\is$
+\begin{itemize}
+{\footnotesize \item No podemos acotar superiormente el error de algoritmo}
+\end{itemize}
+}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Para solucionar este problema {\em amplificamos} $\slis(G,k) - \slis(G,k-1)$}
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Amplificando la diferencia}
+
+{\footnotesize
+
+De manera más precisa, de la definición de $G^r$ tenemos:
+\vs{-1}
+\begin{multline*}
+\slis(G,k) - \slis(G,k-1) > 0 \text{ si y sólo si}\\ 
+\alert{\slis(G^r,k \cdot r) - \slis(G^r,(k - 1) \cdot r) > 0}
+\end{multline*}
+
+\vs{6}
+
+\visible<2->{
+Así, usamos la diferencia más grande \alert{$\slis(G^r,k \cdot r) - \slis(G^r,(k - 1) \cdot r)$} para verificar si $\slis(G,k) - \slis(G,k-1) > 0$
+}
+
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cuánto amplificando la diferencia?}
+
+{\footnotesize
+
+Suponiendo que $G$ tiene $n$ nodos y tomando $r = n + 3$ obtenemos: 
+\begin{eqnarray*}
+\slis(G^r,k \cdot r) - \slis(G^{r},(k-1) \cdot r) & \geq & (2^{r} - 1)^k - 2^n \cdot (2^{r}-1)^{k-1}\\
+& =  & (2^{n+3} - (2^n + 1)) \cdot (2^{n+3}-1)^{k-1}\\
+& \geq  & (2^{n+3} - 2^{n + 1}) \cdot (2^{n+3}-1)^{k-1}\\
+& =  & 3 \cdot 2^{n+1} \cdot (2^{n+3}-1)^{k-1}
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+¡Podemos entonces verificar si $\slis(G,k) - \slis(G,k-1) > 0$ considerando una brecha de tamaño exponencial en $n$!}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una tercera aplicación de la técnica}
+
+{\small
+
+Sea $G = (N,A)$ un grafo (dirigido) sin loops.
+
+\vs{8}
+
+Decimos que $(v_1, \ldots, v_n)$ es un ciclo simple en $G$ si:
+\begin{enumerate}
+\item $n \geq 2$
+
+\item $(v_i,v_{i+1}) \in A$ para cada $1 \leq i \leq n-1$, y $(v_n,v_1) \in A$
+
+\item $v_i \neq v_j$ para cada $1 \leq i < j \leq n$
+\end{enumerate}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una tercera aplicación de la técnica}
+
+{\footnotesize
+
+Un ciclo simple $(v_1, \ldots, v_n)$ con $n$ vértices puede ser visto como un conjunto con $n$ arcos:
+\begin{eqnarray*}
+\{ (v_1,v_2), \ldots (v_{n-1}, v_n), (v_n,v_1) \}
+\end{eqnarray*}
+En este capítulo utilizamos esta representación de los ciclos simples, y decimos que el largo de este ciclo es $n$
+
+\vs{8}
+
+\visible<2->{
+Nótese que dada la representación de ciclos simples tenemos que $(a,b,c) = (b,c,a) = (c,a,b)$, puesto que:
+\begin{eqnarray*}
+\alert{\{(a,b),(b,c),(c,a)\} \,=\, \{(b,c),(c,a), (a,b)\} \,=\, \{(c,a), (a,b), (b,c)\}}
+\end{eqnarray*}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una tercera aplicación de la técnica}
+
+{\small
+
+Sea $\cs$ una función que, dado un grafo $G$, retorna el número de ciclos simples en $G$
+
+
+\vs{8}
+%
+\visible<2->{
+\begin{ejercicio}
+Muestre que $L_{\cs} \in \ptime$
+\end{ejercicio}}
+
+\vs{8}
+
+\visible<3->{
+\begin{teorema}
+Si existe un FPRAS para $\cs$, entonces $\np = \crp$
+\end{teorema}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\cs$ no admite un FPRAS: demostración}
+
+{\small
+
+Sea $\ham = \{ G \mid G$ tiene un ciclo hamiltoniano$\}$
+
+\vs{8}
+
+Vamos a demostrar que si existe un FPRAS para $\cs$, entonces~$\ham \in \bpp$
+\begin{itemize}
+{\footnotesize 
+\item Dado que  $\ham$ es $\np$-completo, se concluye que~$\np \subseteq \bpp$
+\item Al igual que en los casos anteriores, concluimos que $\np = \crp$ a partir de que~$\np \subseteq \bpp$
+}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $G = (N,A)$ un grafo con $|N| = n$ y $n \geq 2$
+\begin{itemize}
+\item $G$ es una entrada de $\ham$
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cómo construimos el grafo aumentado?}
+
+{\footnotesize
+A partir de un ciclo simple con $\ell$ nodos esperamos generar $2^{\ell \cdot r}$ ciclos simples en el grafo aumentado
+\begin{itemize}
+\visible<2->{\item Primer intento: construir $G^r$ como para el caso de $\slis$}
+\end{itemize}
+
+\vs{5}
+
+\visible<3->{
+Considere el siguiente grafo $H$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ, minimum size=9mm] (n1) {{\scriptsize $a$}};
+\node[circ, minimum size=9mm, right=20mm of n1] (n2) {{\scriptsize $b$}}
+edge[arrin, bend right=8] (n1) 
+edge[arrout, bend left=8] (n1); 
+\end{tikzpicture}
+\end{center}
+}
+
+\vs{5}
+
+\visible<4->{
+En este caso $H^2$ es el siguiente grafo:
+\begin{center}
+\begin{tikzpicture}
+\node[circ, minimum size=9mm] (n1) {{\scriptsize $a_1$}};
+\node[circ, minimum size=9mm, below=5mm of n1] (n3) {{\scriptsize $a_2$}};
+\node[circ, minimum size=9mm, right=20mm of n1] (n2) {{\scriptsize $b_1$}}
+edge[arrin, bend right=8] (n1) 
+edge[arrout, bend left=8] (n1)
+edge[arrin, bend right=8] (n3) 
+edge[arrout, bend left=8] (n3); 
+\node[circ, minimum size=9mm, right=20mm of n3] (n4) {{\scriptsize $b_2$}}
+edge[arrin, bend right=8] (n1) 
+edge[arrout, bend left=8] (n1)
+edge[arrin, bend right=8] (n3) 
+edge[arrout, bend left=8] (n3);
+\end{tikzpicture}
+\end{center}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cómo construimos el grafo aumentado?}
+
+{\footnotesize
+
+En $H$ tenemos un ciclo simple y esperamos tener $2^4$ ciclos simples en $H^2$
+
+\vs{10}
+
+\visible<2->{
+El problema es que $H^2$ sólo tiene 6 ciclos simples: $(a_1,b_1)$, $(a_1,b_2)$, $(a_2,b_1)$, $(a_2,b_2)$ y:
+\vs{1}
+\begin{center}
+\begin{tikzpicture}
+\node[circ, minimum size=9mm] (n1) {{\scriptsize $a_1$}};
+\node[circ, minimum size=9mm, below=5mm of n1] (n3) {{\scriptsize $a_2$}};
+\node[circ, minimum size=9mm, right=20mm of n1] (n2) {{\scriptsize $b_1$}}
+edge[arrin, bend right=8] (n1) 
+edge[arrout, bend right=8] (n3);
+\node[circ, minimum size=9mm, right=20mm of n3] (n4) {{\scriptsize $b_2$}}
+edge[arrout, bend right=8] (n1) 
+edge[arrin, bend left=8] (n3);
+\node[below=-1mm of n3, circnw, minimum size=9mm] (na1) {};
+\node[right=0mm of na1, circnw] (na2) {{\scriptsize $(a_1,b_1,a_2,b_2)$}};
+
+\node[circ, minimum size=9mm, right=10mm of n2] (n5) {{\scriptsize $a_1$}};
+\node[circ, minimum size=9mm, below=5mm of n5] (n7) {{\scriptsize $a_2$}};
+\node[circ, minimum size=9mm, right=20mm of n5] (n6) {{\scriptsize $b_1$}}
+edge[arrout, bend right=8] (n5) 
+edge[arrin, bend right=8] (n7);
+\node[circ, minimum size=9mm, right=20mm of n7] (n8) {{\scriptsize $b_2$}}
+edge[arrin, bend right=8] (n5) 
+edge[arrout, bend left=8] (n7);
+\node[below=-1mm of n7, circnw, minimum size=9mm] (na3) {};
+\node[right=0mm of na3, circnw] (na4) {{\scriptsize $(a_1,b_2,a_2,b_1)$}};
+
+\end{tikzpicture}
+\end{center}
+}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cómo construimos el grafo aumentado?}
+
+{\footnotesize
+
+Segundo intento: reemplazamos cada arco
+\begin{center}
+\begin{tikzpicture}
+\node[circ, minimum size=9mm] (n1) {{\scriptsize $a$}};
+\node[circ, minimum size=9mm, right=10mm of n1] (n2) {{\scriptsize $b$}}
+edge[arrin] (n1);
+\end{tikzpicture}
+\end{center}
+
+por
+\visible<2->{
+\begin{center}
+\begin{tikzpicture}
+\node[circ, minimum size=9mm] (n1) {{\scriptsize $a$}};
+\node[circw, minimum size=9mm, right=3mm of n1] (n2) {};
+\node[circ, minimum size=9mm, above=0mm of n2] (n3) {{\scriptsize $c_1$}}
+edge[arrin] (n1);
+\node[circ, minimum size=9mm, below=0mm of n2] (n4) {{\scriptsize $c_{r+1}$}}
+edge[arrin] (n1);
+\node[circ, minimum size=9mm, right=3mm of n2] (n5) {{\scriptsize $d_1$}}
+edge[arrin] (n3)
+edge[arrin] (n4);
+\node[circw, minimum size=9mm, right=3mm of n5] (n6) {};
+\node[circ, above=0mm of n6, minimum size=9mm] (n7) {{\scriptsize $c_2$}}
+edge[arrin] (n5);
+\node[circ, minimum size=9mm, below=0mm of n6] (n8) {{\scriptsize $c_{r+2}$}}
+edge[arrin] (n5);
+\node[circ, minimum size=9mm, right=3mm of n6] (n9) {{\scriptsize $d_2$}}
+edge[arrin] (n7)
+edge[arrin] (n8);
+\node[circw, minimum size=9mm, right=3mm of n9] (n9p) {$\ldots$};
+\node[circw, above=0mm of n9p, minimum size=9mm] (n9pp) {}
+edge[arrin] (n9);
+\node[circw, minimum size=9mm, below=0mm of n9p] (n9ppp) {}
+edge[arrin] (n9);
+\node[circ, minimum size=9mm, right=3mm of n9p] (n10) {{\scriptsize $d_{r-1}$}}
+edge[arrin] (n9pp)
+edge[arrin] (n9ppp);
+\node[circw, minimum size=9mm, right=3mm of n10] (n11) {};
+\node[circ, minimum size=9mm, above=0mm of n11] (n12) {{\scriptsize $c_r$}}
+edge[arrin] (n10);
+\node[circ, minimum size=9mm, below=0mm of n11] (n13) {{\scriptsize $c_{2 r}$}}
+edge[arrin] (n10);
+\node[circ, minimum size=9mm, right=3mm of n11] (n5) {{\scriptsize $b$}}
+edge[arrin] (n12)
+edge[arrin] (n13);
+\end{tikzpicture}
+\end{center}
+donde $c_1$, $\ldots$, $c_r$, $c_{r+1}$, $\ldots$, $c_{2r}$, $d_1$, $\ldots$, $d_{r-1}$ son nodos nuevos creados para reemplazar un arco.
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El grafo aumentado}
+
+{\small
+
+Sea $G^r$ el grafo definido reemplazando cada arco como fue mostrado en la transparencia anterior.
+
+\vs{7}
+
+\begin{ejercicio}
+Defina formalmente el grafo $G^r$
+\end{ejercicio}
+
+\vs{7}
+
+\visible<2->{
+Dado que $G$ no tiene loops puede tener a lo más $n \cdot (n-1)$ arcos
+\begin{itemize}
+\item Por lo tanto, $G^r$ tiene a lo más $n + n \cdot (n-1) \cdot (3 \cdot r -1)$ nodos, y es de tamaño polinomial en el tamaño de $G$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de testigo}
+
+{\small
+
+Cada ciclo simple de $G$ de largo $\ell \geq 2$ corresponde con $2^{\ell \cdot r}$ ciclos de $G^r$ de largo $2 \cdot \ell \cdot r$
+\begin{itemize}
+\item Cada uno de estos ciclos de largo $2 \cdot \ell \cdot r$ en $G^r$ es considerado como un testigo del ciclo de largo $\ell$ en $G$
+\end{itemize}
+
+\vs{8}
+
+Cada ciclo simple de $G^r$ es testigo de un único ciclo simple  de $G$
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Formalice la noción de testigo.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de testigo}
+
+{\small
+
+La conexión fundamental entre los grafos: 
+\begin{center}
+\alert{$G \in \ham$ \ si y sólo si \ $G^r$ tiene un cliclo simple de largo $2 \cdot r \cdot n$}
+\end{center}
+
+\vs{8}
+
+\visible<2->{
+Utilizando esta conexión y eligiendo un valor adecuado para $r$ vamos a construir un algoritmo aleatorizado de tiempo polinomial para $\ham$
+\begin{itemize}
+\item Teniendo como hipótesis la existencia de un FPRAS para~$\cs$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El número de testigos}
+
+{\footnotesize
+
+Definimos los conjuntos:
+\begin{eqnarray*}
+    I^r(G) & = & \{C \mid C \text{ es un ciclo simple en } G^r \text{ de largo }  2 \cdot r \cdot n\}\\
+    M^r(G)  & = & \{C \mid C \text{ es un ciclo simple en } G^r \text{ de largo menor que } 2 \cdot r \cdot n\}
+\end{eqnarray*}
+
+\vs{8}
+
+Tenemos que $G \in \ham$ si y sólo si $I^r(G) \neq \emptyset$
+\begin{itemize}
+\item Suponiendo la existencia de un FPRAS para $\cs$, vamos a desarrollar un algoritmo aleatorizado de tiempo polinomial para verificar~si~$I^r(G) \neq \emptyset$
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El número de testigos}
+
+{\small
+
+Para $ \ell \in\{2, 3, \ldots, n\}$ definimos $t_\ell$ como la cantidad de testigos en $G^r$ para un ciclo simple en $G$ de largo $\ell$ 
+
+\vs{8}
+
+\visible<2->{
+Por la definición de $G^r$ tenemos que $t_\ell = 2^{\ell \cdot r}$
+}
+
+\vs{6}
+
+\visible<3->{
+Además, el número de ciclos simples en $G$ de largo $\ell$ está acotado por:
+\begin{eqnarray*}
+&&\alert{\binom{n \cdot (n-1)}{\ell}}
+\end{eqnarray*}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El número de testigos}
+
+{\small
+
+A partir de lo anterior concluimos que:
+\begin{eqnarray*}
+    |M^r(G)| & \leq & \sum_{\ell=2}^{n-1} \binom{n \cdot (n-1)}{\ell} t_\ell \\
+                        & \leq & \sum_{\ell=2}^{n-1} \binom{n \cdot (n-1)}{\ell} t_{n-1} \\
+                        & \leq & t_{n-1} \sum_{\ell=0}^{n \cdot (n-1)} \binom{n \cdot (n-1)}{\ell} \\
+                        & = & 2^{n \cdot (n-1)} \cdot t_{n-1} \\
+                        & = & 2^{n \cdot (n-1)} \cdot 2^{(n-1) \cdot r}\\
+                        & = & 2^{(n-1) \cdot (n + r)}\\
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Idea fundamental: aumentando las diferencias}
+
+{\small
+
+Por otra parte, si $G\in\ham$ tenemos que:
+\begin{eqnarray*}
+    |I^r(G)| \ \geq \ t_n \ = \ 2^{n \cdot r}
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Concluimos que:
+\vs{1}
+\begin{itemize}
+    \item Si $G \not\in\ham$: \ \alert{$\cs(G^r) \ = \ |M^r(G)| \ \leq \ 2^{(n-1) \cdot (n + r)}$}
+    
+    \vs{1}
+    
+    \item Si $G\in\ham$: \ \alert{$\cs(G^r) \ \geq  \ |I^r(G)| \ \geq \ 2^{n \cdot r}$}
+\end{itemize}
+}
+
+
+\vs{8}
+
+\visible<3->{
+En las siguientes transparencias vamos a obtener un valor de $r$ que nos permita tener un algoritmo aleatorizado de tiempo polinomial para $\ham$
+}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un algoritmo aleatorizado para $\ham$} 
+{\footnotesize
+
+Suponemos que existe un FPRAS $\A$ para $\cs$, y mostramos como esto puede ser utilizado para obtener que $\ham \in \bpp$ 
+
+\vs{6}
+
+\visible<2->{
+Definimos el siguiente algoritmo aleatorizado $\BB$ para $\ham$:
+\begin{enumerate}
+\item Dada la entrada $G$, donde $G$ es un grafo con $n$ nodos, si $n \leq 1$ retorne {\bf no}, en otro caso vaya al paso \ref{ham-p2}
+
+    \item \label{ham-p2} Genere el grafo $G^r$ 
+    
+    \item Sea $s$ el resultado de ejecutar $\A(G^r,\frac{1}{2})$ 
+
+    \item Si $s > (1+\frac{1}{2}) \cdot 2^{(n-1) \cdot (n + r)}$, entonces retorne {\bf sí}, en caso contrario retorne~{\bf no}
+\end{enumerate}
+}
+
+\vs{6}
+
+\visible<3->{
+Nótese que $\BB$ funciona en tiempo polinomial en el tamaño de la entrada $G$ si el valor de $r$ es polinomial en $n$
+\begin{itemize}
+\item Recuerde que tenemos que determinar el valor de $r$
+\end{itemize}
+
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error del algoritmo}
+
+{\footnotesize
+
+Si $G\not\in\ham$ obtenemos que $\pr(\BB(G) \text{ retorne {\bf sí}})$ es igual a:
+\vs{1}
+\visible<2->{
+\begin{align*}
+    \pr(\A&(G^{r},\frac{1}{2}) > (1+\frac{1}{2}) \cdot 2^{(n-1) \cdot (n + r)}) \\
+    &\leq  \pr(\A(G^{r},\frac{1}{2}) > (1+\frac{1}{2}) \cdot \cs(G^{r})) \\
+    &\leq \pr(\A(G^{r}, \frac{1}{2}) > (1+\frac{1}{2}) \cdot \cs(G^{r})) \ \vee\\
+    &  \hspace{70pt}\A(G^{r},\frac{1}{2}) < (1-\frac{1}{2}) \cdot \cs(G^{r})) \\
+    & =  1- \pr(\A(G^{r},\frac{1}{2}) \leq (1+\frac{1}{2}) \cdot \cs(G^{r}) \ \wedge\\
+    &  \hspace{70pt}\A(G^{r},\frac{1}{2}) \geq (1-\frac{1}{2}) \cdot \cs(G^{r})) \\
+    & =  1- \pr(|\A(G^{r},\frac{1}{2}) - \cs(G^{r})|  \leq \frac{1}{2} \cdot \cs(G^{r}))\\
+    & \alert{\leq}  \alert{1- \frac{3}{4} \ = \ \frac{1}{4}}
+\end{align*}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error del algoritmo}
+
+{\small
+
+Consideramos ahora el caso en que $G \in\ham$
+
+\vs{8}
+
+\visible<2->{
+Primero debemos encontrar un valor de $r$ tal que:
+\begin{eqnarray*}
+    (1-\frac{1}{2}) \cdot \cs(G^{r}) & > & (1+\frac{1}{2}) \cdot 2^{(n-1) \cdot (n + r)}
+\end{eqnarray*}
+
+\vs{8}
+
+Dado que $\cs(G^{r}) \geq 2^{n \cdot r}$, basta entonces encontrar un valor de $r$ tal que:
+\begin{eqnarray*}
+    (1-\frac{1}{2}) \cdot 2^{n \cdot r} & > & (1+\frac{1}{2}) \cdot 2^{(n-1) \cdot (n + r)}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error del algoritmo}
+
+{\footnotesize
+
+Tenemos que:
+\begin{eqnarray*}
+&& (1-\frac{1}{2}) \cdot 2^{n \cdot r}   \ >  \ (1+\frac{1}{2}) \cdot 2^{(n-1) \cdot (n + r)}  \\
+& \Leftrightarrow &
+\frac{1}{2} \cdot 2^{n \cdot r} \ > \ \frac{3}{2} \cdot 2^{(n-1) \cdot (n + r)}  \\
+    & \Leftrightarrow &
+  2^{n \cdot r} \ > \ 3 \cdot 2^{(n-1) \cdot (n + r)}  \\
+    & \Leftrightarrow &
+      2^{n \cdot r} \ > \ 2^{(n-1) \cdot (n + r) + \log_2(3)}  \\
+    & \Leftrightarrow &
+  n \cdot r \ > \ n \cdot (n-1) + (n-1) \cdot r + \log_2(3)  \\
+    & \Leftrightarrow &
+   r \ > \ n \cdot (n-1) + \log_2(3)  \\
+\end{eqnarray*}
+
+\vs{4}
+
+\visible<2->{
+Considerando \alert{$r = n \cdot (n-1) + 2$} se cumple la condición.
+\begin{itemize} 
+\item Concluimos que $(1-\frac{1}{2}) \cdot \cs(G^{r})  >  (1+\frac{1}{2})\cdot 2^{(n - 1) \cdot (n+r)} $
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error del algoritmo}
+
+{\footnotesize
+
+Si $G \in\ham $ y $r = n \cdot (n-1) + 2$ tenemos que $\pr(\BB(G)  \text{ retorne {\bf no}})$ es igual a:
+\vs{1}
+\visible<2->{
+\begin{align*}
+    \pr(\A(&G^{r},\frac{1}{2}) \leq (1+\frac{1}{2})\cdot 2^{(n-1) \cdot (n + r)}) \\
+    &\leq  \pr(\A(G^{r},\frac{1}{2}) < (1-\frac{1}{2}) \cdot \cs(G^{r})) \\
+    &\leq \pr(\A(G^{r},\frac{1}{2}) < (1-\frac{1}{2}) \cdot \cs(G^{r}) \ \vee\\
+    &  \hspace{70pt}\A(G^{r},\frac{1}{2}) > (1+\frac{1}{2}) \cdot \cs(G^{r})) \\
+    & =  1- \pr(\A(G^{r}, \frac{1}{2}) \geq (1-\frac{1}{2}) \cdot \cs(G^{r}) \ \wedge\\
+    &  \hspace{70pt}\A(G^{r},\frac{1}{2}) \leq (1+\frac{1}{2}) \cdot \cs(G^{r})) \\
+    & =  1- \pr(|\A(G^{r},\frac{1}{2}) - \cs(G^{r})| \leq \frac{1}{2} \cdot \cs(G^r))\\
+    & \alert{\leq}  \alert{1- \frac{3}{4} \ = \ \frac{1}{4}}
+\end{align*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\cs$ no admite un FPRAS: conclusión}
+
+{\small
+
+Tenemos que en ambos casos el error del algoritmo $\BB$ está acotado superiormente por $\frac{1}{4}$
+\begin{itemize}
+\item Considerando $r = n \cdot (n-1) + 2$ en ambos casos
+\end{itemize}
+
+\vs{8}
+
+Concluimos entonces que $\ham\in\bpp$
+\begin{itemize}
+\item Por lo tanto $\np \subseteq \bpp$ \qed
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La existencia de FPRAS y las reducciones parsimoniosas}
+
+{\small
+
+Sean $f,g : \Sigma^* \to \mathbb{N}$ dos funciones en $\sharpp$
+
+\vs{8}
+
+\begin{teorema}
+Si $f \rpar g$ y existe un FPRAS para $g$, entonces existe un FPRAS para $f$
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+{\bf Demostración}: Suponga que $h : \Sigma^* \to \Sigma^*$ es una función computable en tiempo polinomial tal que $f(w) = g(h(w))$ para todo $w \in \Sigma^*$
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La existencia de FPRAS y las reducciones parsimoniosas}
+
+{\footnotesize
+
+Además, suponga que $\A$ es un FPRAS para $g$, y defina un algoritmo aleatorizado $\BB : \Sigma^* \times (0,1) \to \mathbb{N}$ de la siguiente forma:
+\begin{center}
+Para cada $w \in \Sigma^*$ y $\varepsilon \in (0,1)$: \alert{$\BB(w,\varepsilon) = \A(h(w), \varepsilon)$}
+\end{center}
+
+\vs{6}
+
+\visible<2->{
+Para cada $w \in \Sigma^*$ y $\varepsilon \in (0,1)$:
+\begin{align*}
+\pr\bigg(|\BB(w,\varepsilon&) - f(w)| \leq \varepsilon \cdot f(w)\bigg)  \\
+& = \ \pr\bigg(|\A(h(w),\varepsilon) - g(h(w))| \leq \varepsilon \cdot g(h(w))\bigg)\\
+& \geq \ \frac{3}{4}
+\end{align*} 
+}
+
+\vs{2}
+
+\visible<3->{
+Por lo tanto $\BB$ es un FPRAS para $f$ \qed
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Utilizando las reducciones parsimoniosas}
+
+{\small
+
+Suponiendo que $f \rpar g$, el resultado anterior puede utilizarse de dos~formas:
+\vs{1}
+\begin{itemize}
+\item Si tenemos un FPRAS para $g$, entonces podemos construir un FPRAS para $f$
+
+\vs{1}
+
+\item Si tenemos una demostración que no existe un FPRAS para $f$, entonces concluimos que no existe un FPRAS para $g$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Vamos a encontrar otras funciones que no admiten FPRAS utilizando el resultado anterior.
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Contando el número de cliques}
+
+{\small
+
+Dado un grafo $G = (N,A)$, decimos que $S \subseteq N$ es un clique si para cada $a,b \in S$ se tiene que $(a,b) \in A$
+
+\vs{8}
+
+Sea $\sclique$ una función que, dado un grafo $G$, retorna el número de cliques de $G$
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+Si existe un FPRAS para $\sclique$, entonces $\np = \crp$
+\end{teorema}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{No existe un FPRAS para $\sclique$: demostración}
+
+{\footnotesize
+
+Dado un grafo $G = (N,A)$, defina $\overline{G} = (N, \overline{A})$ con $\overline{A} = (N \times N) \smallsetminus A$
+
+\vs{8}
+
+\visible<2->{
+Tenemos que $\indsets(G) = \sclique(\overline{G})$
+}
+
+\vs{8}
+
+\visible<3->{
+Concluimos que $\indsets \rpar \sclique$
+\vs{1}
+\begin{itemize}
+\item Por lo tanto, si existe un FPRAS para $\sclique$, entonces existe un FPRAS para $\indsets$ y $\np = \crp$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Otro ejemplo: las cláusulas de Horn}
+
+{\small
+
+Recuerde que una cláusula se dice de Horn si contiene a lo más un literal~positivo.
+
+\vs{8}
+
+\begin{ejemplo}
+$(p \vee \neg q \vee \neg r)$,\, $p$,\, $(\neg q \vee \neg r)$\, y \,$\neg q$\, son cláusulas de Horn, mientras que $(p \vee q)$ y $(p \vee \neg q \vee r \vee \neg s)$ no lo son.
+\end{ejemplo}
+
+\vs{8}
+
+Además, decimos que una fórmula proposicional $\varphi$ es de Horn si $\varphi$ es una conjunción de cláusulas de Horn.
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La función $\shorn$}
+
+{\small
+
+Sea $\shorn$ una función que, dada una fórmula proposicional $\varphi$ de Horn, retorna el número de valuaciones que satisfacen $\varphi$
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+$\shorn$ es $\sharpp$-completo.
+\end{teorema}
+}
+
+\vs{8}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre que $L_{\shorn} \in \ptime$
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{No existe un FPRAS para $\shorn$}
+
+{\small
+
+\begin{teorema}
+Si existe un FPRAS para $\shorn$, entonces $\np = \crp$
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+{\bf Demostración:} Sea $G = (N,A)$ un grafo tal que $N \neq \emptyset$}
+
+\vs{8}
+
+\visible<3->{
+Por cada $v \in N$, considere una variable proposicional $x_v$, y defina $\varphi_G$ como la siguiente fórmula proposicional:
+\begin{eqnarray*}
+&&\alert{\bigg(\bigwedge_{a \in N} (x_a \vee \neg x_a)\bigg)\ \wedge \ \bigg(\bigwedge_{(b,c) \in A} (\neg x_b \vee \neg x_c)\bigg)}
+\end{eqnarray*}
+}
+
+}
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{No existe un FPRAS para $\shorn$: demostración}
+
+{\small
+
+Tenemos que $\varphi_G$ es una fórmula proposicional de Horn y~$\indsets(G) = \shorn(\varphi_G)$
+\begin{itemize}
+\item ¿Cómo se puede extraer un conjunto independiente de $G$ desde una valuación que satisface $\varphi_G$?
+\end{itemize}
+
+\vs{10}
+
+\visible<2->{
+Concluimos que $\indsets \rpar \shorn$
+\begin{itemize}
+\item ¿Cómo se maneja el caso en que $N = \emptyset$ en la reducción?
+\end{itemize}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{No existe un FPRAS para $\shorn$: demostración}
+
+{\footnotesize
+
+Por lo tanto, si existe un FPRAS para $\shorn$, entonces existe un FPRAS para $\indsets$ y $\np = \crp$ \qed
+
+
+\vs{10}
+
+\visible<2->{
+\begin{exampleblock}{{\small Comentario final}}
+Dado que $\indsets \rpar \shorn$, se tiene que $\shorn$ es $\sharpp$-hard
+\begin{itemize}
+\item Como $\shorn \in \sharpp$, concluimos que $\shorn$ es $\sharpp$-completo
+\end{itemize}
+\end{exampleblock}
+}
+
+}
+
+\end{frame}
+
+
+\end{document}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Restringiendo las entradas de una función}
+{\small
+
+Una alternativa para mejorar el tiempo de cálculo de una función es sólo considerar entradas de cierto tipo.
+
+\vs{8}
+
+\visible<2->{
+Aunque esta idea puede funcionar bien, tiene como desventaja el hecho de que no tenemos una metodología general para restringir las entradas.
+\begin{itemize}
+\item Por ejemplo, no es cierto que una función $f: \Sigma^* \to \mathbb{N}$ siempre se pueda calcular de manera eficiente si nos restringimos al conjunto de entradas $x \in \Sigma^*$ tal que $f(x) \leq 1$
+\end{itemize}
+}
+
+\vs{8}
+
+\visible<3->{
+De hecho, vamos a ver un ejemplo fundamental donde una restricción severa no logra generar una función que se pueda calcular eficientemente.
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Restringiendo las entradas de $\scnf$}
+{\small
+
+
+Considere el siguiente problema: dada una fórmula proposicional $\varphi$ en CNF tal que $\scnf(\varphi) \leq 1$, determine si $\varphi$ es satisfacible.
+
+\vs{8}
+
+\visible<2->{
+Este es el problema usual de satisfacibilidad pero con una {\bf promesa} sobre la entrada
+\begin{itemize}
+\item La promesa es que la entrada consiste de una fórmula proposicional que puede ser hecha verdad por a lo más una valuación
+\end{itemize}
+}
+
+\vs{8}
+
+\visible<3->{
+Denotamos a este problema como \alert{$\ucnf$}}
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Restringiendo las entradas de $\scnf$}
+{\footnotesize
+
+$\ucnf$ también puede verse como un problema de conteo.
+\begin{itemize}
+\item Dada una fórmula proposicional $\varphi$ en CNF tal que $\scnf(\varphi) \leq 1$, la~función $\sucnf(\varphi)$ retorna el número de valuaciones que satisfacen~$\varphi$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+$\sucnf$ es una restricción de $\scnf$:
+\begin{eqnarray*}
+\sucnf & = & \scnf|_{\{\varphi \, \mid \, \scnf(\varphi) \leq 1\}}
+\end{eqnarray*}
+}
+
+
+\vs{4}
+
+\visible<3->{
+Obviamente $\ucnf$ y $\sucnf$ tienen la misma~complejidad.
+\begin{itemize}
+\item Para estudiar entonces la complejidad de $\sucnf$ vamos a consider $\ucnf$
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una pregunta fundamental}
+
+{\small
+
+¿Es $\ucnf$ un problema tan difícil como $\cnf$?
+
+\vs{8}
+
+\visible<2->{
+¿Cómo podríamos demostrar que $\ucnf$ es tan difícil como~$\cnf$?}
+\begin{itemize}
+\visible<3->{\item ¿Podemos demostrar que $\cnf \in \ptime^{\ucnf}$?}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+Es un problema abierto si $\cnf \in \ptime^{\ucnf}$}
+\begin{itemize}
+\visible<5->{\alert{ \item Pero sí podemos demostrar que $\ucnf$ es tan difícil como $\cnf$ si consideramos algoritmos aleatorizados}}
+\end{itemize}
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Máquinas de Turing  probabilísticas con oráculo}
+
+{\small
+
+Una Máquina de Turing probabilística puede tener un oráculo al igual que en el caso de las Máquinas de Turing usuales (deterministas o no~deterministas)
+
+\vs{8}
+
+\visible<2->{
+\begin{exampleblock}{Ejercicios}
+Dado un problema de decisión $A$:
+\vs{1}
+\begin{enumerate}
+\item Defina la noción de Máquina de Turing probabilística $M^A$ con oráculo para  $A$
+
+\vs{1}
+
+\item Defina las clases de complejidad $\crp^A$ y $\bpp^A$
+\end{enumerate}
+\end{exampleblock}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ucnf$ es tan difícil como $\cnf$}
+
+{\footnotesize
+
+Defina el siguiente lenguaje de decisión:
+\begin{eqnarray*}
+\cnf^{\leq 1} & = & \{ \varphi \mid \varphi \text{ es una fórmula en CNF tal que } \scnf(\varphi) \leq 1 \}
+\end{eqnarray*}
+
+\vs{6}
+
+\begin{ejercicio}
+Demuestre que $\cnf^{\leq 1}$ es $\co\np$-completo.
+\end{ejercicio}
+
+\vs{7}
+
+\visible<2->{
+Sabemos entonces que la promesa sobre las entradas de $\ucnf$ es difícil de verificar.
+\begin{itemize}
+\item Al demostrar que $\ucnf$ es tan difícil como $\cnf$ no queremos sacar provecho de esta dificultad
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ucnf$ es tan difícil como $\cnf$}
+
+{\small
+
+Vamos a eliminar la promesa hecha sobre las entradas de~$\ucnf$
+\begin{itemize}
+\item ¿Cómo debe funcionar un algoritmo para $\ucnf$ sobre las fórmulas proposicionales $\varphi$ en CNF tales que $\scnf(\varphi) \geq 2$?
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Vamos a dejar abierto qué hacer con una entrada $\varphi$ para $\ucnf$ tal que $\scnf(\varphi) \geq 2$
+\begin{itemize}
+\item Consideramos todas las posibilidades
+\end{itemize}}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ucnf$ es tan difícil como $\cnf$: el teorema}
+
+{\small
+
+Sea $H \subseteq \{ \varphi \mid \varphi \text{ es una fórmula en CNF tal que } \scnf(\varphi) \geq 2 \}$ y
+\alert{
+\begin{eqnarray*}
+\ucnf_H & = & \ucnf \cup H
+\end{eqnarray*}}
+
+\vs{6}
+
+\visible<2->{
+\begin{teorema}[Valiant \& Vazirani]
+$\cnf \in \crp^{\ucnf_H}$
+\end{teorema}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La pieza clave del resultado}
+
+{\footnotesize
+
+Decimos que una fórmula proposicional es anulable si la valuación que asigna a cada variable proposicional el valor 0 la satisface. 
+
+\vs{6}
+
+\visible<2->{
+\begin{lema}[Valiant \& Vazirani]
+Existe un algoritmo aleatorizado de tiempo polinomial que, dada una fórmula proposicional $\varphi$ en CNF  con $n \geq 2$ variables y que no es anulable, genera una secuencia de fórmulas $\varphi_0$, $\varphi_1$, $\ldots$, $\varphi_n$, $\varphi_{n+1}$, $\varphi_{n+2}$ en CNF  tales que:
+\begin{enumerate}
+\item Si $\varphi$ es consistente, entonces
+\begin{eqnarray*}
+\pr\bigg(\bigvee_{i=0}^{n+2} \scnf(\varphi_i) = 1\bigg) & \geq & \frac{1}{8}
+\end{eqnarray*}
+
+\item Si $\varphi$ es inconsistente, entonces cada fórmula $\varphi_i$ $(0 \leq i \leq n+2)$ es inconsistente.
+\end{enumerate}
+\end{lema}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ucnf$ es tan difícil como $\cnf$: la demostración}
+
+{\footnotesize
+
+Suponemos que $\A$ es el algoritmo mencionado en el lema.
+
+\vs{6}
+
+\visible<2->{
+Definimos entonces el siguiente algoritmo para $\cnf$:
+\vs{-5}
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+{\bf Alg-CNF-SAT}($\varphi$)\\
+\> \aif $\varphi$ es anulable \athen \areturn {\bf sí}\\
+\> \aelse\\
+\> \> $n :=$ número de variables en $\varphi$\\
+\> \> \aif $n = 1$ \athen \areturn {\bf VerificarExhaustivo}($\varphi$)\\
+\> \> \aelse\\
+\> \> \> \afor $i:=1$ \ato 11 \ado\\
+\> \> \> \> Utilice $\A$ para generar las fórmulas $\varphi_0$, $\ldots$, $\varphi_{n+2}$ a partir de $\varphi$\\
+\> \> \> \> \afor $j:=1$ \ato $n$ \ado\\
+\> \> \> \> \> \aif $\varphi_j \in \ucnf_H$ \athen \areturn {\bf sí}\\
+\> \> \> \areturn {\bf no}
+\end{tabbing}
+
+\vs{2}
+
+En este algoritmo {\bf VerificarExhaustivo}($\varphi$) verifica utilizando tablas de verdad si $\varphi$ es consistente. 
+}
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ucnf$ es tan difícil como $\cnf$: la demostración}
+
+{\footnotesize
+
+Dado que $\A$ funciona en tiempo polinomial, el algoritmo {\bf Alg-CNF-SAT} funciona en tiempo polinomial.
+\begin{itemize}
+\item Tenemos que calcular la probabilidad de error de {\bf Alg-CNF-SAT}
+\end{itemize}
+
+\vs{6}
+
+
+\visible<2->{
+Suponemos primero que $\varphi$ es inconsistente.
+}
+
+\vs{6}
+
+\visible<3->{
+Por el lema sabemos que las fórmulas $\varphi_0$, $\ldots$, $\varphi_{n+2}$ generadas  en cada iteración son todas inconsistentes
+\begin{itemize}
+\item Por lo tanto $\varphi_i \not\in \ucnf$
+\end{itemize}
+}
+
+\vs{6}
+
+\visible<4->{
+Concluimos que \alert{$\pr(\text{\bf Alg-CNF-SAT}(\varphi) \text{ retorne {\bf sí}})= 0$}}
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ucnf$ es tan difícil como $\cnf$: la demostración}
+
+{\footnotesize
+
+
+Suponemos ahora que $\varphi$ es consistente.
+
+\vs{5}
+
+\visible<2->{
+Para que $\text{\bf Alg-CNF-SAT}(\varphi)$ retorne {\bf no}, en cada iteración de debe cumplir la siguiente condición:
+\begin{eqnarray*}
+\bigwedge_{i=0}^{n+2} \scnf(\varphi_i) \neq 1
+\end{eqnarray*}
+}
+
+\vs{3}
+
+\visible<3->{
+Por el lema tenemos que:
+\begin{eqnarray*}
+\pr\bigg(\bigwedge_{i=0}^{n+2} \scnf(\varphi_i) \neq 1\bigg) & \leq & \frac{7}{8}
+\end{eqnarray*}
+}
+
+\vs{3}
+
+\visible<4->{
+Concluimos que:
+\alert{
+\begin{eqnarray*}
+&&\pr(\text{\bf Alg-CNF-SAT}(\varphi) \text{ retorne {\bf no}}) \ \leq \ \bigg(\frac{7}{8}\bigg)^{11} \ < \frac{1}{4}
+\end{eqnarray*}}
+}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ucnf$ es tan difícil como $\cnf$: la demostración}
+
+{\small
+
+Tenemos entonces que:
+\begin{itemize}
+\item Si $\varphi$ es consistente: $\pr(\text{\bf Alg-CNF-SAT}(\varphi) \text{ retorne {\bf sí}}) \geq \frac{3}{4}$
+
+\item Si $\varphi$ es inconsistente: $\pr(\text{\bf Alg-CNF-SAT}(\varphi) \text{ retorne {\bf sí}}) = 0$
+\end{itemize}
+
+\vs{8}
+
+Concluimos que $\cnf \in \crp^{\ucnf_H}$
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del lema}
+
+{\small
+
+Sea $\varphi$ una fórmula proposicional en CNF con $n \geq 2$ variables y que no es~anulable. 
+\begin{itemize}
+\item Suponemos que las variables de $\varphi$ son $x_1$, $\ldots$, $x_n$
+\end{itemize}
+
+\vs{8}
+
+Cada valuación $\sigma : \{x_1, \ldots, x_n\} \to \{0,1\}$ puede ser considerada como un vector $\vec \sigma = (\sigma(x_1), \ldots, \sigma(x_n))$
+
+
+\vs{8}
+
+Los vectores $\vec \sigma$ forman el conjunto $\{0,1\}^n$
+\begin{itemize}
+{\footnotesize \item $\{0,1\}^n$ representa el producto cartesiano $\underbrace{\{0,1\} \times \{0,1\} \times \cdots \times \{0,1\}}_{n \text{ veces}}$}
+\end{itemize}
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del lema}
+
+{\footnotesize
+
+$\{0,1\}^n$ naturalmente forma un espacio vectorial sobre el cuerpo $(\{0,1\}, \oplus, \wedge)$
+\begin{itemize}
+\item Recuerde que $\oplus$ es el o exclusivo
+\end{itemize}
+
+\vs{6}
+
+En particular, las siguientes son las operaciones en el espacio vectorial:
+\begin{eqnarray*}
+(a_1, \ldots, a_n) + (b_1, \ldots, b_n) & = & (a_1 \oplus b_1, \ldots, a_n \oplus b_n)\\
+\alpha \cdot (a_1, \ldots, a_n) & = & (\alpha \wedge a_1, \ldots, \alpha \wedge a_n) \ \ \ \ \ \text{con } \alpha \in \{0,1\}
+\end{eqnarray*}
+
+\vs{6}
+
+Usamos la notación $\langle \cdot,\cdot \rangle$ para el producto interno en el espacio vectorial:
+\begin{eqnarray*}
+\langle (a_1, \ldots, a_n) , (b_1, \ldots, b_n)\rangle & = & (a_1 \wedge b_1) \oplus \cdots \oplus (a_n \wedge b_n)
+\end{eqnarray*}
+Y denotamos como $\vec 0$ el vector nulo.
+
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades útiles del espacio vectorial}
+
+{\footnotesize
+
+\begin{lema}
+Si $\vec a\neq \vec 0$, entonces $| \{ \vec b \in \{0,1\}^n \mid \langle \vec b, \vec a \rangle = 0 \} | \ = \ 2^{n-1}$
+\end{lema}
+
+\vs{6}
+
+\visible<2->{
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Demuestre por inducción que para cada $\ell \geq 1$:
+\begin{align*}
+& |\{ \vec c \in \{0,1\}^\ell \mid \vec c \text{ tiene un número par de posiciones con valor } 1\}|  \, =  \, 2^{\ell -1}
+\end{align*}
+
+\item Demuestre el lema a partir de la propiedad anterior.
+\end{enumerate}
+\end{exampleblock}
+}
+
+\vs{6}
+
+\visible<3->{
+\begin{block}{Corolario 1}
+Si $\vec a\neq \vec 0$, entonces $\pr_{\vec b} ( \langle \vec b, \vec a \rangle = 0) = \frac{1}{2}$
+\end{block}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades útiles del espacio vectorial}
+
+{\footnotesize
+
+\begin{lema}
+Si $\vec a \neq \vec b$, $\vec a \neq \vec 0$, $\vec b \neq \vec 0$ y $n \geq 2$, entonces para cada $v_1, v_2 \in \{0,1\}$:
+\begin{eqnarray*}
+| \{ \vec c \mid \langle \vec c, \vec a \rangle = v_1 \wedge   \langle \vec c, \vec b \rangle = v_2 \}| & = & 2^{n-2}
+\end{eqnarray*}
+\end{lema}
+
+\vs{5}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el lema utilizando el lema anterior.
+\end{ejercicio}
+}
+
+\vs{5}
+
+\visible<3->{
+\begin{block}{Corolario 2}
+Si $\vec a \neq \vec b$, $\vec a \neq \vec 0$, $\vec b \neq \vec 0$ y $n \geq 2$, entonces:  
+\begin{eqnarray*}
+\pr_{\vec c}(\langle \vec c, \vec a \rangle = 0 \wedge \langle \vec c, \vec b \rangle = 0) & = & \pr_{\vec c}(\langle \vec c, \vec a \rangle = 0) \cdot \pr_{\vec c}(\langle \vec c, \vec b \rangle = 0)\\
+\pr_{\vec c}(\langle \vec c, \vec a \rangle = 0 \mid \langle \vec c, \vec b \rangle = 0) & = & \pr_{\vec c}(\langle \vec c, \vec a \rangle = 0) 
+\end{eqnarray*}
+\end{block}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del lema: continuación}
+
+{\small
+
+Dado $\vec v \in \{0,1\}^n$ tal que $\vec v = (v_1, \ldots, v_n)$, defina:
+\begin{eqnarray*}
+\eta_{\vec v} & = & \bigoplus_{i \,:\, v_i = 1} x_i
+\end{eqnarray*}
+Nótese que $\eta_{\vec 0} = \bot$, donde $\bot$ es una contradicción arbitraria. 
+
+\vs{8}
+
+Por ejemplo, si para un vector $\vec v$ tenemos que $v_1 = v_2 = v_5 = 1$ y $v_i = 0$ para toda otra posición $i$, entonces  $\eta_{\vec v} = x_1 \oplus x_2 \oplus x_5$
+
+\vs{8}
+
+\visible<2->{
+Dada una valuación $\sigma$, tenemos que:
+\begin{center}
+\alert{$\sigma(\eta_{\vec v}) = 0$ \ si y sólo si \ $\langle \vec \sigma, \vec v \rangle = 0$}
+\end{center}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las fórmulas generadas por el algoritmo aleatorizado}
+
+{\small
+
+El algoritmo aleatorizado escoge con distribución uniforme y de manera independiente $n+2$ vectores $\vec v_1$, $\ldots$, $\vec v_{n+2}$ en $\{0,1\}^n$, y define:
+\begin{center}
+\begin{tabular}{rclcl}
+$\psi_0$ &  $=$ & $\varphi$ &&\\
+$\psi_{i+1}$ &  $=$ & $\psi_i \wedge \neg \eta_{\vec v_{i+1}}$ && $1\leq i \leq n+1$
+\end{tabular}
+\end{center}
+
+\vs{8}
+
+\visible<2->{
+\vs{1}
+Las fórmulas definidas no están en CNF
+\begin{itemize}
+{\footnotesize \item Vamos a demostrar que satisfacen las propiedades del lema
+
+\item Vamos a mostrar cómo a partir de  ellas se pueden generar las fórmulas $\varphi_0$, $\ldots$, $\varphi_{n+2}$ en CNF mencionadas en el lema}
+\end{itemize}}
+
+ 
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Dos propiedades de $\psi_0$, $\ldots$, $\psi_{n+2}$}
+
+{\small
+
+Un primera observación importante es que si $\varphi$ es inconsistente, entonces cada $\psi_i$ es inconsistente.
+
+\vs{8}
+
+Suponga entonces que $\varphi$ es consistente.
+\begin{itemize}
+\item Existe $k \in \{0, \ldots, n\}$ tal que $2^k \leq \scnf(\varphi) < 2^{k+1}$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Vamos a demostrar que \alert{$\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\psi_{k+2}) = 1) \geq \frac{1}{8}$}}
+\begin{itemize}
+\visible<3->{\item Se concluye que ${\displaystyle \pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\bigvee_{i=0}^{n+2} \scnf(\psi_i) = 1\bigg) \geq  \frac{1}{8}}$}
+\end{itemize}
+
+
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\psi_{k+2}) = 1)$}
+
+{\small
+
+Sea $\Gamma$ el conjunto de valuaciones que satisfacen $\varphi$
+\begin{itemize}
+\item Sabemos que $\Gamma \neq \emptyset$
+\end{itemize}
+
+\vs{8}
+
+Tenemos que:
+\begin{multline*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\psi_{k+2}) = 1) \ = \\ \pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\bigvee_{\sigma \in \Gamma} \sigma \text{ es la única valuación que satisface } \psi_{k+2}\bigg)
+\end{multline*}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\psi_{k+2}) = 1)$}
+
+{\small
+
+Entonces dado $\sigma \in \Gamma$, primero vamos a acotar inferiormente:
+\begin{eqnarray*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\sigma \text{ es la única valuación que satisface } \psi_{k+2})
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Tenemos que esta probabilidad es igual a:
+\begin{eqnarray*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(
+\bigg[\bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1\bigg] \wedge
+\bigg[\bigwedge_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigvee_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 0\bigg]\bigg)
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\psi_{k+2}) = 1)$}
+
+{\footnotesize
+
+Lo cual es igual a:
+\begin{multline*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(
+\bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1\bigg) \ \cdot\\
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\bigwedge_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigvee_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg)
+\end{multline*}
+
+\vs{6}
+
+Utilizamos la siguiente notación:
+\begin{eqnarray*}
+p_\sigma^1 & = & \pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(
+\bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1\bigg)\\
+p_\sigma^2 & = & \pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\bigwedge_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigvee_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg)
+\end{eqnarray*}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $p_\sigma^1$}
+
+{\footnotesize
+
+Tenemos que:
+\begin{eqnarray*}
+p_\sigma^1 & = & \pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(
+\bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1\bigg)\\
+& = & \pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(
+\bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1\bigg)\\
+& = & \prod_{i=1}^{k+2} \pr_{\vec v_i}(\sigma(\neg \eta_{\vec v_i}) = 1)\\
+& = & \prod_{i=1}^{k+2} \pr_{\vec v_i}(\sigma(\eta_{\vec v_i}) = 0)\\
+& = & \prod_{i=1}^{k+2} \pr_{\vec v_i}(\langle \vec v_i, \vec \sigma \rangle = 0)
+\end{eqnarray*}
+
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $p_\sigma^1$}
+
+{\small
+
+Dado que $\varphi$ no es anulable tenemos que $\vec \sigma \neq \vec 0$
+
+ \vs{8}
+ 
+Entonces por Corolario 1 deducimos que $\pr_{\vec v_i}(\langle \vec v_i, \vec \sigma \rangle = 0) = \frac{1}{2}$
+
+\vs{8}
+
+Concluimos que:
+\vs{-1}
+\begin{eqnarray*}
+p_\sigma^1 & = & \prod_{i=1}^{k+2} \pr_{\vec v_i}(\langle \vec v_i, \vec \sigma \rangle = 0)\\
+& = & \prod_{i=1}^{k+2} \frac{1}{2}\\
+& \alert{=} & \alert{\frac{1}{2^{k+2}}}
+\end{eqnarray*}
+
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $p_\sigma^2$}
+
+{\footnotesize
+
+Tenemos que:
+\begin{align*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}&\bigg(\bigwedge_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigvee_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg) \ =\\
+& 1- \pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\bigvee_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigwedge_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 1 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg)
+\end{align*}
+
+\vs{4}
+
+\visible<2->{
+Además, sabemos que:
+\begin{align*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}&\bigg(\bigvee_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigwedge_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 1 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg) \ \leq\\
+& \sum_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} 
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\bigwedge_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 1 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg) \ =\\
+& \sum_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} 
+\pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{j =1}^{k+2} \sigma'(\eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\eta_{\vec v_i}) = 0 \bigg)
+\end{align*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $p_\sigma^2$}
+
+{\footnotesize
+
+Dado $\sigma' \in \Gamma \smallsetminus \{ \sigma \}$, tenemos que:
+\begin{align*}
+\pr_{\vec v_1, \ldots, \vec v_{k+2}}&\bigg(\bigwedge_{j =1}^{k+2} \sigma'(\eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\eta_{\vec v_i}) = 0 \bigg) \ =\\
+&\frac{{\displaystyle \pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigg[\bigwedge_{j = 1}^{k+2} \sigma'(\eta_{\vec v_j}) = 0\bigg] \wedge \bigg[\bigwedge_{i=1}^{k+2} \sigma(\eta_{\vec v_i}) = 0 \bigg]\bigg)}}{{\displaystyle \pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{i=1}^{k+2} \sigma(\eta_{\vec v_i}) = 0 \bigg)}} \ = \\
+&\frac{{\displaystyle \pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{i = 1}^{k+2} \sigma'(\eta_{\vec v_i}) = 0 \wedge \sigma(\eta_{\vec v_i}) = 0 \bigg)}}{{\displaystyle \pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{i=1}^{k+2} \sigma(\eta_{\vec v_i}) = 0 \bigg)}} \ = \\
+\end{align*}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $p_\sigma^2$}
+
+{\footnotesize
+
+\begin{align*}
+&\frac{{\displaystyle \prod_{i=1}^{k+2} \pr_{\vec v_i}(\sigma'(\eta_{\vec v_i}) = 0 \wedge \sigma(\eta_{\vec v_i}) = 0)}}{{\displaystyle \prod_{i=1}^{k+2} \pr_{\vec v_i}(\sigma(\eta_{\vec v_i}) = 0)}} \ =\\
+&\prod_{i=1}^{k+2} \pr_{\vec v_i}(\sigma'(\eta_{\vec v_i}) = 0 \mid \sigma(\eta_{\vec v_i}) = 0) \ =\\
+&\prod_{i=1}^{k+2} \pr_{\vec v_i}( \langle \vec v_i, \vec \sigma' \rangle = 0 \mid \langle \vec v_i, \vec \sigma\rangle = 0)
+\end{align*}
+
+\vs{6}
+
+\visible<2->{
+Concluimos que ${\displaystyle \pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{j =1}^{k+2} \sigma'(\eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\eta_{\vec v_i}) = 0 \bigg)}$ es igual a:
+\alert{
+\begin{eqnarray*}
+\prod_{i=1}^{k+2} \pr_{\vec v_i}( \langle \vec v_i, \vec \sigma' \rangle = 0 \mid \langle \vec v_i, \vec \sigma\rangle = 0)
+\end{eqnarray*}
+}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $p_\sigma^2$}
+
+{\footnotesize
+
+Dado que $\varphi$ no es anulable tenemos que $\vec \sigma \neq \vec 0$ y $\vec \sigma'  \neq \vec 0$
+
+\vs{6}
+
+Así, dado que $\vec \sigma' \neq \vec \sigma$ y $n \geq 2$, deducimos por Corolario 2 que:
+\begin{eqnarray*}
+\pr_{\vec v_i}( \langle \vec v_i, \vec \sigma' \rangle = 0 \mid \langle \vec v_i, \vec \sigma\rangle = 0) & = & \pr_{\vec v_i}( \langle \vec v_i, \vec \sigma' \rangle = 0)
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Además, por Corolario 1 sabemos que $\pr_{\vec v_i}(\langle \vec v_i, \vec \sigma' \rangle = 0) = \frac{1}{2}$
+}
+
+\vs{6}
+
+\visible<3->{
+Concluimos que:
+\alert{
+\begin{eqnarray*}
+\pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{j =1}^{k+2} \sigma'(\eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\eta_{\vec v_i}) = 0 \bigg) & = & \frac{1}{2^{k+2}}
+\end{eqnarray*}
+}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $p_\sigma^2$}
+
+{\footnotesize
+
+Tenemos entonces que:
+\begin{align*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}&\bigg(\bigvee_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigwedge_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 1 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg) \ \leq\\
+& \sum_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} 
+\pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{j =1}^{k+2} \sigma'(\eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\eta_{\vec v_i}) = 0 \bigg) \ =\\
+& \sum_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \frac{1}{2^{k+2}} \ =\\
+& (|\Gamma| - 1) \cdot  \frac{1}{2^{k+2}} \ <\\
+& 2^{k+1} \cdot  \frac{1}{2^{k+2}} \alert{\ = \ \frac{1}{2}}
+\end{align*}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $p_\sigma^2$}
+
+{\footnotesize
+
+Finalmente concluimos que:
+\begin{align*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}&\bigg(\bigwedge_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigvee_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg) \ =\\
+& 1- \pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\bigvee_{\sigma' \in \Gamma \smallsetminus \{ \sigma \}} \bigwedge_{j =1}^{k+2} \sigma'(\neg \eta_{\vec v_j}) = 1 \ \bigg| \ \bigwedge_{i=1}^{k+2} \sigma(\neg \eta_{\vec v_i}) = 1 \bigg) \ \geq\\
+& 1 - \frac{1}{2} \alert{\ = \ \frac{1}{2}}
+\end{align*}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\sigma \text{ es la única valuación que satisface } \psi_{k+2})$}
+
+{\small
+
+Sabemos que:
+\vs{-1}
+\begin{eqnarray*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\sigma \text{ es la única valuación que satisface } \psi_{k+2})  & = & p_\sigma^1 \cdot p_\sigma^2
+\end{eqnarray*}
+
+\vs{8}
+
+Dado que $p_\sigma^1 = \frac{1}{2^{k+2}}$ y $p_\sigma^2 \geq \frac{1}{2}$, concluimos que:
+\vs{-1}
+\alert{
+\begin{eqnarray*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\sigma \text{ es la única valuación que satisface } \psi_{k+2}) & \geq & \frac{1}{2^{k+3}}
+\end{eqnarray*}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La conclusión $\ldots$}
+
+{\footnotesize
+
+De los resultados en las transparencias anteriores tenemos que:
+\begin{align*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}&(\scnf(\psi_{k+2}) = 1) \ = \\ 
+&\pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\bigvee_{\sigma \in \Gamma} \sigma \text{ es la única valuación que satisface } \psi_{k+2}\bigg) \ = \\
+&\sum_{\sigma \in \Gamma} \pr_{\vec v_1, \ldots, \vec v_{n+2}}\bigg(\sigma \text{ es la única valuación que satisface } \psi_{k+2}\bigg) \ \geq \\
+&\sum_{\sigma \in \Gamma} \frac{1}{2^{k+3}} \ = \\
+&|\Gamma| \cdot \frac{1}{2^{k+3}} \ \geq \\
+&2^k \cdot \frac{1}{2^{k+3}} \alert{\ = \ \frac{1}{8}}
+\end{align*}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Pero aún no estamos listos $\ldots$}
+
+{\small
+
+Nos falta indicar cómo generar $\varphi_0$, $\ldots$, $\varphi_{n+2}$ en CNF.
+\begin{itemize}
+\item Esta secuencia es construida de la misma forma que $\psi_0$, $\ldots$, $\psi_{n+2}$, pero reemplazando las fórmulas $(\neg \eta_{\vec v_i})$ por fórmulas en CNF
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Suponga que $\vec v = (v_1, \ldots, v_n)$ es un vector en $\{0,1\}^n$}
+
+\vs{8}
+
+\visible<3->{
+No reemplazamos $(\neg \eta_{\vec v})$ por una fórmula lógicamente equivalente en CNF, puesto que construir tal fórmula toma tiempo exponencial. 
+\begin{itemize}
+\item La reemplazamos por una fórmula relacionada (en un sentido que será definido), y que utiliza nuevas variables proposicionales $y^{\vec v}_1,\ \ldots, \ y^{\vec v}_n$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Reemplazando $(\neg \eta_{\vec v})$ por una fórmula en CNF}
+
+{\small
+
+Defina la fórmula $\xi^{\vec v}_1$ como:
+\begin{eqnarray*}
+\xi^{\vec v}_1 & = & 
+\begin{cases}
+y^{\vec v}_1 \leftrightarrow x_1 & v_1 = 1\\
+y^{\vec v}_1 \leftrightarrow \bot & v_1= 0
+\end{cases}
+\end{eqnarray*}
+donde $\bot$ es una contradicción arbitraria.
+
+\vs{8}
+
+\visible<2->{
+Además, para cada $i \in \{2, \ldots, n\}$ defina:
+\begin{eqnarray*}
+\xi^{\vec v}_i & = & 
+\begin{cases}
+y^{\vec v}_i \leftrightarrow (y^{\vec v}_{i-1} \oplus x_i) & v_i = 1\\
+y^{\vec v}_i \leftrightarrow y^{\vec v}_{i-1} & v_i = 0
+\end{cases}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Reemplazando $(\neg \eta_{\vec v})$ por una fórmula en CNF}
+
+{\small
+
+Finalmente, defina $\xi_{\vec v}$ como:
+\begin{eqnarray*}
+\xi_{\vec v} & = & \bigg(\bigwedge_{i=1}^{n} \xi^{\vec v}_i\bigg) \wedge \neg y^{\vec v}_{n}
+\end{eqnarray*}
+
+
+\vs{8}
+
+\visible<2->{
+La fórmula $\xi_{\vec v}$ no es lógicamente equivalente a $(\neg \eta_{\vec v})$, de hecho no utilizan las mismas variables.}
+\begin{itemize}
+\visible<3->{\item ¿Cuál es la relación entre estas fórmulas?}
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La relación entre $(\neg \eta_{\vec v})$ y $\xi_{\vec v}$}
+
+{\footnotesize
+
+Sea $X = \{x_1, \ldots, x_n\}$ e $Y^{\vec v} = \{y^{\vec v}_1, \ldots, y^{\vec v}_n\}$
+
+\vs{6}
+
+Dos valuaciones $\sigma : X \to \{0,1\}$ y $\lambda : Y^{\vec v} \to \{0,1\}$ son $\vec v$-consistentes si \alert{$(\sigma \cup \lambda)(\xi^{\vec v}_i) = 1$ para cada $i \in \{1, \ldots, n\}$}
+\begin{itemize}
+\item Donde $(\sigma \cup \lambda)(x_j) = \sigma(x_j)$ y $(\sigma \cup \lambda)(y^{\vec v}_j) = \lambda(y^{\vec v}_j)$ para cada $j \in \{1, \ldots, n\}$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+\begin{lema}
+Para cada valuación $\sigma : X \to \{0,1\}$, existe una única valuación $\lambda : Y^{\vec v} \to \{0,1\}$ tal que $\sigma$ y $\lambda$ son $\vec v$-consistentes.
+\end{lema}
+}
+
+\vs{6}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre el lema.
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La relación entre $(\neg \eta_{\vec v})$ y $\xi_{\vec v}$}
+
+{\footnotesize
+
+\begin{lema}
+Si dos valuaciones $\sigma : X \to \{0,1\}$ y $\lambda : Y^{\vec v} \to \{0,1\}$ son $\vec v$-consistentes, entonces 
+\alert{$\sigma(\neg \eta_{\vec v}) = (\sigma \cup \lambda)(\xi_{\vec v})$}
+\end{lema}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el lema.
+\end{ejercicio}}
+
+\vs{6}
+
+\visible<3->{
+Las relaciones entre $(\neg \eta_{\vec v})$ y $\xi_{\vec v}$ mostradas en los lemas son las que necesitamos para terminar la demostración.}
+
+}
+
+\end{frame}
+
+
+%----------------------------------
+\begin{frame}
+\frametitle{Definiendo $\varphi_0$, $\ldots$, $\varphi_{n+2}$}
+
+{\footnotesize
+
+El algoritmo aleatorizado escoge con distribución uniforme y de manera independiente $n+2$ vectores $\vec v_1$, $\ldots$, $\vec v_{n+2}$ en $\{0,1\}^n$, y define:
+\begin{center}
+\begin{tabular}{rclcl}
+$\varphi_0$ &  $=$ & $\varphi$ &&\\
+$\varphi_{i+1}$ &  $=$ & $\varphi_i \wedge \xi_{\vec v_{i+1}}$ && $1\leq i \leq n+1$
+\end{tabular}
+\end{center}
+
+\vs{6}
+
+\visible<2->{
+Las fórmulas $\varphi_0$, $\ldots$, $\varphi_{n+2}$ si están en CNF, puesto que podemos definir:
+\begin{eqnarray*}
+\xi^{\vec v}_1 & = & 
+\begin{cases}
+(\neg y^{\vec v}_1 \vee x_1) \vee (y^{\vec v}_1 \vee \neg x_1) & v_1 = 1\\
+\neg y^{\vec v}_1 & v_1= 0
+\end{cases}
+\end{eqnarray*}
+y para cada $i \in \{2, \ldots, n\}$ podemos definir:
+\begin{eqnarray*}
+\xi^{\vec v}_i & = & 
+\begin{cases}
+(\neg y^{\vec v}_i \vee y^{\vec v}_{i-1} \vee x_i) \wedge
+(y^{\vec v}_i \vee \neg y^{\vec v}_{i-1} \vee x_i) \ \wedge &\\
+(y^{\vec v}_i \vee y^{\vec v}_{i-1} \vee \neg x_i) \wedge
+(\neg y^{\vec v}_i \vee \neg y^{\vec v}_{i-1} \vee \neg x_i)  & v_i = 1\\
+(\neg y^{\vec v}_i \vee y^{\vec v}_{i-1}) \wedge  (y^{\vec v}_i \vee \neg y^{\vec v}_{i-1}) & v_i = 0
+\end{cases}
+\end{eqnarray*}
+
+}
+
+}
+
+
+\end{frame}
+
+
+%----------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\varphi_{k+2}) = 1)$}
+
+{\footnotesize
+
+
+Sea $\Lambda$ el conjunto de valuaciones $\lambda : (X \cup Y^{\vec v_1} \cup \cdots \cup Y^{\vec v_{k+2}}) \to \{0,1\}$ tal que:
+\alert{
+\begin{center}
+Para cada $i \in \{1, \ldots, k+2\}$, se tiene que $\lambda|_X$ y $\lambda|_{Y^{\vec v_i}}$ son $\vec v_i$-consistentes
+\end{center}
+}
+
+\vs{6}
+
+\visible<2->{
+Tenemos que:
+\begin{align*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}&(\scnf(\varphi_{k+2}) = 1) \ = \\ 
+&\pr_{\vec v_1, \ldots, \vec v_{k+2}}(\scnf(\varphi_{k+2}) = 1) \ = \\ 
+&\pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigvee_{\alert{\lambda \in \Lambda}} \lambda \text{ es la única valuación que satisface } \varphi_{k+2}\bigg) \ =  \\
+&\sum_{\lambda \in \Lambda} \pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\lambda \text{ es la única valuación que satisface } \varphi_{k+2}\bigg)
+\end{align*}
+}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\varphi_{k+2}) = 1)$}
+
+{\footnotesize
+
+Y tenemos que:
+\begin{align*}
+\pr_{\vec v_1, \ldots, \vec v_{k+2}}&\bigg(\lambda \text{ es la única valuación que satisface } \varphi_{k+2}\bigg) \ =\\
+&\pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigg[\bigwedge_{i=1}^{k+2} \lambda(\xi_{\vec v_i}) = 1\bigg] \wedge
+\bigg[\bigwedge_{\alert{\lambda' \in \Lambda \smallsetminus \{ \lambda \}}} \bigvee_{j =1}^{k+2} \lambda'(\xi_{\vec v_j}) = 0\bigg]\bigg) \ =\\
+&\pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{i=1}^{k+2} \lambda(\xi_{\vec v_i}) = 1\bigg) \ \cdot\\
+& \hspace{50pt} \pr_{\vec v_1, \ldots, \vec v_{k+2}}\bigg(\bigwedge_{\lambda' \in \Lambda \smallsetminus \{ \lambda \}} \bigvee_{j =1}^{k+2} \lambda'(\xi_{\vec v_j}) = 0 \ \bigg| \ \bigwedge_{i=1}^{k+2} \lambda(\xi_{\vec v_i}) = 1 \bigg)
+\end{align*}
+
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\varphi_{k+2}) = 1)$}
+
+{\footnotesize
+
+
+Dado que $\varphi$ no es anulable, tenemos que $\vec {\lambda|_X} \neq \vec 0$. Así, dado que $\lambda \in \Lambda$ concluimos  para $i \in \{1, \ldots, k+2\}$ que:
+\begin{eqnarray*}
+\pr_{\vec v_i}(\lambda(\xi_{\vec v_i}) = 1) &  = & \pr_{\vec v_i}(\lambda|_X(\neg \eta_{\vec v_i}) = 1)\\
+& = & \pr_{\vec v_i}(\langle \vec {\lambda|_X}, \vec v_i \rangle = 0) \ \alert{=} \ \alert{\frac{1}{2}}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Sea $\lambda' \in \Lambda \smallsetminus \{ \lambda \}$. Dado que $\varphi$ no es anulable y $\lambda \neq \lambda'$, tenemos que $\vec{\lambda|_X} \neq \vec 0$, $\vec{\lambda'|_X} \neq \vec 0$ y $\vec{\lambda|_X} \neq \vec{\lambda'|_X}$, por lo que concluimos para $i \in \{1, \ldots, k+2\}$  que:
+\begin{eqnarray*}
+\pr_{\vec v_i}(\lambda'(\xi_{\vec v_i}) = 1 \mid \lambda(\xi_{\vec v_i}) = 1) & = &
+\pr_{\vec v_i}(\lambda'|_X(\neg \eta_{\vec v_i}) = 1 \mid \lambda|_X(\neg \eta_{\vec v_i}) = 1)\\
+& = & \pr_{\vec v_i}(\langle \vec {\lambda'|_X}, \vec v_i \rangle = 0 \mid \langle \vec {\lambda|_X}, \vec v_i \rangle = 0)\\
+& = & \pr_{\vec v_i}(\langle \vec {\lambda'|_X}, \vec v_i \rangle = 0) \ \alert{=} \ \alert{\frac{1}{2}}
+\end{eqnarray*}
+}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente $\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\varphi_{k+2}) = 1)$}
+
+{\small
+
+Utilizando los resultados anteriores y considerando que $|\Lambda| = |\Gamma|$, concluimos como en el caso de $\psi_0$,  $\ldots$, $\psi_{n+2}$ que:
+\alert{
+\begin{eqnarray*}
+\pr_{\vec v_1, \ldots, \vec v_{n+2}}(\scnf(\varphi_{k+2}) = 1) & \geq & \frac{1}{8}
+\end{eqnarray*}
+}
+
+\vs{8}
+
+Esto concluye la demostración del teorema. \qed
+
+
+
+
+
+
+}
+
+\end{frame}
+
+\end{document}
+
+
+
+

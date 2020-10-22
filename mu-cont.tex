@@ -1,0 +1,6316 @@
+\documentclass{beamer}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{epsfig}
+\usepackage{dpscolor}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+
+\mode<presentation>
+{
+
+\useinnertheme{sparql}
+\useoutertheme{onlyfoot}
+\usecolortheme{seahorse}
+\usecolortheme{rose}
+
+\setbeamercovered{transparent}
+
+}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{corolario}{Corolario}
+\newtheorem{definicion}{Definición}
+\newtheorem{notacion}{Notación}
+\newtheorem{lema}{Lema}
+
+\newenvironment{ejemplo}
+{\begin{exampleblock}{Ejemplo}}
+{\end{exampleblock}}
+
+\newenvironment{ejercicio}
+{\begin{exampleblock}{Ejercicio}}
+{\end{exampleblock}}
+
+\newcommand{\cyan}[1]{\textCyan #1\textBlack}
+\newcommand{\red}[1]{\textRed #1\textBlack}
+\newcommand{\green}[1]{\textGreen #1\textBlack}
+\newcommand{\blue}[1]{\textBlue #1\textBlack}
+\newcommand{\black}[1]{\textBlack #1\textBlack}
+\newcommand{\magenta}[1]{\textMagenta #1\textBlack}
+\newcommand{\brown}[1]{\textBrown #1\textBlack}
+\newcommand{\vs}[1]{\vspace{#1mm}}
+\newcommand{\ignore}{}
+\newcommand{\ri}[1]{\text{\red{#1}}}
+\newcommand{\hs}{\hat\sigma}
+\newcommand{\modelos}{{\it modelos}}
+\newcommand{\B}{{\tt B}}
+\newcommand{\nspace}{\text{NSPACE}}
+\newcommand{\logspace}{\text{LOGSPACE}}
+\newcommand{\nlogspace}{\text{NLOGSPACE}}
+\newcommand{\npspace}{\text{NPSPACE}}
+\newcommand{\pspace}{\text{PSPACE}}
+\newcommand{\ph}{\text{PH}}
+\newcommand{\expspace}{\text{EXPSPACE}}
+\newcommand{\nexpspace}{\text{NEXPSPACE}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\espacio}{{\it espacio}}
+\newcommand{\tiempo}{{\it tiempo}}
+\newcommand{\ptime}{\text{PTIME}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\nexptime}{\text{NEXPTIME}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\A}{{\cal A}}
+\newcommand{\BB}{{\cal B}}
+\newcommand{\sat}{\text{SAT}}
+\newcommand{\sdnf}{\#\text{DNF-SAT}}
+\newcommand{\scnf}{\#\text{CNF-SAT}}
+\newcommand{\tcnfu}{\text{3-CNF-SAT-UNSAT}}
+\newcommand{\usat}{\text{unique-SAT}}
+\newcommand{\np}{\text{NP}}
+\newcommand{\ntime}{\text{NTIME}}
+\newcommand{\crp}{\text{RP}}
+\newcommand{\bpp}{\text{BPP}}
+\newcommand{\cnf}{\text{CNF-SAT}}
+\newcommand{\tcnf}{\text{3-CNF-SAT}}
+\newcommand{\dcnf}{\text{2-CNF-SAT}}
+\newcommand{\horn}{\text{HORN-SAT}}
+\newcommand{\nhorn}{\text{NEG-HORN-SAT}}
+\newcommand{\co}{\text{co-}}
+\newcommand{\rp}{\leq^\text{\it p}_\text{\it m}}
+\newcommand{\tur}{\leq^\text{\it p}_\text{\it T}}
+\newcommand{\rpar}{\leq^\text{\it p}_\text{\it par}}
+\newcommand{\reach}{\text{CAMINO}}
+\newcommand{\pe}{\text{PROG-ENT}}
+\newcommand{\pl}{\text{PROG-LIN}}
+\newcommand{\cor}{\text{CONT-REG}}
+\newcommand{\er}{\text{EQUIV-REG}}
+\newcommand{\qbf}{\text{QBF}}
+\newcommand{\shp}{\text{Succinct-HP}}
+\newcommand{\hp}{\text{HP}}
+\newcommand{\cdp}{\text{DP}}
+\newcommand{\clique}{\text{CLIQUE}}
+\newcommand{\eclique}{\text{exact-CLIQUE}}
+\newcommand{\costo}{\text{costo}}
+\newcommand{\tsp}{\text{TSP}}
+\newcommand{\tspu}{\text{unique-TSP}}
+\newcommand{\no}{\text{NO}}
+\newcommand{\yes}{\text{YES}}
+\newcommand{\br}{\text{CERTAIN-ANSWERS}}
+
+\newcommand{\CROM}{\text{CROM}}
+\newcommand{\EVAL}{\text{EVAL}}
+\newcommand{\EQUIV}{\text{EQUIV}}
+\newcommand{\EQUIVP}{\text{EQUIV-POL}}
+
+\newcommand{\re}{\text{RE}}
+\newcommand{\dec}{\text{R}}
+\newcommand{\fp}{\text{FP}}
+\newcommand{\sharpp}{\#\text{P}}
+\newcommand{\acc}{\text{accept}}
+\newcommand{\ssat}{\#\text{SAT}}
+
+\newcommand{\pr}{{\rm {\bf Pr}}}
+\newcommand{\esp}{{\rm {\bf E}}}
+\newcommand{\vr}{{\rm {\bf Var}}}
+
+
+\newcommand{\ucnf}{\text{U-CNF-SAT}}
+\newcommand{\sucnf}{\#\text{U-CNF-SAT}}
+\newcommand{\shorn}{\#\text{HORN-SAT}}
+\newcommand{\sclique}{\#\text{CLIQUE}}
+\newcommand{\indsets}{\#\text{IS}}
+\newcommand{\is}{\text{GIS}}
+\newcommand{\sis}{\#\text{GIS}}
+\newcommand{\lis}{\text{LIS}}
+\newcommand{\slis}{\#\text{LIS}}
+\newcommand{\cs}{\#\text{CicloSimple}}
+\newcommand{\ham}{\text{HAM}}
+\newcommand{\ncis}{\text{IS}}
+\newcommand{\mis}{\text{MIS}}
+
+\newcommand{\afor}{{\bf for}\ }
+\newcommand{\afore}{{\bf for each}\ }
+\newcommand{\ato}{{\bf to}\ }
+\newcommand{\ado}{{\bf do}\ }
+\newcommand{\aif}{{\bf if}\ }
+\newcommand{\athen}{{\bf then}\ }
+\newcommand{\aelse}{{\bf else}\ }
+\newcommand{\areturn}{{\bf return}\ }
+\newcommand{\awhile}{{\bf while}\ }
+\newcommand{\aand}{{\bf and}\ }
+\newcommand{\aor}{{\bf or}\ }
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+
+\newcommand{\minr}{\text{Min}}
+\newcommand{\maxr}{\text{Max}}
+\newcommand{\exir}{\text{Exists}}
+\newcommand{\fav}{\text{\it fav}}
+\newcommand{\ber}{\text{\bf Ber}}
+
+\usetikzlibrary{arrows,positioning} 
+\tikzset{
+    circ/.style={
+           circle,
+           draw=black, 
+           thick,
+           text centered,
+           },
+    circw/.style={
+           circle,
+           draw=white, 
+           thick,
+           text centered,
+           },
+    arrout/.style={
+           ->,
+           -latex,
+           thick,
+           },
+    arrin/.style={
+           <-,
+           latex-,
+           thick,
+           },
+    arrw/.style={
+           -,
+           thick,
+           },
+    arrww/.style={
+           -,
+           thick,
+           draw=white, 
+           }
+}
+
+\title[Relacionando el muestreo (casi) uniforme con la existencia de un FPRAS]
+{Relacionando el muestreo (casi) uniforme con\\ la existencia de un FPRAS}
+
+\author[IIC3810]
+{IIC3810\\
+\vs{2} Marcelo Arenas y Luis Alberto Croquevielle}
+
+\institute[]
+{
+%  Department of Computer Science\\
+%  Pontificia Universidad Cat\'olica de Chile
+}
+
+\date{}
+
+%\subject{Theoretical Computer Science}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de $p$-relación}
+{\small
+
+Será conveniente ver las funciones de $\sharpp$ como relaciones. 
+
+\vs{8}
+
+\begin{definicion}
+Una relación $R\subseteq \Sigma^*\times\Sigma^*$ es una $p$-relación si:
+\begin{itemize}
+    \item Existe un polinomio $q$ tal que si $(x,y)\in R$, entonces $|y| \leq q(|x|)$
+    \item $R \in \ptime$, vale decir, existe un algoritmo de tiempo polinomial que, dado $(x,y) \in \Sigma^* \times \Sigma^*$, verifica si $(x,y) \in R$
+\end{itemize}
+\end{definicion}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Cada $p$-relación representa una función en $\sharpp$}
+{\small
+
+
+Dada una relación $R \subseteq \Sigma^* \times \Sigma^*$, defina la función $f_R : \Sigma^* \to \N$ como:
+\begin{eqnarray*}
+f_R(x) & = & 
+\begin{cases}
+|\{ y \mid (x,y) \in R \}| & \text{ si } \{ y \mid (x,y) \in R \} \text{ es finito}\\
+0 & \text{ en otro caso}
+\end{cases}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+\begin{proposition}
+    Si $R$ es una $p$-relación, entonces $f_R \in \sharpp$
+\end{proposition}
+}
+
+
+\vs{6}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre la proposición.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Cada función en $\sharpp$ puede ser representada como una $p$-relación}
+{\footnotesize
+
+Sea $f:\Sigma^*\to\N$ una función  en $\sharpp$
+\begin{itemize}
+\item Existe una MT no determinista $M$ tal que para todo $x\in\Sigma^*$ se tiene que~$f(x) = \acc_M(x)$
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+Cada ejecución de $M$ se puede codificar usando el alfabeto $\Sigma$
+}
+
+
+\vs{8}
+
+\visible<3->{
+Utilizando las codificaciones de las ejecuciones de $M$ definimos:
+\alert{
+\begin{multline*}
+    R_f \ = \{ (x,y) \in \Sigma^* \times \Sigma^* \mid y \text{ codifica una ejecución de } M \\ 
+    \text{ con entrada } x \text{ que termina en un estado final}\}
+\end{multline*}}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Cada función en $\sharpp$ puede ser representada como una $p$-relación}
+{\footnotesize
+
+\begin{proposition}
+    Si $f$ está en $\sharpp$, entonces $R_f$ es una $p$-relación
+\end{proposition}
+
+\vs{8}
+
+\visible<2->{
+{\bf Demostración:} Como la MT no determinista $M$ en la transparencia anterior es de tiempo polinomial, para una entrada $x$ se puede:
+\begin{itemize}
+    \item Codificar cualquier ejecución de $M$ que acepta usando un string de largo polinomial en $|x|$
+    
+    \item Verificar si una ejecución termina en estado final (simulando el funcionamiento de $M$) en tiempo polinomial \qed
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Funciones en $\sharpp$ y $p$-relaciones}
+{\footnotesize
+
+Por lo tanto, de ahora en adelante trabajamos con $p$-relaciones.
+
+\vs{8}
+
+Estudiaremos los problemas de conteo y de generación uniforme asociados a $p$-relaciones, sabiendo que los resultados se extienden de manera inmediata  a funciones en $\sharpp$
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un generador uniforme para una $p$-relación}
+{\footnotesize
+
+Dada una $p$-relación $R \subseteq \Sigma^* \times \Sigma^*$, sea:
+\begin{eqnarray*}
+N_R(x) & = & |\{y\in\Sigma^* \mid (x,y)\in R\}|
+\end{eqnarray*}
+Además, suponga que $\bot$ es un símbolo reservado que no es usado en $\Sigma$
+
+\vs{8}
+
+\visible<2->{
+Un algoritmo aleatorizado $\G:\Sigma^*\to \Sigma^* \cup \{\bot\}$ es un generador uniforme para $R$ si para todo $x,y\in\Sigma^*$:
+\begin{itemize}
+\alert{    \item si $(x,y)\not\in R$, entonces $\pr(\G(x) = y) = 0$}
+\alert{    \item si $(x,y)\in R $, entonces $\pr(\G(x) = y) = \frac{1}{N_R(x)}$}
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un generador casi uniforme para una $p$-relación}
+
+{\footnotesize
+
+Las herramientas que veremos más adelante no nos permitirán obtener generadores uniformes, sino que una versión más débil
+\begin{itemize}
+\item Consideramos nuevamente una $p$-relación $R \subseteq \Sigma^* \times \Sigma^*$
+\end{itemize}
+
+
+\vs{6}
+
+\visible<2->{
+\begin{definicion}
+Un algoritmo aleatorizado $\G:\Sigma^*\times (0,1) \to\Sigma^* \cup \{\bot\}$ es un generador casi uniforme para $R$ si para todo $x,y\in\Sigma^*$ y $\varepsilon \in (0,1)$$:$
+\begin{itemize}
+\alert{\visible<3->{\item si $(x,y)\not\in R$, entonces $\pr(\G(x, \varepsilon) = y) = 0$}}
+\alert{\visible<4->{\item si $N_R(x) > 0$, entonces $\pr(\G(x, \varepsilon) = \bot) = 0$}}
+\alert{\visible<5->{\item si $(x,y)\in R$, entonces:
+\begin{eqnarray*}
+&& (1-\varepsilon) \cdot \frac{1}{N_R(x)} \ \leq \ \pr(\G(x,\varepsilon) = y) \ \leq \ (1+\varepsilon) \cdot \frac{1}{N_R(x)}
+\end{eqnarray*}}}
+\end{itemize}
+\end{definicion}}
+
+}
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{¿Por qué utilizamos ${\displaystyle \frac{1}{(1+\varepsilon)}}$ en lugar de $(1 - \varepsilon)$?}
+%
+%{\footnotesize
+%
+%Si reemplazamos ${\displaystyle \frac{1}{(1+\varepsilon)}}$ por $(1 - \varepsilon)$ en la definición anterior obtenemos una definición equivalente.
+%\begin{itemize}
+%\item Vamos a demostrar esto
+%\end{itemize}
+%
+%\vs{8}
+%
+%\visible<2->{
+%Pero para establecer una relación entre muestreo (casi) uniforme y la existencia de un FPRAS es más conveniente utilizar ${\displaystyle \frac{1}{(1+\varepsilon)}}$ en lugar de $(1 - \varepsilon)$}
+%
+%}
+%
+%
+%\end{frame}
+%
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Una definición alternativa de generador casi uniforme} 
+%
+%{\footnotesize
+%
+%Consideramos una definición alternativa de generador casi uniforme
+%para una $p$-relación $R \subseteq \Sigma^* \times \Sigma^*$ 
+%
+%\vs{8}
+%
+%\visible<2->{
+%Un algoritmo aleatorizado $\HH:\Sigma^*\times (0,1)\to\Sigma^* \cup \{\bot\}$ es un generador casi uniforme para $R$ si para todo $x,y\in\Sigma^*$ y $\delta \in (0,1)$:
+%\begin{itemize}
+%\item si $(x,y)\not\in R$, entonces $\pr(\HH(x, \delta) = y) = 0$
+%\alert{\item si $(x,y)\in R$, entonces:
+%\begin{eqnarray*}
+%&& (1-\delta) \cdot \frac{1}{N_R(x)} \ \leq \ \pr(\HH(x,\delta) = y) \ \leq \ (1+\delta) \cdot \frac{1}{N_R(x)}
+%\end{eqnarray*}}
+%\end{itemize}}
+%
+%
+%}
+%
+%\end{frame}
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Las definiciones son equivalentes}
+%{\footnotesize
+%
+%Vamos a demostrar que las definiciones dadas en las dos transparencias anteriores son equivalentes.
+%
+%\vs{8}
+%
+%De manera precisa, dada una $p$-relación $R \subseteq \Sigma^* \times \Sigma^*$, vamos a demostrar que:
+%\alert{
+%\begin{center}
+%Si hay un generador casi uniforme para $R$ bajo la primera definición, entonces hay un generador casi uniforme para $R$ bajo la segunda definición, y viceversa
+%\end{center}
+%}
+%
+%}
+%\end{frame}
+%
+%
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{La primera definición implica la segunda}
+%{\footnotesize
+%
+%Suponga que $\G:\Sigma^*\times (0,1) \to\Sigma^* \cup \{\bot\}$ es un generador casi uniforme para $R$ según la primera definición.
+%\begin{itemize}
+%\item Y sea $(x,y) \in R$
+%\end{itemize}
+%
+%\vs{6}
+%
+%Para todo $\varepsilon \in (0,1)$ tenemos que:
+%\begin{equation}\label{eq-pd}
+%\tag{\dag}
+%\frac{1}{(1+\varepsilon) \cdot N_R(x)} \ \leq \ \pr(\G(x,\varepsilon) = y) \ \leq \ (1+\varepsilon) \cdot \frac{1}{N_R(x)}
+%\end{equation}
+%
+%\vs{6}
+%
+%\visible<2->{
+%En este caso consideramos $\HH = \G$
+%}
+%
+%
+%\vs{6}
+%
+%\visible<3->{
+%Dado $\delta \in (0,1)$, tenemos que demostrar que:
+%\begin{eqnarray*}
+%(1-\delta) \cdot \frac{1}{N_R(x)} \ \leq \ \pr(\HH(x,\delta) = y) \ \leq \ (1+\delta) \cdot \frac{1}{N_R(x)}
+%\end{eqnarray*}
+%}
+%
+%}
+%\end{frame}
+%
+%
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{La primera definición implica la segunda}
+%{\footnotesize
+%
+%
+%Pero tenemos que:
+%\begin{eqnarray*}
+%\delta > 0 & \Rightarrow & \delta^2 > 0\\
+%& \Rightarrow & -\delta^2 < 0\\
+%& \Rightarrow & 1-\delta^2 < 1\\
+%& \Rightarrow & (1-\delta) \cdot (1 + \delta) < 1\\
+%& \Rightarrow & (1-\delta) < \frac{1}{(1 + \delta)}
+%\end{eqnarray*}
+%
+%\vs{4}
+%
+%\visible<2->{
+%Por lo tanto considerando $\varepsilon = \delta$ en \eqref{eq-pd} y el hecho que $\HH(x,\delta) = \G(x,\delta) = \G(x,\varepsilon)$ obtenemos:
+%\alert{
+%\begin{multline*}
+%(1-\delta) \cdot \frac{1}{N_R(x)} < \frac{1}{(1+\varepsilon) \cdot N_R(x)} \ \leq \ \pr(\HH(x,\delta) = y) \ \leq \\ 
+%(1+\varepsilon) \cdot \frac{1}{N_R(x)} \ =\ (1+\delta) \cdot \frac{1}{N_R(x)}
+%\end{multline*}}
+%}
+%
+%}
+%\end{frame}
+%
+%
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{La segunda definición implica la primera}
+%{\footnotesize
+%
+%Suponga que $\HH:\Sigma^*\times (0,1) \to\Sigma^* \cup \{\bot\}$ es un generador casi uniforme para $R$ según la segunda definición.
+%\begin{itemize}
+%\item Y sea $(x,y) \in R$
+%\end{itemize}
+%
+%\vs{6}
+%
+%Para todo $\delta \in (0,1)$ tenemos que:
+%\begin{equation}\label{eq-sd}
+%\tag{\ddag}
+%(1-\delta) \cdot \frac{1}{N_R(x)} \ \leq \ \pr(\HH(x,\delta) = y) \ \leq \ (1+\delta) \cdot \frac{1}{N_R(x)}
+%\end{equation}
+%
+%\vs{6}
+%
+%\visible<2->{
+%\alert{En este caso consideramos $\G$ definido como ${\displaystyle \G(x,\varepsilon) = \HH\bigg(x, \frac{\varepsilon}{(1+ \varepsilon)}\bigg)}$}}
+%
+%\vs{6}
+%
+%\visible<3->{
+%Dado $\varepsilon \in (0,1)$, tenemos que demostrar que:
+%\begin{eqnarray*}
+%\frac{1}{(1 + \varepsilon) \cdot N_R(x)} \ \leq \ \pr(\G(x,\varepsilon) = y) \ \leq \ (1+\varepsilon) \cdot \frac{1}{N_R(x)}
+%\end{eqnarray*}
+%}
+%
+%}
+%\end{frame}
+%
+%
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{La primera definición implica la segunda}
+%{\footnotesize
+%
+%
+%Tenemos que:
+%\begin{eqnarray*}
+%\delta =  \frac{\varepsilon}{(1+ \varepsilon)} & \Rightarrow & \delta + \delta \cdot \varepsilon = \varepsilon\\
+%& \Rightarrow & 0 = \varepsilon - \delta - \delta \cdot \varepsilon\\
+%& \Rightarrow & 1 = 1+ \varepsilon - \delta - \delta \cdot \varepsilon\\
+%& \Rightarrow & 1 = (1 - \delta) \cdot (1+\varepsilon)\\
+%& \Rightarrow & \frac{1}{(1+\varepsilon)} = (1 - \delta)
+%\end{eqnarray*}
+%
+%\vs{4}
+%
+%\visible<2->{
+%Por lo tanto considerando $\delta = \frac{\varepsilon}{(1+ \varepsilon)}$ en \eqref{eq-sd} y los hechos que $\frac{\varepsilon}{(1+ \varepsilon)} \leq \varepsilon$ y $\G(x,\varepsilon) = \HH(x, \frac{\varepsilon}{(1+ \varepsilon)}) = \HH(x,\delta)$ obtenemos:
+%\alert{
+%\begin{multline*}
+%\frac{1}{(1+\varepsilon) \cdot N_R(x)} \ = \ (1-\delta) \cdot \frac{1}{N_R(x)} \ \leq \ \pr(\G(x,\varepsilon) = y) \ \leq \\ (1+\delta) \cdot \frac{1}{N_R(x)} \ \leq \ (1+\varepsilon) \cdot \frac{1}{N_R(x)}
+%\end{multline*}}
+%}
+%
+%}
+%\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un esquema de generación casi uniforme}
+
+{\small
+
+\begin{definicion}
+Dada una $p$-relación $R \subseteq \Sigma^* \times \Sigma^*$, 
+un algoritmo aleatorizado $\G:\Sigma^*\times (0,1)\to\Sigma^* \cup \{\bot\}$ es un {\bf fully polynomial almost uniform generator (FPAUG)} para $R$ si 
+\vs{1}
+\begin{enumerate}
+\item $\G$ es un generador casi uniforme para $R$
+
+\vs{1}
+
+\item Existe un polinomio $q(u,v)$ tal que para todo $x \in \Sigma^*$ y $\varepsilon \in (0,1)$, el~número de pasos ejecutados por $\G(x,\varepsilon)$ es menor o igual a~$q(|x|,\frac{1}{\varepsilon})$
+\end{enumerate}
+\end{definicion}
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una definición de FPRAS para relaciones}
+
+{\footnotesize
+
+\begin{definicion}
+Dada una $p$-relación $R \subseteq \Sigma^* \times \Sigma^*$, un algoritmo aleatorizado $\A : \Sigma^* \times (0,1) \to \mathbb{N}$ es un {\bf fully polynomial randomized approximation scheme (FPRAS)} para $R$ si existe un polinomio $q(u,v)$ tal que para cada $x \in \Sigma^*$ y $\varepsilon \in (0,1)$:
+\vs{1}
+\begin{enumerate}
+\item El número de pasos ejecutados por $\A(x,\varepsilon)$ es menor o igual~a~$q(|x|,\frac{1}{\varepsilon})$
+
+\vs{1}
+
+\visible<2->{
+\alert{\item ${\displaystyle \pr(|\A(x, \varepsilon) - N_R(x)| \leq \varepsilon \cdot N_R(x)) \geq \frac{3}{4}}$}}
+\end{enumerate}
+\end{definicion}
+
+\vs{6}
+
+\visible<3->{
+\begin{block}{Observación}
+Dado $f \in \sharpp$ representado como $R_f$, se puede demostrar que esta definición de FPRAS es equivalente a la vista en el capítulo anterior.
+\end{block}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un comentario sobre las definiciones anteriores}
+
+{\small
+
+La noción de algoritmo aleatorizado se formaliza usando MT~probabilísticas. 
+\begin{itemize}
+\alert{ \item Estas máquinas funcionan con cintas de bits, por lo que las probabilidades resultantes son de la forma $\frac{n}{2^k}$}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto, al describir un algoritmo aleatorizado, en teoría no podemos decir algo como ``la probabilidad de error del algoritmo es $\frac{1}{3}$"}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunos comentarios sobre las definiciones anteriores}
+
+{\small
+
+Tratar de tener algoritmos aleatorizados con probabilidades arbitrarias no entrega intuiciones nuevas
+\begin{itemize}
+\item Y hace mucho más técnicas y complicadas las demostraciones
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\begin{block}{Supuesto}
+Todas las probabilidades que vamos a considerar (por ejemplo, la probabilidad $\frac{1}{N_R(x)}$) son de la forma $\frac{n}{2^k}$
+\end{block}}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La relación entre FPAUG y FPRAS}
+
+{\small
+
+Pasaremos ahora a enunciar y demostrar que la existencia de un FPAUG implica la existencia de un FPRAS.
+\begin{itemize}
+\item Este resultado es válido para una amplia clase de relaciones
+
+\alert {\item Esto nos va a permitir utilizar una gran cantidad de herramientas desarrolladas para el muestreo de variables aleatorias en la construcción de FPRAS}
+\end{itemize}
+
+\vs{8}
+
+
+\visible<2->{
+Primero debemos formalizar la noción de $p$-relación auto-reducible, la cual es necesaria al demostrar la relación entre 
+FPAUG y FPRAS.}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Relaciones auto-reducibles}
+
+{\footnotesize
+
+Intuitivamente, un problema se dice auto-reducible si es que se puede solucionar mediante la resolución de instancias más simples del mismo problema.
+
+\vs{5}
+
+\visible<2->{
+\begin{ejemplo}
+Sea $\varphi$ una fórmula proposicional con variables $x_1$, $\ldots$, $x_n$
+
+\vs{4}
+
+La notación $\varphi[\frac{x_i}{v}]$ indica que la variable $x_i$ es reemplazada por $v \in \{0,1\}$
+\begin{itemize}
+\item Si $v = 0$ reemplazamos $x_i$ por el operador 0-ario $\bot$, y si $v = 1$ reemplazamos $x_i$ por el operador 0-ario $\top$
+
+\item $\varphi[\frac{x_i}{v}]$ tiene una variable menos que $\varphi$
+\end{itemize}
+
+\vs{4}
+
+Determinar si $\varphi$ es satisfacible se reduce a determinar si $\varphi[\frac{x_1}{0}]$ o $\varphi[\frac{x_1}{1}]$ es satisfacible
+\begin{itemize}
+\item Así, una instancia de $\sat$ se reduce a instancias más simples de $\sat$
+\end{itemize}
+\end{ejemplo}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Relaciones auto-reducibles: formalización}
+
+{\footnotesize
+
+\begin{definicion}
+    Una relación $R\subseteq \Sigma^*\times\Sigma^*$ es auto-reducible si:
+\vs{1}
+    \begin{enumerate}
+\visible<2->{        \item Existe una función $g:\Sigma^*\to\N$ tal que $g$ es computable en tiempo polinomial y para cada $(x,y)\in R$ se tiene que~$|y| = g(x)$}
+\vs{1}
+\visible<3->{        \item Existen funciones $\psi:\Sigma^*\times\Sigma^*\to\Sigma^*$ y $\sigma:\Sigma^*\to\N$ tales que:}
+        \begin{itemize}
+        {\footnotesize
+\visible<4->{            \item $\psi$ y $\sigma$ son computables en tiempo polinomial}
+\vs{1}
+\visible<5->{            \item $\sigma(x) \in O(\log(|x|))$}
+\vs{1}
+\visible<6->{             \item $\forall x \in \Sigma^*$: si $g(x) > 0$, entonces $0 < \sigma(x) \leq g(x)$}
+\vs{1}
+\visible<7->{             \item $\forall x,w \in \Sigma^*$: $|\psi(x,w)|\leq |x|$}
+\vs{1}
+\visible<8->{            \item $\forall x,y \in \Sigma^*$ con $y = a_1 \cdots a_n$: 
+\begin{center}
+\alert{$(x,y)\in R$ si y sólo si $(\psi(x, a_1\cdots a_{\sigma(x)}),a_{\sigma(x)+1}\cdots a_n)\in R$}
+\end{center}}}
+        \end{itemize}
+    \end{enumerate}
+\end{definicion}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Relaciones auto-reducibles: ejemplos}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+Demuestre que las siguientes relaciones son auto-reducibles:
+\vs{1}
+\begin{enumerate}
+\item $R_{\sat} = \{ (\varphi, \sigma) \mid \varphi$ es una fórmula proposicional y $\sigma$ es una valuación tal que $\sigma(\varphi) = 1\}$
+
+\vs{2}
+
+\item $R_{\ncis} = \{ (G, S) \mid G$ es un grafo y $S$ es un conjunto independiente de~$G\}$
+\end{enumerate}
+\end{exampleblock}
+
+}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una relación natural no auto-reducible}
+
+{\footnotesize
+
+Dado un grafo $G = (N,A)$, decimos que $S \subseteq N$ es un conjunto independiente \alert{maximal} de $G$ si:
+\begin{enumerate}
+\item $S$ es un conjunto independiente de $G$
+
+\item Para todo conjunto independiente $S'$ de $G$, no se cumple que $S \subsetneq S'$
+\end{enumerate}
+
+\vs{6}
+
+\visible<2->{
+Considere la relación:
+\begin{eqnarray*}
+R_{\mis}  =  \{ (G, S) \mid G \text{ es un grafo y  } S \text{ es un conjunto independiente maximal de } G\}
+\end{eqnarray*}}
+
+\vs{4}
+
+\visible<3->{
+¿Es $R_{\mis}$ auto-reducible?}
+\begin{itemize}
+\visible<4->{\item ¿Cómo se puede demostrar que no lo es?}
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una propiedad de las relaciones auto-reducibles}
+
+{\footnotesize
+
+Para demostrar que $R_{\mis}$ no es auto-reducible identificamos una propiedad de las relaciones auto-reducibles que no es cumplida por $R_{\mis}$
+\begin{itemize}
+\item Bajo una suposición de complejidad
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Dado un alfabeto $\Sigma$, suponga dado un orden lineal en $\Sigma$
+\begin{itemize}
+\item Este orden lineal induce un orden lexicográfico $\leq$ en $\Sigma^*$
+\end{itemize}
+}
+
+\vs{6}
+
+\visible<3->{
+\begin{definicion}
+Dada una relación $R \subseteq \Sigma^* \times \Sigma^*$:
+\begin{eqnarray*}
+\exir(R) & =  & \{ x  \mid \exists y: (x,y) \in R\}\\
+\minr(R) & =  & \{ (x,y)  \mid x \in \exir(R) \wedge y = \operatorname{arg\,min}_{\leq} \{ z \mid (x,z) \in R\}\}\\
+\maxr(R) & =  & \{ (x,y) \mid x \in \exir(R) \wedge y = \operatorname{arg\,max}_{\leq} \{ z \mid (x,z) \in R\}\}
+\end{eqnarray*}
+\end{definicion}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una propiedad de las relaciones auto-reducible}
+
+{\small
+
+\begin{teorema}
+Si $R$ es una $p$-relación auto-reducible tal que $\exir(R) \in \ptime$, entonces $\minr(R) \in \ptime$ y $\maxr(R) \in \ptime$
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el teorema
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$R_{\mis}$ no es auto-reducible}
+
+{\small
+
+\begin{block}{Proposición}
+Si $R_{\mis}$ es auto-reducible, entonces $\ptime = \np$
+\end{block}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre las siguientes propiedades:
+\begin{enumerate}
+\item $R_{\mis}$ es una $p$-relación y $\exir(R_{\mis}) \in \ptime$
+\item $\minr(R_{\mis})$ es $\co\np$-completo
+\end{enumerate}
+
+\vs{2}
+\visible<3->{
+A partir de estas propiedades y del teorema demuestre la proposición.}
+
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Solucionando el ejercicio: $\overline{\minr(R_{\mis})}$ es $\np$-hard}
+
+{\footnotesize
+
+Vamos a mostrar que $\cnf \rp \overline{\minr(R_{\mis})}$
+\begin{itemize}
+\visible<2->{
+\item Dada una formula proposicional $\varphi$ en CNF, mostramos como construir en tiempo polinomial un grafo $G = (N,A)$ y un conjunto $S \subseteq N$ tales que:
+\begin{center} 
+$\varphi$ es satisfacible \ \ si y sólo si  \ \ $(G,S) \in \overline{\minr(R_{\mis})}$
+\end{center}}
+\end{itemize}
+
+\vs{6}
+
+\visible<3->{
+Debemos representar $S$ como un string sobre un alfabeto $\Sigma$ fijo.}
+\begin{itemize}
+\visible<4->{\item Esto es necesario porque debemos tener un orden lexicográfico sobre los conjuntos independientes maximales de $G$}
+\end{itemize}
+
+\vs{6}
+
+\visible<5->{
+En estricto rigor también $G$ debería ser representado como un string sobre $\Sigma$
+\begin{itemize}
+\item Aunque esto no es fundamental para la demostración
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Solucionando el ejercicio: $\overline{\minr(R_{\mis})}$ es $\np$-hard}
+
+{\small
+
+Vamos a dar la idea de la demostración con un ejemplo.
+\begin{itemize}
+\item Dejamos como un ejercicio el generalizar esta idea a cualquier fórmula proposicional en CNF
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Suponga que $\varphi = C_1 \wedge C_2$, donde $C_1 = (r \vee t)$ y $C_2 = (t \vee \neg s \vee \neg t \vee \neg u)$
+\begin{itemize}
+\item Consideramos $\Sigma = \{0,1\}$ en la reducción
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Los nodos del grafo $G$}
+
+{\small
+
+El conjunto $N$ de nodos de $G$ es definido como:
+\begin{eqnarray*}
+N & = & \{C_1, C_2, r, s, t, u,\neg r, \neg s, \neg t, \neg u, \star\}
+\end{eqnarray*}
+donde $\star$ es un símbolo que no es mencionado en $\varphi$
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Representando un conjunto independiente de $G$}
+{\footnotesize
+
+Para representar un conjunto $S \subseteq N$ usamos un string $w \in \{0,1\}^*$ de largo 11
+\vs{1}
+\begin{itemize}
+\item El primer bit de $w$ es 1 si $C_1 \in S$, y 0 en caso contrario. El segundo bit de $w$ es 1 si $C_2 \in S$, y 0 en caso contrario
+
+\item El tercer bit de $w$ es 1 si $\star \in S$, y 0 en caso contrario
+
+\item Los siguientes bits de $w$ son construidos de la misma forma para los nodos $r, s, t, u,\neg r, \neg s, \neg t, \neg u$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejemplo}
+El conjunto $S = \{C_2, \star, u, \neg s, \neg t\}$ es representado por el string $01100010110$
+\end{ejemplo}
+}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Los arcos del grafo $G$}
+
+{\small
+
+\begin{overlayarea}{\textwidth}{6cm}
+
+\only<1|handout:1>{
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {\phantom{.}$r$\phantom{.}};
+\node[circ, right=6mm of n1] (n2) {\phantom{.}$s$\phantom{.}};
+\node[circw, right=1.13mm of n2] (ni1) {};
+\node[circ, right=1.13mm of ni1] (n3) {\phantom{.}$t$\phantom{.}};
+\node[circ, right=6mm of n3] (n4) {\phantom{.}$u$\phantom{.}};
+\node[circw, right=1.13mm of n4] (ni2) {};
+\node[circ, right=1.13mm of ni2] (n5) {$\neg r$};
+\node[circ, right=6mm of n5] (n6) {$\neg s$};
+\node[circw, right=1.13mm of n6] (ni3) {};
+\node[circ, right=1.13mm of ni3] (n7) {$\neg t$};
+\node[circ, right=6mm of n7] (n8) {$\neg u$};
+\node[circ, below=20mm of ni1] (n9) {$C_1$};
+\node[circ, below=20mm of ni3] (n10) {$C_2$};
+\node[circ, above=20mm of ni2] (ns) {\phantom{.}$\star$\phantom{.}};
+\end{tikzpicture}
+\end{center}}
+
+\only<2|handout:2>{
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {\phantom{.}$r$\phantom{.}};
+\node[circ, right=6mm of n1] (n2) {\phantom{.}$s$\phantom{.}};
+\node[circw, right=1.13mm of n2] (ni1) {};
+\node[circ, right=1.13mm of ni1] (n3) {\phantom{.}$t$\phantom{.}};
+\node[circ, right=6mm of n3] (n4) {\phantom{.}$u$\phantom{.}};
+\node[circw, right=1.13mm of n4] (ni2) {};
+\node[circ, right=1.13mm of ni2] (n5) {$\neg r$}
+edge[arrw, bend left=30]  (n1);
+\node[circ, right=6mm of n5] (n6) {$\neg s$};
+\node[circw, right=1.13mm of n6] (ni3) {};
+\node[circ, right=1.13mm of ni3] (n7) {$\neg t$};
+\node[circ, right=6mm of n7] (n8) {$\neg u$};
+\node[circ, below=20mm of ni1] (n9) {$C_1$};
+\node[circ, below=20mm of ni3] (n10) {$C_2$};
+\node[circ, above=20mm of ni2] (ns) {\phantom{.}$\star$\phantom{.}};
+\end{tikzpicture}
+\end{center}}
+
+\only<3|handout:3>{
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {\phantom{.}$r$\phantom{.}};
+\node[circ, right=6mm of n1] (n2) {\phantom{.}$s$\phantom{.}};
+\node[circw, right=1.13mm of n2] (ni1) {};
+\node[circ, right=1.13mm of ni1] (n3) {\phantom{.}$t$\phantom{.}};
+\node[circ, right=6mm of n3] (n4) {\phantom{.}$u$\phantom{.}};
+\node[circw, right=1.13mm of n4] (ni2) {};
+\node[circ, right=1.13mm of ni2] (n5) {$\neg r$}
+edge[arrw, bend left=30]  (n1);
+\node[circ, right=6mm of n5] (n6) {$\neg s$}
+edge[arrw, bend left=30]  (n2);
+\node[circw, right=1.13mm of n6] (ni3) {};
+\node[circ, right=1.13mm of ni3] (n7) {$\neg t$}
+edge[arrw, bend left=30]  (n3);
+\node[circ, right=6mm of n7] (n8) {$\neg u$}
+edge[arrw, bend left=30]  (n4);
+\node[circ, below=20mm of ni1] (n9) {$C_1$};
+\node[circ, below=20mm of ni3] (n10) {$C_2$};
+\node[circ, above=20mm of ni2] (ns) {\phantom{.}$\star$\phantom{.}};
+\end{tikzpicture}
+\end{center}}
+
+\only<4|handout:4>{
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {\phantom{.}$r$\phantom{.}};
+\node[circ, right=6mm of n1] (n2) {\phantom{.}$s$\phantom{.}};
+\node[circw, right=1.13mm of n2] (ni1) {};
+\node[circ, right=1.13mm of ni1] (n3) {\phantom{.}$t$\phantom{.}};
+\node[circ, right=6mm of n3] (n4) {\phantom{.}$u$\phantom{.}};
+\node[circw, right=1.13mm of n4] (ni2) {};
+\node[circ, right=1.13mm of ni2] (n5) {$\neg r$}
+edge[arrw, bend left=30]  (n1);
+\node[circ, right=6mm of n5] (n6) {$\neg s$}
+edge[arrw, bend left=30]  (n2);
+\node[circw, right=1.13mm of n6] (ni3) {};
+\node[circ, right=1.13mm of ni3] (n7) {$\neg t$}
+edge[arrw, bend left=30]  (n3);
+\node[circ, right=6mm of n7] (n8) {$\neg u$}
+edge[arrw, bend left=30]  (n4);
+\node[circ, below=20mm of ni1] (n9) {$C_1$}
+edge[arrw]  (n1)
+edge[arrw]  (n3);
+\node[circ, below=20mm of ni3] (n10) {$C_2$};
+\node[circ, above=20mm of ni2] (ns) {\phantom{.}$\star$\phantom{.}};
+\end{tikzpicture}
+\end{center}}
+
+\only<5|handout:5>{
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {\phantom{.}$r$\phantom{.}};
+\node[circ, right=6mm of n1] (n2) {\phantom{.}$s$\phantom{.}};
+\node[circw, right=1.13mm of n2] (ni1) {};
+\node[circ, right=1.13mm of ni1] (n3) {\phantom{.}$t$\phantom{.}};
+\node[circ, right=6mm of n3] (n4) {\phantom{.}$u$\phantom{.}};
+\node[circw, right=1.13mm of n4] (ni2) {};
+\node[circ, right=1.13mm of ni2] (n5) {$\neg r$}
+edge[arrw, bend left=30]  (n1);
+\node[circ, right=6mm of n5] (n6) {$\neg s$}
+edge[arrw, bend left=30]  (n2);
+\node[circw, right=1.13mm of n6] (ni3) {};
+\node[circ, right=1.13mm of ni3] (n7) {$\neg t$}
+edge[arrw, bend left=30]  (n3);
+\node[circ, right=6mm of n7] (n8) {$\neg u$}
+edge[arrw, bend left=30]  (n4);
+\node[circ, below=20mm of ni1] (n9) {$C_1$}
+edge[arrw]  (n1)
+edge[arrw]  (n3);
+\node[circ, below=20mm of ni3] (n10) {$C_2$}
+edge[arrw]  (n3)
+edge[arrw]  (n6)
+edge[arrw]  (n7)
+edge[arrw]  (n8);
+\node[circ, above=20mm of ni2] (ns) {\phantom{.}$\star$\phantom{.}};
+\end{tikzpicture}
+\end{center}
+}
+
+\only<6|handout:6>{
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {\phantom{.}$r$\phantom{.}};
+\node[circ, right=6mm of n1] (n2) {\phantom{.}$s$\phantom{.}};
+\node[circw, right=1.13mm of n2] (ni1) {};
+\node[circ, right=1.13mm of ni1] (n3) {\phantom{.}$t$\phantom{.}};
+\node[circ, right=6mm of n3] (n4) {\phantom{.}$u$\phantom{.}};
+\node[circw, right=1.13mm of n4] (ni2) {};
+\node[circ, right=1.13mm of ni2] (n5) {$\neg r$}
+edge[arrw, bend left=30]  (n1);
+\node[circ, right=6mm of n5] (n6) {$\neg s$}
+edge[arrw, bend left=30]  (n2);
+\node[circw, right=1.13mm of n6] (ni3) {};
+\node[circ, right=1.13mm of ni3] (n7) {$\neg t$}
+edge[arrw, bend left=30]  (n3);
+\node[circ, right=6mm of n7] (n8) {$\neg u$}
+edge[arrw, bend left=30]  (n4);
+\node[circ, below=20mm of ni1] (n9) {$C_1$}
+edge[arrw]  (n1)
+edge[arrw]  (n3);
+\node[circ, below=20mm of ni3] (n10) {$C_2$}
+edge[arrw]  (n3)
+edge[arrw]  (n6)
+edge[arrw]  (n7)
+edge[arrw]  (n8);
+\node[circ, above=20mm of ni2] (ns) {\phantom{.}$\star$\phantom{.}}
+edge[arrw]  (n1)
+edge[arrw]  (n2)
+edge[arrw]  (n3)
+edge[arrw]  (n4)
+edge[arrw]  (n5)
+edge[arrw]  (n6)
+edge[arrw]  (n7)
+edge[arrw]  (n8)
+edge[arrw]  (n9)
+edge[arrw]  (n10);
+\end{tikzpicture}
+\end{center}
+}
+
+\end{overlayarea}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La equivalencia entre los problemas}
+
+{\footnotesize
+
+$S = \{\star\}$ es un conjunto independiente maximal de $G$
+\begin{itemize}
+\item Es representado por el string $00100000000$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Tenemos que $\varphi$ es satisfacible si y sólo si $(G,S) \in \overline{\minr(R_{\mis})}$
+\begin{itemize}
+\item ¿Por qué se cumple esto en general?
+\end{itemize}}
+
+\vs{6}
+
+\visible<3->{$S' = \{r, \neg s\}$ también es un conjunto independiente maximal de $G$ 
+\begin{itemize}
+\visible<4->{\item $S'$ representa a una valuación $\sigma$ que satisface $\varphi$: $\sigma(r) = 1$ y $\sigma(s) = 0$}
+
+\visible<5->{\item $S'$ es representado por el string $00010000100$}
+
+\visible<6->{\alert{\item Tenemos que $(G,S) \in \overline{\minr(R_{\mis})}$ puesto que $00010000100$ es menor que $00100000000$ en orden lexicográfico}}
+\end{itemize}
+}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Comentarios finales}
+
+{\footnotesize
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Para $\varphi = (r \vee t) \vee (t \vee \neg s \vee \neg t \vee \neg u)$, encuentre $S''$ tal que $(G,S'') \in \minr(R_{\mis})$
+
+\vs{4}
+
+\item\label{mmis-p2} Generalice la construcción mostrada para cualquier fórmula proposicional $\varphi$ en CNF
+\begin{itemize}
+{\footnotesize
+\item Si $\varphi$ menciona $m$ cláusulas y $n$ variables proposicionales, entonces el grafo $G$ debe tener $m + 2 \cdot n + 1$ nodos
+\vs{1}
+\item Como en el ejemplo, se debe tener que $S = \{\star\}$
+}
+\end{itemize}
+
+\vs{4}
+
+\item Para la construcción realizada en \ref{mmis-p2}, demuestre que $\varphi$ es satisfacible si y sólo si $(G,S) \in \overline{\minr(R_{\mis})}$
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una herramienta fundamental}
+
+
+\begin{teorema}[Jerrum, Valiant \& Vazirani]
+    Sea $R$ una $p$-relación auto-reducible. Si existe un FPAUG para $R$, entonces existe un FPRAS para $R$.
+\end{teorema}
+
+
+
+\end{frame}
+
+\newcommand{\ks}{\text{KS}}
+\newcommand{\sks}{\#\text{KS}}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración: primer ejemplo}
+
+{\small
+
+Vamos a mostrar algunas de las ideas fundamentales de la demostración considerando $\ssat$
+\begin{itemize}
+\item Recuerde que  $R_{\sat} = \{ (\varphi, \sigma) \mid \varphi$ es una fórmula proposicional y $\sigma$ es una valuación tal que $\sigma(\varphi) = 1\}$ es una p-relación auto-reducible
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Suponemos que tenemos un generador uniforme para $R_{\sat}$}
+\vs{1}
+\begin{itemize}
+{\footnotesize
+\visible<3->{\item Si este generador funciona en tiempo polinomial entonces vamos a obtener un FPRAS para $\ssat$}
+
+\visible<4->{\item En la demostración del teorema la hipótesis será que existe un FPAUG para la relación que estemos considerando}}
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración: $\ssat$}
+
+{\small
+
+Sea $\G$ un generador uniforme para $R_{\sat}$ que funciona en tiempo polinomial.
+
+\vs{8}
+
+Para cada fórmula proposicional $\varphi$ tenemos:
+\begin{itemize}
+\item si $\sigma(\varphi) = 0$, entonces $\pr(\G(\varphi) = \sigma) = 0$
+\item  si $\sigma(\varphi) = 1$, entonces $\pr(\G(\varphi) = \sigma) = \frac{1}{\ssat(\varphi)}$
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración: $\ssat$}
+
+{\small
+
+Sea $\varphi$ un fórmula proposicional y $\{x_1, \ldots, x_n\}$ el conjunto de variables mencionadas en $\varphi$
+
+\vs{8}
+
+Podemos utilizar $\G$ para generar una valuación $\sigma$ tal que $\sigma(\varphi) = 1$
+\begin{itemize}
+\item Si $\G(\varphi) = \bot$, entonces sabemos que $\varphi$ no es satisfacible y $\ssat(\varphi)=0$
+\end{itemize}
+
+\vs{8}
+
+Suponemos que $\sigma(x_i) = v_i$ para cada $i \in \{1, \ldots, n\}$
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración: $\ssat$}
+
+{\small
+
+Tenemos que $\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_n}{v_n}]) = 1$
+\begin{itemize}
+\item $\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_n}{v_n}]$ es obtenida desde $\varphi$ reemplazando casa variable $x_i$ por el valor $v_i$
+\begin{itemize}
+{\footnotesize
+\item Si $v_i = 0$ reemplazamos $x_i$ por el operador 0-ario $\bot$, y si $v_i = 1$ reemplazamos $x_i$ por el operador 0-ario $\top$
+
+\item $\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_n}{v_n}]$ no tiene variables 
+}
+\end{itemize}
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Así, tenemos que:
+\begin{eqnarray*}
+\ssat(\varphi) & = & \frac{\ssat(\varphi)}{\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_n}{v_n}])}
+\cdot {\textstyle \ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_n}{v_n}])}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración: $\ssat$}
+
+{\small
+
+Por lo tanto, tenemos que:
+\begin{eqnarray*}
+\ssat(\varphi) & = & \frac{1}{\rho} 
+\end{eqnarray*}
+donde:
+\begin{eqnarray*}
+\rho & = & \frac{\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_n}{v_n}])}{\ssat(\varphi)}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Podemos entonces estimar $\ssat(\varphi)$ utilizando una estimación para $\rho$
+\begin{itemize}
+\item Utilizamos $\G$ para estimar $\rho$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Estimando $\rho$}
+
+{\small
+
+Sea $X$ una variable aleatoria que toma valor 1 para $\sigma$, y toma valor 0  para cada valuación $\sigma'$ tal que $\sigma'(\varphi) = 1$ y $\sigma' \neq \sigma$
+\begin{itemize}
+\item En particular, tenemos que $X \sim \ber(\rho)$
+\end{itemize}
+
+\vs{8}
+
+Tenemos que $\esp[X] = \rho$, por lo que podemos estimar $\rho$ a través del muestreo de $X$
+\begin{itemize}
+\item Realizamos $t \geq 1$ nuestras independientes $X_{1}$, $\ldots$, $X_{t}$ de $X$, y utilizamos como estimador el promedio $\overline{X} = \frac{1}{t} \sum_{i=1}^t X_i$
+\begin{itemize}
+\item Puesto que $\esp[\overline{X}] = \rho$ y tiene una menor varianza
+\end{itemize}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Estimando $\rho$}
+
+{\small
+
+Para estimar $\rho$ utilizamos el siguiente algoritmo:
+
+\vs{-4}
+
+\begin{tabbing}
+\phantom{MM} \= \phantom{MM} \= \phantom{MM} \=\\
+\> $\fav := 0$\\
+\>\afor $j := 1$ \ato $t$ \ado \\
+\> \> \alert{$\sigma' := \G(\varphi)$}\\
+\> \> \aif $\sigma' = \sigma$ \athen\\
+\> \> \>  $\fav := \fav + 1$\\
+\> \areturn $\frac{\fav}{t}$
+\end{tabbing}
+
+\vs{6}
+
+\visible<2->{
+¿Qué tan buena es la estimación de $\rho$? ¿Cuántas muestras $t$ debemos realizar para tener una buena estimación de $\rho$?
+}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Estimando $\rho$}
+
+{\footnotesize
+
+Usando la desigualdad de Chebyshev obtenemos:
+\begin{eqnarray*} 
+\pr(|\overline{X} - \esp[\overline{X}]| \geq \varepsilon \cdot \esp[\overline{X}]) & \leq & \frac{\vr[\overline{X}]}{\varepsilon^2 \cdot \esp[\overline{X}]^2}\\
+& = & \frac{\vr[X]}{t \cdot \varepsilon^2 \cdot \esp[X]^2}\\
+& = & \frac{\rho \cdot (1-\rho)}{t \cdot \varepsilon^2 \cdot \esp[X]^2}\\
+& \leq & \frac{1}{t \cdot \varepsilon^2 \cdot \esp[X]^2}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Por lo tanto, si $\frac{4}{\varepsilon^2 \cdot \esp[X]^2} \leq t$, entonces:
+\begin{eqnarray*} 
+\pr(|\overline{X} - \esp[\overline{X}]| \geq \varepsilon \cdot \esp[\overline{X}]) & \leq & \frac{1}{4}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Estimando $\rho$}
+
+{\footnotesize
+
+Para obtener una buena estimación de $\rho$ realizamos entonces $t = \lceil \frac{4}{\varepsilon^2 \cdot \esp[X]^2} \rceil$ muestras 
+\begin{itemize}
+\item ¿Cuán grande es $t$?
+\end{itemize}
+
+\vs{7}
+
+\visible<2->{
+Dado que $\esp[X] = \rho = \frac{1}{\ssat(\varphi)}$, obtenemos:
+\alert{
+\begin{eqnarray*}
+t & = & \bigg\lceil \frac{4 \cdot (\ssat(\varphi))^2}{\varepsilon^2} \bigg\rceil
+\end{eqnarray*}}
+}
+
+\vs{4}
+
+\visible<3->{
+Por lo tanto, $t$ puede ser exponencial en el tamaño de $\varphi$
+\begin{itemize}
+\item ¿Puede ser solucionado este problema utilizando una valuación distinta de $\sigma$ que satisfaga $\varphi$?
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Reduciendo el número de muestras}
+
+{\footnotesize
+
+Consideramos nuevamente la valuación $\sigma$ que satisface $\varphi$
+\begin{itemize}
+\item Recuerde que $\sigma(x_i) = v_i$ para cada $i \in \{1, \ldots, n\}$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Tenemos que:
+\begin{multline*}
+\ssat(\varphi) \ = \
+\frac{\ssat(\varphi)}{\ssat(\varphi[\frac{x_1}{v_1}])} \cdot  \frac{\ssat(\varphi[\frac{x_1}{v_1}])}{\ssat(\varphi[\frac{x_1}{v_1},\frac{x_2}{v_2}])} \cdot \frac{\ssat(\varphi[\frac{x_1}{v_1},\frac{x_2}{v_2}])}{\ssat(\varphi[\frac{x_1}{v_1},\frac{x_2}{v_2},\frac{x_3}{v_3}])} \cdot \ldots\\ \cdot  \frac{\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_{n-1}}{v_{n-1}}])}{\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_{n}}{v_{n}}])} \cdot {\textstyle \ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_n}{v_n}])} 
+\end{multline*}
+}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Reduciendo el número de muestras}
+
+{\footnotesize
+
+Por lo tanto:
+\begin{multline*}
+\ssat(\varphi) \ = \ \frac{1}{\bigg(\frac{\ssat(\varphi[\frac{x_1}{v_1}])}{\ssat(\varphi)}\bigg)} \cdot  \frac{1}{\bigg(\frac{\ssat(\varphi[\frac{x_1}{v_1},\frac{x_2}{v_2}])}{\ssat(\varphi[\frac{x_1}{v_1}])}\bigg)} \ \cdot\\
+\frac{1}{\bigg(\frac{\ssat(\varphi[\frac{x_1}{v_1},\frac{x_2}{v_2},\frac{x_3}{v_3}])}{\ssat(\varphi[\frac{x_1}{v_1},\frac{x_2}{v_2}])}\bigg)} \cdot \ldots \cdot \frac{1}{\bigg(\frac{\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_{n}}{v_{n}}])}{\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_{n-1}}{v_{n-1}}])}\bigg)} 
+\end{multline*}
+
+\vs{6}
+
+Definiendo $\rho_i = \frac{\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_{i}}{v_{i}}])}{\ssat(\varphi[\frac{x_1}{v_1}, \ldots, \frac{x_{i-1}}{v_{i-1}}])}$, obtenemos:
+\alert{
+\begin{eqnarray*}
+\ssat(\varphi) & =  & \prod_{i=1}^n \frac{1}{\rho_i}
+\end{eqnarray*}}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Estimando $\rho_1$}
+
+{\small
+
+Sea $X$ una variable aleatoria tal que para toda valuación $\sigma'$ que satisface~$\varphi$:
+\begin{eqnarray*}
+X(\sigma') & = &
+\begin{cases}
+1 & \text{ si } \sigma'(x_1) = v_1\\
+0 & \text{ en caso contrario}
+\end{cases}
+\end{eqnarray*}
+Tenemos que $X \sim \ber(\rho_1)$
+
+\vs{10}
+
+Realizamos $t \geq 1$ nuestras independientes $X_{1}$, $\ldots$, $X_{t}$ de $X$, y utilizamos como estimador el promedio $\overline{X} = \frac{1}{t} \sum_{i=1}^t X_i$
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Estimando $\rho_1$}
+
+{\small
+
+Para estimar $\rho_1$ utilizamos el siguiente algoritmo:
+
+\vs{-4}
+
+\begin{tabbing}
+\phantom{MM} \= \phantom{MM} \= \phantom{MM} \=\\
+\> $\fav := 0$\\
+\>\afor $j := 1$ \ato $t$ \ado \\
+\> \> $\sigma' := \G(\varphi)$\\
+\> \> \alert{\aif $\sigma'(x_1) = v_1$ \athen}\\
+\> \> \>  $\fav := \fav + 1$\\
+\> \areturn $\frac{\fav}{t}$
+\end{tabbing}
+
+\vs{6}
+
+\visible<2->{
+¿Qué tan buena es la estimación de $\rho_1$? ¿Solucionamos el problema que teníamos con el enfoque anterior?
+}
+
+}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Estimando $\rho_1$}
+
+{\footnotesize
+
+Usando nuevamente la desigualdad de Chebyshev obtenemos:
+\begin{eqnarray*} 
+\pr(|\overline{X} - \esp[\overline{X}]| \geq \varepsilon \cdot \esp[\overline{X}]) & \leq & \frac{1}{t \cdot \varepsilon^2 \cdot \esp[X]^2}
+\end{eqnarray*}
+
+\vs{6}
+
+Entonces realizamos $t = \lceil \frac{4}{\varepsilon^2 \cdot \esp[X]^2} \rceil$ muestras 
+\begin{itemize}
+\item Dado que $\esp[X] = \rho_1 = \frac{\ssat(\varphi[\frac{x_1}{v_1}])}{\ssat(\varphi)}$, obtenemos:
+\alert{\begin{eqnarray*}
+t & = & \bigg\lceil \frac{4 \cdot (\ssat(\varphi))^2}{\varepsilon^2 \cdot (\ssat(\varphi[\frac{x_1}{v_1}]))^2} \bigg\rceil
+\end{eqnarray*}}
+\end{itemize}
+
+
+\vs{4}
+
+\visible<2->{
+Por lo tanto, nuevamente $t$ puede ser exponencial en el tamaño de $\varphi$
+\begin{itemize}
+\item Por ejemplo, si $\ssat(\varphi[\frac{x_1}{v_1}])=1$ y $\ssat(\varphi) = 2^{n-1} + 1$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Reduciendo el valor de $t$}
+
+{\small
+
+¿Qué salió mal? \visible<2->{El problema de elegir $\sigma$ antes de realizar la estimación de $\rho_1$ es que el valor $\esp[X]$ puede ser muy pequeño, por lo que el valor $\frac{1}{\esp[X]^2}$ puede ser muy grande.}
+\begin{itemize}
+\visible<3->{{\footnotesize \item En el caso anterior podíamos tener que $\esp[X] = \frac{1}{2^{n-1} +  1}$, por lo que $\frac{1}{\esp[X]^2} = (2^{n-1}+1)^2$}}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+Para evitar este problema, tenemos que elegir el valor $v_1$ por el que vamos a reemplazar la variable $x_1$ {\bf después} de realizar las $t$ muestras.
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Reduciendo el valor de $t$}
+
+{\footnotesize
+
+Sea:
+\begin{center}
+${\displaystyle \alpha = \frac{\ssat(\varphi[\frac{x_1}{0}])}{\ssat(\varphi)}}$ \ \ \ y \ \ \
+${\displaystyle \beta = \frac{\ssat(\varphi[\frac{x_1}{1}])}{\ssat(\varphi)}}$
+\end{center}
+Nótese que $\alpha + \beta = 1$
+
+\vs{8}
+
+Sean $Y$, $Z$ variables aleatorios tales que para toda valuación $\sigma$ que satisface $\varphi$:
+\begin{eqnarray*}
+Y(\sigma) & = &
+\begin{cases}
+1 & \text{ si } \sigma(x_1) = 0\\
+0 & \text{ si } \sigma(x_1) = 1
+\end{cases}\\
+Z(\sigma) & = &
+\begin{cases}
+1 & \text{ si } \sigma(x_1) = 1\\
+0 & \text{ si } \sigma(x_1) = 0
+\end{cases}\\
+\end{eqnarray*} 
+%\begin{eqnarray*}
+%X(\sigma') & = &
+%\begin{cases}
+%1 & \text{ si } \sigma'(x_1) = v_1\\
+%0 & \text{ en caso contrario}
+%\end{cases}
+%\end{eqnarray*}
+%\end{tabular}
+%\end{center}
+Nótese que $Y \sim \ber(\alpha)$, $Z \sim \ber(\beta)$ y $Z = 1 - Y$
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Reduciendo el valor de $t$}
+
+{\small
+
+Consideramos los estimadores $\overline{Y}$ y $\overline{Z}$ que calculamos con el siguiente algoritmo:
+
+\vs{-4}
+
+\begin{tabbing}
+\phantom{MM} \= \phantom{MM} \= \phantom{MM} \=\\
+\> $\fav_Y := 0$\\
+\> $\fav_Z := 0$\\
+\>\afor $j := 1$ \ato $t$ \ado \\
+\> \> $\sigma := \G(\varphi)$\\
+\> \> \alert{\aif $\sigma(x_1) = 0$}\\
+\> \> \> \alert{\athen $\fav_Y := \fav_Y + 1$}\\
+\> \> \> \alert{\aelse $\fav_Z := \fav_Z + 1$}\\
+\> \areturn $(\frac{\fav_Y}{t},\frac{\fav_Z}{t})$
+\end{tabbing}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Reduciendo el valor de $t$}
+
+{\footnotesize
+
+Finalmente reemplazamos $x_1$ por:
+\begin{eqnarray*}
+v_1 & = &
+\begin{cases}
+0 & \text{ si } \overline{Y} \geq \overline{Z}\\
+1 & \text{ si } \overline{Y} < \overline{Z}
+\end{cases}
+\end{eqnarray*}
+
+\vs{8}
+
+Lo cual corresponde a utilizar el siguiente estimador:
+\alert{
+\begin{eqnarray*}
+X & = & \text{\bf max}\{\overline{Y},\overline{Z}\}
+\end{eqnarray*}
+}
+
+\vs{4}
+
+\visible<2->{
+Vale decir, reemplazamos $x_1$ por el valor $v_1$ que esperamos que aparezca un mayor número de veces en las valuaciones que satisfacen $\varphi$
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Reduciendo el valor de $t$}
+
+{\small
+
+¿Solucionamos el problema con el valor de $\esp[X]$? \visible<2->{{\bf ¡Sí!}}
+
+\vs{8}
+
+\visible<3->{
+Dado que $\overline{Y} \leq X$ y $\overline{Z} \leq X$, tenemos que $\esp[\overline{Y}] \leq \esp[X]$ y $\esp[\overline{Z}] \leq \esp[X]$
+\begin{itemize}
+\item Por lo tanto $\alpha \leq \esp[X]$ y $\beta \leq \esp[X]$
+\end{itemize}
+}
+
+\vs{8}
+
+\visible<4->{
+Tenemos que $\alpha  + \beta \leq 2 \cdot \esp[X]$, de lo cual concluimos $\frac{1}{2} \leq \esp[X]$
+}
+
+\vs{8}
+
+
+\visible<5->{
+\alert{Concluimos entonces que:
+\vs{-2}
+\begin{eqnarray*}
+\frac{1}{\esp[X]^2} & \leq & 4
+\end{eqnarray*}}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Qué más debemos hacer?}
+
+{\small
+
+Debemos realizar procedimientos de estimación similares para $\rho_2$, $\ldots$, $\rho_n$
+\begin{itemize}
+\item En todos ellos usamos el mismo valor de muestras $t$
+\end{itemize}
+
+\vs{10}
+
+Además, debemos calcular cómo los errores en las estimaciones de $\rho_1$, $\ldots$, $\rho_n$ se componen para obtener un error para la estimación de 
+\begin{eqnarray*}
+\prod_{i=1}^n \rho_i
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Qué más debemos hacer?}
+
+{\small
+
+Finalmente, a partir de la estimación de ${\displaystyle \prod_{i=1}^n \rho_i}$, obtenemos una estimación~de:
+\begin{eqnarray*}
+\ssat(\varphi) \ =  \ \prod_{i=1}^n \frac{1}{\rho_i} \ = \ \frac{1}{{\displaystyle \prod_{i=1}^n \rho_i}}
+\end{eqnarray*}
+Esto nos da como resultado un FPRAS para $\ssat$.
+
+\vs{10}
+
+Vamos a mostrar en un segundo ejemplo como las estimaciones $\rho_1$, $\ldots$, $\rho_n$ son utilizadas para generar un FPRAS para un problema de conteo a partir de un generador uniforme de soluciones.
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración: segundo ejemplo}
+
+{\small
+
+En este segundo ejemplo vamos a explicar cómo componer los errores en las estimaciones locales para obtener una cota superior en el error total de la estimación.
+
+\vs{10}
+
+Y también queremos considerar una forma alternativa de auto-reducción.
+\begin{itemize}
+\item Hay muchas formas de definir una noción de relación auto-reducible
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración: segundo ejemplo}
+
+{\small
+
+Utilizamos $\cdot$ para denotar el producto interior usual en $\mathbb{R}^n$ ($n \geq 1$)
+
+\vs{8}
+
+Considere el siguiente problema:
+\begin{multline*}
+\ks \ = \ \{ (\vec a, b) \mid \vec a \in \mathbb{N}^n \text{ para } n \geq 1, \\ b \in \mathbb{Z} \text{ y existe } \vec x \in \{0,1\}^n \text{ tal que } \vec a \cdot \vec x \leq b \}
+\end{multline*}
+
+\vs{8}
+
+\visible<2->{
+$\ks$ es una versión simplificada del problema de la mochila, de hecho tenemos que $\ks \in \ptime$
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ks$ como una relación y el problema de conteo asociado}
+
+{\footnotesize
+
+\begin{ejercicio}
+Podemos representar $\ks$ como la siguiente relación:
+\begin{eqnarray*}
+R_{\ks} & = & \{ ((\vec a, b), \vec x) \mid \vec a \in \mathbb{N}^n \text{ y } \vec x \in \{0,1\}^n \text{ para } n \geq 1, b \in \mathbb{Z} \text{ y } \vec a \cdot \vec x \leq b \}
+\end{eqnarray*}
+Demuestre que $R_{\ks}$ es auto-reducible.
+\end{ejercicio}
+
+\vs{8}
+
+\visible<2->{
+Definimos la función de conteo $\sks$ como $\sks(\vec a, b) = N_{R_{\ks}}((\vec a, b))$
+\begin{itemize}
+\item Suponiendo que $\vec a \in \mathbb{N}^n$, tenemos que $\sks(\vec a, b)$ es el número de vectores $\vec x \in \{0,1\}^n$ tales que~$\vec a \cdot \vec x \leq b$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración para $\ks$}
+
+{\footnotesize
+
+Sea $(\vec a, b)$ una entrada de $\sks$
+\begin{itemize}
+\item Suponemos que $\vec a = (a_1, \ldots, a_n)$ con $0 < a_1 \leq \cdots \leq a_n$ y $b \geq 0$
+\begin{itemize}
+{\footnotesize \item ¿Por qué podemos suponer esto?}
+\end{itemize}
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Definimos $b_0 = 0$ y para cada $i \in \{1, \ldots, n\}$:
+\begin{eqnarray*}
+b_i & = & \min\bigg\{\sum_{j=1}^i a_j,\ b\bigg\}
+\end{eqnarray*}
+}
+
+
+\vs{5}
+
+\visible<3->{
+Es importante notar que:
+\alert{
+\begin{center}
+\begin{tabular}{rclcl}
+$\sks(\vec a, b_0)$ & $=$ & $1$\\
+$\sks(\vec a, b_i)$ & $\leq$ & $\sks(\vec a,b_{i+1})$ & para todo $i \in \{0, \ldots, n-1\}$\\
+$\sks(\vec a, b_n)$ & $=$ & $\sks(\vec a, b)$
+\end{tabular}
+\end{center}}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración para $\ks$}
+
+{\footnotesize
+
+De la misma forma que para $\ssat$, la demostración se basa en la igualdad:
+\begin{multline*}
+\sks(\vec a, b) \ = \ 
+\sks(\vec a, b_n) \ = \ 
+\frac{\sks(\vec a, b_n)}{\sks(\vec a, b_{n-1})} \cdot
+\frac{\sks(\vec a, b_{n-1})}{\sks(\vec a, b_{n-2})} \cdot \ \cdots \\
+\frac{\sks(\vec a, b_{1})}{\sks(\vec a, b_{0})} \cdot
+\sks(\vec a, b_{0})
+\end{multline*}
+
+\vs{8}
+
+\visible<2->{
+Para cada $i \in \{1, \ldots, n\}$ definimos:
+\begin{eqnarray*}
+\alert{\rho_i} & \alert{=} & \alert{\frac{\sks(\vec a, b_{i-1})}{\sks(\vec a, b_i)}}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La idea de la demostración para $\ks$}
+
+{\small
+
+Tenemos que $0 < \rho_i \leq 1$ para cada $i \in \{1, \ldots, n\}$
+
+\vs{8}
+
+\visible<2->{
+Considerando que $\sks(\vec a, b_0) = 1$, concluimos que:
+\begin{eqnarray*}
+\alert{\frac{1}{\sks(\vec a, b)}} & \alert{=} & \alert{\prod_{i=1}^n \rho_i}
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+Por lo tanto, si logramos tener buenas estimaciones de cada $\rho_i$ podemos obtener una buena estimación de $\frac{1}{\sks(\vec a, b)}$
+\begin{itemize}
+\item Y de esta forma de $\sks(\vec a, b)$
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Estimando $\rho_i$}
+
+{\footnotesize
+
+Sea $X_i$ una variable aleatoria tal que para toda valuación $\vec x \in \{0,1\}^n$ que satisface $\vec a \cdot \vec x \leq b_i$:
+\begin{eqnarray*}
+X_i(\vec x) & = &
+\begin{cases}
+1 & \text{ si } \vec a \cdot \vec x \leq b_{i-1}\\
+0 & \text{ en caso contrario}
+\end{cases}
+\end{eqnarray*}
+Tenemos que $X_i \sim \ber(\rho_i)$
+
+\vs{8}
+
+Realizamos $t \geq 1$ nuestras independientes $Y_{i,1}$, $\ldots$, $Y_{i,t}$ de $X_i$, y utilizamos como estimador el promedio $\overline{Y_i} = \frac{1}{t} \cdot \sum_{j=1}^t Y_{i,j}$
+\begin{itemize}
+\item Recuerde que $\esp[\overline{Y_i}] = \rho_i$ y tiene una menor varianza
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+\alert{¿Pero como podemos muestrear $X_i$?}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Estimando $\rho_i$}
+
+{\small
+
+\alert{En este punto necesitamos suponer que tenemos un generador uniforme para $R_{\ks}$}
+\vs{1}
+\begin{itemize}
+{\footnotesize
+\visible<2->{\item Si este generador funciona en tiempo polinomial entonces vamos a obtener un FPRAS para $\sks$}
+
+\visible<3->{\item En la demostración del teorema la hipótesis será que existe un FPAUG para la relación que estemos considerando}
+}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+Sea $\G$ el generador uniforme que necesitamos. Para cada entrada $(\vec c, d)$ de $\ks$ con $\vec c \in \mathbb{N}^m$, y cada vector $\vec y \in \mathbb{N}^m$ tenemos:
+\begin{itemize}
+\item si $\vec c \cdot \vec y > d$, entonces $\pr(\G(\vec c, d) = \vec y) = 0$
+\item si  $\vec c \cdot \vec y \leq d$, entonces $\pr(\G(\vec c, d) = \vec y) = \frac{1}{\sks(\vec c, d)}$
+\end{itemize}
+}
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Estimando $\rho_i$}
+
+{\small
+
+Para estimar $\rho_i = \frac{\sks(\vec a, b_{i-1})}{\sks(\vec a, b_i)}$ utilizamos el siguiente algoritmo:
+
+\vs{-4}
+
+\begin{tabbing}
+\phantom{MM} \= \phantom{MM} \= \phantom{MM} \=\\
+\> $\fav := 0$\\
+\>\afor $j := 1$ \ato $t$ \ado \\
+\> \> \alert{$\vec v := \G(\vec a, b_i)$}\\
+\> \> \aif $\vec a \cdot \vec v \leq b_{i-1}$ \athen\\
+\> \> \>  $\fav := \fav + 1$\\
+\> \areturn $\frac{\fav}{t}$
+\end{tabbing}
+
+\vs{4}
+
+\visible<2->{
+¿Qué tan buena es la estimación de $\rho_i$? ¿Que tan buena es la estimación de $\frac{1}{\sks(\vec a, b)}$ dadas las estimaciones de $\rho_1$, $\ldots$, $\rho_n$?
+\begin{itemize}
+\visible<3->{\item Tenemos que acotar la probabilidad de error}
+\end{itemize}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error}
+
+{\small
+
+Sea ${\displaystyle Z = \prod_{i=1}^n \overline{Y_i}}$
+
+\vs{8}
+
+\visible<2->{
+Y sea $\varepsilon \in (0,1)$
+%\begin{itemize}
+%\item Nos concentramos en el caso interesante en que esperamos que el error sea arbitrariamente pequeño
+%\end{itemize}}
+}
+
+\vs{8}
+
+\visible<3->{
+Para obtener un FPRAS para $\sks$, primero tenemos que acotar superiormente la siguiente probabilidad:
+\begin{eqnarray*} 
+\pr\bigg(\bigg|Z - \frac{1}{\sks(\vec a, b)}\bigg| \geq \varepsilon \cdot  \frac{1}{\sks(\vec a, b)}\bigg)
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error}
+
+{\small
+
+Dado que $\overline{Y_i}$ es independiente de $\overline{Y_j}$ para $i\neq j$; tenemos que:
+\begin{eqnarray*}
+\esp[Z] \ = \ \esp\bigg[\prod_{i=1}^n \overline{Y_i}\bigg] \ = \ \prod_{i=1}^n \esp[\overline{Y_i}] \ = \ \prod_{i=1}^n \rho_i \ = \ \frac{1}{\sks(\vec a, b)}
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Usando entonces la desigualdad de Chebyshev obtenemos:
+\begin{eqnarray*} 
+\pr\bigg(\bigg|Z - \frac{1}{\sks(\vec a, b)}\bigg| \geq \varepsilon \cdot  \frac{1}{\sks(\vec a, b)}\bigg) & = & 
+\pr(|Z - \esp[Z]| \geq \varepsilon \cdot \esp[Z])\\
+& \leq & \frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}\\
+\end{eqnarray*}
+}
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error}
+
+{\footnotesize
+
+Pero tenemos que:
+\begin{eqnarray*}
+\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}
+& = & \frac{1}{\varepsilon^2} \cdot \frac{\vr[Z]}{\esp[Z]^2}\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\frac{\esp[Z^2] - \esp[Z]^2}{\esp[Z]^2}\bigg)\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\frac{\esp[Z^2]}{\esp[Z]^2} - 1\bigg)\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\frac{\esp[(\prod_{i=1}^n \overline{Y_i})^2]}{(\prod_{i=1}^n \esp[\overline{Y_i}])^2} - 1\bigg)\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\frac{\esp[\prod_{i=1}^n \overline{Y_i}^2]}{\prod_{i=1}^n \esp[\overline{Y_i}]^2} - 1\bigg)\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\frac{\prod_{i=1}^n \esp[\overline{Y_i}^2]}{\prod_{i=1}^n \esp[\overline{Y_i}]^2} - 1\bigg)
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La probabilidad de error}
+
+{\footnotesize
+
+\begin{eqnarray*}
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\prod_{i=1}^n \frac{\esp[\overline{Y_i}^2]}{\esp[\overline{Y_i}]^2} - 1\bigg)\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\prod_{i=1}^n \frac{(\vr[\overline{Y_i}] + \esp[\overline{Y_i}]^2)}{\esp[\overline{Y_i}]^2} - 1\bigg)\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\prod_{i=1}^n \bigg[1 + \frac{\vr[\overline{Y_i}] }{\esp[\overline{Y_i}]^2}\bigg] - 1\bigg)\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\prod_{i=1}^n \bigg[1 + \frac{\vr[\overline{Y_i}] }{\rho_i^2}\bigg] - 1\bigg)\\
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Por lo tanto necesitamos acotar superiormente ${\displaystyle \frac{\vr[\overline{Y_i}] }{\rho_i^2}}$}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando superiormente $\frac{\vr[\overline{Y_i}] }{\rho_i^2}$}
+
+{\footnotesize
+
+Tenemos que:
+\begin{eqnarray*}
+\frac{\vr[\overline{Y_i}] }{\rho_i^2} & = & \frac{\vr[\frac{1}{t} \sum_{j=1}^t Y_{i,j}]}{\rho_i^2}\\
+& = & \frac{\frac{1}{t^2} \cdot \vr[\sum_{j=1}^t Y_{i,j}]}{\rho_i^2}\\
+& = & \frac{\frac{1}{t^2} \cdot \sum_{j=1}^t \vr[Y_{i,j}]}{\rho_i^2}\\
+& = & \frac{\frac{1}{t^2} \cdot \sum_{j=1}^t \rho_i \cdot (1 - \rho_i)}{\rho_i^2}\\
+& = & \frac{\frac{1}{t^2} \cdot t \cdot \rho_i \cdot (1 - \rho_i)}{\rho_i^2}\\
+& \alert{=} & \alert{\frac{1}{t} \cdot \bigg(\frac{1}{\rho_i} - 1\bigg)}
+\end{eqnarray*}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando superiormente $\frac{\vr[\overline{Y_i}] }{\rho_i^2}$}
+
+{\footnotesize
+
+\begin{lema}
+Para cada $i \in \{1, \ldots, n\}$ se tiene  que:
+\begin{eqnarray*}
+\sks(\vec a, b_{i-1}) \ \leq \ \sks(\vec a, b_i) \ \leq \ (n+1) \cdot \sks(\vec a, b_{i-1})
+\end{eqnarray*}
+\end{lema}
+
+\vs{8}
+
+\visible<2->{
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Sea $\vec x \in \{0,1\}^n$ tal que $\vec x = (x_1, \ldots, x_n)$ y $\vec a \cdot \vec x \leq b_i$. Demuestre que si $\vec a \cdot \vec x > b_{i-1}$, entonces existe una posición $j \in \{1, \ldots, n\}$ tal que $x_j = 1$ y para el vector $\vec y = (x_1, \ldots, x_{j-1}, 0, x_{j+1}, \ldots, x_n)$ se tiene que $\vec a \cdot \vec y \leq b_{i-1}$.
+
+\vs{1}
+
+\item Demuestre que el lema es consecuencia de la propiedad anterior.
+\end{enumerate}
+\end{exampleblock}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando superiormente $\frac{\vr[\overline{Y_i}] }{\rho_i^2}$}
+
+{\small
+
+Del lema concluimos que para cada $i \in \{1, \ldots, n\}$:
+\begin{eqnarray*}
+\frac{1}{\rho_i} \ = \ \frac{\sks(\vec a, b_i)}{\sks(\vec a, b_{i-1})} \ \leq \ (n+1)
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto:
+\begin{eqnarray*}
+\alert{\frac{\vr[\overline{Y_i}] }{\rho_i^2} \ = \ \frac{1}{t} \cdot \bigg(\frac{1}{\rho_i} - 1\bigg) \ \leq \frac{n}{t}}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando superiormente $\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}$}
+
+{\footnotesize
+
+De los cálculos anteriores concluimos que:
+\begin{eqnarray*}
+\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\prod_{i=1}^n \bigg[1 + \frac{\vr[\overline{Y_i}] }{\rho_i^2}\bigg] - 1\bigg)\\
+& \leq & \frac{1}{\varepsilon^2} \cdot \bigg(\prod_{i=1}^n \bigg[1 + \frac{n}{t}\bigg] - 1\bigg)\\
+& \alert{=} & \alert{\frac{1}{\varepsilon^2} \cdot \bigg(\bigg[1 + \frac{n}{t}\bigg]^n - 1\bigg)}
+\end{eqnarray*}
+
+\vs{4}
+
+%\visible<2->{
+%Tenemos que escoger el valor de $t$ de manera de hacer pequeña la cota superior para $\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}$}
+
+
+\visible<2->{
+Escogemos $t$ de manera de hacer pequeña la cota superior para $\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}$}
+\begin{itemize}
+\visible<3->{ \item Vamos a escoger $t$ de manera que sea polinomial en $n$ y $\frac{1}{\varepsilon}$, dado que $n$ es menor que el tamaño de la entrada $(\vec b, a)$}
+
+\visible<4->{ \item Esperamos que $n$ y $\frac{1}{\varepsilon^2}$ sean valores grandes, por lo que $t$ debe disminuir el impacto de estos valores}
+\begin{itemize}
+{\footnotesize
+\visible<5->{\item Tomamos \alert{$t = c \cdot n^2 \cdot \varepsilon^{-2}$}, donde $c$ es una constante}}
+\end{itemize}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Escogiendo el valor de $t$}
+%
+%{\small
+%
+%Consideramos las siguientes condiciones:
+%\vs{2}
+%\begin{itemize}
+%\visible<2->{ \item Vamos a escoger $t$ de manera que sea polinomial en $n$ y $\frac{1}{\varepsilon}$, dado que $n$ es menor que el tamaño de la entrada $(\vec b, a)$}
+%
+%\vs{2}
+%
+%\visible<3->{ \item Esperamos que $n$ y $\frac{1}{\varepsilon^2}$ sean valores grandes, por lo que $t$ debe disminuir el impacto de estos valores}
+%\begin{itemize}
+%\visible<4->{\item Tomamos \alert{$t = c \cdot n^2 \cdot \varepsilon^{-2}$}, donde $c$ es una constante}
+%\end{itemize}
+%
+%
+%\vs{2}
+%
+%\visible<5->{\item Al escoger el valor de $c$ también debemos considerar que el objetivo final es utilizar $Z^{-1}$ como una buena aproximación de $\sks(\vec a,b)$
+%\begin{itemize}
+%\item El valor de $c$ debe entonces darnos cierta holgura
+%\end{itemize}}
+%\end{itemize}
+%
+%}
+%
+%\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El valor de $t$ y una cota superior para $\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}$}
+
+{\small
+
+Tomamos $t = 5 \cdot n^2 \cdot \varepsilon^{-2}$
+
+\vs{8}
+
+\visible<2->{
+Tenemos que:
+\begin{eqnarray*}
+\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}
+& \leq & \frac{1}{\varepsilon^2} \cdot \bigg(\bigg[1 + \frac{n}{t}\bigg]^n - 1\bigg) \\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\bigg[1 + \frac{\varepsilon^2}{5 \cdot n}\bigg]^n - 1\bigg)
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El valor de $t$ y una cota superior para $\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}$}
+
+{\footnotesize
+
+Además, tenemos que:
+\begin{eqnarray*}
+\bigg[1 + \frac{\varepsilon^2}{5 \cdot n}\bigg]^n & = & \sum_{i=0}^n \binom{n}{i} \bigg(\frac{\varepsilon^2}{5 \cdot n}\bigg)^i\\
+ & = & \sum_{i=0}^n \frac{n!}{i! \cdot (n-i)! \cdot n^i} \cdot  \bigg(\frac{\varepsilon^2}{5}\bigg)^i\\
+ & \leq & \sum_{i=0}^n \frac{1}{i!} \cdot  \bigg(\frac{\varepsilon^2}{5}\bigg)^i\\
+ & < & \sum_{i=0}^\infty \frac{\big(\frac{\varepsilon^2}{5}\big)^i}{i!}\\
+ & \alert{=} & \alert{e^{\frac{\varepsilon^2}{5}}}
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El valor de $t$ y una cota superior para $\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}$}
+
+{\footnotesize
+
+\begin{lema}
+$e^{\frac{\varepsilon^2}{5}} \leq \frac{\varepsilon^2}{4} + 1$
+\end{lema}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el lema considerando que $0 < \frac{\varepsilon^2}{4} < \frac{1}{4}$ y el intervalo donde la función $f(x) = e^{\frac{4}{5} \cdot x} - x - 1$ es negativa.
+\end{ejercicio}
+}
+
+\vs{6}
+
+\visible<3->{
+Concluimos que:
+\begin{eqnarray*}
+\alert{\bigg[1 + \frac{\varepsilon^2}{5 \cdot n}\bigg]^n \ \leq \ e^{\frac{\varepsilon^2}{5}} \ \leq \ \frac{\varepsilon^2}{4}+1}
+\end{eqnarray*}
+}
+
+}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El valor de $t$ y una cota superior para $\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}$}
+
+{\footnotesize
+
+Finalmente obtenemos que:
+\begin{eqnarray*}
+\frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}
+& \leq & \frac{1}{\varepsilon^2} \cdot \bigg(\bigg[1 + \frac{\varepsilon^2}{5 \cdot n}\bigg]^n - 1\bigg)\\
+& \leq & \frac{1}{\varepsilon^2} \cdot \bigg(\frac{\varepsilon^2}{4}+1 - 1\bigg)\\
+& = & \frac{1}{\varepsilon^2} \cdot \bigg(\frac{\varepsilon^2}{4}\bigg)\\
+& \alert{=} & \alert{\frac{1}{4}}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Por lo tanto, para todo $0 < \varepsilon < 1$ obtenemos:
+\alert{
+\begin{equation}\label{eq-sks}
+\tag{$\natural$}
+\pr\bigg(\bigg|Z - \frac{1}{\sks(\vec a, b)}\bigg| \geq \varepsilon \cdot  \frac{1}{\sks(\vec a, b)}\bigg) 
+\ \leq \ \frac{\vr[Z]}{\varepsilon^2 \cdot \esp[Z]^2}
+\ \leq \ \frac{1}{4}
+\end{equation}
+}
+}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Obteniendo un FPRAS para $\sks$}
+
+{\footnotesize
+
+Dado $0 < \delta < 1$, para terminar debemos demostrar que:
+\begin{eqnarray*} 
+\pr(|Z^{-1} - \sks(\vec a, b)| \leq \delta \cdot \sks(\vec a, b)) 
+& \geq & \frac{3}{4}
+\end{eqnarray*}
+De esta forma $Z^{-1}$ nos da un FPRAS para $\sks$
+
+\vs{8}
+
+\visible<2->{
+Considerando $\varepsilon = \frac{\delta}{2}$ en \eqref{eq-sks} obtenemos:
+\begin{eqnarray*}
+\pr\bigg(\bigg(1 - \frac{\delta}{2}\bigg) \cdot \frac{1}{\sks(\vec a, b)} \leq Z \leq \bigg(1 + \frac{\delta}{2}\bigg) \cdot \frac{1}{\sks(\vec a, b)}\bigg) & \geq & \frac{3}{4}
+\end{eqnarray*}
+}
+
+
+\vs{4}
+
+\visible<3->{
+Dado que $0 < \frac{\delta}{2} < 1$, entonces tenemos que:
+\begin{eqnarray*}
+\pr\bigg(\frac{1}{1 + \frac{\delta}{2}} \cdot \sks(\vec a, b) \leq Z^{-1} \leq \frac{1}{1 - \frac{\delta}{2}} \cdot \sks(\vec a, b)\bigg) & \geq & \frac{3}{4}
+\end{eqnarray*}
+}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Obteniendo un FPRAS para $\sks$}
+
+{\footnotesize
+
+Dado que $(1 - \delta) \leq \frac{1}{1 + \frac{\delta}{2}}$ y $\frac{1}{1 - \frac{\delta}{2}} \leq (1 + \delta)$, concluimos que:
+\vs{-1}
+\begin{multline*}
+\pr((1 - \delta) \cdot \sks(\vec a, b) \leq Z^{-1} \leq (1 + \delta) \cdot \sks(\vec a, b)\bigg) \ \geq \\
+\pr\bigg(\frac{1}{1 + \frac{\delta}{2}} \cdot \sks(\vec a, b) \leq Z^{-1} \leq \frac{1}{1 - \frac{\delta}{2}} \cdot \sks(\vec a, b)\bigg) \ \geq \ \frac{3}{4}
+\end{multline*}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto $Z^{-1}$ nos da un FPRAS para $\sks$
+\begin{itemize}
+\item El número de pasos ejecutados por el algoritmo es polinomial en el tamaño de la entrada $(\vec a, b)$ y $\frac{1}{\delta}$ si suponemos que $\G$ funciona en tiempo polinomial, puesto que $\G$ es invocado $n \cdot t $ veces y:
+\vs{-1}
+\alert{
+\begin{eqnarray*}
+n \cdot t \ = \ n \cdot 5 \cdot n^2 \cdot \varepsilon^{-2} \ = \
+5 \cdot n^3 \cdot \bigg(\frac{\delta}{2}\bigg)^{-2} \ = \
+\frac{20 \cdot n^3}{\delta^{2}}
+\end{eqnarray*}}
+\end{itemize}}
+
+}
+\end{frame}
+
+
+
+
+
+\newcommand{\ext}[1]{\text{Ext}_{#1}}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración general}
+
+{\small
+
+Vamos a extender las ideas utilizadas para $\ssat$ y $\sks$ al caso general.
+
+\vs{8}
+
+Vale decir, dada una $p$-relación $R$ auto-reducible, vamos a demostrar que si existe un FPAUG para $R$, entonces existe un FPRAS para $R$
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunos supuestos para la relación $R$}
+
+{\footnotesize
+
+Suponemos que $R \subseteq \Sigma^* \times \Sigma^*$, y dados $x,w\in\Sigma^*$ definimos:
+\begin{eqnarray*}
+ \ext{R}(x,w) &= & \{y\in\Sigma^* \mid (x,y)\in R \text{ y existe } z \in \Sigma^* \text{ tal que } y=w z\}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Sean $g: \Sigma^* \to \mathbb{N}$, $\psi: \Sigma^* \times \Sigma^* \to \Sigma^*$ y $\sigma : \Sigma^* \to \mathbb{N}$ funciones que muestran que $R$ es auto-reducible.
+\begin{itemize}
+\item De acuerdo a la definición vista en las transparencias anteriores
+\end{itemize}
+
+\vs{6}
+
+Además, sea $\G : \Sigma^* \times (0,1) \to \Sigma^* \cup \{\bot\}$ un FPAUG para $R$
+}
+
+\vs{6}
+
+\visible<3->{
+Finalmente, sean $c,d \in \mathbb{R}^+$ tales que $|\Sigma|^{\sigma(x)} \leq |x|^c+d$ para todo $x \in \Sigma^*$
+\begin{itemize}
+\item Sabemos que existe porque $\sigma(x) \in O(\log(|x|))$
+\end{itemize}
+}
+
+
+}
+
+\end{frame}
+
+
+\newcommand{\ear}{\text{\bf EAR}}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un esquema de aproximación para $R$}
+
+{\footnotesize
+
+%\vs{4}
+
+%Pasamos a describir el FPRAS para $N_R$, para entrada $(x,\varepsilon)$. Sea $m$ una cota superior para $\{|y| \>|\> (x,y)\in R\}$ (por ejemplo, $m=g(x)$).
+
+%El algoritmo es el siguiente:
+
+
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+\ear($x$, $\varepsilon$)\\
+\> \aif $\G(x,\varepsilon) = \bot$ \athen \areturn 0\\
+\> \aelse\\
+\> \> $N := 1$\\
+\> \> $m := g(x)$\\
+\> \> $t := \lceil 180 \cdot (|x|^{c}+d)^3 \cdot m^3 \cdot \varepsilon^{-2} \rceil$\\
+\> \> \awhile $g(x) > 0$ \ado\\
+\> \> \> \afor $j:=1$ \ato $t$ \ado\\
+\> \> \> \> ${\displaystyle y_j := \G\bigg(x,\frac{\varepsilon}{5 m}\bigg)}$\\
+\> \> \> Sea $w\in\Sigma^{\sigma(x)}$ el prefijo de largo $\sigma(x)$ más común en $\{y_1, \ldots, y_t\}$\\
+\> \> \> ${\displaystyle \alpha := \frac{|\{ j \in \{1, \ldots, t\} \mid y_j \in \ext{R}(x,w)\}|}{t}}$\\
+\> \> \> $x: =\psi(x,w)$\\
+\> \> \>${\displaystyle N := \frac{1}{\alpha} \cdot N}$ \ \ \ \ \ \ \ \ \ \ {\tt /*} se tiene que $\alpha > 0$ {\tt */}\\
+\> \> \areturn $N$
+\end{tabbing}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ear$ es un FPRAS para $R$}
+
+{\footnotesize
+
+Vamos a demostrar que $\ear$ es un FPRAS para $R$
+\begin{itemize}
+\item Sean $x \in \Sigma^*$ y $\varepsilon \in (0,1)$ una entrada de $\ear$
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Si $N_R(x) = 0$, tenemos que $\ear(x,\varepsilon)$ retorna el resultado correcto $0$ dado que $\G$ es un FPAUG para $R$ 
+\begin{itemize}
+\item En el resto de la demostración suponemos que $N_R(x) > 0$
+\end{itemize}}
+
+\vs{6}
+
+\visible<3->{
+De la misma forma, $\ear(x,\varepsilon)$ retorna el resultado correcto si $g(x) = 0$
+\begin{itemize}
+\item ¿Por qué?
+\end{itemize}
+En el resto de la demostración suponemos que $g(x) > 0$
+}
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ear$ es un FPRAS para $R$}
+
+{\small
+
+Tenemos que el valor de la función $g$ disminuye en cada iteración
+\begin{itemize}
+\item ¿Por qué?
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $s$ la cantidad total de iteraciones realizadas por el algoritmo.
+\begin{itemize}
+\item Tenemos que $s \leq g(x) = m$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{$\ear$ es un FPRAS para $R$}
+
+{\footnotesize
+
+$\ear$ funciona en tiempo polinomial en $|x|$ y $\frac{1}{\varepsilon}$
+\vs{1}
+\begin{itemize}
+\item Dado que $R$ es una $p$-relación, sabemos que existe un polinomio fijo $p(u)$ tal que $m = g(x) \leq p(|x|)$
+\vs{1}
+
+\item Además, sabemos que $m$ puede ser calculado en tiempo polinomial dada la definición de relación auto-reducible 
+\vs{1}
+
+\item Finalmente, tenemos que $\G$ es un FPAUG para $R$, y $\ear$ realiza a lo más $m \cdot  \lceil 180 \cdot (|x|^{c}+d)^3 \cdot m^3 \cdot \varepsilon^{-2} \rceil$ llamadas a la función $\G$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Nos queda entonces por demostrar:
+\begin{eqnarray*}
+\pr\bigg((1-\varepsilon) \cdot N_R(x) \ \leq \ \ear(x, \varepsilon) \ \leq \ (1+\varepsilon) \cdot N_R(x)\bigg) & \geq & \frac{3}{4}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La propiedad central}
+
+{\small
+
+Dado $i \in \{1, \ldots, s\}$, para la iteración $i$ del algoritmo sean:
+\begin{itemize}
+\item $x_i$, $N_i$ los valores de las variables $x$ y $N$ al principio de la iteración
+\begin{itemize}
+{\footnotesize \item Tenemos que $x_1 = x$ y $N_1 = 1$}
+\end{itemize}
+
+\item $w_i$, $\alpha_i$ los valores de las variables $w$ y $\alpha$ calculados en la iteración 
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+\begin{block}{{\small Propiedad de aproximación}}
+Para cada $i \in \{1, \ldots, s\}$:
+    \begin{eqnarray*}
+        \frac{\alpha_i}{1+\frac{\varepsilon}{2m}}
+        \ \leq \ \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+        \ \leq \ \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot \alpha_i
+    \end{eqnarray*}
+\end{block}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Usando la propiedad de aproximación}
+
+{\footnotesize
+
+Tenemos que:
+\begin{align*}
+\pr&\bigg((1-\varepsilon) \cdot N_R(x) \leq \ear(x, \varepsilon) \leq(1+\varepsilon) \cdot N_R(x)\bigg) =\\
+&\pr\bigg((1-\varepsilon) \cdot N_R(x) \leq\ear(x, \varepsilon) \leq(1+\varepsilon) \cdot N_R(x) \,\bigg|\, \text{propiedad de aproximación}\bigg)  \cdot\\
+&\hspace{170pt}\pr\bigg(\text{propiedad de aproximación}\bigg) \ +\\ 
+&\pr\bigg((1-\varepsilon) \cdot N_R(x) \leq\ear(x, \varepsilon) \leq(1+\varepsilon) \cdot N_R(x) \,\bigg|\, \overline{\text{propiedad de aproximación}}\bigg)  \cdot\\
+&\hspace{170pt}\pr\bigg(\overline{\text{propiedad de aproximación}}\bigg)  \geq\\ 
+&\pr\bigg((1-\varepsilon) \cdot N_R(x) \leq\ear(x, \varepsilon) \leq(1+\varepsilon) \cdot N_R(x) \,\bigg|\, \text{propiedad de aproximación}\bigg)  \cdot\\
+&\hspace{170pt}\pr\bigg(\text{propiedad de aproximación}\bigg)
+\end{align*}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Usando la propiedad de aproximación}
+
+{\footnotesize
+
+Por lo tanto, para demostrar que $\ear$ es un FPRAS para $R$ basta acotar inferiormente la siguiente probabilidad:
+\begin{align*}
+&\pr\bigg((1-\varepsilon) \cdot N_R(x) \leq \ear(x, \varepsilon) \leq (1+\varepsilon) \cdot N_R(x) \,\bigg|\, \text{propiedad de aproximación}\bigg)  \cdot\\
+&\hspace{170pt}\pr\bigg(\text{propiedad de aproximación}\bigg)
+\end{align*}
+
+\vs{8}
+
+\visible<2->{
+Primero vamos a demostrar que la propiedad de aproximación es suficiente para tener una buena aproximación de $N_R(x)$
+\begin{itemize}
+\item Después de esto vamos a acotar inferiormente la probabilidad de que la propiedad de aproximación se cumpla \end{itemize}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La propiedad de aproximación es suficiente}
+
+{\small
+
+Definimos $x_{s+1}$ y $N_{s+1}$ como los valores de las variables $x$ y $N$ al final de la iteración $s$ del algoritmo. 
+\visible<2->{
+\begin{itemize}
+\alert{\item Tenemos que $g(x_{s+1}) = 0$, $N_R(x_{s+1}) = 1$ y el valor retornado por el algoritmo es $N_{s+1}$}
+\begin{itemize}
+{\footnotesize \item ¿Por qué?}
+\end{itemize}
+\end{itemize}}
+
+\vs{8}
+
+\visible<3->{
+Dado $i \in \{1, \ldots, s\}$, tenemos que:
+\vs{-2}
+\begin{eqnarray*}
+x_{i+1} & = & \psi(x_i,w_i)\\
+N_R(x_{i+1}) & = & |\ext{R}(x_i,w_i)|\\
+N_{i+1} & = & \frac{1}{\alpha_i} \cdot N_i
+\end{eqnarray*}
+}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La propiedad de aproximación es suficiente}
+
+{\footnotesize
+
+Además, tenemos que:
+\begin{align*}
+    \frac{\alpha_i}{(1+\frac{\varepsilon}{2m})}
+    & \leq \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+    \leq \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot \alpha_i \\
+    & \Rightarrow\ 
+    \frac{N_R(x_i)}{(1+\frac{\varepsilon}{2m})}
+    \leq \frac{|\ext{R}(x_i,w_i)|}{\alpha_i}
+    \leq \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot N_R(x_i) \\
+    & \Rightarrow\ 
+    \frac{N_R(x_i)\cdot N_i}{(1+\frac{\varepsilon}{2m})}
+    \leq |\ext{R}(x_i,w_i)| \cdot \frac{N_i}{\alpha_i}
+    \leq \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot N_R(x_i)\cdot N_i \\
+    & \alert{ \Rightarrow\ 
+   \frac{N_R(x_i)\cdot N_i}{(1+\frac{\varepsilon}{2m})}
+       \leq N_R(x_{i+1})\cdot N_{i+1}
+    \leq \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot N_R(x_i)\cdot N_i}
+\end{align*}
+
+
+\vs{6}
+
+\visible<2->{
+Así, la cantidad $N_R(x_i) \cdot N_i$ es {\em casi} una  invariante  del ciclo {\bf while}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La propiedad de aproximación es suficiente}
+
+{\small
+
+Suponiendo que la propiedad de aproximación es cierta concluimos que:
+\begin{eqnarray*}
+   \frac{N_R(x_1)\cdot N_1}{(1+\frac{\varepsilon}{2m})^s}
+       \ \leq \ N_R(x_{s+1})\cdot N_{s+1}
+    \ \leq \ \bigg(1+\frac{\varepsilon}{2m}\bigg)^s \cdot N_R(x_{1})\cdot N_{1}
+\end{eqnarray*}
+
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto, dado que $s \leq m$ tenemos que:
+\begin{eqnarray*}
+   \alert{\frac{N_R(x_1)\cdot N_1}{(1+\frac{\varepsilon}{2m})^m}
+       \ \leq \ N_R(x_{s+1})\cdot N_{s+1}
+    \ \leq \ \bigg(1+\frac{\varepsilon}{2m}\bigg)^m \cdot N_R(x_{1})\cdot N_{1}}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de $N_R(x_i) \cdot N_i$}
+
+{\small
+
+Dado que $x_1 = x$ y $N_1 = 1$, tenemos que $N_R(x) = N_R(x_1) \cdot N_1$
+\begin{itemize}
+\item Recuerde que queremos calcular $N_R(x)$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Dado que $N_R(x_{s+1}) = 1$, tenemos que $N_R(x_{s+1}) \cdot N_{s+1} = N_{s+1}$ 
+\begin{itemize}
+\item Además, sabemos que $\ear(x, \varepsilon) = N_{s+1}$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La propiedad de aproximación es suficiente: conclusión}
+
+{\small
+
+Juntando los resultados anteriores obtenemos:
+\begin{eqnarray*}
+   \frac{N_R(x)}{(1+\frac{\varepsilon}{2m})^m}
+       \ \leq \ \ear(x, \varepsilon)
+    \ \leq \ \bigg(1+\frac{\varepsilon}{2m}\bigg)^m \cdot N_R(x)
+\end{eqnarray*}
+
+
+\vs{6}
+
+\visible<2->{
+Dado que $\varepsilon \in (0,1)$, tal como el caso de $\sks$ obtenemos:
+\begin{eqnarray*}
+\bigg(1+\frac{\varepsilon}{2m}\bigg)^m \ \leq \ e^{\frac{\varepsilon}{2}} \ \leq \ \varepsilon + 1
+\end{eqnarray*}
+}
+
+\vs{1}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre que $e^{\frac{\varepsilon}{2}} \ \leq \ \varepsilon + 1$ considerando que $0 < \varepsilon < 1$ y el intervalo donde la función $f(x) = e^{\frac{x}{2}} - x - 1$ es negativa.
+\end{ejercicio}
+}
+
+}
+
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{La propiedad de aproximación es suficiente: conclusión}
+%
+%{\small
+%
+%
+%Dado que $\varepsilon \in (0,1)$ y $m \geq 1$, también tenemos que:
+%\begin{eqnarray*}
+%1 - \varepsilon & \leq & \bigg(1-\frac{\varepsilon}{2m}\bigg)^m
+%\end{eqnarray*}
+%
+%
+%\vs{6}
+%
+%Para demostrar lo anterior basta considerar que:
+%\begin{itemize}
+%\item $\big(1-\frac{\varepsilon}{2m}\big)^m$ es una función creciente en $m \geq 1$
+%
+%\item $(1 - \varepsilon) \leq (1 - \frac{\varepsilon}{2})$
+%\end{itemize}
+%
+%}
+%\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La propiedad de aproximación es suficiente: conclusión}
+
+{\footnotesize
+
+Así, suponiendo que la propiedad de aproximación se cumple obtenemos:
+\begin{eqnarray*}
+ \frac{N_R(x)}{(1 + \varepsilon)}
+       \ \leq \ \ear(x, \varepsilon)
+    \ \leq \ (1+ \varepsilon) \cdot N_R(x)
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Sabemos que $(1-\varepsilon) \leq \frac{1}{1+\varepsilon}$, puesto que $\varepsilon >0$
+}
+
+\vs{8}
+
+\visible<3->{
+Suponiendo que la propiedad de aproximación se cumple, obtenemos entonces:
+\begin{eqnarray*}
+\alert{   (1 - \varepsilon)\cdot N_R(x)
+       \ \leq \ \ear(x, \varepsilon)
+    \ \leq \ (1+ \varepsilon) \cdot N_R(x)}
+\end{eqnarray*}
+}
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La propiedad de aproximación es suficiente: conclusión}
+
+{\small
+
+
+Vale decir, hemos demostrado que:
+\begin{multline*}
+ \pr\bigg((1- \varepsilon) \cdot N_R(x)
+      \ \leq \ \ear(x, \varepsilon)
+    \ \leq \ (1+ \varepsilon) \cdot N_R(x) \ \bigg| \\ \text{propiedad de aproximación}\bigg) \ = \ 1
+\end{multline*}
+
+
+\vs{8}
+
+\visible<2->{
+De esta forma, para terminar la demostración tenemos que demostrar:
+\begin{eqnarray*}
+ \pr\bigg(\text{propiedad de aproximación}\bigg) & \geq & \frac{3}{4}
+\end{eqnarray*}
+}
+
+}
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente  $\pr(\text{propiedad de aproximación})$}
+
+{\footnotesize
+
+Fije $i \in \{1, \ldots, s\}$
+\begin{itemize}
+\item $i$ corresponde a una iteración de $\ear$
+\end{itemize}
+
+\vs{6}
+
+Para cada $u\in\Sigma^{\sigma(x_i)}$ definimos la variable aleatoria:
+\begin{eqnarray*}
+    X_u & = & \frac{|\{j \in \{1, \ldots, t\} \mid \exists z \in \Sigma^* : y_j = u z\}|}{t}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+$X_u$ es un promedio de $t$ variables aleatorias que toman valor $0$ ó $1$, las cuales denotamos como $X_{j,u}$ para $j \in \{1, \ldots, t\}$
+\begin{itemize}
+{\footnotesize
+\item $X_{j,u}(y_j) = 1$ si $y_j = u z$ para algún $z \in \Sigma^*$, y $X_{j,u}(y_j) = 0$ en otro caso}
+\end{itemize}
+
+\vs{6}
+
+Vale decir, tenemos que ${\displaystyle X_u = \frac{1}{t} \sum_{j=1}^t X_{j,u}}$
+}
+
+
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente  $\pr(\text{propiedad de aproximación})$}
+
+{\footnotesize
+
+Tenemos que:
+\vs{-1}
+\begin{equation*}
+    \vr[X_u] 
+    \ = \ \vr\bigg[\frac{1}{t}\sum_{j=1}^t X_{j,u}\bigg]
+    \ = \ \frac{1}{t^2} \sum_{j=1}^t \vr[X_{j,u}]
+    \ \leq \ \frac{1}{t^2}\sum_{j=1}^t 1
+    \ = \ \frac{1}{t}
+\end{equation*}
+
+\vs{8}
+
+\visible<2->{
+Dado que $t = \lceil 180 \cdot (|x|^{c} + d)^3 \cdot m^3 \cdot \varepsilon^{-2} \rceil $, por la desigualdad de Chebyshev concluimos que:
+\begin{eqnarray*}
+    \pr\bigg(|X_u - \esp[X_u]| \geq \frac{\varepsilon}{6 \cdot (|x|^{c} + d) \cdot m}\bigg)
+    & \leq & \frac{36 \cdot (|x|^{c} + d)^2 \cdot m^2 \cdot \vr[X_u]}{\varepsilon^2} \\
+    & \leq & \frac{36 \cdot (|x|^{c} + d) ^2\cdot m^2}{\varepsilon^2 \cdot t} \\
+    & \leq & \frac{36 \cdot (|x|^{c} + d) ^2\cdot m^2}{\varepsilon^2 \cdot 180 \cdot (|x|^{c} + d)^3 \cdot m^3 \cdot \varepsilon^{-2}} \\
+    & =   & \frac{1}{5 \cdot (|x|^c + d) \cdot m}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Definiendo $\alpha_i$ en términos de las variables aleatorias $X_u$}
+
+{\small
+
+El valor de cada variable aleatoria $X_u$ es una función de las variables~$y_1, \ldots, y_t$
+\begin{itemize}
+\item Podemos entonces hablar de $X_u(y_1, \ldots, y_t)$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+De la misma forma, el valor de la variable aleatoria $\alpha_i$ es una función de $y_1, \ldots, y_t$, y podemos hablar de $\alpha_i(y_1, \ldots, y_t)$
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Definiendo $\alpha_i$ en términos de las variables aleatorias $X_u$}
+
+{\footnotesize
+
+Suponga que $v$ es el valor de $w_i$. Si los valores de la variables $y_1$, $\ldots$, $y_t$ en la iteración $i$ son $a_1, \ldots, a_t$, respectivamente, entonces tenemos que:
+\alert{
+\begin{eqnarray*}
+\alpha_i(a_1, \ldots, a_t) & = & X_{v}(a_1, \ldots, a_t)
+\end{eqnarray*}}
+
+\vs{5}
+
+\visible<2->{
+Además, en general tenemos que:
+\alert{
+\begin{eqnarray*}
+\alpha_i(y_1, \ldots, y_t) & = & \max_{u \in \Sigma^{\sigma(x_i)}} X_u(y_1, \dots, y_t)
+\end{eqnarray*}}
+}
+
+\vs{5}
+
+\visible<3->{
+Es importante notar que {\bf no} podemos concluir que:
+\begin{eqnarray*}
+\alpha_i(y_1, \ldots, y_t) & = & X_{v}(y_1, \ldots, y_t), 
+\end{eqnarray*}
+dado que $v$ es un string {\bf fijo} calculado en la iteración $i$
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{No podemos concluir que $\alpha_i(y_1, \ldots, y_t) = X_{v}(y_1, \ldots, y_t)$ }
+
+{\small
+
+Suponga que ejecutamos el algoritmo nuevamente obteniendo $v'$ como el valor de $w_i$
+\begin{itemize}
+\item Además, suponga que los valores de la variables $y_1$, $\ldots$, $y_t$ en la iteración $i$ de esta nueva ejecución son $b_1, \ldots, b_t$, respectivamente.
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sabemos que $\alpha_i(b_1, \ldots, b_t) =  X_{v'}(b_1, \ldots, b_t)$}
+
+\vs{8}
+
+\visible<3->{
+\alert{
+Pero si $v \neq v'$ y $X_v(b_1, \ldots, b_t) < X_{v'}(b_1, \ldots, b_t)$, entonces tenemos que:
+\begin{eqnarray*}
+\alpha_i(b_1, \ldots, b_t) & \neq & X_{v}(b_1, \ldots, b_t)
+\end{eqnarray*}}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando superiormente  $\pr(|\alpha_i - \esp[X_{w_i}]| \geq \delta)$}
+
+
+{\small
+
+Queremos entender cuán cercar está $\alpha_i$ de $\esp[X_{w_i}]$
+\begin{itemize}
+\item Vale decir, queremos acotar superiormente $\pr(|\alpha_i - \esp[X_{w_i}]| \geq \delta)$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Dado que ${\displaystyle \alpha_i = \max_{u \in \Sigma^{\sigma(x_i)}} X_u}$, no podemos utilizar la desigualdad de Chebyshev para acotar superiormente $\pr(|\alpha_i - \esp[X_{w_i}]| \geq \delta)$
+\begin{itemize}
+\item ¿Por qué?
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando superiormente  $\pr(|\alpha_i - \esp[X_{w_i}]| \geq \delta)$}
+
+{\small
+
+Si $|\alpha_i - \esp[X_{w_i}]| \geq \delta$ en la iteración $i$, entonces  se debe tener que $|X_{w_i} - \esp[X_{w_i}]| \geq \delta$
+\begin{itemize}
+{\footnotesize
+\item Y si esperamos que esto se cumpla en la iteración $i$ de cada ejecución de $\ear$, entonces en cada ejecución debe ser posible encontrar $u \in \Sigma^{\sigma(x_i)}$ tal que $|X_{u} - \esp[X_{u}]| \geq \delta$
+}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\alert{
+Por lo tanto, tenemos que:
+\begin{eqnarray*}
+\pr(|\alpha_i - \esp[X_{w_i}]| \geq \delta) & \leq &
+     \pr\bigg(\bigvee_{u \in \Sigma^{\sigma(x_i)}} |X_u - \esp[X_u]| \geq \delta \bigg)
+\end{eqnarray*}
+}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando superiormente  $\pr(|\alpha_i - \esp[X_{w_i}]| \geq \frac{\varepsilon}{6 \cdot (|x|^{c} + d) \cdot m})$}
+
+
+{\footnotesize
+
+
+Utilizando la conclusión de la transparencia anterior:
+\begin{align*}
+    \pr\bigg(|\alpha_i - \esp[X_{w_i}]| &\geq \frac{\varepsilon}{6 \cdot (|x|^{c} + d) \cdot m}\bigg)
+      \ \leq\\  
+     &\pr\bigg(\bigvee_{u \in \Sigma^{\sigma(x_i)}} \bigg[|X_u - \esp[X_u]| \geq \frac{\varepsilon}{6 \cdot (|x|^{c}+d) \cdot m}\bigg]\bigg) \ \leq \\
+    & \sum_{u \in \Sigma^{\sigma(x_i)}} \pr\bigg(|X_u - \esp[X_u]| \geq \frac{\varepsilon}{6 \cdot ( |x|^{c} + d) \cdot m}\bigg) \ \leq \\
+    & \sum_{u \in \Sigma^{\sigma(x_i)}} \frac{1}{5 \cdot (|x|^c + d) \cdot m} \ = \\
+    & \frac{1}{5 \cdot  (|x|^c+d) \cdot m} \cdot |\Sigma|^{\sigma(x_i)} \leq \\
+    & \frac{1}{5 \cdot  (|x|^c+d) \cdot m} \cdot (|x_i|^c + d) \ = \ \frac{1}{5 m} \cdot \bigg(\frac{|x_i|^c+d}{|x|^c+d}\bigg) \alert{\ \leq \ \frac{1}{5 m}}
+\end{align*}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Por qué $\ear$ elige el prefijo de largo $\sigma(x)$ más común en~$\{y_1, \ldots, y_t\}$?}
+
+{\footnotesize
+
+Como $w_i$ se elige como el prefijo de largo $\sigma(x_i)$ más común en $\{y_1, \ldots, y_t\}$, sabemos que:
+\begin{multline*}
+    \alpha_i \ = \  \frac{|\{j \in \{1, \ldots, t\} \mid y_j \in \ext{R}(x_i,w_i)\}|}{t}
+           \ \geq \ \frac{t}{|\Sigma|^{\sigma(x_i)}} \cdot \frac{1}{t} \ = \\
+           \frac{1}{|\Sigma|^{\sigma(x_i)}}
+           \ \geq \ \frac{1}{|x_i|^c+d}  \ \geq \ \frac{1}{|x|^c+d}
+\end{multline*}
+
+\vs{8}
+
+\visible<2->{
+Concluimos entonces que:
+\begin{eqnarray*}
+    \pr\bigg(|\alpha_i - \esp[X_{w_i}]| \leq \alpha_i  \cdot \frac{\varepsilon}{6 m}\bigg)
+    & \geq & \pr\bigg(|\alpha_i - \esp[X_{w_i}]| \leq \frac{\varepsilon}{6 \cdot (|x|^{c}+d) \cdot m}\bigg) \\
+    & \geq & 1 - \frac{1}{5 m}
+\end{eqnarray*}
+}
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Dos desigualdades útiles}
+
+{\small
+
+Tenemos que ${\displaystyle 1+\frac{\varepsilon}{5 m} \geq 1 + \frac{\varepsilon}{6 m}}$
+
+\vs{8}
+
+\visible<2->{
+Por otra parte, para $\varepsilon\in (0,1)$ también se tiene que:
+\begin{eqnarray*}
+    \frac{1}{1+ \frac{\varepsilon}{5  m}} & \leq & 1-\frac{\varepsilon}{6  m},
+\end{eqnarray*}
+puesto que $m \geq 1$ y:
+\begin{eqnarray*}
+    \frac{1}{1+\frac{\varepsilon}{5  m}} \leq 1-\frac{\varepsilon}{6 m}
+    & \Leftrightarrow &
+    \frac{5 m}{5  m+\varepsilon} \leq \frac{6  m-\varepsilon}{6  m} \\
+    & \Leftrightarrow &
+    30 \cdot m^2 \leq 30 \cdot m^2 + 6 \cdot m \cdot \varepsilon - 5 \cdot m \cdot \varepsilon-\varepsilon^2 \\
+    & \Leftrightarrow &
+    \varepsilon^2 \leq m \cdot \varepsilon\\
+    & \Leftrightarrow &
+    \varepsilon \leq m
+\end{eqnarray*}
+
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una cota inferior para  $\pr(|\alpha_i - \esp[X_{w_i}]| \leq \alpha_i \cdot \frac{\varepsilon}{6m})$}
+
+{\small
+
+Usando todas las desigualdades anteriores concluimos que:
+\begin{align*}
+    \pr\bigg(\frac{1}{(1+\frac{\varepsilon}{5m})} \cdot \alpha_i
+    &\leq \esp[X_{w_i}]
+    \leq \bigg(1+\frac{\varepsilon}{5m}\bigg) \cdot \alpha_i\bigg) \ \geq \\
+    &
+    \pr\bigg(\bigg(1-\frac{\varepsilon}{6m}\bigg) \cdot \alpha_i
+    \leq \esp[X_{w_i}]
+    \leq \bigg(1+ \frac{\varepsilon}{6m}\bigg)\cdot\alpha_i\bigg) \ = \\
+    & \pr\bigg(|\alpha_i - \esp[X_{w_i}]| \leq \alpha_i \cdot \frac{\varepsilon}{6m}\bigg) \ \geq \\
+    & 1 - \frac{1}{5m}
+\end{align*}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando $\esp[X_{w_i}]$}
+
+{\small
+
+Por definición de $X_{w_i}$, se tiene que:
+\begin{eqnarray*}
+    \esp[X_{w_i}]
+    & = & \esp\bigg[\frac{1}{t}\sum_{j=1}^t X_{j,w_i}\bigg] \\
+    &=  & \frac{1}{t}\sum_{j=1}^t  \esp[X_{j,w_i}] \\
+    &=  & \frac{1}{t}\sum_{j=1}^t  \bigg(1 \cdot \pr(X_{j,w_i} = 1) + 0  \cdot \pr(X_{j,w_i} = 0)\bigg) \\
+    &=  & \frac{1}{t}\sum_{j=1}^t \sum_{y\in \ext{R}(x_i,w_i)} \pr\bigg(\G\bigg(x_i,\frac{\varepsilon}{5m}\bigg)=y\bigg) \\
+    &=  & \sum_{y\in \ext{R}(x_i,w_i)} \pr\bigg(\G\bigg(x_i,\frac{\varepsilon}{5m}\bigg)=y\bigg)
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando $\esp[X_{w_i}]$}
+
+{\footnotesize
+
+Como $\G$ es un FPAUG para $R$, tenemos que:
+\begin{eqnarray*}
+\bigg(1-\frac{\varepsilon}{5m}\bigg) \cdot \frac{1}{N_R(x_i)}\ \leq \ 
+\pr\bigg(\G\bigg(x_i,\frac{\varepsilon}{5m}\bigg)=y\bigg) \ \leq \ 
+\bigg(1+\frac{\varepsilon}{5m}\bigg) \cdot \frac{1}{N_R(x_i)}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Por lo tanto:
+\begin{eqnarray*}
+    \sum_{y\in \ext{R}(x_i,w_i)} \bigg(1-\frac{\varepsilon}{5m}\bigg) \cdot \frac{1}{N_R(x_i)}
+    \ \leq \ \esp[X_{w_i}] \ \leq \
+    \sum_{y\in \ext{R}(x_i,w_i)} \bigg(1+\frac{\varepsilon}{5m}\bigg) \cdot \frac{1}{N_R(x_i)}
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+De lo cual concluimos que:
+\begin{eqnarray*}
+  \bigg(1-\frac{\varepsilon}{5m}\bigg) \cdot \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+    \ \leq \ \esp[X_{w_i}] \ \leq \ 
+   \bigg(1+\frac{\varepsilon}{5m}\bigg) \cdot \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando $\esp[X_{w_i}]$}
+
+{\footnotesize
+
+
+Dado que:
+\begin{eqnarray*}
+\bigg(1+\frac{\varepsilon}{5m}\bigg) & \leq & \bigg(1+\frac{\varepsilon}{4m}\bigg) \\
+\frac{1}{1+\frac{\varepsilon}{4m}} & \leq &\bigg(1-\frac{\varepsilon}{5m}\bigg)
+\end{eqnarray*}
+
+\vs{6}
+
+Concluimos que:
+\begin{eqnarray*}
+ \frac{1}{1+\frac{\varepsilon}{4m}}  \cdot \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+    \ \leq \ \esp[X_{w_i}] \ \leq \ 
+   \bigg(1+\frac{\varepsilon}{4m}\bigg) \cdot \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+\end{eqnarray*}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Otra desigualdad útil}
+
+{\footnotesize
+
+Para $\varepsilon\in (0,1)$, se tiene que:
+\begin{eqnarray*}
+1+\frac{\varepsilon}{2m} & \geq & \bigg( 1+ \frac{\varepsilon}{5m}\bigg) \cdot \bigg(1+\frac{\varepsilon}{4m}\bigg)
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Puesto que $\varepsilon\in (0,1)$ y:
+\begin{eqnarray*}
+    1+\frac{\varepsilon}{2m} \geq \bigg( 1+ \frac{\varepsilon}{5m}\bigg) \cdot \bigg(1+\frac{\varepsilon}{4m}\bigg) 
+    & \Leftrightarrow & 
+   1+ \frac{\varepsilon}{2m} \geq 1 + \frac{\varepsilon}{4m} + \frac{\varepsilon}{5m} + \frac{\varepsilon^2}{20m} \\
+    & \Leftrightarrow & 
+   \frac{\varepsilon}{2m} \geq \frac{\varepsilon}{4m} + \frac{\varepsilon}{5m} + \frac{\varepsilon^2}{20m} \\
+    & \Leftrightarrow & 
+    10\varepsilon \geq 5\varepsilon + 4\varepsilon + \varepsilon^2 \\
+    & \Leftrightarrow & 
+    \varepsilon \geq \varepsilon^2\\
+    & \Leftrightarrow & 
+    1 \geq \varepsilon
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{{\large Acotando inferiormente $\pr(\frac{\alpha_i}{(1+\frac{\varepsilon}{2m})} 
+    \leq \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+    \leq (1+\frac{\varepsilon}{2m}) \cdot \alpha_i)$}}
+
+{\small
+
+Usando las desigualdades anteriores, tenemos que:
+\begin{eqnarray*}
+     \frac{1}{(1+\ \frac{\varepsilon}{5m})} \cdot \alpha_i \leq \esp[X_{w_i}] & \Rightarrow &
+   \frac{1}{(1+\ \frac{\varepsilon}{5m})} \cdot \alpha_i \leq  \bigg(1+\frac{\varepsilon}{4m}\bigg) \cdot \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)} \\
+    & \Rightarrow &
+    \frac{1}{(1+\frac{\varepsilon}{5m}) \cdot (1+\frac{\varepsilon}{4m})} \cdot \alpha_i  \leq \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)} \\
+    & \Rightarrow &
+    \frac{1}{(1+\frac{\varepsilon}{2m})} \cdot \alpha_i \leq \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)} 
+    \end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+De la misma forma obtenemos:
+\begin{eqnarray*}
+    \esp[X_{w_i}] \leq \bigg(1+\ \frac{\varepsilon}{5m}\bigg) \cdot \alpha_i & \Rightarrow &
+    \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}  \leq \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot \alpha_i
+    \end{eqnarray*}
+
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{{\large Acotando inferiormente $\pr(\frac{\alpha_i}{(1+\frac{\varepsilon}{2m})} 
+    \leq \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+    \leq (1+\frac{\varepsilon}{2m}) \cdot \alpha_i)$}}
+    
+{\small
+
+Juntando todo lo anterior, finalmente concluimos que:
+\begin{multline*}
+    \pr\bigg(\frac{\alpha_i}{(1+\frac{\varepsilon}{2m})} 
+    \leq \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+    \leq \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot \alpha_i \bigg) 
+     \ \geq\\ 
+    \pr\bigg(\frac{\alpha_i}{(1+\frac{\varepsilon}{5m})}
+    \leq \esp[X_{w_i}]
+    \leq \bigg(1+\frac{\varepsilon}{5m}\bigg) \cdot \alpha_i \bigg) 
+     \ \geq \
+    1 - \frac{1}{5m}
+\end{multline*}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente  $\pr(\text{propiedad de aproximación})$: el paso final}
+
+{\footnotesize
+
+Recuerde que nuestro objetivo es demostrar que:
+\begin{eqnarray*}
+\pr(\text{propiedad de aproximación}) & \geq & \frac{3}{4}
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Tenemos que:
+\begin{align*}
+\pr(\text{propiedad} & \text{ de aproximación}) \ = \\ 
+&\pr\bigg(\bigwedge_{i=1}^s \bigg[\frac{\alpha_i}{(1+\frac{\varepsilon}{2m})} 
+    \leq \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+    \leq \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot \alpha_i\bigg]\bigg) \ =\\    
+&\prod_{i=1}^s \pr\bigg(\frac{\alpha_i}{(1+\frac{\varepsilon}{2m})} 
+    \leq \frac{|\ext{R}(x_i,w_i)|}{N_R(x_i)}
+    \leq \bigg(1+\frac{\varepsilon}{2m}\bigg) \cdot \alpha_i\bigg) \ \geq\\
+&\prod_{i=1}^s \bigg(1 - \frac{1}{5m}\bigg) \ = \ \bigg(1 - \frac{1}{5m}\bigg)^s \ \alert{\geq \ \bigg(1 - \frac{1}{5m}\bigg)^m}
+\end{align*}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Acotando inferiormente  $\pr(\text{propiedad de aproximación})$: el paso final}
+
+{\small
+
+Dado que $m \geq 1$, tenemos que ${\displaystyle \bigg(1-\frac{1}{5m}\bigg)^m \ \geq \ \frac{4}{5} \ > \ \frac{3}{4}}$
+
+\vs{8}
+
+Concluimos finalmente que:
+\begin{eqnarray*}
+\alert{\pr(\text{propiedad de aproximación}) \ \geq \ \bigg(1 - \frac{1}{5m}\bigg)^m \ \geq \ \frac{3}{4}}
+\end{eqnarray*}
+
+\vs{6}
+
+Esto termina la demostración del teorema. \qed
+
+}
+
+\end{frame}
+
+\end{document}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una pregunta pendiente}
+
+{\footnotesize
+
+¿Cómo podemos construir un generador (casi) uniforme para una relación?
+
+\vs{8}
+
+\visible<2->{
+Recuerde el problema $\ks$ definido en la sección anterior y la relación:
+\begin{eqnarray*}
+R_{\ks} & = & \{ ((\vec a, b), \vec x) \mid \vec a \in \mathbb{N}^n \text{ y } \vec x \in \{0,1\}^n \text{ para } n \geq 1, b \in \mathbb{Z} \text{ y } \vec a \cdot \vec x \leq b \}
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+Vamos a responder primero una pregunta más específica: ¿Cómo podemos construir un generador (casi) uniforme para $R_{\ks}$?
+\begin{itemize}
+\item La respuesta a esta pregunta va a tener los ingredientes necesarios para responder la pregunta más general
+\end{itemize}
+}
+
+%\vs{8}
+
+%\visible<3->{
+%Pero antes tenemos que introducir la noción de cadena de Markov}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+{\small
+
+Fije $n \geq 1$, $\vec a \in \mathbb{N}^n$  y $b \in \mathbb{N}$
+\begin{itemize}
+\item Y suponga que $\Omega = \{ \vec x \in \{0,1\}^n \mid \vec a \cdot \vec x \leq b \}$
+\end{itemize}
+Nótese que $\Omega \neq \emptyset$
+
+\vs{8}
+
+\visible<2->{
+Considere una secuencia $\{ X_t \}_{t \in \mathbb{N}}$ de variables aleatorias con recorrido $\Omega$}
+\begin{itemize}
+\visible<3->{\item El dominio de cada variable $X_t$ es $D_t$, el cual no necesitamos definir}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+Decimos que $\Omega$ es el conjunto de estados de la secuencia $\{ X_t \}_{t \in \mathbb{N}}$
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+{\small
+
+Dado $t \in \mathbb{N}$ y $\vec x \in \Omega$, nos interesa calcular \alert{$\pr(X_t = \vec x)$}
+
+\vs{8}
+
+\visible<2->{
+Para calcular esta probabilidad necesitamos definir la dinámica de la~secuencia
+\begin{itemize}
+\item Vale decir, necesitamos definir cómo se cambio de estado al pasar de tiempo $t$ a tiempo $t+1$
+\end{itemize}
+}
+
+\vs{8}
+
+\visible<3->{
+De manera formal, dado $t \in \mathbb{N}$ y $\vec x, \vec y \in \Omega$, necesitamos entregar:
+\begin{eqnarray*}
+\alert{\pr(X_{t+1} = \vec y \mid X_t = \vec x)}
+\end{eqnarray*}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+
+{\small
+
+Suponga que en tiempo $t$ estamos en el estado $\vec x = (x_1, \ldots, x_n)$
+
+\vs{8}
+
+\visible<2->{
+El estado $\vec y$ en el tiempo $t+1$ se obtiene utilizando el siguiente~procedimiento:
+\vs{-3}
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+{\bf GenerarSiguiente}($\vec x$)\\
+\> Escoja $c \in \{0,1\}$ con distribución uniforme\\
+\> \aif $c = 0$ \athen \areturn $\vec x$\\
+\> \aelse\\
+\> \> Escoja $i \in \{1, \ldots, n\}$ con distribución uniforme\\
+\> \> $\vec u := (x_1, \ldots, x_{i-1}, 1 - x_i, x_{i+1}, \ldots, x_n)$\\
+\> \> \aif $\vec a \cdot \vec u \leq b$ \athen \areturn $\vec u$\\
+\> \> \aelse \areturn $\vec x$
+\end{tabbing}
+\vs{1}
+Tenemos entonces que \alert{$\vec y = \text{\bf GenerarSiguiente}(\vec x)$}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de la secuencia}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+Sea $t \in \mathbb{N}$
+\vs{1}
+\begin{enumerate}
+\item Dados $\vec x, \vec y \in \Omega$, calcule $\pr(X_{t+1} = \vec y \mid X_t = \vec x)$
+\begin{itemize}
+\item Considere de manera separada los casos $\vec x \neq \vec y$ y $\vec x = \vec y$
+\end{itemize}
+
+\vs{3}
+
+\item Demuestre que para todo $\vec x, \vec y \in \Omega$, existe $t' > t$ tal que:
+\vs{-1}
+\begin{eqnarray*}
+\pr(X_{t'} = \vec y \mid X_t = \vec x) & > & 0
+\end{eqnarray*}
+
+\vs{2}
+
+\item Dados $\vec x_0, \vec x_1, \ldots, \vec x_t, \vec x_{t+1} \in \Omega$, demuestre que:
+\vs{-1}
+\begin{multline*}
+\pr(X_{t+1} = \vec x_{t+1} \mid X_0 = \vec x_0 \wedge X_1 = \vec x_1 \wedge \cdots \wedge X_t = \vec x_t) \ = \\ 
+\pr(X_{t+1} = \vec x_{t+1}  \mid X_t = \vec x_t)
+\end{multline*}
+
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿A qué converge la secuencia?}
+
+{\footnotesize
+
+Sea $\vec x$ un vector arbitrario en $\Omega$
+
+\vs{6}
+
+Suponga que en tiempo 0 estamos en el estado $\vec x$, y que en cada instante cambiamos de estado utilizando el procedimiento \text{\bf GenerarSiguiente}
+\begin{itemize}
+\visible<2->{\item ¿Cuáles son los estados a los que podríamos llegar en un tiempo $t \gg 0$? ¿Cuál es la probabilidad de estar en un estado específico en este tiempo $t$?}
+
+\visible<3->{\item ¿Es posible llegar a una distribución estacionaria, vale decir, un tiempo $t'$ tal que para todo $\vec y \in \Omega$ se tiene que $\pr(X_{t'+1} = \vec y) = \pr(X_{t'} = \vec y)$?}
+
+\visible<4->{\item ¿Existe una única distribución estacionaria?}
+\end{itemize}
+
+\vs{6}
+
+\visible<5->{
+¿Cuáles son las respuestas a las preguntas anteriores si cambiamos $\vec x$ por otro vector inicial?}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La secuencia converge a la distribución uniforme}
+
+{\footnotesize
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Dado $t \in \mathbb{N}$ y $\vec x \in \Omega$, demuestre que:
+\begin{eqnarray*}
+\sum_{\vec y \in \Omega} \pr(X_{t+1} = \vec y \mid X_{t} = \vec x) & = & 1\\
+\sum_{\vec y \in \Omega} \pr(X_{t+1} = \vec x \mid X_{t} = \vec y) & = & 1
+\end{eqnarray*}
+
+\vs{2}
+
+\item Demuestre que la distribución uniforme es una distribución estacionaria. 
+\begin{itemize}
+{\footnotesize
+\item Vale decir, demuestre que si para $t \in \mathbb{N}$ se tiene que $\pr(X_t = \vec x) = \frac{1}{|\Omega|}$ para cada $\vec x \in \Omega$, entonces:
+\begin{center}
+$\pr(X_{t+1} = \vec y) = \pr(X_{t} = \vec y)$ para cada $\vec y \in \Omega$
+\end{center}}
+\end{itemize}
+\end{enumerate}
+
+\end{exampleblock}
+
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Generando $R_{\ks}$ con distribución (casi) uniforme}
+
+{\small
+
+Para generar los elementos de $\Omega$ con distribución (casi) uniforme utilizamos el siguiente procedimiento:
+\vs{-3}
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+\> Sea $\vec x$ un elemento arbitrario de $\Omega$\\
+\> $t = f(|x|)$\\
+\> \afor $i := 1$ \ato $t$ \ado\\
+\> \> $\vec x := \text{\bf GenerarSiguiente}(\vec x)$\\
+\> \areturn $\vec x$
+\end{tabbing}
+
+\vs{8}
+
+\visible<2->{
+¿Qué condiciones deben cumplirse para que este procedimiento genere $\Omega$ con distribución (casi) uniforme y en tiempo polinomial?}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las condiciones  para la generación (casi) uniforme}
+
+{\small
+
+\begin{itemize}
+\visible<2->{\item La secuencia debe converger a la distribución uniforme desde cualquier punto de partida $\vec x \in \Omega$}
+
+\vs{4}
+
+\visible<3->{\item La distribución uniforme debe ser la única distribución a la que converge la secuencia}
+
+\vs{4}
+
+\visible<4->{\item $f(n)$ debe estar acotada superiormente por un polinomio}
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las condiciones para la generación (casi) uniforme}
+
+{\small
+
+\begin{itemize}
+\item Debe ser posible calcular $\text{\bf GenerarSiguiente}(\vec x)$ en tiempo polinomial
+
+\vs{4}
+
+\visible<2->{\item Después de ejecutar $t$ pasos se debe tener una garantía de que estamos cerca de la distribución uniforme
+\begin{itemize}
+\alert{\item Obtenemos entonces un generador casi uniforme para los elementos de $\Omega$}
+\end{itemize}}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+Todas estas condiciones han sido estudiadas para las cadenas de Markov.
+\begin{itemize}
+\item Vamos a introducir y estudiar este herramienta esencial para el muestreo de variables aleatorias
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las cadenas de Markov}
+
+{\small
+
+Considere una sucesión $\{ X_t \}_{t \in \mathbb{N}}$ de variables aleatorias.
+
+\vs{6}
+
+\visible<2->{
+\begin{definicion}
+$\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov con conjunto de estados $\Omega$ si:
+\vs{1}
+\begin{enumerate}
+\item $\Omega$ es un conjunto finito o infinito enumerable, y $X_t : D_t \to \Omega$ para cada $t \in \mathbb{N}$
+
+\vs{1}
+\item Existe $p: \Omega \times \Omega \to [0,1]$ tal que para cada $t \in \mathbb{N}$ y cada secuencia $a_0$, $\ldots$, $a_t$, $a_{t+1}$ de elementos de $\Omega$:
+\vs{-2}
+\begin{multline*}
+\alert{\pr(X_{t+1} = a_{t+1 }\mid X_{t} = a_{t} \wedge \cdots \wedge X_0 = a_0) \ =} \\ 
+\alert{\pr(X_{t + 1} = a_{t+1 }\mid X_{t} = a_{t}) \ = \ p(a_{t+1,} a_{t})}
+\end{multline*}
+\end{enumerate}
+\end{definicion}
+}
+
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las cadenas de Markov}
+
+{\footnotesize
+
+En una cadena de Markov la distribución de probabilidades en el tiempo $t+1$ sólo depende de la distribución de probabilidades en el tiempo $t$
+\begin{itemize}
+{\footnotesize
+\item Consideramos cadenas discretas: el tiempo es un conjunto infinito enumerable, y el conjunto de estados $\Omega$ es finito o infinito~enumerable}
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Además, consideramos cadenas de Markov donde las probabilidades de transición no dependen del tiempo.
+\begin{itemize}
+{\footnotesize
+\item Para cada $t_1, t_2 \in \mathbb{N}$ y $a,b \in \Omega$:
+\begin{eqnarray*}
+\pr(X_{t_1 + 1} = a \mid X_{t_1} = b) & = & \pr(X_{t_2 + 1} = a \mid X_{t_2} = b)
+\end{eqnarray*}}
+\end{itemize}}
+\visible<3->{
+Estos son llamadas cadenas de Markov homogéneas. 
+}
+
+\vs{6}
+
+\visible<4->{
+En general, consideramos cadenas de Markov con conjunto de estados $\Omega$~finito.
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Representando una cadena de Markov}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$
+\begin{itemize}
+\item Suponemos además que $p : \Omega \times \Omega \to [0,1]$ es la función que define las probabilidades de transición.
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Podemos representar cada variable aleatoria $X_t$ como un vector $\vec x_t$ tal que:
+\begin{center}
+para cada $a \in \Omega$ se tiene que $\vec x_t[a] = \pr(X_t = a)$
+\end{center}
+}
+
+\vs{6}
+
+\visible<3->{
+Además, podemos representar la cadena de Markov como una matriz $P$ de~$|\Omega| \times |\Omega|$: 
+\begin{center}
+para cada $a,b \in \Omega$, se tiene que $P[a,b] = p(a,b)$
+\end{center}
+$P$ es llamada la matriz de transición de la cadena de Markov.
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Representando una cadena de Markov}
+
+{\small
+
+
+
+Dado $a \in \Omega$ y $t \in \mathbb{N}$, tenemos que:
+\begin{multline*}
+\pr(X_{t+1} = a) \ = \ \sum_{b \in \Omega} \pr(X_{t+1} = a \mid X_{t} = b) \cdot \pr(X_{t} = b) \ =
+\\ 
+\sum_{b \in \Omega} p(a,b) \cdot \pr(X_{t} = b) \ = \ \sum_{b \in \Omega} P[a,b] \cdot \pr(X_{t} = b)
+\end{multline*}
+
+\vs{8}
+
+\visible<2->{
+Dado que $\vec x_{t+1}[a] = \pr(X_{t+1} = a)$ y $\vec x_{t}[b] = \pr(X_{t} = b)$ para cada $a,b \in \Omega$ y $t \in \mathbb{N}$, concluimos que:
+\alert{
+\begin{eqnarray*}
+P \vec x_{t} & = & \vec x_{t+1}
+\end{eqnarray*}
+}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de la matriz de transición}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+Sea $P$ la matriz de transición de una cadena de Markov.
+\vs{1}
+\begin{enumerate}
+\item Demuestre que para cada columna de $P$, se tiene que la suma de sus valores es 1
+
+\vs{2}
+
+\item Para cada fila de $P$, ¿se debe tener que la suma de sus valores es 1?
+\begin{itemize}
+\item ¿Era cierta esta propiedad para la matriz $P$ de la cadena de Markov para $R_{\ks}$?
+\end{itemize}
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una cadena de Markov como un grafo}
+
+{\small
+
+
+
+La matriz de transición $P$ de una cadena de Markov con conjunto de estados $\Omega$ puede ser vista como un grafo $G_P$ con pesos:
+\vs{1}
+\begin{itemize}
+\item $\Omega$ es el conjunto de nodos de $G_P$
+
+\vs{1}
+
+\item Dados $a, b \in \Omega$, el peso del arco $(a,b)$ en $G$ es $P[b,a]$
+\begin{itemize}
+{\footnotesize
+\item Vale decir, el peso de $(a,b)$ representa la probabilidad de pasar al estado $b$ dado que estábamos en el estado $a$
+}
+\end{itemize}
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una cadena de Markov como un grafo: un ejemplo}
+
+{\footnotesize
+
+\begin{center}
+\begin{tabular}{ccc}
+$\Omega = \{1,2,3,4\}$
+&\ \ \ &
+$P = \ \begin{pmatrix}
+0\text{.}2 & 0 & 0\text{.}6 & 0\text{.}9\\
+0\text{.}3 & 1 & 0 & 0\\
+0\text{.}4 & 0 & 0\text{.}2 & 0\\
+0\text{.}1 & 0 & 0\text{.}2 & 0\text{.}1
+\end{pmatrix}$
+\end{tabular}
+
+\vs{4}
+
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$0\text{.}2$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$0\text{.}3$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$1$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$G_P = \  0\text{.}4$} (n1)
+edge[arrout, bend right = 15] node[right] {$0\text{.}6$} (n1)
+edge[arrout, in = 250, out = 200, loop] node[below] {$0\text{.}2$} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$0\text{.}1\ \ $} (n1)
+edge[arrout, bend right = 15] node[right] {$0\text{.}9$} (n1)
+edge[arrin, bend left = 15] node[below] {$0\text{.}2$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$0\text{.}1$} (n3);
+\end{tikzpicture}
+\end{center}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de las cadenas de Markov}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+\begin{itemize}
+\item Además, defina $P^0$ como la matriz identidad y $P^{t+1} = P P^t$ para todo $t \in \mathbb{N}$
+\end{itemize}
+
+
+\vs{6}
+
+\visible<2->{
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Demuestre que para cada $t \in \mathbb{N}$ y $a,b \in \Omega$ se tiene que:
+\begin{eqnarray*}
+\pr(X_{t} = a \mid X_0 = b) & = & P^t[a,b]
+\end{eqnarray*}
+
+\item Demuestre para cada $t_1,t_2 \in \mathbb{N}$ y $a,b \in \Omega$ se tiene que:
+\begin{eqnarray*}
+\pr(X_{t_1+t_2} = a \mid X_{t_1} = b) & = & \pr(X_{t_2} = a \mid X_0 = b)
+\end{eqnarray*}
+\end{enumerate}
+\end{exampleblock}
+}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La distribución estacionaria de una cadena de Markov}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+\begin{itemize}
+\item Y sea $\vec \pi \in [0,1]^{|\Omega|}$ tal que ${\displaystyle \sum_{a \in \Omega} \vec \pi[a] = 1}$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+$\vec \pi$  es una distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$ si \alert{$P \vec \pi = \vec \pi$}
+\end{definicion}
+}
+
+\vs{8}
+
+\visible<3->{
+Vale decir, $\vec \pi$ es una distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$ si esta distribución no cambia al realizar una transición de la cadena de Markov}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunos ejemplos de distribuciones estacionarias}
+
+{\footnotesize
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Considere una cadena de Markov con la siguiente matriz de transición:
+\begin{eqnarray*}
+P & = & \begin{pmatrix}
+0\text{.}5 & 0\text{.}5\\
+0\text{.}5 & 0\text{.}5
+\end{pmatrix}
+\end{eqnarray*}
+Muestre que esta cadena de Markov tiene una única distribución estacionaria, y construya esta distribución.
+
+\vs{2}
+
+\item Construya una cadena de Markov que tenga al menos dos distribuciones estacionarias.
+\begin{itemize}
+{\footnotesize
+\item El dominio de esta cadena debe ser finito
+}
+\end{itemize}
+
+\vs{2}
+
+\item Construya una cadena de Markov que no tenga distribución estacionaria.
+\begin{itemize}
+{\footnotesize
+\item El dominio de esta cadena debe ser infinito enumerable
+}
+\end{itemize}
+\end{enumerate}
+
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una primera propiedad fundamental: irreducibilidad}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+$\{ X_t \}_{t \in \mathbb{N}}$ es irreducible si $G_P$ es un grafo fuertemente conexo.
+\end{definicion}
+}
+
+\vs{8}
+
+\visible<3->{
+Tenemos que $\{ X_t \}_{t \in \mathbb{N}}$ es irreducible si y sólo si para cada $a, b \in \Omega$, existe $t > 0$ tal que:
+\begin{eqnarray*}
+\pr(X_t = a \mid X_0 = b) & > & 0
+\end{eqnarray*}
+}
+
+}
+
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una segunda propiedad fundamental: aperiodicidad}
+
+
+{\small
+
+Sea $a \in \Omega$. Si $\{ n > 0 \mid \pr(X_n = a \mid X_0 = a) > 0\}$ no es vacío, entonces el periodo de $a$ es definido como:
+\begin{eqnarray*}
+\text{MCD}\,\{ n > 0 \mid \pr(X_n = a \mid X_0 = a) > 0\}
+\end{eqnarray*}
+En caso contrario, el periodo de $a$ no está definido. 
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+Un estado $a \in \Omega$ es aperiódico si su periodo está definido y es igual a 1. Además, $\{ X_t \}_{t \in \mathbb{N}}$ es aperiódica si cada estado $b \in \Omega$ es aperiódico.
+\end{definicion}
+}
+
+}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Irreducibilidad y aperiodicidad: algunos ejemplos}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Muestre que la cadena de Markov definida para la relación $R_{\ks}$ es irreducible y aperiódica.
+
+\vs{2}
+
+\item Demuestre que en una cadena de Markov irreducible todos los estados tienen el mismo periodo.
+\begin{itemize}
+{\footnotesize \item Concluimos entonces que si una cadena de Markov irreducible tiene un estado aperiódico, entonces la cadena es aperiódica.}
+\end{itemize}
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible con conjunto de estados $\Omega$ y matriz de transición $P$, y sean $b,c \in \Omega$
+
+\vs{8}
+
+Suponemos que los periodos de $b$ y $c$ son $\ell_b$ y $\ell_c$, respectivamente.
+\begin{itemize}
+\item ¿Por qué sabemos que estos periodos existen?
+\end{itemize}
+
+\vs{8}
+
+Dado que $\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov irreducible:
+\begin{itemize}
+\item Existe un camino en $G_P$ desde $b$ a $c$ de largo $k_{b,c}$, y existe un camino en $G_P$ desde $c$ a $b$ de largo $k_{c,b}$
+\end{itemize}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Entonces existe un camino de $b$ a $b$ de largo $k_{b,c} + k_{c,b}$, de lo cual concluimos que $\pr(X_{k_{b,c} + k_{c,b}} = b \mid X_0 = b) > 0$
+\begin{itemize}
+\item Dado que $\ell_b$ es el periodo de $b$, concluimos que $\ell_b \mid (k_{b,c} + k_{c,b})$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $n > 0$ tal que $\pr(X_n = c \mid X_0 = c) > 0$
+\begin{itemize}
+\item Existe un camino en $G_P$ de $c$ a $c$ de largo $n$
+\end{itemize}
+}
+
+\vs{7}
+
+\visible<3->{
+Tenemos entonces que existe un camino en $G_P$ de $b$ a $b$ de largo $k_{b,c} + n + k_{c,b}$, por lo que $\pr(X_{k_{b,c} + n + k_{c,b}} = b \mid X_0 = b) > 0$
+\begin{itemize}
+\item Dado que $\ell_b$ es el periodo de $b$, concluimos que $\ell_b \mid (k_{b,c} + n + k_{c,b})$
+
+\visible<4->{\item Así, dado que $\ell_b \mid (k_{b,c} + k_{c,b})$, deducimos que \alert{$\ell_b \mid n$}}
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Por lo tanto, $\ell_b \mid n$ para cada $n > 0$ tal que $\pr(X_n = c \mid X_0 = c) > 0$
+\begin{itemize}
+\alert{\item De lo cual deducimos que $\ell_b \leq \ell_c$, puesto que $\ell_c = \text{MCD}\,\{ n > 0 \mid \pr(X_n = c \mid X_0 = c) > 0\}$}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+De la misma forma se puede demostrar que $\ell_c \leq \ell_b$, de lo cual concluimos que $\ell_b = \ell_c$ \qed
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia de un límite: irreducibilidad y aperiodicidad}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible y aperiódica con conjunto de estados $\Omega$
+
+\vs{8}
+
+\begin{teorema}
+Si $a \in \Omega$, se tiene que:
+\vs{1}
+\begin{enumerate}
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}$ existe para cada $b \in \Omega$
+
+\vs{2}
+
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) =\lim_{n \to \infty} \pr(X_n = a \mid X_0 = c)}$ para cada~$b, c \in \Omega$
+\end{enumerate}
+\end{teorema}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia de un límite: irreducibilidad y aperiodicidad}
+
+{\small
+
+Dado $a \in \Omega$, definimos:
+\alert{
+\begin{eqnarray*}
+\lambda_a & = & \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b),
+\end{eqnarray*}}
+donde $b$ es un elemento arbitrario en $\Omega$
+
+\vs{8}
+
+\visible<2->{
+\begin{lema}
+Si existe $a \in \Omega$ tal que $\lambda_a = 0$, entonces $\lambda_b = 0$ para todo $b \in \Omega$
+\end{lema}}
+
+\vs{8}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre el lema.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad y aperiodicidad: un par de ejemplos}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Construya una cadena de Markov irreducible, aperiódica y  tal que $\lambda_a = 0$ para todo estado $a$
+
+\vs{2}
+
+\item Construya una cadena de Markov irreducible,  aperiódica y tal que $\lambda_b > 0$ para todo estado $b$
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al primer problema}
+
+{\small
+
+Considere la siguiente cadena de Markov con conjunto de estado $\Omega = \mathbb{N}$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$0$}
+edge[arrout, in = 200, out = 160, loop] node[left] {$\frac{1}{4}$} (n1);
+\node[circ, right=15mm of n1] (n2) {$1$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n1)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n1);
+\node[circ, right=15mm of n2] (n3) {$2$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n2)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n2);
+\node[circ, right=15mm of n3] (n4) {$3$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n3)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n3);
+\node[circw, right=15mm of n4] (n5) {$\ldots$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n4)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n4);
+%\node[circw, right=15mm of n4] (n5) {}
+%edge[arrww] node {{\large $\ldots$}} (n4);
+\end{tikzpicture}
+\end{center}
+
+\vs{8}
+
+Esta cadena de Markov es irreducible y aperiódica.
+\begin{itemize}
+{\footnotesize \item Es fácil ver que el estado 0 es aperiódico, de lo cual se concluye que la cadena de Markov es aperiódica dado que es irreducible}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al primer problema}
+
+{\footnotesize
+
+Tenemos que:
+\begin{eqnarray*}
+\pr(X_{n+1} = 0 \mid X_0 = 0) & = & 
+\pr(X_{n+1} = 0 \mid X_n = 0) \cdot \pr(X_n = 0 \mid X_0 = 0) \ +\\ 
+&& \pr(X_{n+1} = 0 \mid X_n = 1) \cdot \pr(X_n = 1 \mid X_0 = 0)\\
+& = & \frac{1}{4} \cdot \pr(X_n = 0 \mid X_0 = 0) + \frac{1}{4} \cdot \pr(X_n = 1 \mid X_0 = 0)
+\end{eqnarray*}
+
+\vs{6}
+
+Tomando el límite cuando $n$ tiende a infinito obtenemos:
+\begin{eqnarray*}
+\lambda_0 & = & \frac{1}{4} \cdot \lambda_0 + \frac{1}{4} \cdot \lambda_1
+\end{eqnarray*}
+
+\vs{6}
+
+Por lo tanto: \alert{$3 \cdot \lambda_0 = \lambda_1$}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al primer problema}
+
+{\footnotesize
+
+Considere $i > 0$ y suponga que $3 \cdot \lambda_{i-1} = \lambda_i$
+
+\vs{8}
+
+\visible<2->{
+Tenemos que:
+\begin{align*}
+\pr(X_{n+1} = i \mid & X_0 = i) \\
+= \ & \ \pr(X_{n+1} = i \mid X_n = i-1) \cdot \pr(X_n = i-1 \mid X_0 = i) \ +\\
+& \ \pr(X_{n+1} = i \mid X_n = i+1) \cdot \pr(X_n = i+1 \mid X_0 = i)\\
+= \ & \ \frac{3}{4} \cdot \pr(X_n = i-1 \mid X_0 = i) + \frac{1}{4} \cdot \pr(X_n = i+1 \mid X_0 = i)
+\end{align*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al primer problema}
+
+{\footnotesize
+
+
+Tomando el límite cuando $n$ tiende a infinito obtenemos:
+\begin{eqnarray*}
+\lambda_{i} & = & \frac{3}{4} \cdot \lambda_{i-1} + \frac{1}{4} \cdot \lambda_{i+1}\\
+& = & \frac{3}{4} \cdot \frac{1}{3} \cdot \lambda_{i} + \frac{1}{4} \cdot \lambda_{i+1}\\
+& = & \frac{1}{4} \cdot  \lambda_{i} + \frac{1}{4} \cdot \lambda_{i+1}
+\end{eqnarray*}
+
+\vs{6}
+
+Por lo tanto: \alert{$3 \cdot \lambda_i = \lambda_{i+1}$}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al primer problema}
+
+{\small
+
+\alert{Concluimos que $\lambda_i = 3^i \cdot \lambda_{0}$ para cada $i \in \mathbb{N}$}
+
+\vs{10}
+
+\visible<2->{
+Así, dado que $\lambda_i \leq 1$ para cada $i \in \mathbb{N}$, se debe tener que $\lambda_0 = 0$
+\begin{itemize}
+\item Del lema concluimos entonces que $\lambda_i = 0$ para cada $i \in \mathbb{N}$ \qed
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso finito}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica y con conjunto de estados $\Omega$ finito
+
+\vs{6}
+
+\begin{lema}
+${\displaystyle \sum_{a \in \Omega} \lambda_a = 1}$
+\end{lema}
+
+\vs{6}
+
+\visible<2->{
+{\bf Demostración:} fije un elemento $b \in \Omega$
+}
+\vs{6}
+
+\visible<3->{
+Para cada $n \in \mathbb{N}$ tenemos que:
+\begin{eqnarray*}
+\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b) & = & 1
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso finito}
+
+{\footnotesize
+
+Por lo tanto tenemos que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \bigg(\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b)\bigg) & = & 1
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Además, sabemos que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \bigg(\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b)\bigg) & = & 
+\sum_{a \in \Omega} \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)\\ & = & \sum_{a \in \Omega} \lambda_a
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+Concluimos que ${\displaystyle \sum_{a \in \Omega} \lambda_a = 1}$ \qed}
+
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso finito}
+
+{\small
+
+¿Por qué la demostración anterior no es válida si $\Omega$ es un conjunto infinito enumerable?
+\begin{itemize}
+\item ¿Qué paso de la demostración no funciona?
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Como consecuencia de los resultados anteriores obtenemos:
+\vs{2}
+\begin{corolario}
+Si $\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov irreducible, aperiódica y con un conjunto de estados $\Omega$ finito, entonces $\lambda_a > 0$ para cada $a \in \Omega$
+\end{corolario}}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad de la distribución estacionaria: el caso finito}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica, con conjunto de estados $\Omega$ finito y matriz de transición $P$
+\begin{itemize}
+\item Y sea $\vec \pi \in [0,1]^{|\Omega|}$ un vector tal que $\vec \pi[a] = \lambda_a$ para cada $a \in \Omega$
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+$\vec \pi$ es la única distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$
+\end{teorema}
+}
+
+\vs{8}
+
+\visible<3->{
+{\bf Demostración:} Primero tenemos que demostrar que $P \vec \pi = \vec \pi$
+\begin{itemize}
+\item Vale decir, tenemos que demostrar que $(P \vec \pi)[a] = \vec \pi[a]$ para cada~$a \in\Omega$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+Dado $a \in \Omega$ y un estado arbitrario $c \in \Omega$, tenemos que:
+\begin{eqnarray*}
+(P \vec \pi)[a] & = & \sum_{b \in \Omega} P[a,b] \cdot \vec \pi[b]\\
+& = & \sum_{b \in \Omega} \bigg(\pr(X_1 = a \mid X_0 = b) \cdot \lim_{n \to \infty} \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \sum_{b \in \Omega}  \bigg(\pr(X_1 = a \mid X_0 = b) \cdot  \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \sum_{b \in \Omega}  \bigg(\pr(X_{n+1} = a \mid X_n = b) \cdot  \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \pr(X_{n+1} = a \mid X_0 = c)\\
+& = & \lim_{m \to \infty} \pr(X_{m} = a \mid X_0 = c)\\
+& \alert{=} & \alert{\lambda_a \ = \ \vec \pi[a]}
+\end{eqnarray*}
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+En segundo lugar, tenemos que demostrar que para toda distribución estacionaria $\vec \alpha$ para $\{ X_t \}_{t \in \mathbb{N}}$, se tiene que $\vec \alpha = \vec \pi$
+
+\vs{6}
+
+\visible<2->{Suponga que $P \vec \alpha = \vec \alpha$. Dado $a \in \Omega$ tenemos que:
+\begin{eqnarray*}
+\vec \alpha[a] & = & (P \vec \alpha)[a]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot \vec \alpha[b]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot (P \vec \alpha)[b]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot \bigg(\sum_{c \in \Omega} P[b,c] \cdot \vec \alpha[c]\bigg)\\
+& = & \sum_{b \in \Omega} \sum_{c \in \Omega} P[a,b] \cdot P[b,c] \cdot \vec \alpha[c]\\
+& = & \sum_{c \in \Omega} \bigg(\sum_{b \in \Omega} P[a,b] \cdot P[b,c]\bigg) \cdot \vec \alpha[c]
+\end{eqnarray*}}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+\begin{eqnarray*}
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot \vec \alpha[c]\\
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot (P \vec \alpha)[c]\\
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot \bigg(\sum_{d \in \Omega} P[c,d] \cdot \vec \alpha[d]\bigg)\\
+& = & \sum_{c \in \Omega} \sum_{d \in \Omega} P^2[a,c] \cdot P[c,d] \cdot \vec \alpha[d]\\
+& = & \sum_{d \in \Omega} \bigg(\sum_{c \in \Omega} P^2[a,c] \cdot P[c,d]\bigg) \cdot \vec \alpha[d]\\
+& = & \sum_{d \in \Omega} P^3[a,d] \cdot \vec \alpha[d]
+\end{eqnarray*}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+
+{\small
+
+Siguiendo con este proceso, concluimos que para todo $n \geq 1$:
+\begin{eqnarray*}
+\vec \alpha[a] & = & \sum_{b \in \Omega} P^n[a,b] \cdot \vec \alpha[b]
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto:
+\alert{
+\begin{eqnarray*}
+\vec \alpha[a] & = & \sum_{b \in \Omega} \pr(X_n = a \mid X_0 = b) \cdot \vec \alpha[b]\\
+\end{eqnarray*}}
+}
+
+
+
+
+}
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+Tomando el límite cuando $n$ tiende a infinito obtenemos:
+\begin{eqnarray*}
+\vec \alpha[a] & = & \lim_{n \to \infty} \bigg(\sum_{b \in \Omega} \pr(X_n = a \mid X_0 = b) \cdot \vec \alpha[b]\bigg)\\
+& = &  \sum_{b \in \Omega} \bigg(\lim_{n \to \infty}\pr(X_n = a \mid X_0 = b)\bigg) \cdot \vec \alpha[b]\\
+& = &  \sum_{b \in \Omega} \lambda_a \cdot \vec \alpha[b]\\
+& = &  \lambda_a \cdot  \sum_{b \in \Omega} \vec \alpha[b]\\
+& \alert{=} &  \alert{\lambda_a \cdot 1 \ = \ \lambda_a \ = \  \vec \pi[a]}
+\end{eqnarray*}
+
+\vs{6}
+
+Concluimos que $\vec \alpha = \vec \pi$, puesto que $\vec \alpha[a] = \vec \pi[a]$ para todo $a \in \Omega$\qed
+
+}
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+La estructura de links en una pequeña Web:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {} (n1);
+%edge[arrout, in = 70, out = 20, loop] node[above] {$1$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {} (n1)
+edge[arrout, bend right = 15] node[right] {} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {} (n5);
+\end{tikzpicture}
+\end{center}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+La estructura de links vista como una caminata aleatoria:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$\frac{1}{4}$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$\frac{1}{4}$} (n1);
+%edge[arrout, in = 70, out = 20, loop] node[above] {$1$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$\frac{1}{4}$} (n1)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{2}$} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$\frac{1}{4}$} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {$\frac{1}{2}$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$1$} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {$1$} (n5);
+\end{tikzpicture}
+\end{center}
+
+
+}
+
+\end{frame}
+
+\renewcommand{\arraystretch}{1.25}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Podemos representar la caminata aleatoria como una matriz $P$
+\begin{itemize}
+\item $P[i,j]$ es la probabilidad de ir de la página $j$ a la página $i$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+La matriz $P$ de nuestro ejemplo:
+\begin{center}
+$P = \ \begin{pmatrix}
+\frac{1}{4} & 0 & \frac{1}{2} & 0 & 0 & 0\\
+\frac{1}{4} & 0 & 0 & 0 & 0 & 0\\
+\frac{1}{4} & 0 & 0 & 0 & 0 & 0 \\
+\frac{1}{4} & 0 & \frac{1}{2} & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0
+\end{pmatrix}$
+\end{center}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+El ranking de una página $i$ se define como la probabilidad $x_i$ de que el caminante aleatorio llegue a $i$
+\begin{itemize}
+\visible<2->{\item ¿Qué características de la Web influyen en el valor $x_i$?}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+En el ejemplo tenemos que:
+\vs{-2}
+\begin{eqnarray*}
+x_i & = & \sum_{j=1}^6 P[i,j] \cdot x_j
+\end{eqnarray*}
+}
+
+\vs{8}
+
+\visible<4->{
+Así, si $\vec x$ es un vector tal que $\vec x[i] = x_i$ para cada $i \in \{1, \ldots, 6\}$, entonces:
+\begin{eqnarray*}
+P \vec x  & = & \vec x
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{PageRank como una cadena de Markov}
+
+{\small
+
+El proceso anterior se puede generalizar para la Web real.
+\begin{itemize}
+\item Suponemos que la Web tiene $N$ páginas, por lo que $P$ es una matriz de $N \times N$
+\end{itemize}
+
+\vs{8}
+
+Además, definimos $\vec \pi$ como un vector tal que $\vec \pi[i]$ es la probabilidad de que el caminante aleatorio llegue a la página $i$, para cada $i \in \{1, \ldots, N\}$
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{PageRank como una cadena de Markov}
+
+{\small
+
+$P$ puede ser considerada como la matriz de transición de una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ con conjunto de estados $\Omega = \{1, \ldots, N\}$
+\begin{itemize}
+\visible<2->{\alert{\item El vector $\vec \pi$ es entonces  una distribución estacionaria de $\{ X_t \}_{t \in \mathbb{N}}$}}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+¿Cómo podemos asegurar que $\vec \pi$ existe y es único? ¿Cómo podemos calcular $\vec \pi$?}
+
+\vs{8}
+
+\visible<3->{
+¡Irreducibilidad y aperiodicidad son las propiedades que necesitamos!
+\begin{itemize}
+\item Dado que el conjunto de estados de la cadena de Markov es finito
+\end{itemize}}
+
+}
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Dos preguntas por responder:
+\begin{itemize}
+\item ¿Podemos asegurar que la cadena de Markov dada por $P$ es~irreducible? \visible<2->{No}
+\item ¿Podemos asegurar que la cadena de Markov dada por $P$ es~aperiódica? \visible<3->{No}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+¿Cómo solucionamos estos problemas?
+}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Para solucionar los problemas suponemos que el caminante aleatorio también puede decidir moverse a cualquier página sin considerar la estructura de la Web.
+\begin{itemize}
+\item Esto es controlado por un parámetro $\alpha$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $U$ una matriz de $N \times N$ tal que $U[i,j] = \frac{1}{N}$, y sea $\alpha \in (0,1)$
+}
+
+\vs{8}
+
+\visible<3->{
+Definimos una matriz $W_\alpha$ de $N \times N$ como:
+\alert{
+\begin{eqnarray*}
+W_\alpha & = & \alpha \cdot P + (1 - \alpha) \cdot U
+\end{eqnarray*}}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Con probabilidad $\alpha$ el caminante utiliza los links para moverse, y con probabilidad $(1 - \alpha)$ se mueve a cualquier página (sin considerar la estructura de la Web).
+\begin{itemize}
+\item Cuanto más grande es $\alpha$, más consideramos la estructura de la Web
+\end{itemize}
+
+\vs{10}
+
+\visible<2->{
+\alert{Tenemos que $W_\alpha$ define una cadena de Markov irreducible y aperiódica.}}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La definición y cálculo de PageRank}
+
+{\small
+
+Consideramos un valor fijo de $\alpha$
+\begin{itemize}
+\item En el artículo inicial sobre PageRank se consideraba $\alpha = 0\text{.}85$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Definimos entonces $\vec \pi$ como la distribución estacionaria de la cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ cuya matriz de transición es $W_\alpha$
+\begin{itemize}
+\item Esta distribución existe y es única porque la cadena de Markov es irreducible, aperiódica y tiene un conjunto finito de estados
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La definición y cálculo de PageRank}
+
+{\small
+
+Para cada página $i$, calculamos $\vec \pi[i]$ utilizando la igualdad:
+\begin{eqnarray*}
+\vec \pi[i] & = & \lim_{n \to \infty} \pr(X_n = i \mid X_0 = 1)
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Vale decir, la caminata comienza en la página 1 (una página arbitraria), y el valor $\vec \pi[i]$ se calcula utilizando un valor de $n$ suficientemente grande.}
+\begin{itemize}
+\visible<3->{\item Obtenemos una aproximación del valor de $\vec \pi[i]$, pero que en la práctica es suficientemente buena}
+\end{itemize}
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un último comentario: el caso infinito }
+
+{\small
+
+Considere nuevamente la siguiente cadena de Markov con conjunto de estados $\Omega = \mathbb{N}$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$0$}
+edge[arrout, in = 200, out = 160, loop] node[left] {$\frac{1}{4}$} (n1);
+\node[circ, right=15mm of n1] (n2) {$1$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n1)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n1);
+\node[circ, right=15mm of n2] (n3) {$2$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n2)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n2);
+\node[circ, right=15mm of n3] (n4) {$3$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n3)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n3);
+\node[circw, right=15mm of n4] (n5) {$\ldots$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n4)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n4);
+%\node[circw, right=15mm of n4] (n5) {}
+%edge[arrww] node {{\large $\ldots$}} (n4);
+\end{tikzpicture}
+\end{center}
+
+\vs{8}
+
+Demostramos que para esta cadena de Markov se tiene que $\lambda_i = 0$ para todo $i \in \mathbb{N}$
+\begin{itemize}
+\item Queremos definir una condición que nos asegure que los valores $\lambda_i$ forman una distribución estacionaria para la cadena de Markov
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una tercera propiedad fundamental: recurrencia}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$
+\begin{itemize}
+\item Y sea $b \in \Omega$
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+Definimos $T_b$ como una variable aleatoria que registra el primer instante de tiempo mayor a $0$ en que llegamos a $b$, suponiendo que en el tiempo $0$ estábamos~en~$b$
+\begin{itemize}
+\item Vale decir, si el valor de $T_a$ es $n$, con $n \geq 1$, entonces $X_0 = b$, $X_1 \neq b$, $\ldots$, $X_{n-1} \neq b$ y $X_n = b$
+\end{itemize}
+Este tiempo de retorno a $b$ es llamado {\em hitting time}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una tercera propiedad fundamental: recurrencia}
+
+{\small
+
+\begin{definition}
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$, y sea~$b \in \Omega$
+\vs{2}
+\begin{enumerate}
+\visible<2->{\item $b$ es recurrente si ${\displaystyle \sum_{n \geq 1} \pr(T_b = n)  \ =  \ 1}$}
+
+\vs{2}
+
+\visible<3->{\item $b$ es recurrente positivo si $b$ es recurrente y $\esp[T_b] \in \mathbb{R}^+$}
+\end{enumerate}
+\end{definition}
+
+\vs{8}
+
+\visible<4->{
+\begin{ejercicio}
+De una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ con conjunto de estados $\Omega$ y un estado $b \in \Omega$ tal que $b$ es recurrente pero no recurrente positivo.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución para el ejercicio}
+
+{\footnotesize
+
+Considere la siguiente cadena de Markov con conjunto de estados $\Omega = \mathbb{N}$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$0$};
+\node[circ, right=15mm of n1] (n2) {$1$}
+edge[arrin, bend right = 20] node[above] {$\frac{1}{2}$} (n1)
+edge[arrout, bend left = 20] node[below] {$1$} (n1);
+\node[circw, below=10mm of n1] (n3) {};
+\node[circ, right=5mm of n3] (n4) {$2$}
+edge[arrin, bend right = 20] node[left] {$\frac{1}{4}$} (n1);
+\node[circ, below=10mm of n3] (n5) {$3$}
+edge[arrin, bend right = 20] node[left] {$1$} (n4);
+\node[circ, left=5mm of n3] (n6) {$4$}
+edge[arrin, bend right = 20] node[left] {$1$} (n5)
+edge[arrout, bend left = 20] node[left] {$1$} (n1);
+\node[circw, left=10mm of n1] (n7) {};
+\node[circ, above=4mm of n7] (n8) {$5$}
+edge[arrin, bend right = 20] node[below] {$\frac{1}{8}$} (n1);
+\node[circw, left=10mm of n8] (n9) {};
+\node[circw, above=4mm of n9] (n10) {$\ldots$}
+edge[arrin, bend right = 20] node[below] {$1$} (n8);
+\end{tikzpicture}
+\end{center}
+Tenemos que $0$ es un estado recurrente pero no recurrente positivo.
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad de la distribución estacionaria: el caso general}
+
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica y \alert{donde cada estado es recurrente positivo}
+\begin{itemize}
+\item  Y sea $\vec \pi \in [0,1]^{|\Omega|}$ un vector tal que $\vec \pi[a] = \lambda_a$ para cada $a \in \Omega$, donde $\Omega$ es el conjunto de estados de $\{ X_t \}_{t \in \mathbb{N}}$
+\begin{itemize}
+{\footnotesize \item Nótese que $\Omega$ puede ser un conjunto infinito enumerable}
+\end{itemize}
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+$\vec \pi$ es la única distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$
+\end{teorema}
+}
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Markov Chain Monte Carlo}
+
+{\small
+
+Ya vimos cómo los problemas de conteo se pueden reducir a problemas de generación uniforme. 
+\begin{itemize}
+{\footnotesize \item ¿Pero cómo podemos resolver el problema de generación uniforme? Las cadenas de Markov resultan ser una herramienta muy útil para esto}
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Supongamos, más en general, que nos interesa generar elementos de un conjunto $\Omega$ según una distribución de probabilidad $\vec \pi$}
+\begin{itemize}
+\visible<3->{{\footnotesize \item Por ejemplo, $\Omega$ podría ser el conjunto de valuaciones que satisfacen una fórmula proposicional, y $\vec \pi$ la distribución uniforme sobre estas valuaciones}}
+\end{itemize}
+
+\vs{6}
+
+\visible<4->{
+¿Cómo podemos hacer esto? 
+\begin{itemize}
+{\footnotesize \item La clave está en construir una cadena de Markov cuya distribución estacionaria sea $\vec \pi$}
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Markov Chain Monte Carlo}
+
+{\small
+
+Así­, dado un conjunto $\Omega$ finito y una distribución de probabilidades $\vec \pi$ sobre $\Omega$, queremos definir una cadena de Markov cuyos estados sean los elementos de $\Omega$ y cuya distribución estacionaria sea $\vec \pi$
+
+\vs{8}
+
+\visible<2->{
+Mostraremos una estrategia general para definir una cadena de Markov con estas características: \alert{el algoritmo de Metropolis-Hastings}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: el primer ingrediente}
+
+{\small
+
+\begin{proposition}
+    Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con matriz de transición $P$. Si para todo $a,b\in\Omega$ se cumple que:
+    \begin{eqnarray*}
+        P[b,a] \cdot \vec \pi[a]  & = & P[a,b] \cdot \vec \pi[b],
+    \end{eqnarray*}
+    entonces $\vec \pi$ es una distribución estacionaria para  $\{ X_t \}_{t \in \mathbb{N}}$    
+    \end{proposition}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una demostración de la proposición}
+
+{\footnotesize
+
+{\bf Demostración: } Sea $a\in\Omega$. Tenemos que:
+\begin{eqnarray*}
+    (P \vec \pi)[a] 
+    & = & \sum_{b\in\Omega} P[a,b] \cdot \vec \pi[b] \\
+    &= & \sum_{b\in\Omega} P[b,a] \cdot \vec \pi[a] \\
+    &= & \vec \pi[a] \cdot \sum_{b\in\Omega} P[b,a] \\
+    &= & \vec \pi[a] \cdot \sum_{b\in\Omega} \pr(X_1 = b \mid X_0 = a)\\
+    &= & \vec \pi[a] \cdot 1 \ = \ \vec \pi[a]
+\end{eqnarray*}
+
+\vs{6}
+
+Vale decir, $P \vec \pi = \vec \pi$, de lo cual concluimos que $\vec \pi$ es una distribución estacionaria de $\{ X_t \}_{t \in \mathbb{N}}$ \qed
+
+}
+
+\end{frame}
+
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: el primer ingrediente}
+
+{\small
+
+A la propiedad de que para todo $a,b\in\Omega$ se tenga que:
+\begin{eqnarray*}
+    P[b,a] \cdot \vec \pi[a] & = & P[a,b] \cdot \vec \pi[b]
+\end{eqnarray*}
+se le llama {\bf condición de reversibilidad}
+
+\vs{8}
+
+La proposición anterior nos indica entonces que para que la cadena de Markov tenga a $\vec \pi$ como distribución estacionaria es suficiente que cumpla la condición de reversibilidad.
+\begin{itemize}
+\visible<2->{\item ¿Cómo definimos una cadena de Markov que cumpla esta condición?}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la idea del algoritmo}
+
+{\small
+
+A priori, no existe ninguna garantía de que para todo $a,b$ se cumpla que:
+\begin{eqnarray*}
+    P[b,a] \cdot \vec \pi[a] & = & P[a,b] \cdot \vec \pi[b]
+\end{eqnarray*}
+
+\vs{8}
+
+Si no se cumple esta propiedad, entonces existe un par $a, b$ tal que:
+\begin{eqnarray*}
+    P[b,a] \cdot \vec \pi[a] & > & P[a,b] \cdot \vec \pi[b]
+\end{eqnarray*}
+¿Qué hacemos en este caso?
+
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la idea del algoritmo}
+
+{\small
+
+Lo que hacemos es definir una nueva matriz de transiciones $Q$, a partir de $P$, de la siguiente forma:
+\begin{eqnarray*}
+    Q[c,d] & = & P[c,d] \cdot \alpha[c,d] \ \ \ \ \ \text{ para } c,d \in \Omega
+\end{eqnarray*}
+
+\vs{8}
+
+En esta definición, $\alpha$ es construido de tal forma que $Q$ cumpla la condición de reversibilidad. 
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la idea del algoritmo}
+
+{\small
+
+Considerando un par $a,b$ tal que:
+\begin{eqnarray*}
+    P[b,a] \cdot \vec \pi[a] & > & P[a,b] \cdot \vec \pi[b]
+\end{eqnarray*}
+
+\vs{8}
+
+Una idea natural para lograr que esto sea una igualdad es hacer más pequeño el lado izquierdo. 
+\begin{itemize}
+\item El lado derecho no es necesario hacerlo más pequeño
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto, definimos $\alpha[a,b] = 1$ y 
+\begin{eqnarray*}
+    \alpha[b,a] & = & \frac{P[a,b] \cdot \vec \pi[b]}{P[b,a] \cdot \vec \pi[a]}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la idea del algoritmo}
+
+{\footnotesize
+
+Análogamente, para un par $a,b$ tal que $ P[b,a] \cdot \vec \pi[a] <  P[a,b] \cdot \vec \pi[b]$, 
+definimos $\alpha[b,a] = 1$ y
+\begin{eqnarray*}
+    \alpha[a,b] & = & \frac{P[b,a] \cdot \vec \pi[a]}{P[a,b] \cdot \vec \pi[b]},
+\end{eqnarray*}
+que es lo mismo que la ecuación en el otro caso sólo que con los roles de $a$ y~$b$~intercambiados.
+
+\vs{8}
+
+\visible<2->{
+En resumen, $\alpha$ se define como:
+\begin{eqnarray*}
+    \alpha[a,b] & = &
+    \begin{cases}
+        {\displaystyle \min \bigg\{\frac{P[b,a] \cdot \vec \pi[a]}{P[a,b] \cdot \vec \pi[b]}, 1\bigg\}}
+        & \text{si } P[a,b] \cdot \vec \pi[b] > 0\\
+        1 & \text{en otro caso}
+    \end{cases}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la idea del algoritmo}
+
+{\footnotesize
+
+Por tanto, nos gustarí­a definir $Q[a,b]=P[a,b] \cdot \alpha[a,b]$ y así­ tener una matriz de transición $Q$ que cumple la condición de reversibilidad. 
+\begin{itemize}
+\item Sin embargo, no podemos asegurar que $Q$ sea la matriz de transición de una cadena de Markov
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Para asegurar esto, definimos para cada $b\in\Omega$:
+\begin{eqnarray*}
+    r(b) & = & 1 - \sum_{x\in\Omega} P[x,b] \cdot \alpha[x,b],
+\end{eqnarray*}
+y agregamos $r(b)$ a la probabilidad de quedarse en el estado $b$}
+
+\vs{6}
+
+\visible<3->{
+La definición de $Q$ es entonces:
+\alert{
+\begin{eqnarray*}
+    Q[a,b] & = &  
+\begin{cases}
+        P[a,b] \cdot \alpha[a,b] + r(b) & \text{si } a=b\\
+        P[a,b] \cdot \alpha[a,b]        & \text{si } a \neq b
+    \end{cases}
+\end{eqnarray*}}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la formalización del algoritmo}
+
+{\footnotesize
+
+
+Sea $\vec \pi$ una distribución de probabilidades sobre un dominio finito $\Omega$, y sea $P$ la matriz de transición de una cadena de Markov con conjunto de estados $\Omega$
+\begin{itemize}
+\item Y sea $\alpha: \Omega\times\Omega \to [0,1]$ definida como en las transparencias anteriores
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Además, sea $a_0$ un elemento arbitrario de $\Omega$}
+
+\vs{6}
+
+\visible<3->{
+El siguiente algoritmo simula $N$ transiciones de acuerdo a la cadena de Markov con matriz de transición $Q$ descrita anteriormente.
+\begin{itemize}
+\item Así­, la cadena de Markov simulada tiene como distribución estacionaria a la distribución $\vec \pi$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la formalización del algoritmo}
+
+{\small
+
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\phantom{MM}\= \\
+\text{\bf MH}($\vec \pi$, $P$, $a_0$, $N$) \\
+\> \afor $j:=1$ \ato $N$ \ado \\
+\> \> Generar $b \in \Omega$ con distribución $P[\cdot, a_{j-1}]$\\
+\> \> Generar $u \in [0,1]$ con distribución uniforme\\
+\> \> \aif $u \leq \alpha[b,a_{j-1}]$ \athen \\
+\> \> \> $a_{j} := b$ \\
+\> \> \aelse \\
+\> \> \> $a_{j} := a_{j-1}$ \\
+\> \areturn $\{a_1, a_2, \ldots, a_N\}$
+\end{tabbing}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la formalización del algoritmo}
+
+{\small
+
+¿Cómo interpretamos la salida del algoritmo? 
+\begin{itemize}
+\item Vamos a demostrar que para cada $j\in\{1, \ldots, N\}$, se tiene que $a_j$ es generado según la distribución de probabilidades $Q^j \vec x_0$, donde $\vec x_0$ es un vector tal que $\vec x_0[a_0] = 1$ y $\vec x_0[b] = 0$ para todo $b \neq a_0$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+En este contexto, $Q$ es la matriz que describimos antes, con distribución estacionaria $\vec \pi$ 
+\begin{itemize}
+\item Así­, el algoritmo toma un vector inicial $\vec x_0$ y realiza $N$ transiciones según la matriz de transición $Q$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Markov Chain Monte Carlo: algunos comentarios}
+
+{\small
+
+El algoritmo de Metropolis-Hastings nos entrega una estrategia general para muestrear de acuerdo a una distribución de interés $\vec \pi$
+\begin{itemize}
+\item Si $N$ es suficientemente grande, entonces $a_N$ será generado de acuerdo a una distribución similar a la estacionaria
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Sin embargo, el algoritmo no entrega a priori ningún criterio respecto a qué se entiende por suficientemente grande.
+\begin{itemize}
+\item ¿Cuál debe ser el valor de $N$ para que la cadena de Markov se acerque lo suficiente a la distribución estacionaria? 
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Markov Chain Monte Carlo: algunos comentarios}
+
+{\small
+
+Por ejemplo, para aplicar el algoritmo a problemas de conteo necesitamos un generador casi uniforme.
+\begin{itemize}
+\item Eso significa que $\vec \pi$ es la distribución uniforme, y que queremos estar muy cerca de la distribución estacionaria
+
+\item A la vez, no queremos que $N$ sea demasiado grande ya que queremos obtener un algoritmo de tiempo polinomial
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Markov Chain Monte Carlo: algunos comentarios}
+
+{\small
+
+Otro tema importante es el de la convergencia de la cadena de Markov a la distribución $\vec \pi$
+\begin{itemize}
+\item El algoritmo de Metropolis-Hastings nos asegura que $\vec \pi$ es distribución estacionaria, pero no nos asegura que sea la única
+
+\item Aún más, el algoritmo no nos asegura que la cadena de Markov converja a $\vec \pi$ independientemente del vector $\vec x_0$ inicial
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Para conseguir estas garantí­as se debe exigir más condiciones a la cadena de Markov caracterizada por $Q$
+\begin{itemize}
+\item En particular, es suficiente pedir que la cadena de Markov sea irreducible y aperiódica
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Markov Chain Monte Carlo: algunos comentarios}
+
+{\small
+
+Cómo mencionamos antes, en los problemas de conteo consideramos $\vec \pi$ como la distribución uniforme.
+\begin{itemize}
+\item Entonces, dado que $\vec \pi[a] = \vec \pi[b]$ para todo $a,b$, la condición de reversibilidad se reduce a que $P[a,b]=P[b,a]$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto, no siempre será necesario recurrir al algoritmo de Metropolis-Hastings en este contexto.
+\begin{itemize}
+\item Nos basta con definir una cadena de Markov cuya matriz de transición sea simétrica, y que además sea irreducible y aperiódica
+
+\item Esto puede lograrse en muchos casos. En otros, sin embargo, es necesario recurrir al algoritmo de Metropolis-Hastings
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la correctitud del algoritmo}
+
+{\footnotesize
+
+\begin{proposition}
+    Sea $\Omega$ un conjunto finito, $\pi$ una distribución sobre $\Omega$ y $P$ la matriz de transición de una cadena de Markov con conjunto de estados $\Omega$. Además, sea $Q$ una matriz tal que:
+    \begin{eqnarray*}
+        Q[a,b] & = &  
+\begin{cases}
+            P[a,b] \cdot \alpha[a,b] + r(b) & \text{si } a = b\\
+            P[a,b] \cdot \alpha[a,b]        & \text{si } a \neq b
+\end{cases}
+    \end{eqnarray*}
+    para todo $a,b\in\Omega$, donde ${\displaystyle r(b) = 1 - \sum_{x\in\Omega} P[x,b] \cdot \alpha[x,b]}$ y
+    \begin{eqnarray*}
+        \alpha[a,b] & = & 
+\begin{cases}
+            {\displaystyle \min \bigg\{\frac{P[b,a] \cdot \vec \pi[a]}{P[a,b] \cdot \vec \pi[b]}, 1\bigg\}} & \text{si } P[a,b] \cdot \vec \pi[b] > 0\\
+            1 & \text{en otro caso}
+\end{cases}
+    \end{eqnarray*}
+    Entonces $Q$ es la matriz de transición de una cadena de Markov y $Q[c,d] \cdot \vec \pi[c] = Q[c,d] \cdot \vec \pi[d]$ para todo $c,d\in\Omega$
+\end{proposition}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la correctitud del algoritmo}
+
+{\small
+
+\begin{ejercicio}
+Demuestre la proposición anterior.
+\end{ejercicio}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Metropolis-Hastings: la correctitud del algoritmo}
+
+{\footnotesize
+
+
+Ahora, solo falta demostrar que el algoritmo de Metropolis-Hastings efectúa las transiciones de acuerdo a las probabilidades especificadas por $Q$
+
+\vs{6}
+
+\visible<2->{
+En el siguiente teorema, consideramos toda la notación dada en la proposición anterior y en la descripción del algoritmo de Metropolis-Hastings.
+\begin{teorema}
+    Para todo $c\in\Omega$ y $j\in\{1,\ldots,N\}$ se tiene que:
+    \begin{eqnarray*}
+        \pr(a_j = c) & = & (Q^j \vec x_0)[c]
+    \end{eqnarray*}
+\end{teorema}
+}
+
+\vs{6}
+
+\visible<3->{
+Demostraremos el teorema sin requerir que $\vec x_0$ sea un vector canónico.
+\begin{itemize}
+\item $\vec x_0$ representa entonces la distribución de probabilidades de acuerdo a la cual se eligió $a_0$
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del teorema}
+
+{\small
+
+{\bf Demostración:} haremos la demostración por inducción, partiendo por el caso base $j=1$
+\begin{itemize}
+\item La demostración del caso inductivo, como se verá después, es completamente análoga a la del caso base
+\end{itemize}
+
+\vs{6}
+
+Sea $c\in\Omega$. Tenemos entonces que:
+\begin{eqnarray*}
+    \pr(a_1=c)  \ = \ \pr(a_1=c \wedge u\leq \alpha[b,a_0]) + \pr(a_1=c \wedge u > \alpha[b,a_0])
+\end{eqnarray*}
+
+\vs{6}
+
+Denotamos el primer término como $p_1$ y el segundo como $p_2$
+\begin{itemize}
+\item Estudiamos a continuación cada uno de estos términos
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del teorema}
+
+{\small
+
+\begin{align*}
+    p_1 
+    &=\  \pr(a_1=c \wedge u\leq \alpha[b,a_0]) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega}
+       \pr(a_1=c \wedge u\leq \alpha[b,a_0] \wedge b=y \wedge a_0=x) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega}
+       \pr(a_1=c \mid u\leq \alpha[b,a_0] \wedge b=y \wedge a_0=x) \cdot\\
+    &  \hspace{110pt} \pr(u\leq \alpha[b,a_0] \wedge b=y \wedge a_0=x) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(y=c) \cdot
+       \pr(u\leq \alpha[b,a_0] \mid b=y \wedge a_0=x)\cdot \\
+    &  \hspace{110pt} \pr(b=y \wedge a_0=x) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(y=c) \cdot
+       \alpha[y,x] \cdot \pr(b=y \mid a_0=x) \cdot \pr(a_0=x) 
+\end{align*}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del teorema}
+
+{\small
+
+Por lo tanto, tenemos que:
+\begin{align*}
+    p_1 
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(y=c) \cdot 
+       \alpha[y,x] \cdot P[y,x] \cdot \pr(a_0=x) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(y=c) \cdot
+       \alpha[y,x] \cdot P[y,x] \cdot \vec x_0[x] \\
+    &=\ \sum_{x\in\Omega} 
+       \alpha[c,x] \cdot P[c,x] \cdot \vec x_0[x]
+\end{align*}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del teorema}
+
+{\small
+
+Por otra parte, tenemos que:
+\begin{align*}
+    p_2 
+    &=\ \pr(a_1=c \wedge u > \alpha[b,a_0]) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega}
+       \pr(a_1=c \wedge u > \alpha[b,a_0] \wedge b=y \wedge a_0=x) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega}
+       \pr(a_1=c \mid u > \alpha[b,a_0] \wedge b=y \wedge a_0=x) \cdot\\
+    &  \hspace{110pt} \pr(u > \alpha[b,a_0] \wedge b=y \wedge a_0=x) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(x=c) \cdot
+       \pr(u > \alpha[b,a_0] \mid b=y \wedge a_0=x) \cdot\\
+    &  \hspace{110pt} \pr(b=y \wedge a_0=x) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(x=c) \cdot
+       (1 - \alpha[y,x]) \cdot \pr(b=y \mid a_0=x) \cdot \pr(a_0=x) 
+\end{align*}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del teorema}
+
+{\footnotesize
+
+Por lo tanto, tenemos que:
+\begin{align*}
+    p_2
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(x=c) \cdot 
+       (1-\alpha[y,x]) \cdot P[y,x] \cdot \pr(a_0=x) \\
+    &=\ \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(x=c) \cdot
+       (1-\alpha[y,x]) \cdot P[y,x] \cdot \vec x_0[x] \\
+    &=\ \sum_{y\in\Omega} 
+       (1-\alpha[y,c])\cdot  P[y,c] \cdot \vec x_0[c] \\
+    &=\ \vec x_0[c] \cdot \sum_{y\in\Omega} 
+       (1-\alpha[y,c]) \cdot P[y,c] \\
+    &=\ \vec x_0[c] \cdot \bigg(\sum_{y\in\Omega} P[y,c] - 
+       \sum_{y\in\Omega}\alpha[y,c] \cdot P[y,c] \bigg) \\
+    &=\ \vec x_0[c] \cdot \bigg(1 - 
+       \sum_{y\in\Omega}\alpha[y,c] \cdot P[y,c] \bigg) \\
+    &= \vec x_0[c] \cdot r(c)
+\end{align*}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del teorema}
+
+{\small
+
+Tenemos entonces que:
+\begin{align*}
+    \pr(a_1=c)
+    &\ = \ p_1 + p_2 \\
+    &\ = \ \bigg(\sum_{x\in\Omega} \alpha[c,x] \cdot P[c,x] \cdot \vec x_0[x]\bigg) + \vec x_0[c] \cdot r(c) \\
+    &\ = \ (\alpha[c,c] \cdot P[c,c] \cdot \vec x_0[c] + r(c) \cdot \vec x_0[c]) \ + \\
+    &\hspace{90pt} \sum_{x\in\Omega \,:\, x \neq c} \alpha[c,x] \cdot P[c,x] \cdot \vec x_0[x] \\
+    &\ = \ Q[c,c] \cdot \vec x_0[c] + 
+       \sum_{x\in\Omega \,:\, x \neq c} Q[c,x] \cdot \vec x_0[x] \\
+    &= \sum_{x\in\Omega} Q[c,x] \cdot \vec x_0[x] \\
+    &= (Q \vec x_0)[c]
+\end{align*}
+
+}
+
+\end{frame}
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del teorema}
+
+{\small
+
+Con esto queda demostrado el caso base. 
+
+\vs{8}
+
+\visible<2->{
+La demostración del caso inductivo es totalmente análoga. 
+\begin{itemize}
+\item Si suponemos que la propiedad es cierta para $a_k$ y queremos probar para $a_{k+1}$, la demostración es igual a la que acabamos de hacer, solo que en lugar del vector $\vec x_0$ consideramos el vector $(Q^k \vec x_0)$
+\begin{itemize}
+{\footnotesize \item Por hipótesis de inducción sabemos que $a_k$ distribuye de acuerdo al vector $(Q^k \vec x_0)$}
+\end{itemize}
+\end{itemize}}
+
+\vs{8}
+
+\visible<3->{
+Así­, queda demostrado el teorema. \qed
+}
+
+}
+
+\end{frame}
+
+
+\end{document}
+
+\end{document}+++
+
+
+
+%%%%% POR HACER
+- Ver si en la existencia del límite de la cadena de Markov es también necesario considerar aperioricidad
+- Demostrar que la existencia de un camino de c a b implica pr(X_n = b | X_0 = c) > 0. Deducir desde esto la definición alternativa de irreducibilidad.
+

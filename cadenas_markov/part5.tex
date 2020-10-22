@@ -1,0 +1,649 @@
+%!TEX root = main.tex
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+
+
+Para cada $k \geq 1$, tenemos que:
+\begin{eqnarray*}
+M_a^{(k\cdot n_0 + n)} - m_a^{(k\cdot n_0 + n)} & = & M_a^{(n_0 + (k-1) \cdot n_0 + n)} - m_a^{(n_0 + (k-1) \cdot n_0 + n)}\\
+& \leq & \big(1 - \ell \cdot t\big)\cdot \big(M_a^{((k-1)\cdot n_0 + n)} - m_a^{((k-1)\cdot n_0 + n)}\big)  \\
+& = & \big(1 - \ell \cdot t\big)\cdot \big(M_a^{(n_0 + (k-2)\cdot n_0 + n)} - m_a^{(n_0 + (k-2)\cdot n_0 + n)}\big)  \\
+& \leq & \big(1 - \ell \cdot t\big)^2 \cdot \big(M_a^{((k-2)\cdot n_0 + n)} - m_a^{((k-2)\cdot n_0 + n)}\big)  \\
+& \leq & \cdots \\
+& \leq & \big(1 - \ell \cdot t\big)^k \cdot \big(M_a^{(n)} - m_a^{(n)}\big)
+\end{eqnarray*}
+
+\vs{6}
+
+Notése que la desigualdad también es válida para $k=0$
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Considerando $n=0$, obtenemos la sub-sucesión $\big(M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}\big)_{k \in \mathbb{N}}$ de la sucesión $\big(M_a^{(n)} - m_a^{(n)}\big)_{n \in \mathbb{N}}$
+
+\vs{8}
+
+Dado que $0 \leq (1 - \ell \cdot t) < 1$ (ya que $t, \ell > 0$), para esta sub-sucesión se tiene que:
+\begin{eqnarray*}
+0 \leq \lim_{k \to \infty} (M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}) \ \leq 
+\lim_{k \to \infty} \big(1 - \ell \cdot t\big)^k \cdot \big(M_c^{(n)} - m_c^{(n)}\big) \ = \ 0
+\end{eqnarray*}
+
+\vs{6}
+
+Vale decir,
+\begin{eqnarray*}
+\lim_{k \to \infty} (M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}) & = & 0
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+Para todo $n \in \mathbb{N}$ se tiene que:
+\begin{itemize}
+\item $m_a^{(n)} \leq m_a^{(n+1)}$
+\item $M_a^{(n)} \geq M_a^{(n+1)}$
+\item $m_a^{(n)} \leq M_a^{(n)}$
+\end{itemize}
+
+\vs{8}
+
+Por lo tanto, para todo $n \in \mathbb{N}$ se tiene que:
+\begin{itemize}
+\item $M_a^{(n)} - m_a^{(n)} \geq 0$
+\item $M_a^{(n+1)} - m_a^{(n+1)} \leq M_a^{(n)} - m_a^{(n)}$
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Dado que $\big(M_a^{(n)} - m_a^{(n)}\big)_{n \in \mathbb{N}}$ es una sucesión de números reales monótona decreciente y acotada inferiormente, concluimos que existe $u \in \mathbb{R}$ tal que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \big(M_a^{(n)} - m_a^{(n)}\big) & = & u
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Además, para la sub-sucesión $\big(M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}\big)_{k \in \mathbb{N}}$ de $\big(M_a^{(n)} - m_a^{(n)}\big)_{n \in \mathbb{N}}$ se cumple que:
+\begin{eqnarray*}
+\lim_{k \to \infty} (M_a^{(k \cdot n_0)} - m_a^{(k \cdot n_0)}) & = & 0
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{\alert{¡Concluimos que $u = 0$!}}
+\begin{itemize}
+\visible<4->{\item ¿Cómo se demuestra que las dos sucesiones tienen el mismo límite? ¿Por qué es importante aquí que $n_0 \geq 1$? \qed}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Irreducibilidad y aperiodicidad: una propiedad del límite}
+%
+%{\small
+%
+%Dado $a \in \Omega$, definimos:
+%\alert{
+%\begin{eqnarray*}
+%\lambda_a & = & \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b),
+%\end{eqnarray*}}
+%donde $b$ es un elemento arbitrario en $\Omega$
+%
+%\vs{8}
+%
+%\visible<2->{
+%\begin{lema}
+%Si existe $a \in \Omega$ tal que $\lambda_a = 0$, entonces $\lambda_b = 0$ para todo $b \in \Omega$
+%\end{lema}}
+%
+%\vs{8}
+%
+%\visible<3->{
+%\begin{ejercicio}
+%Demuestre el lema.
+%\end{ejercicio}
+%}
+%
+%}
+%
+%\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso infinito}
+
+{\small
+
+Irreducibilidad y aperiodicidad {\bf no} son condiciones suficientes para asegurar que una cadena de Markov con un conjunto infinito (enumerable) de estados tiene una distribución estacionaria única.
+\begin{itemize}
+\item De hecho, bajo estas condiciones ni siquiera se puede asegurar que la cadena tiene una distribución estacionaria
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\begin{exampleblock}{Ejercicio}
+Construya una cadena de Markov irreducible, aperiódica, con un conjunto infinito de estados y que no tenga distribución estacionaria.
+\end{exampleblock}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+{\small
+
+Considere la siguiente cadena de Markov con conjunto de estado $\Omega = \mathbb{N}$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$0$}
+edge[arrout, in = 200, out = 160, loop] node[left] {$\frac{1}{4}$} (n1);
+\node[circ, right=15mm of n1] (n2) {$1$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n1)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n1);
+\node[circ, right=15mm of n2] (n3) {$2$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n2)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n2);
+\node[circ, right=15mm of n3] (n4) {$3$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n3)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n3);
+\node[circw, right=15mm of n4] (n5) {$\ldots$}
+edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n4)
+edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n4);
+%\node[circw, right=15mm of n4] (n5) {}
+%edge[arrww] node {{\large $\ldots$}} (n4);
+\end{tikzpicture}
+\end{center}
+
+\vs{8}
+
+Esta cadena de Markov es irreducible y aperiódica.
+\begin{itemize}
+{\footnotesize \item Es fácil ver que el estado 0 es aperiódico, de lo cual se concluye que la cadena de Markov es aperiódica dado que es irreducible}
+\end{itemize}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+{\small
+
+Suponga que $P$ es la matriz de transición de la cadena de Markov, y $\vec \lambda$ es una distribución estacionaria para ella, vale decir,
+\begin{eqnarray*}
+P \vec \lambda &=& \vec \lambda
+\end{eqnarray*}
+
+\vs{8}
+
+Además, suponga que $\vec \lambda[i] = \lambda_i$ para cada $i \in \mathbb{N}$
+\begin{itemize}
+\item Tenemos que ${\displaystyle \sum_{i \in \mathbb{N}} \lambda_i = 1}$
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+
+{\small
+
+
+Considerando las definiciones de $P$ y $\vec \lambda$ obtenemos:
+\begin{eqnarray*}
+\lambda_0 & = & \frac{1}{4} \cdot \lambda_0 + \frac{1}{4} \cdot \lambda_1
+\end{eqnarray*}
+
+\vs{6}
+
+Por lo tanto: \alert{$3 \cdot \lambda_0 = \lambda_1$}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+{\small
+
+Considere $i > 0$ y suponga que $3 \cdot \lambda_{i-1} = \lambda_i$
+
+\vs{8}
+
+Tenemos que:
+\begin{eqnarray*}
+\lambda_{i} & = & \frac{3}{4} \cdot \lambda_{i-1} + \frac{1}{4} \cdot \lambda_{i+1}\\
+& = & \frac{3}{4} \cdot \frac{1}{3} \cdot \lambda_{i} + \frac{1}{4} \cdot \lambda_{i+1}\\
+& = & \frac{1}{4} \cdot  \lambda_{i} + \frac{1}{4} \cdot \lambda_{i+1}
+\end{eqnarray*}
+
+\vs{8}
+
+Por lo tanto: \alert{$3 \cdot \lambda_i = \lambda_{i+1}$}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución al ejercicio}
+
+{\small
+
+\alert{Concluimos que $\lambda_i = 3^i \cdot \lambda_{0}$ para cada $i \in \mathbb{N}$}
+
+\vs{10}
+
+\visible<2->{
+Así, dado que $\lambda_i \leq 1$ para cada $i \in \mathbb{N}$, se debe tener que $\lambda_0 = 0$}
+
+\vs{10}
+
+\visible<3->{
+Concluimos entonces que $\lambda_i = 0$ para cada $i \in \mathbb{N}$, lo cual contradice la condición ${\displaystyle \sum_{i \in \mathbb{N}} \lambda_i = 1}$
+\begin{itemize}
+\item No podemos entonces tener una distribución estacionaria para $P$ \qed
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Un último comentario: el caso infinito }
+%
+%{\small
+%
+%Considere nuevamente la siguiente cadena de Markov con conjunto de estados $\Omega = \mathbb{N}$:
+%\begin{center}
+%\begin{tikzpicture}
+%\node[circ] (n1) {$0$}
+%edge[arrout, in = 200, out = 160, loop] node[left] {$\frac{1}{4}$} (n1);
+%\node[circ, right=15mm of n1] (n2) {$1$}
+%edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n1)
+%edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n1);
+%\node[circ, right=15mm of n2] (n3) {$2$}
+%edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n2)
+%edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n2);
+%\node[circ, right=15mm of n3] (n4) {$3$}
+%edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n3)
+%edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n3);
+%\node[circw, right=15mm of n4] (n5) {$\ldots$}
+%edge[arrin, bend right = 25] node[above] {$\frac{3}{4}$} (n4)
+%edge[arrout, bend left = 25] node[below] {$\frac{1}{4}$} (n4);
+%%\node[circw, right=15mm of n4] (n5) {}
+%%edge[arrww] node {{\large $\ldots$}} (n4);
+%\end{tikzpicture}
+%\end{center}
+%
+%\vs{8}
+%
+%Demostramos que para esta cadena de Markov se tiene que $\lambda_i = 0$ para todo $i \in \mathbb{N}$
+%\begin{itemize}
+%\item Queremos definir una condición que nos asegure que los valores $\lambda_i$ forman una distribución estacionaria para la cadena de Markov
+%\end{itemize}
+%
+%}
+%
+%\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿Cómo podemos asegurar convergencia en el caso infinito?}
+
+{\small
+
+Vamos a ver que irreducibilidad y  aperiodicidad sí son condiciones útiles en el caso infinito, pero cuando con consideradas junto con una tercera propiedad fundamental.
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La noción de estado recurrente}
+
+{\footnotesize
+
+Sea $b$ un estado en una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ 
+
+\vs{8}
+
+\visible<2->{
+Definimos $T_b$ como una variable aleatoria que registra el primer instante de tiempo mayor a $0$ en que llegamos a $b$, suponiendo que en el tiempo $0$ estábamos~en~$b$
+\begin{itemize}
+\item Vale decir, si el valor de $T_b$ es $n$, con $n \geq 1$, entonces $X_0 = b$, $X_1 \neq b$, $\ldots$, $X_{n-1} \neq b$ y $X_n = b$
+\end{itemize}
+Este tiempo de retorno a $b$ es llamado {\em hitting time}
+}
+
+\vs{8}
+
+\visible<3->{
+\begin{definicion}
+$b$ es recurrente si \alert{${\displaystyle \sum_{n \geq 1} \pr(T_b = n)  = 1}$}, y $b$ es transitorio en caso contrario.
+\end{definicion}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una caracterización de los estado recurrentes}
+{\small
+
+Sea $b$ un estado en una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ 
+
+\vs{8}
+
+Defina:
+\vs{-2}
+\begin{eqnarray*}
+p_b & = & \sum_{n \geq 1} \pr(T_b = n)
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre que $p_b \in [0,1]$
+\vs{1}
+\begin{itemize}
+{\footnotesize \item Nótese que no estamos asumiendo que $b$ es recurrente
+
+\item ¿Es posible tener una cadena de Markov donde $p_b = 0$?
+}
+\end{itemize}
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una caracterización de los estado recurrentes}
+{\footnotesize
+
+Suponga que la matriz de transición de $\{ X_t \}_{t \in \mathbb{N}}$ es $P$, y recuerde que $G_P$ es grafo que representa a $P$
+
+\vs{6}
+
+Partiendo desde el estado $b$, consideramos caminatas sobre $G_P$ que sólo utilizan arcos con probabilidad mayor a cero y tiene largo infinito.
+\begin{itemize}
+\item Podemos realizar estas caminatas incluso si $\{ X_t \}_{t \in \mathbb{N}}$ tiene un conjunto finito de estados
+\end{itemize}
+
+\vs{6}
+
+Defina una variable aleatoria $V_b$ que cuenta el número total de veces que $b$ es visitado en las caminatas.
+\begin{itemize}
+\item El punto de partida $b$ es considerado como la primera visita a este estado
+\end{itemize}
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una caracterización de los estado recurrentes}
+{\footnotesize
+
+Dado un número natural $n \geq 1$, tenemos que:
+\alert{
+\begin{eqnarray*}
+\pr(V_b = n) & = & p_b^{n-1} \cdot (1 - p_b)
+\end{eqnarray*}}
+
+
+\visible<2->{
+\begin{proposition}
+$b$ es recurrente si y sólo si $\esp[V_b] = \infty$
+\end{proposition}}
+
+\vs{4}
+
+\visible<3->{
+\begin{ejercicio}
+Demuestre la proposición.
+\end{ejercicio}}
+
+\vs{6}
+
+\visible<4->{
+¡Tenemos entonces que $b$ es recurrente si y sólo si $b$ es visitado una cantidad infinita de veces!
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una segunda caracterización de los estado recurrentes}
+{\footnotesize
+
+Partiendo desde el estado $b$,  nuevamente consideramos caminatas sobre $G_P$ que sólo utilizan arcos con probabilidad mayor a cero y tiene largo~infinito.
+
+\vs{8}
+
+Dado $n \in \mathbb{N}$, sea $V_b^{(n)}$ una variable aleatoria tal que $V_b^{(n)} = 1$ si el estado en la caminata es $b$ después de recorrer $n$ arcos en $G_P$, y $V_b^{(n)} = 0$ en caso contrario.
+
+\vs{8}
+
+Tenemos que:
+\begin{eqnarray*}
+V_b & = & \sum_{n \in \mathbb{N}} V_b^{(n)}
+\end{eqnarray*}
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una segunda caracterización de los estado recurrentes}
+{\footnotesize
+
+Concluimos que:
+\begin{eqnarray*}
+\esp[V_b] & = & \sum_{n \in \mathbb{N}} \esp[V_b^{(n)}]
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Así, dado que $V_b^{(n)} \sim \ber(\pr(X_n = b \mid X_0 = b))$, concluimos que:
+\begin{eqnarray*}
+\alert{\esp[V_b]} & \alert{=} & \alert{\sum_{n \in \mathbb{N}} \pr(X_n = b \mid X_0=b)}
+\end{eqnarray*}}
+
+\vs{6}
+
+\visible<3->{
+\begin{corolario}
+$b$ es recurrente si y sólo si 
+\begin{eqnarray*}
+\sum_{n \in \mathbb{N}} \pr(X_n = b \mid X_0=b) & = & \infty
+\end{eqnarray*}
+\end{corolario}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una tercera propiedad fundamental: estados recurrentes positivos}
+
+{\small
+
+\begin{definition}
+Un estado $b$ en una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ es recurrente positivo si $b$ es recurrente y \alert{$\esp[T_b] \in \mathbb{R}$}
+\end{definition}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+De una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ con conjunto de estados $\Omega$ y un estado $b \in \Omega$ tal que $b$ es recurrente pero no recurrente positivo.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una solución para el ejercicio}
+
+{\footnotesize
+
+Considere la siguiente cadena de Markov con conjunto de estados $\Omega = \mathbb{N}$:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$0$};
+\node[circ, right=15mm of n1] (n2) {$1$}
+edge[arrin, bend right = 20] node[above] {$\frac{1}{2}$} (n1)
+edge[arrout, bend left = 20] node[below] {$1$} (n1);
+\node[circw, below=9mm of n1] (n3) {};
+\node[circ, right=5mm of n3] (n4) {$2$}
+edge[arrin, bend right = 20] node[left] {$\frac{1}{4}$\,} (n1);
+\node[circ, below=9mm of n3] (n5) {$3$}
+edge[arrin, bend right = 20] node[left] {$1$} (n4);
+\node[circ, left=5mm of n3] (n6) {$4$}
+edge[arrin, bend right = 20] node[left] {$1$} (n5)
+edge[arrout, bend left = 20] node[left] {$1$} (n1);
+\node[circw, left=10mm of n1] (n7) {};
+\node[circ, above=4mm of n7] (n8) {$5$}
+edge[arrin, bend right = 20] node[below] {$\frac{1}{8}$} (n1);
+\node[circw, left=10mm of n8] (n9) {};
+\node[circw, above=4mm of n9] (n10) {$\ldots$}
+edge[arrin, bend right = 20] node[below] {$1$} (n8);
+\node[circw, right=3mm of n8] (n11) {};
+\node[circ, above=2mm of n11] (n12) {{\scriptsize $11$}}
+edge[arrout, bend left = 20] node[left] {$1$} (n1);
+\node[circw, left=10mm of n12] (n12a) {};
+\node[circw, above=4mm of n12a] (n12b) {$\ldots$}
+edge[arrout, bend left = 20] node[above] {$1$} (n12);
+\node[circ, right=7mm of n12] (n13) {{\scriptsize $12$}}
+edge[arrin, bend right = 20] node[right] {$\frac{1}{16}$}(n1);
+\node[circw, right=10mm of n13] (n13a) {};
+\node[circw, above=4mm of n13a] (n13b) {$\ldots$}
+edge[arrin, bend right = 20] node[above] {$1$} (n13);
+\end{tikzpicture}
+\end{center}
+\visible<2->{Tenemos que $0$ es un estado recurrente pero no recurrente positivo.}
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad de la distribución estacionaria: el caso general}
+
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica y \alert{donde cada estado es recurrente positivo}
+\begin{itemize}
+\item  Y sea $\vec \pi \in [0,1]^{|\Omega|}$ un vector tal que $\vec \pi[a] = \lambda_a$ para cada $a \in \Omega$, donde $\Omega$ es el conjunto de estados de $\{ X_t \}_{t \in \mathbb{N}}$
+\begin{itemize}
+{\footnotesize 
+\item Nótese que $\Omega$ puede ser un conjunto infinito enumerable
+
+\item $\lambda_a = \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)$, vale decir, $\lambda_a$ es definido como en el caso finito considerando un estado arbitrario $b \in \Omega$ (todos los puntos de partida dan el mismo resultado)}
+\end{itemize}
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+$\vec \pi$ es la única distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$
+\end{teorema}
+}
+
+
+
+}
+
+\end{frame}

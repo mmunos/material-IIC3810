@@ -1,0 +1,821 @@
+%!TEX root = main.tex
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La distribución estacionaria de una cadena de Markov}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+\begin{itemize}
+\item Y sea $\vec \pi \in [0,1]^{|\Omega|}$ tal que ${\displaystyle \sum_{a \in \Omega} \vec \pi[a] = 1}$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+$\vec \pi$  es una distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$ si \alert{$P \vec \pi = \vec \pi$}
+\end{definicion}
+}
+
+\vs{8}
+
+\visible<3->{
+Vale decir, $\vec \pi$ es una distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$ si esta distribución no cambia al realizar una transición de la cadena de Markov}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunos ejemplos de distribuciones estacionarias}
+
+{\footnotesize
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Considere una cadena de Markov con la siguiente matriz de transición:
+\begin{eqnarray*}
+P & = & \begin{pmatrix}
+0\text{.}5 & 0\text{.}5\\
+0\text{.}5 & 0\text{.}5
+\end{pmatrix}
+\end{eqnarray*}
+Muestre que esta cadena de Markov tiene una única distribución estacionaria, y construya esta distribución.
+
+\vs{2}
+
+\item Construya una cadena de Markov que tenga al menos dos distribuciones estacionarias.
+\begin{itemize}
+{\footnotesize
+\item El dominio de esta cadena debe ser finito
+}
+\end{itemize}
+
+\vs{2}
+
+\item Construya una cadena de Markov que no tenga distribución estacionaria.
+\begin{itemize}
+{\footnotesize
+\item El dominio de esta cadena debe ser infinito enumerable
+}
+\end{itemize}
+\end{enumerate}
+
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Preguntas en torno a la distribución estacionaria}
+
+Dada una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ con un conjunto finito de estados $\Omega$ nos interesan las siguientes preguntas:
+
+\begin{itemize}
+
+\vs{4}
+
+\visible<2->{
+
+\item ¿Existe una distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$?
+
+}
+
+\vs{2}
+
+\visible<3->{
+
+\item Si es que existe, ¿en qué casos es única?
+
+}
+
+\vs{2}
+
+\visible<3->{
+	
+\item ¿Siempre puedo converger a esta distribución desde cualquier punto de partida?
+	
+}
+
+\end{itemize}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+	\frametitle{Un recordatorio de Álgebra Lineal}
+	
+	{\small
+		
+		Para responder la primera pregunta, vamos a recordar unos conceptos de Álgebra Lineal.
+		
+		\vs{8}
+		
+		\visible<3->{
+			\begin{definicion}
+				Sea $A$ una matriz cuadrada. Un {\bf vector propio} de $A$ es un vector (no nulo) $\bar{x}$ tal que $A\bar{x} = \lambda\bar{x}$, donde $\lambda\in\R$. Este $\lambda$ a su vez es un {\bf valor propio} de $M$.
+			\end{definicion}
+		}
+		
+		\vs{4}
+		
+		\visible<4->{
+			Naturalmente, si $\vec x$ es vector propio de $M$, para cualquier valor $a\in\R$ se tiene que $a\cdot\vec x$ también lo es.
+		}
+	}
+	
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+	\frametitle{Un recordatorio de Álgebra Lineal}
+	
+	{\small
+		
+		\begin{definicion}
+			El {\bf polinomio característico} de una matriz cuadrada $A$ es el determinante de $A - \lambda I$, donde $I$ es la matriz identidad.
+		\end{definicion}
+		
+		\vs{4}
+		
+		\visible<2->{
+			Notemos que $A{\vec x} = \lambda {\vec x}$ equivale a que $(A - \lambda I){\vec x}$ sea el vector 0 para un vector no nulo ${\vec x}$. Esto ocurre cuando $A - \lambda I$ es no invertible, es decir, cuando su determinante es 0.
+		}
+		
+		\vs{6}
+		
+		\visible<3->{
+			Por lo tanto, $\lambda$ es raíz del polinomio característico de $A$ si y sólo si es valor propio.
+		}
+	}
+	
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+	\frametitle{Un recordatorio de Álgebra Lineal}
+	
+	{\small
+		
+		\begin{proposition}
+			Una matriz $A$ de tamaño $n \times n$ tiene a lo más $n$ valores propios. Además, son los mismos que los de su matriz transpuesta $A^T$.
+		\end{proposition}
+		
+		\vs{4}
+		
+		\visible<2->{
+			{\bf Demostración.} El grado de $\lambda$ en el determinante de $A - \lambda I$ es a lo más $n$, así que la primera parte se cumple por el teorema fundamental del álgebra.
+		}
+		
+		\vs{4}
+		
+		\visible<3->{
+			Para la segunda parte hay que recordar el determinante es simétrico respecto a filas y columnas, por lo que $det(A) = det(A^T)$. Luego, $det(A - \lambda I) = det(A^T - \lambda I)$, y sus raíces son las mismas. \qed
+		}
+		
+		
+	}
+	
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+	\frametitle{Valores propios de una cadena de Markov}
+	
+	{\small
+		
+		
+		\begin{teorema}
+			Considere una cadena de Markov finita con una matriz de transición $P$. Se tiene que $1$ es valor propio de $P$.
+		\end{teorema}
+		
+		\vs{4}
+		
+		\visible<2->{
+			{\bf Demostración.} Tenemos que las columnas de de $P$ suman 1, y por lo tanto las filas de $P^T$ también.
+		}
+		
+		\vs{4}
+		
+		\visible<3->{
+			Considere el siguiente vector:
+			$$
+			\vec x = \begin{bmatrix}
+				1\\
+				1\\
+				\vdots\\
+				1
+			\end{bmatrix}
+			$$
+			Se tiene que ${\vec x}$ es un vector propio de $P^T$ con valor propio 1. Luego 1 es valor propio de $P$.
+		}
+	}
+	
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+	\frametitle{Valores propios de una cadena de Markov}
+	
+	{\small
+		
+		Si una cadena de Markov tiene una distribución estacionaria $\vec \pi$ entonces cumple con $P\vec \pi = 1\cdot \pi$. Es decir, tiene como valor propio 1. 
+		
+		\vs{16}
+		
+		\visible<2->{
+			Sin embargo, que una matriz tenga valor propio 1 aún no nos dice que su vector propio sea una distribución de probabilidades.} \visible<3->{Podría tener componentes negativas.}
+		
+		
+		
+		
+	}
+	
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+	\frametitle{Valores propios de una cadena de Markov}
+	
+	{\small
+		
+		Vamos a usar una herramienta clásica del Álgebra lineal
+		
+		\visible<2->{
+			\begin{teorema}[Perron-Frobenius]
+				Sea $A$ una matriz cuadrada finita sin componentes negativas. Existe un vector propio de $A$ cuyas componentes son todas positivas.
+			\end{teorema}
+		}
+		
+		\vs{8}
+		
+		\visible<3->{
+			Usando este vector vamos a construir una distribución estacionaria.
+		}
+		
+	}
+	
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+	\frametitle{Existencia de la distribución estacionaria}
+	
+	{\small
+		
+		\begin{proposition}
+			Toda cadena de Markov finita tiene una distribución estacionaria.
+		\end{proposition}
+	
+		\vs{4}
+	
+		{\bf Demostración.} Sea $P$ su matriz de transición, y sea $\vec x$ un vector propio positivo con valor propio $\lambda$.
+		
+		\vs{4}
+		
+		Normalizamos este vector de tal manera que la suma de sus componentes es 1. Sigue siendo vector propio para $\lambda$.
+		
+		\vs{4}
+		
+		Luego tenemos que $P \vec x = \lambda \vec x$. Como la suma de todas las columnas de $P$ es 1, entonces la suma de los componentes de $\lambda \vec x$ también es 1. 
+		
+		\vs{4}
+		
+		Finalmente, como $\sum_{i} x_i = \sum_{i} \lambda x_i$, entonces $\lambda = 1$, por lo que $\vec x$ es una distribución estacionaria. \qed
+		
+		
+	}
+	
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una primera propiedad fundamental: irreducibilidad}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+$\{ X_t \}_{t \in \mathbb{N}}$ es irreducible si $G_P$ es un grafo fuertemente conexo.
+\end{definicion}
+}
+
+\vs{8}
+
+\visible<3->{
+Tenemos que $\{ X_t \}_{t \in \mathbb{N}}$ es irreducible si y sólo si para cada $a, b \in \Omega$, existe $t > 0$ tal que:
+\begin{eqnarray*}
+\pr(X_t = a \mid X_0 = b) & > & 0
+\end{eqnarray*}
+}
+
+}
+
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una segunda propiedad fundamental: aperiodicidad}
+
+
+{\small
+
+Sea $a \in \Omega$. Si $\{ n > 0 \mid \pr(X_n = a \mid X_0 = a) > 0\}$ no es vacío, entonces el periodo de $a$ es definido como:
+\begin{eqnarray*}
+\text{MCD}\,\{ n > 0 \mid \pr(X_n = a \mid X_0 = a) > 0\}
+\end{eqnarray*}
+En caso contrario, el periodo de $a$ no está definido. 
+
+\vs{8}
+
+\visible<2->{
+\begin{definicion}
+Un estado $a \in \Omega$ es aperiódico si su periodo está definido y es igual a 1. Además, $\{ X_t \}_{t \in \mathbb{N}}$ es aperiódica si cada estado $b \in \Omega$ es aperiódico.
+\end{definicion}
+}
+
+}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Irreducibilidad y aperiodicidad: algunos ejemplos}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Muestre que la cadena de Markov definida para la relación $R_{\ks}$ es irreducible y aperiódica.
+
+\vs{2}
+
+\item Demuestre que en una cadena de Markov irreducible todos los estados tienen el mismo periodo.
+\begin{itemize}
+{\footnotesize \item Concluimos entonces que si una cadena de Markov irreducible tiene un estado aperiódico, entonces la cadena es aperiódica.}
+\end{itemize}
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible con conjunto de estados $\Omega$ y matriz de transición $P$, y sean $b,c \in \Omega$
+
+\vs{8}
+
+Suponemos que los periodos de $b$ y $c$ son $\ell_b$ y $\ell_c$, respectivamente.
+\begin{itemize}
+\item ¿Por qué sabemos que estos periodos existen?
+\end{itemize}
+
+\vs{8}
+
+Dado que $\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov irreducible:
+\begin{itemize}
+\item Existe un camino en $G_P$ desde $b$ a $c$ de largo $k_{b,c}$, y existe un camino en $G_P$ desde $c$ a $b$ de largo $k_{c,b}$
+\end{itemize}
+
+}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Entonces existe un camino de $b$ a $b$ de largo $k_{b,c} + k_{c,b}$, de lo cual concluimos que $\pr(X_{k_{b,c} + k_{c,b}} = b \mid X_0 = b) > 0$
+\begin{itemize}
+\item Dado que $\ell_b$ es el periodo de $b$, concluimos que $\ell_b \mid (k_{b,c} + k_{c,b})$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $n > 0$ tal que $\pr(X_n = c \mid X_0 = c) > 0$
+\begin{itemize}
+\item Existe un camino en $G_P$ de $c$ a $c$ de largo $n$
+\end{itemize}
+}
+
+\vs{7}
+
+\visible<3->{
+Tenemos entonces que existe un camino en $G_P$ de $b$ a $b$ de largo $k_{b,c} + n + k_{c,b}$, por lo que $\pr(X_{k_{b,c} + n + k_{c,b}} = b \mid X_0 = b) > 0$
+\begin{itemize}
+\item Dado que $\ell_b$ es el periodo de $b$, concluimos que $\ell_b \mid (k_{b,c} + n + k_{c,b})$
+
+\visible<4->{\item Así, dado que $\ell_b \mid (k_{b,c} + k_{c,b})$, deducimos que \alert{$\ell_b \mid n$}}
+\end{itemize}}
+
+}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Una solución para el segundo ejercicio}
+
+{\small
+
+Por lo tanto, $\ell_b \mid n$ para cada $n > 0$ tal que $\pr(X_n = c \mid X_0 = c) > 0$
+\begin{itemize}
+\alert{\item De lo cual deducimos que $\ell_b \leq \ell_c$, puesto que $\ell_c = \text{MCD}\,\{ n > 0 \mid \pr(X_n = c \mid X_0 = c) > 0\}$}
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+De la misma forma se puede demostrar que $\ell_c \leq \ell_b$, de lo cual concluimos que $\ell_b = \ell_c$ \qed
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia del límite en el caso finito: irreducibilidad y aperiodicidad}
+
+{\small
+
+Vamos a demostrar que irreducibilidad y aperiodicidad son condiciones suficientes para la convergencia de una cadena Markov con un conjunto finito de estados.
+\begin{itemize}
+\item La convergencia no depende del punto de partida
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+Esto nos va a permitir demostrar que una cadena de Markov irreducible, aperiódica y con un conjunto finito de estados tiene una única distribución estacionaria.
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia del límite}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible y aperiódica con conjunto finito de estados $\Omega$
+
+\vs{4}
+
+\begin{teorema}
+Si $a \in \Omega$, se tiene que:
+\vs{1}
+\begin{enumerate}
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}$ existe para cada $b \in \Omega$
+
+\vs{2}
+
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) =\lim_{n \to \infty} \pr(X_n = a \mid X_0 = c)}$ para cada~$b, c \in \Omega$
+\end{enumerate}
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+Antes de demostrar este teorema, vamos a estudiar en detalle sus consecuencias.}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso finito}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica y con conjunto finito de estados $\Omega$
+
+\vs{8}
+
+Dado $a \in \Omega$, definimos:
+\alert{
+\begin{eqnarray*}
+\lambda_a & = & \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b),
+\end{eqnarray*}}
+donde $b$ es un elemento arbitrario en $\Omega$
+
+\vs{8}
+
+\visible<2->{
+\begin{lema}
+${\displaystyle \sum_{a \in \Omega} \lambda_a = 1}$
+\end{lema}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del lema}
+
+{\small
+
+Fije un elemento $b \in \Omega$
+
+\vs{10}
+
+\visible<2->{
+Para cada $n \in \mathbb{N}$ tenemos que:
+\begin{eqnarray*}
+\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b) & = & 1
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+Por lo tanto tenemos que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \bigg(\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b)\bigg) & = & 1
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración del lema}
+
+{\small
+
+Además, sabemos que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \bigg(\sum_{a \in \Omega} \pr(X_n = a \mid X_0 = b)\bigg) & = & 
+\sum_{a \in \Omega} \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)\\ & = & \sum_{a \in \Omega} \lambda_a
+\end{eqnarray*}
+
+
+\vs{8}
+
+\visible<2->{
+Concluimos que ${\displaystyle \sum_{a \in \Omega} \lambda_a = 1}$ \qed}
+
+
+}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y el caso finito: una segunda propiedad fundamental}
+
+{\small
+
+\begin{lema}
+Si $\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov irreducible, aperiódica y con un conjunto finito de estados $\Omega$, entonces $\lambda_a > 0$ para cada $a \in \Omega$
+\end{lema}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el lema.
+\end{ejercicio}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad de la distribución estacionaria en el caso finito}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible, aperiódica, con conjunto finito de estados $\Omega$ y matriz de transición $P$
+\begin{itemize}
+\item Y sea $\vec \pi \in [0,1]^{|\Omega|}$ un vector tal que $\vec \pi[a] = \lambda_a$ para cada $a \in \Omega$
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+\begin{teorema}
+$\vec \pi$ es la única distribución estacionaria para $\{ X_t \}_{t \in \mathbb{N}}$
+\end{teorema}
+}
+
+\vs{8}
+
+\visible<3->{
+{\bf Demostración:} Primero tenemos que demostrar que $P \vec \pi = \vec \pi$
+\begin{itemize}
+\item Vale decir, tenemos que demostrar que $(P \vec \pi)[a] = \vec \pi[a]$ para cada~$a \in\Omega$
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+Dado $a \in \Omega$ y un estado arbitrario $c \in \Omega$, tenemos que:
+\begin{eqnarray*}
+(P \vec \pi)[a] & = & \sum_{b \in \Omega} P[a,b] \cdot \vec \pi[b]\\
+& = & \sum_{b \in \Omega} \bigg(\pr(X_1 = a \mid X_0 = b) \cdot \lim_{n \to \infty} \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \sum_{b \in \Omega}  \bigg(\pr(X_1 = a \mid X_0 = b) \cdot  \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \sum_{b \in \Omega}  \bigg(\pr(X_{n+1} = a \mid X_n = b) \cdot  \pr(X_n = b \mid X_0 = c)\bigg)\\
+& = & \lim_{n \to \infty} \pr(X_{n+1} = a \mid X_0 = c)\\
+& = & \lim_{m \to \infty} \pr(X_{m} = a \mid X_0 = c)\\
+& \alert{=} & \alert{\lambda_a \ = \ \vec \pi[a]}
+\end{eqnarray*}
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+En segundo lugar, tenemos que demostrar que para toda distribución estacionaria $\vec \alpha$ para $\{ X_t \}_{t \in \mathbb{N}}$, se tiene que $\vec \alpha = \vec \pi$
+
+\vs{6}
+
+\visible<2->{Suponga que $P \vec \alpha = \vec \alpha$. Dado $a \in \Omega$ tenemos que:
+\begin{eqnarray*}
+\vec \alpha[a] & = & (P \vec \alpha)[a]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot \vec \alpha[b]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot (P \vec \alpha)[b]\\
+& = & \sum_{b \in \Omega} P[a,b] \cdot \bigg(\sum_{c \in \Omega} P[b,c] \cdot \vec \alpha[c]\bigg)\\
+& = & \sum_{b \in \Omega} \sum_{c \in \Omega} P[a,b] \cdot P[b,c] \cdot \vec \alpha[c]\\
+& = & \sum_{c \in \Omega} \bigg(\sum_{b \in \Omega} P[a,b] \cdot P[b,c]\bigg) \cdot \vec \alpha[c]
+\end{eqnarray*}}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+\begin{eqnarray*}
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot \vec \alpha[c]\\
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot (P \vec \alpha)[c]\\
+& = & \sum_{c \in \Omega} P^2[a,c] \cdot \bigg(\sum_{d \in \Omega} P[c,d] \cdot \vec \alpha[d]\bigg)\\
+& = & \sum_{c \in \Omega} \sum_{d \in \Omega} P^2[a,c] \cdot P[c,d] \cdot \vec \alpha[d]\\
+& = & \sum_{d \in \Omega} \bigg(\sum_{c \in \Omega} P^2[a,c] \cdot P[c,d]\bigg) \cdot \vec \alpha[d]\\
+& = & \sum_{d \in \Omega} P^3[a,d] \cdot \vec \alpha[d]
+\end{eqnarray*}
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+
+{\small
+
+Siguiendo con este proceso, concluimos que para todo $n \geq 1$:
+\begin{eqnarray*}
+\vec \alpha[a] & = & \sum_{b \in \Omega} P^n[a,b] \cdot \vec \alpha[b]
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Por lo tanto:
+\alert{
+\begin{eqnarray*}
+\vec \alpha[a] & = & \sum_{b \in \Omega} \pr(X_n = a \mid X_0 = b) \cdot \vec \alpha[b]\\
+\end{eqnarray*}}
+}
+
+
+
+
+}
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia y unicidad en el caso finito: demostración}
+
+{\footnotesize
+
+Tomando el límite cuando $n$ tiende a infinito obtenemos:
+\begin{eqnarray*}
+\vec \alpha[a] & = & \lim_{n \to \infty} \bigg(\sum_{b \in \Omega} \pr(X_n = a \mid X_0 = b) \cdot \vec \alpha[b]\bigg)\\
+& = &  \sum_{b \in \Omega} \bigg(\lim_{n \to \infty}\pr(X_n = a \mid X_0 = b)\bigg) \cdot \vec \alpha[b]\\
+& = &  \sum_{b \in \Omega} \lambda_a \cdot \vec \alpha[b]\\
+& = &  \lambda_a \cdot  \sum_{b \in \Omega} \vec \alpha[b]\\
+& \alert{=} &  \alert{\lambda_a \cdot 1 \ = \ \lambda_a \ = \  \vec \pi[a]}
+\end{eqnarray*}
+
+\vs{6}
+
+Concluimos que $\vec \alpha = \vec \pi$, puesto que $\vec \alpha[a] = \vec \pi[a]$ para todo $a \in \Omega$\qed
+
+}
+
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+La estructura de links en una pequeña Web:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {} (n1)
+edge[arrout, bend left = 15] node[above] {} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {} (n1)
+edge[arrout, bend right = 15] node[right] {} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {} (n5);
+\end{tikzpicture}
+\end{center}
+
+}
+
+\end{frame}

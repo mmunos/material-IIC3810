@@ -1,0 +1,229 @@
+\documentclass{beamer}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{epsfig}
+\usepackage{dpscolor}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{MnSymbol,wasysym}
+
+\mode<presentation>
+{
+
+\useinnertheme{sparql}
+\useoutertheme{onlyfoot}
+\usecolortheme{seahorse}
+\usecolortheme{rose}
+
+\setbeamercovered{transparent}
+
+}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{corolario}{Corolario}
+\newtheorem{definicion}{Definición}
+\newtheorem{notacion}{Notación}
+\newtheorem{lema}{Lema}
+
+\newenvironment{ejemplo}
+{\begin{exampleblock}{Ejemplo}}
+{\end{exampleblock}}
+
+\newenvironment{ejercicio}
+{\begin{exampleblock}{Ejercicio}}
+{\end{exampleblock}}
+
+\newcommand{\cyan}[1]{\textCyan #1\textBlack}
+\newcommand{\red}[1]{\textRed #1\textBlack}
+\newcommand{\green}[1]{\textGreen #1\textBlack}
+\newcommand{\blue}[1]{\textBlue #1\textBlack}
+\newcommand{\black}[1]{\textBlack #1\textBlack}
+\newcommand{\magenta}[1]{\textMagenta #1\textBlack}
+\newcommand{\brown}[1]{\textBrown #1\textBlack}
+\newcommand{\vs}[1]{\vspace{#1mm}}
+\newcommand{\ignore}{}
+\newcommand{\ri}[1]{\text{\red{#1}}}
+\newcommand{\hs}{\hat\sigma}
+\newcommand{\modelos}{{\it modelos}}
+\newcommand{\B}{{\tt B}}
+\newcommand{\nspace}{\text{NSPACE}}
+\newcommand{\logspace}{\text{LOGSPACE}}
+\newcommand{\nlogspace}{\text{NLOGSPACE}}
+\newcommand{\npspace}{\text{NPSPACE}}
+\newcommand{\pspace}{\text{PSPACE}}
+\newcommand{\ph}{\text{PH}}
+\newcommand{\expspace}{\text{EXPSPACE}}
+\newcommand{\nexpspace}{\text{NEXPSPACE}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\espacio}{{\it espacio}}
+\newcommand{\tiempo}{{\it tiempo}}
+\newcommand{\ptime}{\text{PTIME}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\nexptime}{\text{NEXPTIME}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\A}{{\cal A}}
+\newcommand{\BB}{{\cal B}}
+\newcommand{\sat}{\text{SAT}}
+\newcommand{\sdnf}{\#\text{DNF-SAT}}
+\newcommand{\scnf}{\#\text{CNF-SAT}}
+\newcommand{\tcnfu}{\text{3-CNF-SAT-UNSAT}}
+\newcommand{\usat}{\text{unique-SAT}}
+\newcommand{\np}{\text{NP}}
+\newcommand{\ntime}{\text{NTIME}}
+\newcommand{\crp}{\text{RP}}
+\newcommand{\bpp}{\text{BPP}}
+\newcommand{\cnf}{\text{CNF-SAT}}
+\newcommand{\tcnf}{\text{3-CNF-SAT}}
+\newcommand{\dcnf}{\text{2-CNF-SAT}}
+\newcommand{\horn}{\text{HORN-SAT}}
+\newcommand{\nhorn}{\text{NEG-HORN-SAT}}
+\newcommand{\co}{\text{co-}}
+\newcommand{\rp}{\leq^\text{\it p}_\text{\it m}}
+\newcommand{\tur}{\leq^\text{\it p}_\text{\it T}}
+\newcommand{\rpar}{\leq^\text{\it p}_\text{\it par}}
+\newcommand{\reach}{\text{CAMINO}}
+\newcommand{\pe}{\text{PROG-ENT}}
+\newcommand{\pl}{\text{PROG-LIN}}
+\newcommand{\cor}{\text{CONT-REG}}
+\newcommand{\er}{\text{EQUIV-REG}}
+\newcommand{\qbf}{\text{QBF}}
+\newcommand{\shp}{\text{Succinct-HP}}
+\newcommand{\hp}{\text{HP}}
+\newcommand{\cdp}{\text{DP}}
+\newcommand{\clique}{\text{CLIQUE}}
+\newcommand{\eclique}{\text{exact-CLIQUE}}
+\newcommand{\costo}{\text{costo}}
+\newcommand{\tsp}{\text{TSP}}
+\newcommand{\tspu}{\text{unique-TSP}}
+\newcommand{\no}{\text{NO}}
+\newcommand{\yes}{\text{YES}}
+\newcommand{\br}{\text{CERTAIN-ANSWERS}}
+
+\newcommand{\CROM}{\text{CROM}}
+\newcommand{\EVAL}{\text{EVAL}}
+\newcommand{\EQUIV}{\text{EQUIV}}
+\newcommand{\EQUIVP}{\text{EQUIV-POL}}
+
+\newcommand{\re}{\text{RE}}
+\newcommand{\dec}{\text{R}}
+\newcommand{\fp}{\text{FP}}
+\newcommand{\sharpp}{\#\text{P}}
+\newcommand{\acc}{\text{accept}}
+\newcommand{\ssat}{\#\text{SAT}}
+
+\newcommand{\pr}{{\rm {\bf Pr}}}
+\newcommand{\esp}{{\rm {\bf E}}}
+\newcommand{\vr}{{\rm {\bf Var}}}
+
+
+\newcommand{\ucnf}{\text{U-CNF-SAT}}
+\newcommand{\sucnf}{\#\text{U-CNF-SAT}}
+\newcommand{\shorn}{\#\text{HORN-SAT}}
+\newcommand{\sclique}{\#\text{CLIQUE}}
+\newcommand{\indsets}{\#\text{IS}}
+\newcommand{\is}{\text{GIS}}
+\newcommand{\sis}{\#\text{GIS}}
+\newcommand{\lis}{\text{LIS}}
+\newcommand{\slis}{\#\text{LIS}}
+\newcommand{\cs}{\#\text{CicloSimple}}
+\newcommand{\ham}{\text{HAM}}
+\newcommand{\ncis}{\text{IS}}
+\newcommand{\mis}{\text{MIS}}
+
+\newcommand{\afor}{{\bf for}\ }
+\newcommand{\afore}{{\bf for each}\ }
+\newcommand{\ato}{{\bf to}\ }
+\newcommand{\ado}{{\bf do}\ }
+\newcommand{\aif}{{\bf if}\ }
+\newcommand{\athen}{{\bf then}\ }
+\newcommand{\aelse}{{\bf else}\ }
+\newcommand{\areturn}{{\bf return}\ }
+\newcommand{\awhile}{{\bf while}\ }
+\newcommand{\aand}{{\bf and}\ }
+\newcommand{\aor}{{\bf or}\ }
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+
+\newcommand{\minr}{\text{Min}}
+\newcommand{\maxr}{\text{Max}}
+\newcommand{\exir}{\text{Exists}}
+\newcommand{\ks}{\text{KS}}
+\newcommand{\sks}{\#\text{KS}}
+\newcommand{\ber}{\text{\bf Ber}}
+
+\usetikzlibrary{arrows,positioning} 
+\tikzset{
+    circ/.style={
+           circle,
+           draw=black, 
+           thick,
+           text centered,
+           },
+    circw/.style={
+           circle,
+           draw=white, 
+           thick,
+           text centered,
+           },
+    arrout/.style={
+           ->,
+           -latex,
+           thick,
+           },
+    arrin/.style={
+           <-,
+           latex-,
+           thick,
+           },
+    arrw/.style={
+           -,
+           thick,
+           },
+    arrww/.style={
+           -,
+           thick,
+           draw=white, 
+           }
+}
+
+\title[Cadenas de Markov]
+{Cadenas de Markov}
+
+\author[IIC3810]
+{IIC3810\\
+\vs{2} Marcelo Arenas, Luis Alberto Croquevielle y Thomas Reisenegger}
+
+\institute[]
+{
+%  Department of Computer Science\\
+%  Pontificia Universidad Católica de Chile
+}
+
+\date{}
+
+%\subject{Theoretical Computer Science}
+
+\begin{document}
+
+\input{part1}
+
+\input{part2}
+
+\input{part3}
+
+\input{part4}
+
+\input{part5}
+
+\input{part6}
+
+
+\end{document}

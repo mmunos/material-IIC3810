@@ -1,0 +1,593 @@
+%!TEX root = main.tex
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+La estructura de links vista como una caminata aleatoria:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$\frac{1}{4}$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$\frac{1}{4}$} (n1)
+edge[arrout, bend left = 15] node[below] {$\frac{1}{2}$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$\frac{1}{2}$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$\frac{1}{4}$} (n1)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{2}$} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$\frac{1}{4}$} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {$\frac{1}{2}$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$1$} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {$1$} (n5);
+\end{tikzpicture}
+\end{center}
+
+
+}
+
+\end{frame}
+
+
+
+
+
+
+
+\renewcommand{\arraystretch}{1.25}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Podemos representar la caminata aleatoria como una matriz $P$
+\begin{itemize}
+\item $P[i,j]$ es la probabilidad de ir de la página $j$ a la página $i$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+La matriz $P$ de nuestro ejemplo:
+\begin{center}
+$P = \ \begin{pmatrix}
+\frac{1}{4} & \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0\\
+\frac{1}{4} & \frac{1}{2} & 0 & 0 & 0 & 0\\
+\frac{1}{4} & 0 & 0 & 0 & 0 & 0 \\
+\frac{1}{4} & 0 & \frac{1}{2} & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0
+\end{pmatrix}$
+\end{center}
+}
+
+}
+
+\end{frame}
+
+
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Esperamos que la caminata aleatoria no se detenga, lo cual no sucede en nuestra pequeña Web porque la página $6$ no tiene links de salida:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$\frac{1}{4}$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$\frac{1}{4}$} (n1)
+edge[arrout, bend left = 15] node[below] {$\frac{1}{2}$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$\frac{1}{2}$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$\frac{1}{4}$} (n1)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{2}$} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$\frac{1}{4}$} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {$\frac{1}{2}$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$1$} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {$1$} (n5);
+\end{tikzpicture}
+\end{center}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Para solucionar el problema, suponemos que la página $6$ no tiene preferencias al navegar y la conectamos con todas las páginas:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {} (n1)
+edge[arrout, bend left = 15] node[below] {} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {} (n1)
+edge[arrout, bend right = 15] node[right] {} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {} (n5)
+edge[arrout, bend right = 15] node[right] {} (n5)
+edge[arrout, bend left = 12] node[above] {} (n1)
+edge[arrout, bend right = 15] node[above] {} (n2)
+edge[arrout, bend right = 12] node[below] {} (n4)
+edge[arrout, in = 340, out = 290, loop] node[below] {} (n6)
+edge[arrout, bend left = 30] node[below] {} (n3);
+
+\end{tikzpicture}
+\end{center}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Obtenemos entonces el siguiente grafo para la caminata aleatoria:
+\begin{center}
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$\frac{1}{4}$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$\frac{1}{4}$} (n1)
+edge[arrout, bend left = 15] node[below] {$\frac{1}{2}$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$\frac{1}{2}$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$\frac{1}{4}$} (n1)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{2}$} (n1);
+%edge[arrout, in = 250, out = 200, loop] node[below] {} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$\frac{1}{4}$} (n1)
+%edge[arrout, bend right = 15] node[right] {} (n1)
+edge[arrin, bend left = 15] node[below] {$\frac{1}{2}$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$1$} (n3);
+\node[circ, right=25mm of n2] (n5) {$5$};
+\node[circ, below=25mm of n5] (n6) {$6$}
+edge[arrin, bend left = 15] node[left] {$1$} (n5)
+edge[arrout, bend right = 15] node[right] {$\frac{1}{6}$} (n5)
+edge[arrout, bend left = 12] node[above] {$\frac{1}{6}$} (n1)
+edge[arrout, bend right = 15] node[above] {$\frac{1}{6}$} (n2)
+edge[arrout, bend right = 12] node[below] {$\frac{1}{6}$} (n4)
+edge[arrout, in = 340, out = 290, loop] node[below] {$\frac{1}{6}$} (n6)
+edge[arrout, bend left = 43] node[below] {$\frac{1}{6}$} (n3);
+
+\end{tikzpicture}
+\end{center}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+Así, consideramos la siguiente matriz en nuestro ejemplo:
+\begin{center}
+$P = \ \begin{pmatrix}
+\frac{1}{4} & \frac{1}{2} & \frac{1}{2} & 0 & 0 & \frac{1}{6}\\
+\frac{1}{4} & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{6}\\
+\frac{1}{4} & 0 & 0 & 0 & 0 & \frac{1}{6} \\
+\frac{1}{4} & 0 & \frac{1}{2} & 1 & 0 & \frac{1}{6}\\
+0 & 0 & 0 & 0 & 0 & \frac{1}{6}\\
+0 & 0 & 0 & 0 & 1 & \frac{1}{6}
+\end{pmatrix}$
+\end{center}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Un ejemplo importante: PageRank}
+
+{\small
+
+El ranking de una página $i$ se define como la probabilidad $x_i$ de que el caminante aleatorio llegue a $i$
+\begin{itemize}
+\visible<2->{\item ¿Qué características de la Web influyen en el valor $x_i$?}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+En el ejemplo tenemos que:
+\vs{-2}
+\begin{eqnarray*}
+x_i & = & \sum_{j=1}^6 P[i,j] \cdot x_j
+\end{eqnarray*}
+}
+
+\vs{8}
+
+\visible<4->{
+Así, si $\vec x$ es un vector tal que $\vec x[i] = x_i$ para cada $i \in \{1, \ldots, 6\}$, entonces:
+\begin{eqnarray*}
+P \vec x  & = & \vec x
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{PageRank como una cadena de Markov}
+
+{\small
+
+El proceso anterior se puede generalizar para la Web real.
+\vs{1}
+\begin{itemize}
+\item Suponemos que la Web tiene $N$ páginas
+
+\item Cada página $i \in N$ que no tiene links de salida es conectada con cada página $j \in N$
+
+\item $P$ es una matriz de $N \times N$ construida a partir de la estructura de links generada, como fue mostrado en las transparencias anteriores
+\end{itemize}
+
+\vs{8}
+
+Además, definimos $\vec \pi$ como un vector tal que $\vec \pi[i]$ es la probabilidad de que el caminante aleatorio llegue a la página $i$, para cada $i \in \{1, \ldots, N\}$
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{PageRank como una cadena de Markov}
+
+{\small
+
+$P$ puede ser considerada como la matriz de transición de una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ con conjunto de estados $\Omega = \{1, \ldots, N\}$
+\begin{itemize}
+\visible<2->{\alert{\item El vector $\vec \pi$ es entonces  una distribución estacionaria de $\{ X_t \}_{t \in \mathbb{N}}$}}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+¿Cómo podemos asegurar que $\vec \pi$ existe y es único? ¿Cómo podemos calcular $\vec \pi$?}
+
+\vs{8}
+
+\visible<4->{
+¡Irreducibilidad y aperiodicidad son las propiedades que necesitamos!
+\begin{itemize}
+\item Dado que el conjunto de estados de la cadena de Markov es finito
+\end{itemize}}
+
+}
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Dos preguntas por responder:
+\begin{itemize}
+\item ¿Podemos asegurar que la cadena de Markov dada por $P$ es~irreducible? \visible<2->{{\bf No}}
+\item ¿Podemos asegurar que la cadena de Markov dada por $P$ es~aperiódica? \visible<3->{{\bf No}}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+¿Cómo solucionamos estos problemas?
+}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Para solucionar los problemas suponemos que el caminante aleatorio también puede decidir moverse a cualquier página sin considerar la estructura de la Web.
+\begin{itemize}
+\item Esto es controlado por un parámetro $\alpha$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $U$ una matriz de $N \times N$ tal que $U[i,j] = \frac{1}{N}$, y sea $\alpha \in (0,1)$
+}
+
+\vs{8}
+
+\visible<3->{
+Definimos una matriz $W_\alpha$ de $N \times N$ como:
+\alert{
+\begin{eqnarray*}
+W_\alpha & = & \alpha \cdot P + (1 - \alpha) \cdot U
+\end{eqnarray*}}}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y PageRank}
+
+{\small
+
+Con probabilidad $\alpha$ el caminante utiliza los links para moverse, y con probabilidad $(1 - \alpha)$ se mueve a cualquier página (sin considerar la estructura de la Web).
+\begin{itemize}
+\item Cuanto más grande es $\alpha$, más consideramos la estructura de la Web
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+\alert{Tenemos que $W_\alpha$ define una cadena de Markov irreducible y aperiódica.}
+\begin{itemize}
+\item ¿Por qué?
+\end{itemize}
+}
+
+}
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La definición de PageRank}
+
+{\small
+
+Consideramos un valor fijo de $\alpha$
+\begin{itemize}
+\item En el artículo original sobre PageRank se consideraba $\alpha = 0\text{.}85$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Definimos entonces $\vec \pi$ como la distribución estacionaria de la cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ cuya matriz de transición es $W_\alpha$
+\begin{itemize}
+\item Esta distribución existe y es única porque la cadena de Markov es irreducible, aperiódica y tiene un conjunto finito de estados
+
+\item Además se tiene que $\vec \pi[i] > 0$ para cada $i \in \{1, \ldots, N\}$, por lo que ninguna página Web es considera absolutamente irrelevante {\large {\alert \smiley{}}}
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El cálculo de PageRank}
+
+{\small
+
+Para cada página $i$, calculamos $\vec \pi[i]$ considerado la igualdad:
+\begin{eqnarray*}
+\vec \pi[i] & = & \lim_{n \to \infty} \pr(X_n = i \mid X_0 = 1)
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+Vale decir, la caminata comienza en la página 1 (una página arbitraria), y el valor $\vec \pi[i]$ se calcula utilizando un valor de $n$ suficientemente grande.}
+\begin{itemize}
+\visible<3->{\item Obtenemos una aproximación del valor de $\vec \pi[i]$}
+\end{itemize}
+
+
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El cálculo de PageRank}
+
+{\footnotesize
+
+Las ideas anteriores se traducen en la práctica en el siguiente algoritmo {\bf AproxPageRank} para aproximar $\vec \pi$
+
+\vs{7}
+
+En {\bf AproxPageRank} utilizamos un parámetro $\varepsilon \in (0,1)$ que indica cuándo debe detenerse el algoritmo.
+\begin{itemize}
+\item Si la distancia entre los últimos vectores generados es menor que $\varepsilon$ el algoritmo se detiene
+\end{itemize}
+
+\vs{7}
+
+En {\bf AproxPageRank} la similitud entre dos vectores $\vec a$ y $\vec b$ es medida a través de la distancia Manhattan:
+\vs{-3}
+\begin{eqnarray*}
+\|\vec a - \vec b\|_1 &=& \sum_{i=1}^N |\vec a[i] - \vec b[i]|
+\end{eqnarray*}
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{El algoritmo {\bf AproxPageRank}}
+
+{\footnotesize
+
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+{\bf AproxPageRank}($\varepsilon$)\\
+\> Sea $\vec \pi_0$ tal que $\vec \pi_0[1]=1$ y $\vec \pi_0[i] = 0$ para cada $i \in \{2, \ldots, N\}$\\
+\> Sea $\vec \pi_1 = W_\alpha \vec \pi_0$\\
+\> \aif $\|\vec \pi_0 - \vec \pi_1\|_1 < \varepsilon$ \athen \areturn $\vec \pi_1$\\
+\> \aelse\\
+\> \> \afor $n := 2$ \ato $\infty$ \ado\\
+\> \> \> $\vec \pi_n = W_\alpha \vec \pi_{n-1}$\\
+\> \> \> \aif $\|\vec \pi_{n-1} - \vec \pi_n\|_1 < \varepsilon$ \athen \areturn $\vec \pi_n$
+\end{tabbing}
+
+
+}
+
+
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible y aperiódica con un conjunto finito de estados $\Omega$
+
+\vs{8}
+
+En las transparencias anteriores utilizamos la siguiente propiedad para cada~$a \in \Omega$:
+\vs{1}
+\begin{enumerate}
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}$ existe para cada $b \in \Omega$
+
+\vs{2}
+
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) =\lim_{n \to \infty} \pr(X_n = a \mid X_0 = c)}$ para cada~$b, c \in \Omega$
+\end{enumerate}
+
+\vs{8}
+
+\visible<2->{
+En las siguientes transparencias vamos a demostrar esta propiedad.}
+
+}
+    
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La existencia del límite: una noción fundamental}
+
+{\small
+
+
+\begin{definicion}
+Dada una matriz $A$ de $\ell \times \ell$ de números reales.
+\vs{2}
+\begin{enumerate}
+    \item $A$ es no negativa si para todo $a, b \in \{1, \dots \ell\}$, se tiene que~$A[a, b] \geq 0$
+    
+    \vs{3}
+    
+    \visible<2->{
+    \item $A$ es cuasipositiva si $A$ es no negativa y existe un número natural~$n \geq 1$, tal que para todo $a, b \in \{1, \dots, \ell\}$, se tiene que~$A^{n}[a, b] > 0$
+    }
+\end{enumerate}
+\end{definicion}
+
+}
+    
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Irreducibilidad, aperiodicidad y cuasipositividad}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov irreducible y aperiódica con conjunto finito de estados $\Omega$ y matriz de transición $P$
+
+\vs{8}
+
+\begin{proposition}
+P es una matriz cuasipositiva
+\end{proposition}
+
+\vs{8}
+
+\visible<2->{
+{\bf Demostración:} Dado $a \in \Omega$, defina $J(a) = \{n \geq 1 \mid P^{n}[a, a] > 0\}$
+\alert{
+\begin{itemize}
+    \item Por aperiodicidad, se tiene que $\text{MCD}(J(a)) = 1$
+\end{itemize}
+}
+
+}
+
+}
+
+\end{frame}

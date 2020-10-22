@@ -1,0 +1,595 @@
+%!TEX root = main.tex
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+Nótese que $P^{n+m}[a,a] \geq P^{n}[a,a] \cdot P^{m}[a,a]$
+\begin{itemize}
+    \item Por lo tanto, tenemos la siguiente propiedad de clausura: si $n, m \in J(a)$, entonces $n + m \in J(a)$ 
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+\begin{lema}
+Para todo $a \in \Omega$, existe una par de números consecutivos en $J(a)$
+\end{lema}
+}
+
+\vs{6}
+
+\visible<3->{
+{\bf Demostración:} suponga que existe $a \in \Omega$ tal que $J(a)$ no contiene algún par de números consecutivos
+\begin{itemize}
+    \item Hay una distancia mínima $k \geq 2$ entre los elementos de $J(a)$
+\end{itemize}
+}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+Tenemos entonces que existe $n_0 \in J(a)$ tal que $n_0+k \in J(a)$
+
+\vs{8}
+
+\visible<2->{
+Además, existe $n_1 \in J(a)$ tal que $n_1 = m \cdot k + d$, con $m \in \mathbb{N}$ y $1 \leq d \leq k-1$
+\begin{itemize}
+    \item De otra forma, se tendría que $k|n$ para cada $n \in J(a)$, lo cual implicaría que $\text{MCD(}J(a)) \geq k > 1$
+\end{itemize}
+}
+
+\vs{6}
+
+\visible<3->{
+Por lo tanto, por la propiedad de clausura: $(m+1) \cdot (n_0 + k) \in J(a)$ y $n_1 + (m+1) \cdot n_0 \in J(a)$
+}
+
+\vs{4}
+
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+La distancia entre $(m+1) \cdot (n_0 + k)$ y $n_1 + (m+1) \cdot n_0$ es:
+\begin{eqnarray*}
+(m+1) \cdot (n_0 + k) - (n_1 + (m+1) \cdot n_0) &=& (m+1) \cdot k - n_1\\
+&=& k - (n_1 - m \cdot k)\\
+&=& k - d\\
+& < & k
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Encontramos entonces dos números en $J(a)$ cuya distancia es menor que~$k$, lo cual contradice el supuesto inicial.
+\begin{itemize}
+\item Concluimos que existe un par de números consecutivos en $J(a)$ \qed
+\end{itemize} 
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+\begin{lema}
+Dado $k \in \mathbb{N}$ con $k \geq 1$, existe $n_0 \in \mathbb{N}$ tal que $n_0 \geq 1$ y:
+\begin{eqnarray*}
+\{ n \in \mathbb{N} \mid n \geq n_0\} & \subseteq & \{ n_1 \cdot k + n_2 \cdot (k + 1) \mid n_1, n_2 \in \mathbb{N} \text{ y } n_1 \geq 1 \}
+\end{eqnarray*}
+\end{lema}
+
+\vs{8}
+
+\visible<2->{
+
+{\bf Demostración:} Dado $n \geq k^2$, existen $m \in \mathbb{N}$ y $d \in \{0, \ldots, k-1\}$ tales~que
+\begin{eqnarray*}
+n - k^2 &=& m \cdot k + d
+\end{eqnarray*}
+
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+Podemos entonces expresar $n$ como:
+\begin{eqnarray*}
+n &=& k^2 + m \cdot k + d\\
+& = & (k - d + m)\cdot k + d \cdot (k + 1)
+\end{eqnarray*}
+
+\vs{6}
+
+Dado que $k - d > 0$, concluimos que para $n_0 = k^2$ se tiene que $n_0 \geq 1$ y:
+\begin{eqnarray*}
+\{ n \in \mathbb{N} \mid n \geq n_0\} & \subseteq & \{ n_1 \cdot k + n_2 \cdot (k + 1) \mid n_1, n_2 \in \mathbb{N} \text{ y } n_1 \geq 1 \} 
+\end{eqnarray*} \qed
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+Fije $c \in \Omega$
+
+\vs{6}
+
+Por el primer lema, existe $k \in J(c)$ tal que $k + 1$ también es un elemento de $J(c)$
+\begin{itemize}
+\item Por la definición de $J(c)$ sabemos que $k \geq 1$
+\end{itemize}
+
+\vs{6}
+
+Por lo tanto, por el segundo lema existe $n_c \geq 1$ tal que:
+\begin{eqnarray*}
+\{ n \in \mathbb{N} \mid n \geq n_c\} & \subseteq & \{ n_1 \cdot k + n_2 \cdot (k + 1) \mid n_1, n_2 \in \mathbb{N} \text{ y } n_1 \geq 1\} \\
+&\subseteq& J(c)
+\end{eqnarray*}
+Nótese que la última inclusión es consecuencia de que $n + m \in J(c)$ si~$n,m \in J(c)$
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\footnotesize
+
+Sean $a,b \in \Omega$
+\begin{itemize}
+\item Como la cadena de Markov considerada es irreducible, existen $r_{a, c}, s_{c, b} \geq 1$ tales que $P^{r_{a,c}}[a, c] > 0$ y $P^{s_{c, b}}[c, b] > 0$
+\end{itemize}
+
+\vs{8}
+
+\visible<2->{
+Sea $n_{a,b} = r_{a, c} + n_c + s_{c,b}$
+}
+
+\vs{8}
+
+\visible<3->{
+Dado $n \geq n_{a,b}$ con $\ell = n - n_{a,b}$, tenemos que:
+\begin{eqnarray*}
+P^n[a,b] & = & P^{n_{a,b} + \ell}[a,b]\\
+& = & P^{r_{a, c} + n_c + \ell + s_{c,b}}[a, b]\\
+& \geq & P^{r_{a, c}}[a,c] \cdot P^{n_c + \ell}[c,c] \cdot P^{s_{c,b}}[c, b] \ > \ 0
+\end{eqnarray*}
+Nótese que $P^{n_c + \ell}[c,c] > 0$ dado que $\{ n \in \mathbb{N} \mid n \geq n_c\} \subseteq J(c)$
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la proposición}
+
+{\small
+
+\alert{Para todo $a,b \in \Omega$ y para todo $n \geq n_{a,b}$, tenemos que $P^n[a,b] > 0$}
+
+\vs{8}
+
+\visible<2->{
+Sea ${\displaystyle n^\star  =  \max_{a,b \in \Omega} n_{a, b}}$
+}
+
+\vs{8}
+
+\visible<3->{
+Tenemos que $P^{n^\star}[a,b] > 0$ para todo $a,b \in \Omega$
+\begin{itemize}
+\item Concluimos que $P$ es cuasipositiva (dado que $P$ es no negativa) \qed
+\end{itemize}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Existencia del límite: cuasipositividad}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto finito de estados $\Omega$ y matriz de transición $P$, donde $P$ es cuasipositiva.
+
+\vs{4}
+
+\begin{teorema}
+Si $a \in \Omega$, se tiene que:
+\vs{1}
+\begin{enumerate}
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}$ existe para cada $b \in \Omega$
+
+\vs{2}
+
+\item ${\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) =\lim_{n \to \infty} \pr(X_n = a \mid X_0 = c)}$ para cada~$b, c \in \Omega$
+\end{enumerate}
+\end{teorema}
+
+\vs{8}
+
+\visible<2->{
+Obtenemos entonces como corolario el teorema que queríamos demostrar, dada la proposición anterior.}
+
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+Fije $a \in \Omega$
+
+\vs{8}
+
+Dado $n \in \mathbb{N}$, definimos:
+\alert{
+\begin{eqnarray*}
+m_a^{(n)} & = & \min_{b \in \Omega} P^n[a, b] \\
+M_a^{(n)} & = & \max_{b \in \Omega} P^n[a, b]
+\end{eqnarray*}
+}
+
+}
+    
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Tenemos que $m_a^{(n)} \leq m_a^{(n+1)}$, puesto que:
+\begin{eqnarray*}
+m_a^{(n+1)} & = & \min_{b \in \Omega} P^{n+1}[a, b] \\
+& = & \min_{b \in \Omega} \sum_{c \in \Omega} P^n[a, c] \cdot P[c, b] \\
+& \geq & \min_{b \in \Omega} \sum_{c \in \Omega} \bigg(\min_{d \in \Omega} P^n[a, d]\bigg) P[c, b] \\
+& = & \min_{b \in \Omega} \bigg(\min_{d \in \Omega} P^n[a, d]\bigg) \sum_{c \in \Omega} P[c, b] \\
+& = & \min_{b \in \Omega} \bigg(\min_{d \in \Omega} P^n[a, d]\bigg)\\
+& = & \min_{d \in \Omega} P^n[a, d] \ = \ m_a^{(n)}
+\end{eqnarray*}
+
+\vs{4}
+
+\visible<2->{
+De la misma forma se puede demostrar que $M_a^{(n)} \geq M_a^{(n+1)}$
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+\begin{lema}
+Existen $r_a, s_a \in \mathbb{R}$ tales que:
+\begin{eqnarray*}
+\lim_{n \to \infty} m_a^{(n)} & = & r_a\\
+\lim_{n \to \infty} M_a^{(n)} & = & s_a
+\end{eqnarray*}
+\end{lema}
+
+\vs{8}
+
+\visible<2->{
+\begin{ejercicio}
+Demuestre el lema considerando que $(m_a^{(n)})_{n \in \mathbb{N}}$ es una sucesión de números reales monotona creciente y acotada superiormente.
+\begin{itemize}
+\item ¿Qué propiedades debe usar el caso de la sucesión $(M_a^{(n)})_{n \in \mathbb{N}}$?
+\end{itemize}
+\end{ejercicio}}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+Para demostrar el teorema basta entonces demostrar que:
+\begin{eqnarray*}
+\alert{\lim_{n \to \infty} \big(M_a^{(n)} - m_a^{(n)}\big)} & \alert{=} & \alert{0}
+\end{eqnarray*}
+
+\vs{8}
+
+De hecho, si esto se cumple, para cada $b \in \Omega$ se tiene que:
+\begin{eqnarray*}
+\lim_{n \to \infty} \pr(X_n = a \mid X_0 = b) & = & r_a
+\end{eqnarray*}
+Dado que \ $\pr(X_n = a \mid X_0 = b) = P^n[a,b]$,\ $m_a^{(n)} \leq P^n[a,b] \leq M_a^{(n)}$ y~~$r_a = s_a$
+
+}
+
+\end{frame}
+
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Existencia de un límite: cuasipositividad}
+%
+%{\small
+%
+%A partir de lo anterior necesitamos demostrar que existe un número $L_a \in \mathbb{R}$ tal que para todo $\delta > 0$ existe un número $n_1 \in \mathbb{N}$ tal que para todo $n > n_1$
+%
+%\begin{eqnarray*}
+%M_a^{(n)} - L_a < \delta
+%\end{eqnarray*}
+%
+%\visible<2->{
+%
+%dado que de esta forma podemos concluir que
+%
+%\begin{eqnarray*}
+%L_a & = & {\displaystyle \lim_{n \to \infty}} M_a^{(n)} \\
+%& = & {\displaystyle \lim_{n \to \infty}} M_a^{(n)} - {\displaystyle \lim_{n \to \infty}} (M_a^{(n)} - m_a^{(n)}) \\
+%& = & {\displaystyle \lim_{n \to \infty}} (M_a^{(n)} - M_a^{(n)} + m_a^{(n)}) \\
+%& = & {\displaystyle \lim_{n \to \infty}} m_a^{(n)} \\
+%& = & {\displaystyle \lim_{n \to \infty} \pr(X_n = a \mid X_0 = b)}
+%\end{eqnarray*}
+%
+%}
+%
+%}
+%
+%\end{frame}
+%
+%%--------------------------------------------------
+%\begin{frame}
+%\frametitle{Existencia de un límite: cuasipositividad}
+%
+%{\small
+%
+%Dado un $n \in \mathbb{N}$ y $a \in \Omega$, tenemos:
+%
+%\begin{eqnarray*}
+%M_a^{(1)} \geq M_a^{(2)} \geq \dots \geq M_a^{(n)} \geq m_a^{(n)} \geq \dots \geq m_a^{(1)}
+%\end{eqnarray*}
+%
+%\vs{4}
+%
+%\visible<2->{
+%
+%Ahora, escojamos un $L_a \in \mathbb{R}$ tal que para todo $n \in \mathbb{N}$
+%
+%\begin{eqnarray*}
+%M_a^{(n)} \geq L_a \geq m_a^{(n)}
+%\end{eqnarray*}
+%
+%}
+%
+%\vs{4}
+%
+%\visible<3->{
+%
+%Además, para $\delta > 0$, tomemos $\varepsilon = \delta$ y $n_1 = n_0$. Así, para todo $n > n_1$ tenemos:
+%
+%\begin{eqnarray*}
+%M_a^{(n)} - L_a \leq M_a^{(n)} - m_a^{(n)} < \varepsilon = \delta \qed
+%\end{eqnarray*}
+%
+%}
+%
+%}
+%
+%\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+Sea $\ell = |\Omega|$, y sea $n_0 \in \mathbb{N}$ tal que $n_0 \geq 1$ y $P^{n_0}[b,c] > 0$ para cada $b,c \in \Omega$
+\begin{itemize}
+\item Además, sea $t = {\displaystyle \min_{b,c \in \Omega} P^{n_0}[b,c]}$
+\end{itemize}
+
+
+\vs{8}
+
+\visible<2->{
+Dados estados $b_0, c_0 \in \Omega$, defina:
+\begin{eqnarray*}
+\Omega_1 & = & \{d \in \Omega \mid P^{n_0}[d, b_0] \geq P^{n_0}[d, c_0]\} \\
+\Omega_2 & = & \Omega \smallsetminus \Omega_1
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Nótese que:
+\begin{eqnarray*}
+\sum_{d \in \Omega_1} P^{n_0}[d, b_0] + \sum_{d \in \Omega_2} P^{n_0}[d, b_0] & = & \sum_{d \in \Omega} P^{n_0}[d, b_0]\\
+& = & 1
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+A partir de lo cual obtenemos:
+\begin{eqnarray*}
+\sum_{d \in \Omega_1} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) & = & 1 - \sum_{d \in \Omega_2} P^{n_0}[d, b_0] - \sum_{c \in \Omega_1} P^{n_0}[d, c_0] \\
+& \leq & 1 - \sum_{d \in \Omega_2} t - \sum_{d \in \Omega_1} t \\
+& = & 1 - \ell \cdot t
+\end{eqnarray*}
+
+}
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Dado $n \geq 0$, tenemos que:
+\begin{eqnarray*}
+P^{n_0 + n}[a, b_0] - P^{n_0 + n}[a, c_0] & = & \sum_{d \in \Omega} P^{n}[a, d] \cdot P^{n_0}[d, b_0] - \sum_{d \in \Omega} P^{n}[a,d] \cdot P^{n_0}[d, c_0]\\
+& = & \sum_{d \in \Omega} P^{n}[a, d] \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) \\
+& = & \sum_{d \in \Omega_1} P^{n}[a, d] \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) + \\
+&& \hspace{41pt} \sum_{d \in \Omega_2} P^{n}[a, d] \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) \\
+& \leq & \sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) + \\
+&& \hspace{41pt} \sum_{d \in \Omega_2} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+\
+{\footnotesize
+
+Dado que:
+\begin{eqnarray*}
+\sum_{d \in \Omega_1} P^{n_0}[d, b_0] + \sum_{d \in \Omega_2} P^{n_0}[d, b_0] \ = \ 1 \ = \ 
+\sum_{d \in \Omega_1} P^{n_0}[d, c_0] + \sum_{d \in \Omega_2} P^{n_0}[d, c_0]
+\end{eqnarray*}
+
+\vs{6}
+
+Tenemos que:
+\begin{eqnarray*}
+\sum_{d \in \Omega_2} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) = - \sum_{d \in \Omega_1} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)
+\end{eqnarray*}
+
+\vs{6}
+
+\visible<2->{
+Concluimos entonces que:
+\begin{multline*}
+\sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) + \sum_{d \in \Omega_2} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) 
+\ = \\
+\sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) - \sum_{d \in \Omega_1} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) 
+\end{multline*}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\footnotesize
+
+Así, dado que ${\displaystyle \sum_{d \in \Omega_1} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) \leq 1 - \ell \cdot t}$, obtenemos:
+\begin{eqnarray*}
+P^{n_0 + n}[a, b_0] - P^{n_0 + n}[a, c_0] & \leq & \sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) + \\
+&& \hspace{41pt} \sum_{d \in \Omega_2} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)\\
+& = & \sum_{d \in \Omega_1} M_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big) - \\
+&& \hspace{41pt} \sum_{d \in \Omega_1} m_a^{(n)} \cdot \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)\\
+& = & \big(M_a^{(n)} - m_a^{(n)}\big) \sum_{d \in \Omega_1} \big(P^{n_0}[d, b_0] - P^{n_0}[d, c_0]\big)\\
+& \leq & \big(1 - \ell \cdot t\big) \cdot \big(M_a^{(n)} - m_a^{(n)}\big)
+\end{eqnarray*}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La demostración de la existencia del límite}
+
+{\small
+
+En particular, escogemos $b_0, c_0$ tales que
+\begin{eqnarray*}
+M_a^{(n_0 + n)} & = & P^{n_0 + n}[a, b_0]\\
+m_a^{(n_0 + n)} & = & P^{n_0 + n}[a, c_0]
+\end{eqnarray*}
+
+\vs{8}
+
+\visible<2->{
+De esta forma, obtenemos:
+\begin{eqnarray*}
+\alert{M_a^{(n_0 + n)} -  m_a^{(n_0 + n)}} & \alert{\leq} & \alert{\big(1 - \ell \cdot t\big) \cdot \big(M_a^{(n)} - m_a^{(n)}\big)}
+\end{eqnarray*}
+}
+
+}
+
+\end{frame}

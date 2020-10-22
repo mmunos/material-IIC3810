@@ -1,0 +1,596 @@
+%!TEX root = main.tex
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Motivación: una pregunta pendiente del capítulo anterior}
+
+{\footnotesize
+
+¿Cómo podemos construir un generador (casi) uniforme para una relación?
+
+\vs{8}
+
+\visible<2->{
+Recuerde el problema $\ks$ definido en el capítulo anterior y la relación:
+\begin{eqnarray*}
+R_{\ks} & = & \{ ((\vec a, b), \vec x) \mid \vec a \in \mathbb{N}^n, b \in \mathbb{Z}, \vec x \in \{0,1\}^n \text{ para } n \geq 1, \text{ y } \vec a \cdot \vec x \leq b \}
+\end{eqnarray*}
+}
+
+\vs{6}
+
+\visible<3->{
+Vamos a responder primero una pregunta más específica: ¿Cómo podemos construir un generador (casi) uniforme para $R_{\ks}$?
+\begin{itemize}
+\item La respuesta a esta pregunta va a tener los ingredientes necesarios para responder la pregunta más general
+\end{itemize}
+}
+
+%\vs{8}
+
+%\visible<3->{
+%Pero antes tenemos que introducir la noción de cadena de Markov}
+
+}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+{\small
+
+Fije $n \geq 1$, $\vec a \in \mathbb{N}^n$  y $b \in \mathbb{N}$
+\begin{itemize}
+\item Y suponga que $\Omega = \{ \vec x \in \{0,1\}^n \mid \vec a \cdot \vec x \leq b \}$
+\end{itemize}
+Nótese que $\Omega \neq \emptyset$
+
+\vs{8}
+
+\visible<2->{
+Considere una secuencia $\{ X_t \}_{t \in \mathbb{N}}$ de variables aleatorias con recorrido $\Omega$}
+\begin{itemize}
+\visible<3->{\item El dominio de cada variable $X_t$ es $D_t$, el cual no necesitamos definir}
+\end{itemize}
+
+\vs{8}
+
+\visible<4->{
+Decimos que $\Omega$ es el conjunto de estados de la secuencia $\{ X_t \}_{t \in \mathbb{N}}$
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+{\small
+
+Dado $t \in \mathbb{N}$ y $\vec x \in \Omega$, nos interesa calcular \alert{$\pr(X_t = \vec x)$}
+
+\vs{8}
+
+\visible<2->{
+Para calcular esta probabilidad necesitamos definir la dinámica de la~secuencia
+\begin{itemize}
+\item Vale decir, necesitamos definir cómo se cambio de estado al pasar de tiempo $t$ a tiempo $t+1$
+\end{itemize}
+}
+
+\vs{8}
+
+\visible<3->{
+De manera formal, dado $t \in \mathbb{N}$ y $\vec x, \vec y \in \Omega$, necesitamos definir:
+\begin{eqnarray*}
+\alert{\pr(X_{t+1} = \vec y \mid X_t = \vec x)}
+\end{eqnarray*}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una secuencia de variables aleatorias para generar $R_{\ks}$}
+
+
+{\small
+
+Suponga que en tiempo $t$ estamos en el estado $\vec x = (x_1, \ldots, x_n)$
+
+\vs{8}
+
+\visible<2->{
+El estado $\vec y$ en el tiempo $t+1$ se obtiene utilizando el siguiente~procedimiento:
+\vs{-3}
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+{\bf GenerarSiguiente}($\vec x$)\\
+\> Escoja $c \in \{0,1\}$ con distribución uniforme\\
+\> \aif $c = 0$ \athen \areturn $\vec x$\\
+\> \aelse\\
+\> \> Escoja $i \in \{1, \ldots, n\}$ con distribución uniforme\\
+\> \> $\vec u := (x_1, \ldots, x_{i-1}, 1 - x_i, x_{i+1}, \ldots, x_n)$\\
+\> \> \aif $\vec a \cdot \vec u \leq b$ \athen \areturn $\vec u$\\
+\> \> \aelse \areturn $\vec x$
+\end{tabbing}
+\vs{1}
+Tenemos entonces que \alert{$\vec y = \text{\bf GenerarSiguiente}(\vec x)$}
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de la secuencia}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+Sea $t \in \mathbb{N}$
+\vs{1}
+\begin{enumerate}
+\item Dados $\vec x, \vec y \in \Omega$, calcule $\pr(X_{t+1} = \vec y \mid X_t = \vec x)$
+\begin{itemize}
+\item Considere de manera separada los casos $\vec x \neq \vec y$ y $\vec x = \vec y$
+\end{itemize}
+
+\vs{3}
+
+\item Demuestre que para todo $\vec x, \vec y \in \Omega$, existe $t' > t$ tal que:
+\vs{-1}
+\begin{eqnarray*}
+\pr(X_{t'} = \vec y \mid X_t = \vec x) & > & 0
+\end{eqnarray*}
+
+\vs{2}
+
+\item Dados $\vec x_0, \vec x_1, \ldots, \vec x_t, \vec x_{t+1} \in \Omega$, demuestre que:
+\vs{-1}
+\begin{multline*}
+\pr(X_{t+1} = \vec x_{t+1} \mid X_0 = \vec x_0 \wedge X_1 = \vec x_1 \wedge \cdots \wedge X_t = \vec x_t) \ = \\ 
+\pr(X_{t+1} = \vec x_{t+1}  \mid X_t = \vec x_t)
+\end{multline*}
+
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{¿A qué converge la secuencia?}
+
+{\footnotesize
+
+Sea $\vec x$ un vector arbitrario en $\Omega$
+
+\vs{6}
+
+Suponga que en tiempo 0 estamos en el estado $\vec x$, y que en cada instante cambiamos de estado utilizando el procedimiento \text{\bf GenerarSiguiente}
+\begin{itemize}
+\visible<2->{\item ¿Cuáles son los estados a los que podríamos llegar en un tiempo $t \gg 0$? ¿Cuál es la probabilidad de estar en un estado específico en este tiempo $t$?}
+
+\visible<3->{\item ¿Es posible llegar a una distribución estacionaria, vale decir, un tiempo $t'$ tal que para todo $\vec y \in \Omega$ se tiene que $\pr(X_{t'+1} = \vec y) = \pr(X_{t'} = \vec y)$?}
+
+\visible<4->{\item ¿Existe una única distribución estacionaria?}
+\end{itemize}
+
+\vs{6}
+
+\visible<5->{
+¿Cuáles son las respuestas a las preguntas anteriores si cambiamos $\vec x$ por otro vector inicial?}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{La secuencia converge a la distribución uniforme}
+
+{\footnotesize
+
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Dado $t \in \mathbb{N}$ y $\vec x \in \Omega$, demuestre que:
+\begin{eqnarray*}
+\sum_{\vec y \in \Omega} \pr(X_{t+1} = \vec y \mid X_{t} = \vec x) & = & 1\\
+\sum_{\vec y \in \Omega} \pr(X_{t+1} = \vec x \mid X_{t} = \vec y) & = & 1
+\end{eqnarray*}
+
+\vs{2}
+
+\item Demuestre que la distribución uniforme es una distribución estacionaria. 
+\begin{itemize}
+{\footnotesize
+\item Vale decir, demuestre que si para $t \in \mathbb{N}$ se tiene que $\pr(X_t = \vec x) = \frac{1}{|\Omega|}$ para cada $\vec x \in \Omega$, entonces:
+\begin{center}
+$\pr(X_{t+1} = \vec y) = \pr(X_{t} = \vec y)$ para cada $\vec y \in \Omega$
+\end{center}}
+\end{itemize}
+\end{enumerate}
+
+\end{exampleblock}
+
+
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Generando $R_{\ks}$ con distribución (casi) uniforme}
+
+{\small
+
+Para generar los elementos de $\Omega$ con distribución (casi) uniforme utilizamos el siguiente procedimiento:
+\vs{-3}
+\begin{tabbing}
+\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\\
+\> Sea $\vec x$ un elemento arbitrario de $\Omega$\\
+\> $t = f(|\vec a| + |b|)$\\
+\> \afor $i := 1$ \ato $t$ \ado\\
+\> \> $\vec x := \text{\bf GenerarSiguiente}(\vec x)$\\
+\> \areturn $\vec x$
+\end{tabbing}
+Donde $|\vec a| + |b|$ es el tamaño de la entrada $(\vec a,b)$
+
+\vs{8}
+
+\visible<2->{
+¿Qué condiciones deben cumplirse para que este procedimiento genere $\Omega$ con distribución (casi) uniforme y en tiempo polinomial?}
+
+}
+
+\end{frame}
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las condiciones  para la generación (casi) uniforme}
+
+{\small
+
+\begin{itemize}
+\item La secuencia debe converger a la distribución uniforme desde cualquier punto de partida $\vec x \in \Omega$
+
+\vs{4}
+
+\visible<2->{\item La distribución uniforme debe ser la única distribución a la que converge la secuencia}
+
+\vs{4}
+
+\visible<3->{\item $f(n)$ debe estar acotada superiormente por un polinomio}
+\end{itemize}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las condiciones para la generación (casi) uniforme}
+
+{\small
+
+\begin{itemize}
+\item Debe ser posible calcular $\text{\bf GenerarSiguiente}(\vec x)$ en tiempo polinomial
+
+\vs{4}
+
+\visible<2->{\item Después de ejecutar $t$ pasos se debe tener una garantía de que estamos cerca de la distribución uniforme
+\begin{itemize}
+\alert{\item Obtenemos entonces un generador casi uniforme para los elementos de $\Omega$}
+\end{itemize}}
+\end{itemize}
+
+\vs{8}
+
+\visible<3->{
+Todas estas condiciones han sido estudiadas para las cadenas de Markov.
+\begin{itemize}
+\item Vamos a introducir y estudiar este herramienta esencial para el muestreo de variables aleatorias
+\end{itemize}}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las cadenas de Markov}
+
+{\small
+
+Considere una sucesión $\{ X_t \}_{t \in \mathbb{N}}$ de variables aleatorias.
+
+\vs{6}
+
+\visible<2->{
+\begin{definicion}
+$\{ X_t \}_{t \in \mathbb{N}}$ es una cadena de Markov con conjunto de estados $\Omega$ si:
+\vs{1}
+\begin{enumerate}
+\item $\Omega$ es un conjunto finito o infinito enumerable, y $X_t : D_t \to \Omega$ para cada $t \in \mathbb{N}$
+
+\vs{1}
+\item Existe $p: \Omega \times \Omega \to [0,1]$ tal que para cada $t \in \mathbb{N}$ y cada secuencia $a_0$, $\ldots$, $a_t$, $a_{t+1}$ de elementos de $\Omega$:
+\vs{-2}
+\begin{multline*}
+\alert{\pr(X_{t+1} = a_{t+1 }\mid X_{t} = a_{t} \wedge \cdots \wedge X_0 = a_0) \ =} \\ 
+\alert{\pr(X_{t + 1} = a_{t+1 }\mid X_{t} = a_{t}) \ = \ p(a_{t+1,} a_{t})}
+\end{multline*}
+\end{enumerate}
+\end{definicion}
+}
+
+
+}
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Las cadenas de Markov}
+
+{\footnotesize
+
+En una cadena de Markov la distribución de probabilidades en el tiempo $t+1$ sólo depende de la distribución de probabilidades en el tiempo $t$
+\begin{itemize}
+{\footnotesize
+\item Consideramos cadenas discretas: el tiempo es un conjunto infinito enumerable, y el conjunto de estados $\Omega$ es finito o infinito~enumerable}
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Además, consideramos cadenas de Markov donde las probabilidades de transición no dependen del tiempo.
+\begin{itemize}
+{\footnotesize
+\item Para cada $t_1, t_2 \in \mathbb{N}$ y $a,b \in \Omega$:
+\begin{eqnarray*}
+\pr(X_{t_1 + 1} = a \mid X_{t_1} = b) & = & \pr(X_{t_2 + 1} = a \mid X_{t_2} = b)
+\end{eqnarray*}}
+\end{itemize}}
+\visible<3->{
+Estos son llamadas cadenas de Markov homogéneas. 
+}
+
+\vs{6}
+
+\visible<4->{
+En general, consideramos cadenas de Markov con conjuntos finitos de estados.
+}
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Representando una cadena de Markov}
+
+{\footnotesize
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$
+\begin{itemize}
+\item Suponemos además que $p : \Omega \times \Omega \to [0,1]$ es la función que define las probabilidades de transición.
+\end{itemize}
+
+\vs{6}
+
+\visible<2->{
+Podemos representar cada variable aleatoria $X_t$ como un vector $\vec x_t$ tal que:
+\begin{center}
+para cada $a \in \Omega$ se tiene que $\vec x_t[a] = \pr(X_t = a)$
+\end{center}
+}
+
+\vs{6}
+
+\visible<3->{
+Además, podemos representar la cadena de Markov como una matriz $P$ de~$|\Omega| \times |\Omega|$: 
+\begin{center}
+para cada $a,b \in \Omega$, se tiene que $P[a,b] = p(a,b)$
+\end{center}
+$P$ es llamada la matriz de transición de la cadena de Markov.
+}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Representando una cadena de Markov}
+
+{\small
+
+
+
+Dado $a \in \Omega$ y $t \in \mathbb{N}$, tenemos que:
+\begin{multline*}
+\pr(X_{t+1} = a) \ = \ \sum_{b \in \Omega} \pr(X_{t+1} = a \mid X_{t} = b) \cdot \pr(X_{t} = b) \ =
+\\ 
+\sum_{b \in \Omega} p(a,b) \cdot \pr(X_{t} = b) \ = \ \sum_{b \in \Omega} P[a,b] \cdot \pr(X_{t} = b)
+\end{multline*}
+
+\vs{8}
+
+\visible<2->{
+Dado que $\vec x_{t+1}[a] = \pr(X_{t+1} = a)$ y $\vec x_{t}[b] = \pr(X_{t} = b)$ para cada $a,b \in \Omega$ y $t \in \mathbb{N}$, concluimos que:
+\alert{
+\begin{eqnarray*}
+P \vec x_{t} & = & \vec x_{t+1}
+\end{eqnarray*}
+}
+}
+
+
+}
+
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de la matriz de transición}
+
+{\small
+
+\begin{exampleblock}{Ejercicios}
+Sea $P$ la matriz de transición de una cadena de Markov.
+\vs{1}
+\begin{enumerate}
+\item Demuestre que para cada columna de $P$, se tiene que la suma de sus valores es 1
+
+\vs{2}
+
+\item Para cada fila de $P$, ¿se debe tener que la suma de sus valores es 1?
+\begin{itemize}
+\item ¿Era cierta esta propiedad para la matriz $P$ de la cadena de Markov para $R_{\ks}$?
+\end{itemize}
+\end{enumerate}
+\end{exampleblock}
+
+}
+
+
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una cadena de Markov como un grafo}
+
+{\small
+
+
+
+La matriz de transición $P$ de una cadena de Markov con conjunto de estados $\Omega$ puede ser vista como un grafo $G_P$ con pesos:
+\vs{1}
+\begin{itemize}
+\item $\Omega$ es el conjunto de nodos de $G_P$
+
+\vs{1}
+
+\item Dados $a, b \in \Omega$, el peso del arco $(a,b)$ en $G$ es $P[b,a]$
+\begin{itemize}
+{\footnotesize
+\item Vale decir, el peso de $(a,b)$ representa la probabilidad de pasar al estado $b$ dado que estábamos en el estado $a$
+}
+\end{itemize}
+\end{itemize}
+
+}
+
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Una cadena de Markov como un grafo: un ejemplo}
+
+{\footnotesize
+
+\begin{center}
+\begin{tabular}{ccc}
+$\Omega = \{1,2,3,4\}$
+&\ \ \ &
+$P = \ \begin{pmatrix}
+0\text{.}2 & 0 & 0\text{.}6 & 0\text{.}9\\
+0\text{.}3 & 1 & 0 & 0\\
+0\text{.}4 & 0 & 0\text{.}2 & 0\\
+0\text{.}1 & 0 & 0\text{.}2 & 0\text{.}1
+\end{pmatrix}$
+\end{tabular}
+
+\vs{4}
+
+\begin{tikzpicture}
+\node[circ] (n1) {$1$}
+edge[arrout, in = 160, out = 110, loop] node[above] {$0\text{.}2$} (n1);
+\node[circ, right=25mm of n1] (n2) {$2$}
+edge[arrin, bend right = 15] node[above] {$0\text{.}3$} (n1)
+edge[arrout, in = 70, out = 20, loop] node[above] {$1$} (n2);
+\node[circ, below=25mm of n1] (n3) {$3$}
+edge[arrin, bend left = 15] node[left] {$G_P = \  0\text{.}4$} (n1)
+edge[arrout, bend right = 15] node[right] {$0\text{.}6$} (n1)
+edge[arrout, in = 250, out = 200, loop] node[below] {$0\text{.}2$} (n3);
+\node[circ, below=25mm of n2] (n4) {$4$}
+edge[arrin, bend left = 15] node[below] {$0\text{.}1\ \ $} (n1)
+edge[arrout, bend right = 15] node[right] {$0\text{.}9$} (n1)
+edge[arrin, bend left = 15] node[below] {$0\text{.}2$} (n3)
+edge[arrout, in = 340, out = 290, loop] node[below] {$0\text{.}1$} (n3);
+\end{tikzpicture}
+\end{center}
+
+}
+
+\end{frame}
+
+
+
+
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Algunas propiedades de las cadenas de Markov}
+
+{\small
+
+Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+\begin{itemize}
+\item Además, defina $P^0$ como la matriz identidad y $P^{t+1} = P P^t$ para todo $t \in \mathbb{N}$
+\end{itemize}
+
+
+\vs{6}
+
+\visible<2->{
+\begin{exampleblock}{Ejercicios}
+\begin{enumerate}
+\item Demuestre que para cada $t \in \mathbb{N}$ y $a,b \in \Omega$ se tiene que:
+\begin{eqnarray*}
+\pr(X_{t} = a \mid X_0 = b) & = & P^t[a,b]
+\end{eqnarray*}
+
+\item Demuestre para cada $t_1,t_2 \in \mathbb{N}$ y $a,b \in \Omega$ se tiene que:
+\begin{eqnarray*}
+\pr(X_{t_1+t_2} = a \mid X_{t_1} = b) & = & \pr(X_{t_2} = a \mid X_0 = b)
+\end{eqnarray*}
+\end{enumerate}
+\end{exampleblock}
+}
+
+}
+
+
+\end{frame}

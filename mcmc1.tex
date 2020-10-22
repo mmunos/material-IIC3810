@@ -1,0 +1,3124 @@
+\documentclass{beamer}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{epsfig}
+\usepackage{dpscolor}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\mode<presentation>
+{
+	
+	\useinnertheme{sparql}
+	\useoutertheme{onlyfoot}
+	\usecolortheme{seahorse}
+	\usecolortheme{rose}
+	
+	\setbeamercovered{transparent}
+	
+}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{corolario}{Corolario}
+\newtheorem{definicion}{Definición}
+\newtheorem{notacion}{Notación}
+\newtheorem{lema}{Lema}
+
+\newenvironment{ejemplo}
+{\begin{exampleblock}{Ejemplo}}
+	{\end{exampleblock}}
+
+\newenvironment{ejercicio}
+{\begin{exampleblock}{Ejercicio}}
+	{\end{exampleblock}}
+
+\newcommand{\cyan}[1]{\textCyan #1\textBlack}
+\newcommand{\red}[1]{\textRed #1\textBlack}
+\newcommand{\green}[1]{\textGreen #1\textBlack}
+\newcommand{\blue}[1]{\textBlue #1\textBlack}
+\newcommand{\black}[1]{\textBlack #1\textBlack}
+\newcommand{\magenta}[1]{\textMagenta #1\textBlack}
+\newcommand{\brown}[1]{\textBrown #1\textBlack}
+\newcommand{\vs}[1]{\vspace{#1mm}}
+\newcommand{\ignore}{}
+\newcommand{\ri}[1]{\text{\red{#1}}}
+\newcommand{\hs}{\hat\sigma}
+\newcommand{\modelos}{{\it modelos}}
+\newcommand{\B}{{\tt B}}
+\newcommand{\nspace}{\text{NSPACE}}
+\newcommand{\logspace}{\text{LOGSPACE}}
+\newcommand{\nlogspace}{\text{NLOGSPACE}}
+\newcommand{\npspace}{\text{NPSPACE}}
+\newcommand{\pspace}{\text{PSPACE}}
+\newcommand{\ph}{\text{PH}}
+\newcommand{\expspace}{\text{EXPSPACE}}
+\newcommand{\nexpspace}{\text{NEXPSPACE}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\espacio}{{\it espacio}}
+\newcommand{\tiempo}{{\it tiempo}}
+\newcommand{\ptime}{\text{PTIME}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\nexptime}{\text{NEXPTIME}}
+\newcommand{\CC}{{\cal C}}
+\newcommand{\A}{{\cal A}}
+\newcommand{\BB}{{\cal B}}
+\newcommand{\sat}{\text{SAT}}
+\newcommand{\sdnf}{\#\text{DNF-SAT}}
+\newcommand{\scnf}{\#\text{CNF-SAT}}
+\newcommand{\tcnfu}{\text{3-CNF-SAT-UNSAT}}
+\newcommand{\usat}{\text{unique-SAT}}
+\newcommand{\np}{\text{NP}}
+\newcommand{\ntime}{\text{NTIME}}
+\newcommand{\crp}{\text{RP}}
+\newcommand{\bpp}{\text{BPP}}
+\newcommand{\cnf}{\text{CNF-SAT}}
+\newcommand{\tcnf}{\text{3-CNF-SAT}}
+\newcommand{\dcnf}{\text{2-CNF-SAT}}
+\newcommand{\horn}{\text{HORN-SAT}}
+\newcommand{\nhorn}{\text{NEG-HORN-SAT}}
+\newcommand{\co}{\text{co-}}
+\newcommand{\rp}{\leq^\text{\it p}_\text{\it m}}
+\newcommand{\tur}{\leq^\text{\it p}_\text{\it T}}
+\newcommand{\rpar}{\leq^\text{\it p}_\text{\it par}}
+\newcommand{\reach}{\text{CAMINO}}
+\newcommand{\pe}{\text{PROG-ENT}}
+\newcommand{\pl}{\text{PROG-LIN}}
+\newcommand{\cor}{\text{CONT-REG}}
+\newcommand{\er}{\text{EQUIV-REG}}
+\newcommand{\qbf}{\text{QBF}}
+\newcommand{\shp}{\text{Succinct-HP}}
+\newcommand{\hp}{\text{HP}}
+\newcommand{\cdp}{\text{DP}}
+\newcommand{\clique}{\text{CLIQUE}}
+\newcommand{\eclique}{\text{exact-CLIQUE}}
+\newcommand{\costo}{\text{costo}}
+\newcommand{\tsp}{\text{TSP}}
+\newcommand{\tspu}{\text{unique-TSP}}
+\newcommand{\no}{\text{NO}}
+\newcommand{\yes}{\text{YES}}
+\newcommand{\br}{\text{CERTAIN-ANSWERS}}
+
+\newcommand{\CROM}{\text{CROM}}
+\newcommand{\EVAL}{\text{EVAL}}
+\newcommand{\EQUIV}{\text{EQUIV}}
+\newcommand{\EQUIVP}{\text{EQUIV-POL}}
+
+\newcommand{\re}{\text{RE}}
+\newcommand{\dec}{\text{R}}
+\newcommand{\fp}{\text{FP}}
+\newcommand{\sharpp}{\#\text{P}}
+\newcommand{\acc}{\text{accept}}
+\newcommand{\ssat}{\#\text{SAT}}
+\newcommand{\smatching}{\#\text{MATCHING}}
+
+\newcommand{\pr}{{\rm {\bf Pr}}}
+\newcommand{\esp}{{\rm {\bf E}}}
+\newcommand{\vr}{{\rm {\bf Var}}}
+
+
+\newcommand{\ucnf}{\text{U-CNF-SAT}}
+\newcommand{\sucnf}{\#\text{U-CNF-SAT}}
+\newcommand{\shorn}{\#\text{HORN-SAT}}
+\newcommand{\sclique}{\#\text{CLIQUE}}
+\newcommand{\indsets}{\#\text{IS}}
+\newcommand{\is}{\text{GIS}}
+\newcommand{\sis}{\#\text{GIS}}
+\newcommand{\lis}{\text{LIS}}
+\newcommand{\slis}{\#\text{LIS}}
+\newcommand{\cs}{\#\text{CicloSimple}}
+\newcommand{\ham}{\text{HAM}}
+\newcommand{\ncis}{\text{IS}}
+\newcommand{\mis}{\text{MIS}}
+
+\newcommand{\afor}{{\bf for}\ }
+\newcommand{\afore}{{\bf for each}\ }
+\newcommand{\ato}{{\bf to}\ }
+\newcommand{\ado}{{\bf do}\ }
+\newcommand{\aif}{{\bf if}\ }
+\newcommand{\athen}{{\bf then}\ }
+\newcommand{\aelse}{{\bf else}\ }
+\newcommand{\areturn}{{\bf return}\ }
+\newcommand{\awhile}{{\bf while}\ }
+\newcommand{\aand}{{\bf and}\ }
+\newcommand{\aor}{{\bf or}\ }
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+
+\newcommand{\minr}{\text{Min}}
+\newcommand{\maxr}{\text{Max}}
+\newcommand{\exir}{\text{Exists}}
+\newcommand{\ks}{\text{KS}}
+\newcommand{\sks}{\#\text{KS}}
+
+\usetikzlibrary{arrows,positioning} 
+\tikzset{
+	circ/.style={
+		circle,
+		draw=black, 
+		thick,
+		text centered,
+	},
+	circw/.style={
+		circle,
+		draw=white, 
+		thick,
+		text centered,
+	},
+	arrout/.style={
+		->,
+		-latex,
+		thick,
+	},
+	arrin/.style={
+		<-,
+		latex-,
+		thick,
+	},
+	arrw/.style={
+		-,
+		thick,
+	},
+	arrww/.style={
+		-,
+		thick,
+		draw=white, 
+	}
+}
+
+\title[Los métodos Markov chain Monte Carlo (MCMC)]
+{Los métodos Markov chain Monte Carlo (MCMC)}
+
+\author[IIC3810]
+{IIC3810\\
+	\vs{2} Marcelo Arenas, Luis Alberto Croquevielle y Thomas Reisenegger}
+
+\institute[]
+{
+	%  Department of Computer Science\\
+	%  Pontificia Universidad Cat\'olica de Chile
+}
+
+\date{}
+
+%\subject{Theoretical Computer Science}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Markov Chain Monte Carlo}
+		
+		{\small
+			
+			Ya vimos como los problemas de conteo se pueden reducir a problemas de generación uniforme. 
+			\begin{itemize}
+				\visible<2->{\item ¿Pero cómo podemos resolver el problema de generación uniforme? Las cadenas de Markov son una herramienta útil para esto}
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<3->{
+				En general, las cadenas de Markov son una herramienta útil para generar elementos de un conjunto $\Omega$ según una distribución de probabilidad $\vec \pi$}
+			\begin{itemize}
+				\visible<4->{\item Para esto, la distribución estacionaria de la cadena de Markov debe ser $\vec \pi$}
+			\end{itemize}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Markov Chain Monte Carlo}
+		
+		{\footnotesize
+			
+			\begin{ejemplo}
+				Sea $\varphi$ una fórmula proposicional satisfacible, y sea $\{x_1, \ldots, x_n\}$ el conjunto de variables mencionadas en $\varphi$
+				
+				\vs{6}
+				
+				Definimos $\Omega$ como el conjunto de valuaciones $\sigma : \{x_1, \ldots, x_n\} \to \{0,1\}$ y $\vec \pi$ como una distribución de probabilidad tal que:
+				\begin{itemize}
+					\item Si $\sigma_1(\varphi) = \sigma_2(\varphi) = 1$, entonces $\vec \pi[\sigma_1] = \vec \pi[\sigma_2]$
+					
+					\item ${\displaystyle \sum_{\sigma \,:\, \sigma(\varphi) = 0} \vec \pi[\sigma] \ \leq \ \frac{1}{2}}$
+				\end{itemize}
+				
+				\vs{5}
+				
+				Una cadena de Markov con distribución estacionaria $\vec \pi$ puede ser utilizada para generar valuaciones que satisfacen $\varphi$
+				\begin{itemize}
+					\visible<2->{\item ¿Cómo se hace esto? ¿Cuántos pasos toma generar una valuación?}
+				\end{itemize}
+			\end{ejemplo}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Markov Chain Monte Carlo}
+		
+		{\footnotesize
+			
+			Un método Markov Chain Monte Carlo utiliza una cadena de Markov para generar elementos de acuerdo con la distribución estacionaria de la cadena
+			\begin{itemize}
+				\item En el capítulo anterior estudiamos uno de estos métodos
+			\end{itemize}
+			
+			\vs{6}
+			
+			\visible<2->{
+				En este capítulo vamos a ver respuestas para dos preguntas fundamentales para los métodos Markov Chain Monte Carlo}
+			\vs{1}
+			\begin{itemize}
+				\visible<3->{\alert{\item ¿Es posible crear una cadena de Markov con distribución estacionaria $\vec \pi$ a partir de una cadena de Markov que no tenga a $\vec \pi$ como distribución estacionaria?}}
+				
+				\vs{1}
+				
+				\visible<4->{\alert{\item ¿Cuántos pasos deben ser ejecutados para generar elementos de acuerdo a una distribución de probabilidad cercana a la distribución estacionaria de una cadena de Markov?}}
+				\begin{itemize}
+					{\footnotesize \visible<5->{\alert{\item ¿Cómo se define que dos distribuciones sean cercanas?}}}
+				\end{itemize}
+			\end{itemize}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una respuesta a la primera pregunta}
+		
+		{\footnotesize
+			
+			Dado un conjunto $\Omega$ finito y una distribución de probabilidades $\vec \pi$ sobre $\Omega$, queremos definir una cadena de Markov cuyos estados sean los elementos de $\Omega$ y cuya distribución estacionaria sea $\vec \pi$
+			\vs{1}
+			\begin{itemize}
+				\item Queremos definir esta cadena de Markov a partir de una cadena de Markov dada (que no tiene a $\vec \pi$ como distribución estacionaria) 
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Mostraremos una estrategia general para esta tarea: \alert{el algoritmo de Metropolis-Hastings}}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: el primer ingrediente}
+		
+		{\small
+			
+			\begin{proposition}
+				Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$. Si para todo $a,b\in\Omega$ se cumple que:
+				\begin{eqnarray*}
+					P[b,a] \cdot \vec \pi[a]  & = & P[a,b] \cdot \vec \pi[b],
+				\end{eqnarray*}
+				entonces $\vec \pi$ es una distribución estacionaria para  $\{ X_t \}_{t \in \mathbb{N}}$    
+			\end{proposition}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una demostración de la proposición}
+		
+		{\footnotesize
+			
+			{\bf Demostración.} Dado $a\in\Omega$, tenemos que:
+			\begin{eqnarray*}
+				(P \vec \pi)[a] 
+				& = & \sum_{b\in\Omega} P[a,b] \cdot \vec \pi[b] \\
+				&= & \sum_{b\in\Omega} P[b,a] \cdot \vec \pi[a] \\
+				&= & \vec \pi[a] \cdot \sum_{b\in\Omega} P[b,a] \\
+				&= & \vec \pi[a] \cdot \sum_{b\in\Omega} \pr(X_1 = b \mid X_0 = a)\\
+				&= & \vec \pi[a] \cdot 1 \ = \ \vec \pi[a]
+			\end{eqnarray*}
+			
+			\vs{6}
+			
+			\visible<2->{
+				Vale decir, $P \vec \pi = \vec \pi$, de lo cual concluimos que $\vec \pi$ es una distribución estacionaria de $\{ X_t \}_{t \in \mathbb{N}}$ \qed
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: el primer ingrediente}
+		
+		{\footnotesize
+			
+			A la propiedad de que para todo $a,b\in\Omega$ se tenga que:
+			\begin{eqnarray*}
+				P[b,a] \cdot \vec \pi[a] & = & P[a,b] \cdot \vec \pi[b]
+			\end{eqnarray*}
+			se le llama {\bf condición de reversibilidad}
+			
+			\vs{8}
+			
+			\visible<2->{
+				La proposición nos indica que para que la cadena de Markov tenga a $\vec \pi$ como distribución estacionaria es suficiente que cumpla la condición de reversibilidad.}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Reversibilidad no es una condición necesaria}
+		
+		{\footnotesize
+			
+			\begin{ejercicio}
+				Construya una cadena de Markov irreducible, aperiódica, con matriz de transición $P$ no simétrica y que tenga a la distribución uniforme $\vec \pi$ como distribución estacionaria.
+				\begin{itemize}
+					\item Nótese que esta cadena no satisface la propiedad de reversibilidad para $\vec \pi$
+				\end{itemize}
+			\end{ejercicio}
+			
+			\vs{12}
+			
+			\visible<2->{
+				Una solución para el ejercicio:
+				\alert{
+					$P = \ \begin{pmatrix}
+					0\text{.}25 & 0\text{.}25 & 0\text{.}5\\
+					0\text{.}5 & 0 & 0\text{.}5\\
+					0\text{.}25 & 0\text{.}75 & 0
+					\end{pmatrix}$}
+			}
+			
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la idea del algoritmo}
+		
+		{\small
+			
+			¿Cómo definimos una cadena de Markov que cumpla la condición de reversibilidad para una distribución $\vec \pi$?
+			
+			\vs{8}
+			
+			\visible<2->{
+				No existe ninguna garantía de que para todo $a,b$ se cumpla que:
+				\begin{eqnarray*}
+					P[b,a] \cdot \vec \pi[a] & = & P[a,b] \cdot \vec \pi[b]
+			\end{eqnarray*}}
+			
+			\vs{8}
+			
+			\visible<3->{
+				Si no se cumple esta propiedad, entonces existe un par $a, b$ tal que:
+				\begin{eqnarray*}
+					P[b,a] \cdot \vec \pi[a] & > & P[a,b] \cdot \vec \pi[b]
+				\end{eqnarray*}
+				¿Qué hacemos en este caso?
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la idea del algoritmo}
+		
+		{\small
+			
+			Lo que hacemos es definir una nueva matriz de transición $Q$, a partir de $P$, de la siguiente forma:
+			\begin{eqnarray*}
+				Q[c,d] & = & P[c,d] \cdot \alpha[c,d] \ \ \ \ \ \text{ para } c,d \in \Omega
+			\end{eqnarray*}
+			
+			\vs{8}
+			
+			En esta definición, $\alpha$ es construido de tal forma que $Q$ cumpla la condición de reversibilidad. 
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la idea del algoritmo}
+		
+		{\small
+			
+			Considere un par $a,b$ tal que:
+			\begin{eqnarray*}
+				P[b,a] \cdot \vec \pi[a] & > & P[a,b] \cdot \vec \pi[b]
+			\end{eqnarray*}
+			
+			\vs{8}
+			
+			Una idea natural para lograr que esto sea una igualdad es hacer más pequeño el lado izquierdo. 
+			\begin{itemize}
+				\item El lado derecho no es necesario hacerlo más pequeño
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Por lo tanto, definimos $\alpha[a,b] = 1$ y 
+				\begin{eqnarray*}
+					\alpha[b,a] & = & \frac{P[a,b] \cdot \vec \pi[b]}{P[b,a] \cdot \vec \pi[a]}
+				\end{eqnarray*}
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la idea del algoritmo}
+		
+		{\footnotesize
+			
+			Análogamente, para un par $a,b$ tal que $ P[b,a] \cdot \vec \pi[a] <  P[a,b] \cdot \vec \pi[b]$, 
+			definimos $\alpha[b,a] = 1$ y
+			\begin{eqnarray*}
+				\alpha[a,b] & = & \frac{P[b,a] \cdot \vec \pi[a]}{P[a,b] \cdot \vec \pi[b]},
+			\end{eqnarray*}
+			que es lo mismo que la ecuación en el otro caso sólo que con los roles de $a$ y~$b$~intercambiados.
+			
+			\vs{8}
+			
+			\visible<2->{
+				En resumen, $\alpha$ se define como:
+				\begin{eqnarray*}
+					\alpha[a,b] & = &
+					\begin{cases}
+						{\displaystyle \min \bigg\{\frac{P[b,a] \cdot \vec \pi[a]}{P[a,b] \cdot \vec \pi[b]}, 1\bigg\}}
+						& \text{si } P[a,b] \cdot \vec \pi[b] > 0\\
+						1 & \text{en otro caso}
+					\end{cases}
+				\end{eqnarray*}
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la idea del algoritmo}
+		
+		{\footnotesize
+			
+			Por tanto, nos gustarí­a definir $Q[a,b]=P[a,b] \cdot \alpha[a,b]$ y así­ tener una matriz de transición $Q$ que cumple la condición de reversibilidad. 
+			
+			\vs{8}
+			
+			\visible<2->{
+				Sin embargo, no podemos asegurar que $Q$ sea la matriz de transición de una cadena de Markov.}
+			\begin{itemize}
+				\visible<3->{\item Puesto que no podemos asegurar que ${\displaystyle \sum_{a \in \Omega} Q[a,b] = 1}$ para todo $b \in \Omega$}
+			\end{itemize}
+			
+			\vs{6}
+			
+			\visible<4->{De hecho sólo podemos asegurar que ${\displaystyle \sum_{a \in \Omega} Q[a,b] \leq 1}$ para todo $b \in \Omega$
+				\begin{itemize}
+					\item ¿Por qué?
+			\end{itemize}}
+			
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la idea del algoritmo}
+		
+		{\footnotesize
+			
+			Para resolver el problema, definimos para cada $b\in\Omega$:
+			\begin{eqnarray*}
+				r(b) & = & 1 - \sum_{a\in\Omega} P[a,b] \cdot \alpha[a,b],
+			\end{eqnarray*}
+			y agregamos $r(b)$ a la probabilidad de quedarse en el estado $b$
+			
+			\vs{6}
+			
+			\visible<2->{
+				De esta forma, la definición de $Q$ es:
+				\alert{
+					\begin{eqnarray*}
+						Q[a,b] & = &  
+						\begin{cases}
+							P[a,b] \cdot \alpha[a,b] + r(b) & \text{si } a=b\\
+							P[a,b] \cdot \alpha[a,b]        & \text{si } a \neq b
+						\end{cases}
+				\end{eqnarray*}}
+			}
+			
+			\vs{6}
+			
+			\visible<3->{
+				\begin{ejercicio}
+					Demuestre que $Q$ es la matriz de transición de una cadena de Markov.
+			\end{ejercicio}}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la formalización del algoritmo}
+		
+		{\footnotesize
+			
+			
+			Sea $\vec \pi$ una distribución de probabilidad sobre un dominio finito $\Omega$, y sea $P$ la matriz de transición de una cadena de Markov con conjunto de estados $\Omega$
+			\begin{itemize}
+				\item Y sea $\alpha: \Omega\times\Omega \to [0,1]$ definida como en las transparencias anteriores
+			\end{itemize}
+			
+			\vs{6}
+			
+			\visible<2->{
+				Además, sea $a_0$ un elemento arbitrario de $\Omega$}
+			
+			\vs{6}
+			
+			\visible<3->{
+				El siguiente algoritmo simula $N$ transiciones de acuerdo a la cadena de Markov con matriz de transición $Q$ descrita anteriormente.
+				%\begin{itemize}
+				%\item Así­, la cadena de Markov simulada tiene como distribución estacionaria a la distribución $\vec \pi$
+				%\end{itemize}
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la formalización del algoritmo}
+		
+		{\small
+			
+			\begin{tabbing}
+				\phantom{MM}\=\phantom{MM}\=\phantom{MM}\=\phantom{MM}\= \\
+				\text{\bf MH}($\vec \pi$, $P$, $a_0$, $N$) \\
+				\> \afor $j:=1$ \ato $N$ \ado \\
+				\> \> Generar $b \in \Omega$ con distribución $P[\cdot, a_{j-1}]$\\
+				\> \> Generar $u \in [0,1]$ con distribución uniforme\\
+				\> \> \aif $u \leq \alpha[b,a_{j-1}]$ \athen \\
+				\> \> \> $a_{j} := b$ \\
+				\> \> \aelse \\
+				\> \> \> $a_{j} := a_{j-1}$ \\
+				\> \areturn $\{a_1, a_2, \ldots, a_N\}$
+			\end{tabbing}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la formalización del algoritmo}
+		
+		{\footnotesize
+			
+			¿Cómo interpretamos la salida del algoritmo? 
+			\begin{itemize}
+				\item Vamos a demostrar que para cada $j\in\{1, \ldots, N\}$, se tiene que $a_j$ es generado según la distribución de probabilidades $Q^j \vec x_0$, donde $\vec x_0$ es un vector tal que $\vec x_0[a_0] = 1$ y $\vec x_0[b] = 0$ para todo $b \neq a_0$
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				En este contexto, $Q$ es la matriz que describimos antes, con distribución estacionaria $\vec \pi$ 
+				\begin{itemize}
+					\item Así­, el algoritmo toma un vector inicial $\vec x_0$ y realiza $N$ transiciones según la matriz de transición $Q$
+			\end{itemize}}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Markov Chain Monte Carlo: algunos comentarios}
+		
+		{\footnotesize
+			
+			El algoritmo de Metropolis-Hastings nos entrega una estrategia general para muestrear de acuerdo a una distribución de interés $\vec \pi$
+			\begin{itemize}
+				\item Si $N$ es suficientemente grande, entonces $a_N$ será generado de acuerdo a una distribución similar a la estacionaria
+			\end{itemize}
+			
+			\vs{6}
+			
+			\visible<2->{
+				Sin embargo, el algoritmo no entrega a priori ningún criterio respecto a qué se entiende por suficientemente grande.
+				\begin{itemize}
+					\item ¿Cuál debe ser el valor de $N$ para que la cadena de Markov se acerque lo suficiente a la distribución estacionaria? 
+			\end{itemize}}
+			
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Markov Chain Monte Carlo: algunos comentarios}
+		
+		{\small
+			
+			Por ejemplo, para aplicar el algoritmo a problemas de conteo necesitamos un generador casi uniforme.
+			\begin{itemize}
+				\item Eso significa que $\vec \pi$ es la distribución uniforme, y que queremos estar muy cerca de la distribución estacionaria
+				
+				\item A la vez, no queremos que $N$ sea demasiado grande ya que queremos obtener un algoritmo de tiempo polinomial
+			\end{itemize}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Markov Chain Monte Carlo: algunos comentarios}
+		
+		{\footnotesize
+			
+			Otro tema importante es el de la convergencia de la cadena de Markov a la distribución $\vec \pi$
+			\begin{itemize}
+				\item El algoritmo de Metropolis-Hastings nos asegura que $\vec \pi$ es distribución estacionaria, pero no nos asegura que sea la única
+				
+				\item Aún más, el algoritmo no nos asegura que la cadena de Markov converja a $\vec \pi$ independientemente del vector $\vec x_0$ inicial
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Para conseguir estas garantí­as se debe exigir más condiciones a la cadena de Markov caracterizada por $Q$
+				\begin{itemize}
+					\item Más adelante vamos a analizar en detalle cómo conseguir estas garantías manipulando la matriz $P$
+			\end{itemize}}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Markov Chain Monte Carlo: algunos comentarios}
+		
+		{\footnotesize
+			
+			Cómo mencionamos antes, en los problemas de conteo consideramos $\vec \pi$ como la distribución uniforme.
+			\begin{itemize}
+				\item Entonces, dado que $\vec \pi[a] = \vec \pi[b]$ para todo $a,b$, la condición de reversibilidad se reduce a que $P[a,b]=P[b,a]$
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Por lo tanto, no siempre será necesario recurrir al algoritmo de Metropolis-Hastings en este contexto.
+				\begin{itemize}
+					\item Nos basta con definir una cadena de Markov cuya matriz de transición sea simétrica, y que además sea irreducible y aperiódica
+					
+					\item Esto puede lograrse en muchos casos. En otros, sin embargo, es necesario recurrir al algoritmo de Metropolis-Hastings
+			\end{itemize}}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la correctitud del algoritmo}
+		
+		{\footnotesize
+			
+			\begin{proposition}
+				Sea $\Omega$ un conjunto finito, $\vec \pi$ una distribución sobre $\Omega$ y $P$ la matriz de transición de una cadena de Markov con conjunto de estados $\Omega$. Además, sea $Q$ una matriz tal que:
+				\begin{eqnarray*}
+					Q[a,b] & = &  
+					\begin{cases}
+						P[a,b] \cdot \alpha[a,b] + r(b) & \text{si } a = b\\
+						P[a,b] \cdot \alpha[a,b]        & \text{si } a \neq b
+					\end{cases}
+				\end{eqnarray*}
+				para todo $a,b\in\Omega$, donde ${\displaystyle r(b) = 1 - \sum_{x\in\Omega} P[x,b] \cdot \alpha[x,b]}$ y
+				\begin{eqnarray*}
+					\alpha[a,b] & = & 
+					\begin{cases}
+						{\displaystyle \min \bigg\{\frac{P[b,a] \cdot \vec \pi[a]}{P[a,b] \cdot \vec \pi[b]}, 1\bigg\}} & \text{si } P[a,b] \cdot \vec \pi[b] > 0\\
+						1 & \text{en otro caso}
+					\end{cases}
+				\end{eqnarray*}
+				Entonces $Q$ es la matriz de transición de una cadena de Markov y $Q[d,c] \cdot \vec \pi[c] = Q[c,d] \cdot \vec \pi[d]$ para todo $c,d\in\Omega$
+			\end{proposition}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la correctitud del algoritmo}
+		
+		{\small
+			
+			\begin{ejercicio}
+				Demuestre la proposición anterior.
+			\end{ejercicio}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la correctitud del algoritmo}
+		
+		{\small
+			
+			
+			Ahora, solo falta demostrar que el algoritmo de Metropolis-Hastings efectúa las transiciones de acuerdo a las probabilidades especificadas por la matriz $Q$
+			
+			\vs{10}
+			
+			\visible<2->{
+				En el siguiente teorema, consideramos toda la notación dada en la proposición anterior y en la descripción del algoritmo de Metropolis-Hastings.}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Metropolis-Hastings: la correctitud del algoritmo}
+		
+		{\small
+			
+			\begin{teorema}
+				Para todo $c\in\Omega$ y $j\in\{0, 1,\ldots,N\}$ se tiene que:
+				\begin{eqnarray*}
+					\pr(a_j = c) & = & (Q^j \vec x_0)[c]
+				\end{eqnarray*}
+			\end{teorema}
+			
+			
+			\vs{8}
+			
+			\visible<2->{
+				Demostraremos el teorema sin requerir que $\vec x_0$ sea un vector canónico.
+				\begin{itemize}
+					\item $\vec x_0$ representa entonces la distribución de probabilidades de acuerdo a la cual se eligió $a_0$
+			\end{itemize}}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%%--------------------------------------------------
+	%\begin{frame}
+	%\frametitle{La demostración del teorema}
+	%
+	%{\footnotesize
+	%
+	%Haremos la demostración por inducción, partiendo por el caso base $j=0$
+	%\begin{itemize}
+	%\item La demostración del caso base es trivial, dado que $Q^0 = I$ y, por hipótesis, $a_0$ se elige de acuerdo a la distribución de probabilidades representada por $x_0$, o sea, para todo $c\in\Omega$ se tiene
+	%    \begin{equation*}
+	%        \pr(a_0 = c) \ = \ \vec x_0[c] \ = \ (Q^0 \vec x_0)[c]
+	%    \end{equation*}
+	%\end{itemize}
+	%
+	%\vs{4}
+	%
+	%Ahora, supongamos que el resultado es cierto para $j=k$, y probemos para $j=k+1$. Sea $c\in\Omega$. Tenemos entonces que:
+	%\begin{eqnarray*}
+	%    \pr(a_{k+1}=c)  \ = \ \pr(a_{k+1}=c \wedge u\leq \alpha[b,a_k]) + \pr(a_{k+1}=c \wedge u > \alpha[b,a_k])
+	%\end{eqnarray*}
+	%
+	%\vs{4}
+	%
+	%Denotamos el primer término como $p_1$ y el segundo como $p_2$
+	%\begin{itemize}
+	%\item Estudiamos a continuación cada uno de estos términos
+	%\end{itemize}
+	%
+	%}
+	%
+	%\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La demostración del teorema}
+		
+		{\footnotesize
+			
+			Haremos la demostración por inducción, partiendo por el caso base $j=0$
+			
+			\vs{8}
+			
+			\visible<2->{
+				La demostración del caso base es trivial, dado que $Q^0 = I$ y, por hipótesis, $a_0$ se elige de acuerdo a la distribución de probabilidades representada por $\vec x_0$, o sea, para todo $c\in\Omega$ se tiene:
+				\begin{equation*}
+					\pr(a_0 = c) \ = \ \vec x_0[c] \ = \ (Q^0 \vec x_0)[c]
+				\end{equation*}
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La demostración del teorema}
+		
+		{\footnotesize
+			
+			Ahora, suponemos que el resultado es cierto para $j=k$, y consideramos~$j=k+1$
+			
+			\vs{8}
+			
+			\visible<2->{
+				Sea $c\in\Omega$.  Tenemos entonces que:
+				\vs{-2}
+				\alert{
+					\begin{multline*}
+						\pr(a_{k+1}=c)  \ = \\ 
+						\pr(a_{k+1}=c \wedge u\leq \alpha[b,a_k]) + \pr(a_{k+1}=c \wedge u > \alpha[b,a_k])
+				\end{multline*}}
+			}
+			
+			\vs{6}
+			
+			\visible<3->{
+				Denotamos el primer término como $p_1$ y el segundo como $p_2$
+				\begin{itemize}
+					\item Estudiamos a continuación cada uno de estos términos
+			\end{itemize}}
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La demostración del teorema}
+		
+		{\footnotesize
+			
+			\begin{eqnarray*}
+				p_1 
+				&=&  \pr(a_{k+1}=c \wedge u\leq \alpha[b,a_k]) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega}
+				\pr(a_{k+1}=c \wedge u\leq \alpha[b,a_k] \wedge b=y \wedge a_k=x) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega}
+				\pr(a_{k+1}=c \mid u\leq \alpha[b,a_k] \wedge b=y \wedge a_k=x) \cdot\\
+				&&  \hspace{120pt} \pr(u\leq \alpha[b,a_k] \wedge b=y \wedge a_k=x) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(y=c) \cdot
+				\pr(u\leq \alpha[b,a_k] \mid b=y \wedge a_k=x)\cdot \\
+				&&  \hspace{177pt} \pr(b=y \wedge a_k=x) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(y=c) \cdot
+				\alpha[y,x] \cdot \pr(b=y \mid a_k=x) \cdot \pr(a_k=x) 
+			\end{eqnarray*}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La demostración del teorema}
+		
+		{\footnotesize
+			
+			Por lo tanto, tenemos por hipótesis de inducción que:
+			\begin{eqnarray*}
+				p_1 
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(y=c) \cdot 
+				\alpha[y,x] \cdot P[y,x] \cdot \pr(a_k=x) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(y=c) \cdot
+				\alpha[y,x] \cdot P[y,x] \cdot (Q^k \vec x_0)[x] \\
+				&=& \sum_{x\in\Omega} 
+				\alpha[c,x] \cdot P[c,x] \cdot (Q^k \vec x_0)[x]
+			\end{eqnarray*}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La demostración del teorema}
+		
+		{\footnotesize
+			
+			
+			Por otra parte, tenemos que:
+			\begin{eqnarray*}
+				p_2 
+				&=& \pr(a_{k+1}=c \wedge u > \alpha[b,a_k]) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega}
+				\pr(a_{k+1}=c \wedge u > \alpha[b,a_k] \wedge b=y \wedge a_k=x) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega}
+				\pr(a_{k+1}=c \mid u > \alpha[b,a_k] \wedge b=y \wedge a_k=x) \cdot\\
+				&&  \hspace{121.5pt} \pr(u > \alpha[b,a_k] \wedge b=y \wedge a_k=x) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(x=c) \cdot
+				\pr(u > \alpha[b,a_k] \mid b=y \wedge a_k=x) \cdot\\
+				&&  \hspace{178.5pt} \pr(b=y \wedge a_k=x) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(x=c) \cdot
+				(1 - \alpha[y,x]) \cdot \pr(b=y \mid a_k=x) \cdot \pr(a_k=x) 
+			\end{eqnarray*}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La demostración del teorema}
+		
+		{\footnotesize
+			
+			Por lo tanto, tenemos por hipótesis de inducción que:
+			\begin{eqnarray*}
+				p_2
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(x=c) \cdot 
+				(1-\alpha[y,x]) \cdot P[y,x] \cdot \pr(a_k=x) \\
+				&=& \sum_{x\in\Omega}\sum_{y\in\Omega} \pr(x=c) \cdot
+				(1-\alpha[y,x]) \cdot P[y,x] \cdot (Q^k \vec x_0)[x] \\
+				&=& \sum_{y\in\Omega} 
+				(1-\alpha[y,c])\cdot  P[y,c] \cdot (Q^k \vec x_0)[c] \\
+				&=& (Q^k \vec x_0)[c] \cdot \sum_{y\in\Omega} 
+				(1-\alpha[y,c]) \cdot P[y,c] \\
+				&=& (Q^k \vec x_0)[c] \cdot \bigg(\sum_{y\in\Omega} P[y,c] - 
+				\sum_{y\in\Omega}\alpha[y,c] \cdot P[y,c] \bigg) \\
+				&=& (Q^k \vec x_0)[c] \cdot \bigg(1 - 
+				\sum_{y\in\Omega}\alpha[y,c] \cdot P[y,c] \bigg) \\
+				&=& (Q^k \vec x_0)[c] \cdot r(c)
+			\end{eqnarray*}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La demostración del teorema}
+		
+		{\footnotesize
+			
+			Tenemos entonces que:
+			\begin{eqnarray*}
+				\pr(a_{k+1}=c)
+				& = & p_1 + p_2 \\
+				& = & \bigg(\sum_{x\in\Omega} \alpha[c,x] \cdot P[c,x] \cdot (Q^k \vec x_0)[x]\bigg) + (Q^k \vec x_0)[c] \cdot r(c) \\
+				& = & (\alpha[c,c] \cdot P[c,c] \cdot (Q^k \vec x_0)[c] + r(c) \cdot (Q^k \vec x_0)[c]) \ + \\
+				&&\hspace{80pt} \sum_{x\in\Omega \,:\, x \neq c} \alpha[c,x] \cdot P[c,x] \cdot (Q^k \vec x_0)[x] \\
+				& = & Q[c,c] \cdot (Q^k \vec x_0)[c] + 
+				\sum_{x\in\Omega \,:\, x \neq c} Q[c,x] \cdot (Q^k \vec x_0)[x] \\
+				&= &\sum_{x\in\Omega} Q[c,x] \cdot (Q^k \vec x_0)[x] \\
+				&= & (Q^{k+1} \vec x_0)[c]
+			\end{eqnarray*}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La demostración del teorema}
+		
+		{\small
+			
+			Con esto queda demostrado el caso inductivo.
+			
+			\vs{8}
+			
+			\visible<2->{
+				Así­, queda demostrado el teorema. \qed
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{$\vec \pi$ como la única distribución estacionaria del algoritmo de Metropolis-Hastings}
+		
+		{\small
+			
+			¿Cómo podemos asegurar que $\vec \pi$ es la única distribución estacionaria de la cadena de Markov con matriz de transición $Q$?
+			\begin{itemize}
+				\item ¿Cómo podemos asegurar que la cadena de Markov converge a $\vec \pi$ independientemente del vector $\vec x_0$ inicial?
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Para tener las condiciones anteriores la cadena de Markov debe ser irreducible y aperiódica.}
+			\begin{itemize}
+				\visible<3->{\item ¿Para lograr esto basta con que la cadena de Markov con matriz de transición $P$ sea irreducible y aperiódica?}
+			\end{itemize}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{No basta partir de una cadena irreducible y aperiódica}
+		
+		{\footnotesize
+			
+			Considere la siguiente cadena de Markov:
+			\begin{center}
+				\begin{tikzpicture}
+				\node[circ] (n1) {$a$}
+				edge[arrout, in = 160, out = 110, loop] node[above] {$0\text{.}5$} (n1);
+				\node[circ, right=15mm of n1] (n2) {$b$}
+				edge[arrin] node[above] {$0\text{.}5$} (n1);
+				\node[circ, below=15mm of n1] (n3) {$c$}
+				edge[arrin] node[below] {$\ 1$} (n2)
+				edge[arrout] node[left] {$1$} (n1);
+				\end{tikzpicture}
+			\end{center}
+			
+			\vs{6}
+			
+			Esta cadena de Markov es irreducible y aperiódica, y su única distribución estacionaria es: 
+			$$\begin{pmatrix}
+			0\text{.}5\\
+			0\text{.}25\\
+			0\text{.}25
+			\end{pmatrix}$$
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{No basta partir de una cadena irreducible y aperiódica}
+		
+		
+		{\footnotesize
+			
+			Queremos utilizar el algoritmo de Metropolis-Hastings para obtener a partir de $P$ la distribución uniforme $\vec \pi[a] = \vec \pi[b] = \vec \pi[c] = \frac{1}{3}$ como distribución estacionaria de una cadena de Markov.
+			
+			\vs{8}
+			
+			\visible<2->{
+				En este caso tenemos que $P[a,b] = P[b,c] = P[c,a] = 0$ y $\alpha[b,a] = \alpha[c,b] = \alpha[a,c] = 0$,} \visible<3->{por lo que el algoritmo genera la siguiente cadena de Markov:
+				\begin{center}
+					\begin{tikzpicture}
+					\node[circ] (n1) {$a$}
+					edge[arrout, in = 160, out = 110, loop] node[above] {$1$} (n1);
+					\node[circ, right=10mm of n1] (n2) {$b$}
+					edge[arrout, in = 160, out = 110, loop] node[above] {$1$} (n2);
+					\node[circ, below=10mm of n1] (n3) {$c$}
+					edge[arrout, in = 160, out = 110, loop] node[above] {$1$} (n3);
+					\end{tikzpicture}
+				\end{center}
+			}
+			
+			
+			
+			
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{No basta partir de una cadena irreducible y aperiódica}
+		
+		
+		{\footnotesize
+			
+			Vale decir, tenemos que:
+			$Q = \begin{pmatrix}
+			1 & 0 & 0\\
+			0 & 1 & 0\\
+			0 & 0 & 1
+			\end{pmatrix}$
+			
+			\vs{10}
+			
+			La cadena de Markov generada por el algoritmo de Metropolis-Hastings no es irreducible ni tiene una única distribución estacionaria.
+			\begin{itemize}
+				\item Y además converge a distintas distribuciones dependiendo de la distribución de partida
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				¿Cómo podemos solucionar estos problemas?}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una solución simple y general}
+		
+		
+		{\footnotesize
+			
+			Suponga que tenemos una cadena de Markov con conjunto de estados $\Omega$ y matriz de transición $P$
+			
+			\vs{6}
+			
+			\visible<2->{
+				En el algoritmo de Metropolis-Hastings suponemos que es posible hacer muestreo de acuerdo con $P$
+				\begin{itemize}
+					\item Vale decir, dado $a \in \Omega$, suponemos que es posible generar de manera aleatoria $b\in\Omega$ de acuerdo a la distribución probabilidad $P[\cdot,a]$
+					
+					\item Más aun, suponemos que $b$ puede ser generado de manera eficiente 
+				\end{itemize}
+			}
+			
+			\vs{6}
+			
+			\visible<3->{
+				Para solucionar los problemas mencionados en las transparencias anteriores vamos a modificar $P$
+				\begin{itemize}
+					\item Lo importante es que debe ser posible hacer muestreo de acuerdo con la matriz modificada de manera eficiente
+			\end{itemize}}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una solución simple y general}
+		
+		
+		{\small
+			
+			Sea $\theta \in (0,1)$ y $U$ una matriz  de $|\Omega| \times |\Omega|$ tal que 
+			\begin{eqnarray*}
+				U[a,b] & = & \frac{1}{|\Omega|}
+			\end{eqnarray*}
+			Vale decir, $U$ representa una cadena de Markov en la cual es posible moverse de un estado a cualquier otro con distribución uniforme.
+			
+			\vs{8}
+			
+			\visible<2->{
+				Considerando $P$, $\theta$ y $U$ defina:
+				\alert{
+					\begin{eqnarray*}
+						P_\theta & = & \theta \cdot P + (1 - \theta) \cdot U
+			\end{eqnarray*}}}
+			
+		}
+		
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una solución simple y general}
+		
+		
+		{\footnotesize
+			
+			Tenemos que:
+			\vs{1}
+			\begin{itemize}
+				\item $P_\theta$ es irreducible y aperiodica
+				
+				\item Es posible hacer muestreo de manera eficiente de acuerdo a $P_\theta$ si es posible hacer muestreo de manera eficiente de acuerdo a $P$
+				
+				\item La matriz $Q_\theta$ generada por el algoritmo de Metropolis-Hastings es irreducible y aperiódica
+				\begin{itemize}
+					{\footnotesize \alert{\item Por lo tanto, utilizando $P_\theta$ solucionamos los problemas mencionados en las transparencias anteriores}}
+				\end{itemize}
+			\end{itemize}
+			
+			\vs{6}
+			
+			\visible<2->{
+				\begin{ejercicio}
+					Demuestre las propiedades mencionadas arriba.
+				\end{ejercicio}
+			}
+			
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una respuesta a la segunda pregunta: velocidad de convergencia}
+		
+		{\small
+			
+			¿Cómo podemos asegurar que una cadena de Markov convergerá a la distribución estacionaria en un tiempo razonable?
+			
+			\vs{10}
+			
+			\visible<2->{
+				Para responder esta pregunta, primero necesitamos definir una métrica que indique la distancia que hay entre la distribución estacionaria y la distribución de probabilidad de la cadena en un tiempo $t \geq 0$
+			}
+			
+			%    \vs{8}
+			
+			%    \visible<3->{
+			%    En adelante, cuando hablemos de una cadena de Markov, asumiremos que $<P, \Omega, \pi>$ denotan a la matriz de transici\'on, el conjunto de estados y la distribuci\'on estacionaria de \'esta, respectivamente.
+			%    }
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Distancia de variación}
+		
+		{\small
+			
+			Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$, matriz de transición $P$ y distribución estacionaria $\vec \pi$
+			
+			\vs{8}
+			
+			\visible<2->{
+				\begin{definicion}
+					Dado $x \in \Omega$, la distancia de variación en tiempo $t \geq 0$ con respecto a un estado inicial $x$ se define como:
+					\begin{eqnarray*}
+						\alert{\Delta_x(t)} & \alert{=}  & \alert{\frac{1}{2} \sum_{y \in \Omega} \big| P^t[y, x] - \vec\pi[y] \big|}
+					\end{eqnarray*}
+			\end{definicion}}
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Mixing time de una cadena de Markov}
+		
+		{\small
+			
+			\begin{definicion}
+				Dada una cadena  de Markov $\{ X_t \}_{t \in \mathbb{N}}$ y $\varepsilon \in (0,1)$, el mixing time de $\{ X_t \}_{t \in \mathbb{N}}$ a partir de un estado inicial $x$ se define como:
+				\begin{eqnarray*}
+					\tau_x(\varepsilon) & = & \min\{t \in \mathbb{N} \mid \forall t' \geq t \,:\, \Delta_x(t') \leq \varepsilon\}
+				\end{eqnarray*}
+			\end{definicion}
+			
+			\vs{8}
+			
+			\visible<2->{
+				
+				¿Cómo podemos acotar el mixing time de una cadena de Markov?
+				
+			}
+			
+		}
+		
+	\end{frame}
+	
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Cadenas Reversibles}
+	%    
+	%    {\small
+	%    
+	%    \vs{8}
+	%    
+	%    \begin{definicion}
+	%        Diremos que una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ es reversible ssi
+	%        \begin{eqnarray*}
+	%            \forall x, y \in \Omega \quad \pi(x) P[y, x] = \pi(y) P[x, y] = Q(x, y)
+	%        \end{eqnarray*}
+	%    \end{definicion}
+	%    
+	%    }
+	%    
+	%    \end{frame}
+	%    
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Caminos Can\'onicos}
+	%    
+	%    {\small
+	%    
+	%    Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov reversible, irreducible y aperi\'odica
+	%    
+	%    \vs{4}
+	%    
+	%    \begin{definicion}
+	%        Diremos que $\{ X_t \}_{t \in \mathbb{N}}$ tiene un grafo subyacente no dirigido $H = (\Omega, E)$ con
+	%        \begin{eqnarray*}
+	%            E = \{\{x, y\} \in \Omega^{(2)} : Q(x, y) > 0\}
+	%        \end{eqnarray*}
+	%    \end{definicion}
+	%    
+	%    \vs{4}
+	%    
+	%    \visible<2->{
+	%    
+	%    \begin{definicion}
+	%        Definiremos un camino can\'onico de $x$ a $y$, $\gamma_{xy}$, con $x, y \in \Omega$, como
+	%        \begin{eqnarray*}
+	%            \gamma_{xy} = e_1 e_2 \dotsc e_r
+	%        \end{eqnarray*}
+	%        con $e_1, e_2, \dotsc, e_r \in E$ transiciones legales desde $x$ hasta $y$.
+	%    \end{definicion}
+	%    
+	%    }
+	%    
+	%    }
+	%    
+	%    \end{frame}
+	%    
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Caminos Can\'onicos}
+	%    
+	%    {\small
+	%    
+	%    Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov reversible, irreducible y aperi\'odica, con  grafo subyacente $H=(\Omega, E)$. Adem\'as, sea $\Gamma = \{\gamma_{xy} : x, y \in \Omega\}$ un conjunto de caminos can\'onicos para cada par de estados
+	%    
+	%    \vs{8}
+	%    
+	%    \begin{definicion}
+	%        Diremos que la m\'axima carga de una arista corresponde a
+	%        \begin{eqnarray*}
+	%            \overline{\rho} = \overline{\rho}(\Gamma) = {\displaystyle \max_{\{w, w'\} \in E}} \frac{1}{Q(w, w')} {\displaystyle \sum_{\gamma_{xy} \ni \{w, w'\}}} \pi(x) \pi(y) \left| \gamma_{xy} \right|
+	%        \end{eqnarray*}
+	%    \end{definicion}
+	%    
+	%    \vs{8}
+	%    
+	%    \visible<2->{
+	%    Intuitivamente, queremos que no haya aristas con mucha carga para no formar \textit{bottlenecks}.
+	%    }
+	%    
+	%    }
+	%    
+	%    \end{frame}
+	%    
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Caminos Can\'onicos}
+	%    
+	%    {\small
+	%    
+	%    Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov reversible, irreducible y aperi\'odica, tal que $P[x, x] \geq \frac{1}{2}$ para todo estado $x \in \Omega$. Adem\'as, sea $\Gamma = \{\gamma_{xy} : x, y \in \Omega\}$ un conjunto de caminos can\'onicos para cada par de estados con m\'axima carga de una arista $\overline{\rho} = \overline{\rho}(\Gamma)$
+	%    
+	%    \vs{8}
+	%    
+	%    \begin{proposition}
+	%        El mixing time de $\{ X_t \}_{t \in \mathbb{N}}$ satisface
+	%        \begin{eqnarray*}
+	%            \tau_x(\epsilon) \leq \overline{\rho} (\ln \pi(x)^{-1} + \ln \epsilon^{-1})
+	%        \end{eqnarray*}
+	%        para cualquier estado inicial $x \in \Omega$.
+	%    \end{proposition}
+	%    
+	%    }
+	%    
+	%    \end{frame}
+	
+	
+	
+	
+	
+	%
+	%%--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Una respuesta a la segunda pregunta: velocidad de convergencia}
+	%    
+	%    {\small
+	%    
+	%    ?`C\'omo podemos asegurar que una cadena de Markov converger\'a a la distribuci\'on estacionaria en un tiempo razonable?
+	%    
+	%    \vs{8}
+	%    
+	%    \visible<2->{
+	%    Necesitamos definir una m\'etrica que indique la distancia que hay entre la distribuci\'on estacionaria y la distribuci\'on de probabilidad de la cadena en un tiempo $t \geq 0$.
+	%    }
+	%    
+	%    \vs{8}
+	%    
+	%%    \visible<3->{
+	%%    En adelante, cuando hablemos de una cadena de Markov, asumiremos que $<P, \Omega, \pi>$ denotan a la matriz de transici\'on, el conjunto de estados y la distribuci\'on estacionaria de \'esta, respectivamente.
+	%%    }
+	%    
+	%    }
+	%    
+	%    \end{frame}
+	%    
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Distancia de variaci\'on}
+	%    
+	%    {\small
+	%    
+	%    Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov con conjunto de estados $\Omega$, matriz de transici\'on $P$ y distribuci\'on estacionaria $\vec \pi$
+	%     
+	%    \vs{8}
+	%    
+	%    \visible<2->{
+	%    \begin{definicion}
+	%        Dado $x \in \Omega$, la distancia de variaci\'on en tiempo $t \geq 0$ con respecto a un estado inicial $x$ se define como:
+	%        \begin{eqnarray*}
+	%             \alert{\Delta_x(t)} & \alert{=}  & \alert{\frac{1}{2} \sum_{y \in \Omega} \big| P^t[y, x] - \vec\pi[y] \big|}
+	%        \end{eqnarray*}
+	%    \end{definicion}}
+	%    
+	%    }
+	%    
+	%    \end{frame}
+	%    
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Mixing time de una cadena de Markov}
+	%    
+	%    {\small
+	%    
+	%    \begin{definicion}
+	%       Dada una cadena  de Markov $\{ X_t \}_{t \in \mathbb{N}}$ y $\varepsilon \in (0,1)$, el mixing time de $\{ X_t \}_{t \in \mathbb{N}}$ a partir de un estado inicial $x$ se define como:
+	%        \begin{eqnarray*}
+	%            \tau_x(\varepsilon) & = & \min\{t \in \mathbb{N} \mid \forall t' \geq t \,:\, \Delta_x(t') \leq \varepsilon\}
+	%        \end{eqnarray*}
+	%    \end{definicion}
+	%    
+	%    \vs{8}
+	%    
+	%    \visible<2->{
+	%    
+	%    ?`C\'omo podemos acotar el mixing time de una cadena de Markov?
+	%    
+	%    }
+	%    
+	%    }
+	%    
+	%    \end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La técnica de los caminos canónicos}
+		
+		{\small
+			
+			Desde ahora en adelante, asumiremos una notación estándar para los elementos de una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$:
+			\begin{itemize}
+				{\footnotesize
+					\item $\Omega$ es su conjunto de estados
+					\item $P$ es su matriz de transición
+					\item $\vec \pi$ es su distribución estacionaria}
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Suponiendo que $\{ X_t \}_{t \in \mathbb{N}}$ es reversible, para cada $x,y \in \Omega$ definimos 
+				\begin{eqnarray*}
+					Q(\{x, y\}) \ = \ P[x, y] \cdot \vec \pi[y]  \ = \  P[y,x] \cdot \vec \pi[x]
+			\end{eqnarray*}}
+			\visible<3->{Intuitivamente, $\{x,y\}$ representa a un arco en un grafo no dirigido.}    
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La técnica de los caminos canónicos}
+		
+		{\footnotesize
+			
+			Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov reversible, irreducible y aperiódica
+			
+			\vs{8}
+			
+			\visible<2->{
+				Asociamos a $\{ X_t \}_{t \in \mathbb{N}}$ un grafo $H_{P,\vec \pi} = (\Omega, E_{P,\vec \pi})$ no dirigido, donde:
+				\begin{eqnarray*}
+					E_{P,\vec \pi} & = & \{\{x, y\} \in 2^{\Omega} \mid Q(\{x, y\}) > 0\}
+				\end{eqnarray*}
+			}
+			
+			\vs{6}
+			
+			\visible<3->{
+				Además, dados $x,y \in \Omega$, un camino canónico de $x$ a $y$ se define como un camino $\gamma_{x,y} = e_1, \ldots, e_r$ desde $x$ a $y$ en $H_{P,\vec \pi}$
+				\begin{itemize}
+					\visible<4->{
+						\item Suponemos que $r \geq 1$, y denotamos al largo $r$ del camino como $|\gamma_{x,y}|$
+						\item Utilizamos la notación $e \in \gamma_{x,y}$ para indicar que $e$ es un arco (no dirigido) en el camino $\gamma_{x,y}$}
+			\end{itemize}}    
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La técnica de los caminos canónicos}
+		
+		{\small
+			
+			Suponga que por cada par $x,y \in \Omega$ escogemos un camino canónico $\gamma_{x,y}$, y definimos $\Gamma$ como el conjunto de estos caminos.
+			%Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov reversible, irreducible y aperi\'odica, con  grafo subyacente $H=(\Omega, E)$. Adem\'as, sea $\Gamma = \{\gamma_{xy} : x, y \in \Omega\}$ un conjunto de caminos can\'onicos para cada par de estados
+			
+			\vs{8}
+			
+			\visible<2->{   
+				\begin{definicion}
+					La máxima carga de un arco se define como
+					\begin{eqnarray*}
+						\alert{\rho(\Gamma)} & \alert{=} & \alert{\max_{e \in E_{P,\vec \pi}} \bigg(\frac{1}{Q(e)} \sum_{\gamma_{x,y} \in \Gamma \,:\, e \in \gamma_{x,y}} \vec \pi[x] \cdot \vec \pi[y] \cdot |\gamma_{x,y}|\bigg)}
+					\end{eqnarray*}
+				\end{definicion}
+			}
+			
+			\vs{8}
+			
+			\visible<3->{
+				Intuitivamente, queremos que no haya arcos con mucha carga para no formar \textit{cuellos de botella}.
+			}
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{La técnica de los caminos canónicos: un resultado fundamental}
+		
+		{\small
+			
+			\begin{teorema}
+				Sea $\{ X_t \}_{t \in \mathbb{N}}$ una cadena de Markov reversible, irreducible y aperi\'odica, tal que $P[x, x] \geq \frac{1}{2}$ para todo $x \in \Omega$. Adem\'as, sea $\Gamma$ un conjunto de caminos canónicos para cada par de estados en $\Omega$.
+				
+				\vs{8}
+				
+				\visible<2->{
+					Para cada $x \in \Omega$ y $\varepsilon \in (0,1)$, se tiene que:
+					\begin{eqnarray*}
+						\alert{\tau_x(\varepsilon)} & \alert{ \leq} & \alert{ \rho(\Gamma) \cdot \bigg(\ln \frac{1}{\vec \pi[x]} + \ln \frac{1}{\varepsilon}\bigg)}
+				\end{eqnarray*}}
+			\end{teorema}
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un primer ejemplo: generación aleatoria de strings binarios}
+		
+		{\small
+			Consideremos el problema de generar con distribución uniforme strings binarios de largo $n \geq 1$ a través de una cadena de Markov.
+			\begin{itemize}
+				\visible<2->{\item Usaremos el conjunto de estados $\Omega = \{0, 1\}^n$}
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<3->{Para movernos entre estados invertiremos a lo más un bit del string.}
+			\begin{itemize}
+				\visible<4->{\item Con probabilidad $\frac{1}{2}$ no nos movemos de estado}
+				\visible<5->{\item Si nos movemos, se invierte uno de los $n$ bits con distribución uniforme}
+			\end{itemize}
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un primer ejemplo: generación aleatoria de strings binarios}
+		
+		{\small
+			Sea $\vec \pi : \Omega \rightarrow \mathbb{R}$ la distribución uniforme sobre los estados.
+			
+			
+			\vs{8}
+			
+			\visible<2->{
+				Suponiendo que $d : \Omega \times \Omega \rightarrow \mathbb{N}$ es la distancia de Hamming entre dos strings binarios, tenemos que:
+				\begin{eqnarray*}
+					P[x, y] & = & \begin{cases}
+						\frac{1}{2} & \text{si $d(x, y) = 0$} \\
+						\frac{1}{2 \cdot n} & \text{si $d(x, y) = 1$} \\
+						0 & \text{si $d(x, y) \geq 2$}
+					\end{cases}
+				\end{eqnarray*}
+			}
+			
+			\vs{4}
+			
+			\visible<3->{
+				De esto se concluye que $\vec \pi$ es la (única) distribución estacionaria de la cadena de~Markov.
+				\begin{itemize}
+					\item ¿Por qué?
+			\end{itemize}}
+			
+			
+			%    \visible<3->{
+			%    \begin{eqnarray*}
+			%        \forall x \in \Omega \quad (P \vec \pi) [x] = {\displaystyle \sum_{y \in \Omega}} P[x, y] \vec \pi [y] = 2^{-n}
+			%    \end{eqnarray*} \qed
+			%    }
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un primer ejemplo: generación aleatoria de strings binarios}
+		
+		{\small
+			
+			La cadena de Markov definida satisface las condiciones del teorema.
+			\begin{itemize}
+				\item La cadena es reversible, irreducible, aperiódica y $P[x,x] \geq \frac{1}{2}$ para cada $x \in \Omega$
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Podemos usar entonces la técnica de los caminos canónicos para acotar el mixing time.}
+			\begin{itemize}
+				\visible<3->{\item La clave es escoger un conjunto $\Gamma$ de caminos canónicos tal que $\rho(\Gamma)$ sea polinomial en $n$, que en este caso es el tamaño de la entrada}
+			\end{itemize}
+			
+			
+			\vs{8}
+			
+			\visible<4->{
+				Utilizamos como primer ejemplo a la generación aleatoria de strings binarios porque es simple escoger un conjunto de caminos $\Gamma$ tal que $\rho(\Gamma)$ es polinomial en $n$}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un primer ejemplo: generación aleatoria de strings binarios}
+		
+		{\small
+			
+			Dado $x = x_1 \cdots x_n$ e $y = y_1 \cdots y_n$, consideramos el camino canónico $\gamma_{x,y} = e_1 \cdots e_n$, donde para $i \in \{1, \ldots, n\}$:
+			\begin{eqnarray*}
+				e_i & = & \big\{y_1 \cdots y_{i-1} \alert{x_i} x_{i+1} \cdots x_{n},\ y_1 \cdots y_{i-1} \alert{y_i} x_{i+1} \cdots x_{n}\big\}
+			\end{eqnarray*}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Vale decir, el camino de $x$ a $y$ corresponde a cambiar uno a uno de izquierda a derecha los bits de $x$ por los de $y$
+			}
+			\begin{itemize}
+				\visible<3->{\item Si los strings tienen un bit en común, utilizamos un loop}
+				\visible<4->{\item Nótese que $|\gamma_{xy}| = n$}
+			\end{itemize}
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Acotando el número de caminos}
+		
+		{\small
+			Necesitamos obtener una cota superior para la cantidad de caminos que pasan por cada~arco. 
+			\begin{itemize}
+				\item Consideramos un arco $e$ arbitrario    
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<2->{
+				Para algún $i \in \{1, \ldots, n\}$, tenemos que:
+				\begin{eqnarray*}
+					e & = & \big\{y_1 \cdots y_{i-1} \alert{x_i} x_{i+1} \cdots x_{n},\ y_1 \cdots y_{i-1} \alert{y_i} x_{i+1} \cdots x_{n}\big\}
+				\end{eqnarray*}
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Acotando el número de caminos}
+		
+		{\small
+			
+			Dados $x,y \in \Omega$, si $e \in \gamma_{x,y}$, entonces:
+			\begin{itemize}
+				\visible<2->{\item Los bits $x_i$, $\ldots$, $x_n$ de $x$ están fijos, y tenemos $2^{i-1}$ opciones para los otros bits de $x$}
+				\visible<3->{\item Los bits $y_1$, $\ldots$, $y_i$ de $y$ están fijos, y tenemos $2^{n-i}$ opciones para los otros bits de $y$}
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<4->{
+				Concluimos que la cantidad total de caminos que pueden contener a $e$ es 
+				\begin{eqnarray*}
+					2^{i-1} \cdot 2^{n-i} &=& 2^{n-1}
+			\end{eqnarray*}}
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Acotando superiormente $\rho(\Gamma)$}
+		
+		{\footnotesize
+			Recordemos que la carga máxima de un arco es
+			\begin{eqnarray*}
+				\rho(\Gamma) & = & \max_{e \in E_{P,\vec \pi}} \bigg(\frac{1}{Q(e)} \sum_{\gamma_{x,y} \in \Gamma \,:\, e \in \gamma_{x,y}} \vec \pi[x] \cdot \vec \pi[y] \cdot |\gamma_{x,y}|\bigg)
+			\end{eqnarray*}
+			
+			\vs{8}
+			
+			Tenemos que:
+			\begin{itemize}
+				\visible<2->{\item $\forall x \in \Omega$ : $\vec \pi [x] = \frac{1}{2^{n}}$}
+				\visible<3->{\item $\forall e \in E_{P,\vec \pi}$ tal que $e = \{x,y\}$ : $Q(e) = P[x, y] \cdot \vec \pi[y] \geq \frac{1}{2 \cdot n} \cdot \frac{1}{2^{n}}$}
+				\visible<4->{\item $\forall e \in E_{P,\vec \pi}$ : $|\{\gamma_{x,y} \in \Gamma \mid e \in \gamma_{x,y}\}| = 2^{n-1}$}
+				\visible<5->{\item $\forall x, y \in \Omega$ : $|\gamma_{x,y}| = n$}
+			\end{itemize}
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Acotando superiormente $\rho(\Gamma)$}
+		
+		{\small
+			Desarrollando la expresión obtenemos:
+			\begin{eqnarray*}
+				\rho(\Gamma) & = & \max_{e \in E_{P,\vec \pi}} \bigg(\frac{1}{Q(e)} \sum_{\gamma_{x,y} \in \Gamma \,:\, e \in \gamma_{x,y}} \vec \pi[x] \cdot \vec \pi[y] \cdot |\gamma_{x,y}|\bigg)\\
+				& \leq &  \max_{e \in E_{P,\vec \pi}} \bigg(2 \cdot n \cdot 2^n \sum_{\gamma_{x,y} \in \Gamma \,:\, e \in \gamma_{x,y}} \frac{1}{2^n} \cdot \frac{1}{2^n} \cdot n\bigg)\\
+				& = &  \max_{e \in E_{P,\vec \pi}} \bigg(2 \cdot n \cdot 2^n \cdot \frac{1}{2^n} \cdot \frac{1}{2^n} \cdot n \cdot 2^{n-1} \bigg)\\
+				& = &  \max_{e \in E_{P,\vec \pi}} n^2\\
+				& = & n^2
+			\end{eqnarray*}
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Acotando el mixing time en la generación de strings binarios}
+		
+		{\footnotesize
+			Recordemos que para $x \in \Omega$ y $\varepsilon \in (0,1)$:
+			\begin{eqnarray*}
+				\tau_x(\varepsilon) & \leq & \rho(\Gamma) \cdot \bigg(\ln \frac{1}{\vec \pi[x]} + \ln \frac{1}{\varepsilon}\bigg)
+			\end{eqnarray*}
+			
+			\vs{6}
+			
+			\visible<2->{
+				Por lo tanto, tenemos que:
+				\begin{multline*}
+					\tau_x(\varepsilon) \ \leq \ n^2 \cdot \bigg(\ln \frac{1}{\vec \pi[x]} + \ln \frac{1}{\varepsilon}\bigg)
+					\ =\\  n^2 \cdot \bigg(\ln 2^n + \ln \frac{1}{\varepsilon}\bigg)
+					\ =\  n^2 \cdot \bigg(n \cdot \ln 2 + \ln \frac{1}{\varepsilon}\bigg)
+				\end{multline*}
+			}
+			
+			\vs{4}
+			
+			\visible<3->{
+				Concluimos que la cadena converge rápido desde cualquier estado inicial.
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un FPAUG para strings binarios}
+		
+		{\small
+			
+			
+			\begin{ejercicio}
+				Utilizando el resultado anterior construya un FPAUG para el problema de generar string binarios con distribución uniforme.
+				\vs{1}
+				\begin{itemize}
+					{\footnotesize
+						\item Su algoritmo debe realizar a lo más la siguiente cantidad de pasos en la cadena de Markov usada: $${\displaystyle \bigg\lceil n^2 \cdot \bigg(n \cdot \ln 2 + \ln \frac{2}{\varepsilon}\bigg)\bigg\rceil}$$}
+				\end{itemize}
+				\vs{-3}
+			\end{ejercicio}
+			
+			
+		}
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un segundo ejemplo: permutaciones de una lista}
+		
+		{\small
+			
+			Dado $n \geq 2$, consideramos el problema de generar permutaciones aleatorias de una lista con $n$ elementos y sin repeticiones.
+			%    los elementos de un conjunto de tama\~no $n$ a trav\'es de una cadena de Markov.
+			
+			\vs{10}
+			
+			Para resolver este problema consideramos una cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ con conjunto de estados $\Omega$ tal que:
+			\begin{eqnarray*}
+				\Omega & = & \{ L \mid L \text{ es una lista de largo } n \text{ con elementos } 1, \ldots, n\}
+			\end{eqnarray*}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un segundo ejemplo: permutaciones de una lista}
+		
+		{\small
+			
+			La dinámica de $\{ X_t \}_{t \in \mathbb{N}}$  es definida de la siguiente forma.
+			\vs{2}
+			\begin{itemize}
+				\item Dada una lista $L$:
+				\vs{2}
+				\begin{itemize}
+					\item Con probabilidad $\frac{1}{2}$ no se realiza cambios a $L$
+					\vs{3}
+					
+					\item Con probabilidad $\frac{1}{2}$ se realiza cambios a $L$. En este caso se escoge con distribución uniforme un par $(i,j)$ tal que $i,j \in \{1,\ldots, n\}$ e $i \neq j$, y se intercambia $L[i]$ por $L[j]$
+				\end{itemize}
+			\end{itemize}
+			
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: distribución estacionaria}
+		
+		{\footnotesize
+			
+			La matriz de transición $P$ de la cadena de Markov $\{ X_t \}_{t \in \mathbb{N}}$ satisface lo siguiente para cada $L_1, L_2 \in \Omega$:
+			\begin{eqnarray*}
+				P[L_1, L_2] & = & \begin{cases}
+					\frac{1}{2} & \text{si $L_1 = L_2$} \\
+					\frac{1}{n \cdot (n-1)} & \text{si $L_1$ y $L_2$ difieren exactamente en dos posiciones}\\
+					0 & \text{en otro caso}
+				\end{cases}
+			\end{eqnarray*}
+			
+			\vs{6}
+			
+			\visible<2->{
+				\begin{ejercicio}
+					Sea $\vec \pi : \Omega \rightarrow \mathbb{R}$ la distribución uniforme sobre $\Omega$:
+					\begin{eqnarray*}
+						\vec \pi[L] & = & \frac{1}{n!} \quad\quad \text{para cada } L \in \Omega
+					\end{eqnarray*}
+					Demuestre que $\vec \pi$ es la única distribución estacionaria de $\{ X_t \}_{t \in \mathbb{N}}$, a la cual converge la cadena independientemente del estado inicial.
+			\end{ejercicio}}
+			
+			%    \visible<2->{
+			%    {\bf Demostraci\'on:} Sea $P$ la matriz de transici\'on de la cadena y $L(y)$ el conjunto de estados $x \in \Omega$ obtenibles desde $y \in \Omega$, tales que $x \neq y$
+			%    \begin{eqnarray*}
+			%        P[x, y] = \begin{cases}
+			%            \frac{1}{2} & \text{si $x = y$} \\
+			%            \frac{1}{n(n-1)} & \text{si $x \in L(y)$} \\
+			%            0 & \text{en otro caso}
+			%        \end{cases}
+			%    \end{eqnarray*}
+			%    }
+			
+		}
+	\end{frame}
+	
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Permutaciones de un Conjunto: Distribuci\'on Estacionaria}
+	%    
+	%    {\small
+	%    \begin{eqnarray*}
+	%        \forall x \in \Omega \quad (P \vec \pi) [x] & = & {\displaystyle \sum_{y \in \Omega}} P[x, y] \vec \pi [y] \\
+	%         & = & P[x, x] \vec \pi [x] + {\displaystyle \sum_{y \in L(x)}} P[x, y] \vec \pi [y] \\
+	%         & = & \frac{1}{2 \cdot n!} + {\displaystyle \sum_{y \in L(x)}} \frac{1}{n(n-1)} \frac{1}{n!} \\
+	%         & = & \frac{1}{2 \cdot n!} + \frac{n(n-1)}{2} \frac{1}{n(n-1)} \frac{1}{n!} \\
+	%         & = & \frac{1}{n!}
+	%    \end{eqnarray*} \qed
+	%    }
+	%    \end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: caminos canónicos}
+		
+		{\small
+			Dados $L_1, L_2 \in \Omega$, definimos un camino canónico $\gamma_{L_1,L_2}$ desde $L_1$ a $L_2$ de la siguiente forma.
+			\visible<2->{
+				\begin{itemize}
+					\item Suponiendo que $L_1 = [a_1, \ldots, a_n]$ y $L_2 = [b_1, \ldots, b_n]$, los arcos de $\gamma_{L_1,L_2}$ van colocando a cada elemento $b_i$ en la posición $i$ que le corresponde en $L_2$, desde $i = 1$ hasta $i =n$
+					
+					\item Si un elemento $b_i$ estaba en la posición $i$ en su turno, entonces no se realiza ninguna acción
+					%    $i$-ésimo arco 
+					%    de $\gamma_{L_1,L_2}$ corresponde a poner al elemento $b_i$ en la posición $i$, si no estaba ahí. 
+			\end{itemize}}
+			%    \begin{itemize}
+			%    \item Si $b_i$ se encontraba en la posición $i$ al momento de realizar la transición entonces no se cambia la lista (lo que corresponde a utilizar un loop en el grafo $H_{P,\vec \pi}$)
+			%    \end{itemize}}
+			
+			\vs{8}
+			
+			\visible<3->{Tenemos que $|\gamma_{L_1,L_2}| \leq n$}
+			
+			\vs{8}
+			
+			\visible<4->{Definimos $\Gamma$  como $\{\gamma_{L_1,L_2} \mid L_1,L_2 \in \Omega \}$}
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: caminos canónicos}
+		
+		{\footnotesize
+			
+			\begin{ejemplo}
+				Si $L_1 = [3,1,4,2]$ y $L_2 = [4,2,1,3]$, el camino canónico de $L_1$ a $L_2$ se construye realizando las siguientes acciones:
+				\begin{enumerate}
+					\item Colocar el elemento $4$ en la posición $1$, lo que equivale a permutar las posiciones $1$ y $3$ en la lista $L_1$ generando 
+					$L_3 = [4,1,3,2]$
+					
+					\item Colocar el elemento $2$ en la posición $2$, lo que equivale a permutar las posiciones $2$ y $4$ en la lista $L_3$ generando 
+					$L_4 = [4,2,3,1]$
+					
+					\item Colocar el elemento $1$ en la posición $3$, lo que equivale a permutar las posiciones $3$ y $4$ en la lista $L_4$ generando 
+					$L_2 = [4,2,1,3]$
+				\end{enumerate}
+				
+				\vs{4}
+				
+				Tenemos entonces que \alert{$\gamma_{L_1,L_2} = \{L_1,L_3\}, \{L_3,L_4\}, \{L_4,L_2\}$}
+			\end{ejemplo}
+			
+		}
+		
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: caminos por arco}
+		
+		{\footnotesize
+			
+			No hay una forma sencilla de  contar la cantidad de caminos que pasan por un arco dado.
+			\begin{itemize}
+				\visible<2->{\item Vamos a acotar superiormente este número}
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<3->{
+				Considere un arco $\{L_1,L_2\}$ del grafo $H_{P, \vec \pi}$ tal que $L_1 \neq L_2$, y suponga que:
+				\begin{eqnarray*}
+					k & = & \min_{i \in \{1, \ldots, n\}} L_1[i] \neq L_2[i]
+				\end{eqnarray*}
+			}
+			
+			\vs{6}
+			
+			\visible<4->{Vamos a definir una función inyectiva $f_{\{L_1,L_2\}} : \{ \gamma_{L_3,L_4} \mid \{L_1,L_2\} \in \gamma_{L_3,L_4}\} \to \Omega$}
+			\begin{itemize}
+				\visible<5->{\alert{\item Concluimos que $|\{ \gamma_{L_3,L_4} \mid \{L_1,L_2\} \in \gamma_{L_3,L_4}\}| \leq |\Omega| = n!$}}
+			\end{itemize}
+			
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: caminos por arco}
+		
+		
+		{\footnotesize
+			Suponga que $L_1 = [a_1, \ldots, a_n]$, y sean $L_3, L_4 \in \Omega$ tales que $\{L_1,L_2\} \in \gamma_{L_3,L_4}$
+			\begin{itemize}
+				\item Nótese que $L_3 \neq L_4$
+			\end{itemize}
+			
+			\vs{6}
+			
+			\visible<2->{
+				Nos referimos a la posición de un elemento en las permutaciones $L_3$, $L_4$ y $L_1$ como \textit{inicial}, \textit{final} y \textit{actual}, respectivamente.
+			}
+			
+			\vs{6}
+			
+			\visible<3->{
+				Definimos $f_{\{L_1,L_2\}}(\gamma_{L_3,L_4})$ como una lista $L \in \Omega$ tal que:}
+			\begin{itemize}
+				\visible<4->{\item Los elementos $a_1, \dotsc, a_{k-1}$ son colocados en $L$ en sus posiciones iniciales~en $L_3$}
+				\visible<5->{\item Los $n-(k-1)$ elementos restantes de $L_1$ son colocados en $L$ en el orden final en que aparecen en $L_4$}
+			\end{itemize}
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: caminos por arco}
+		
+		{\small
+			Podemos comprobar que $f_{\{L_1,L_2\}}$ es inyectiva obteniendo $L_3$ y $L_4$ a partir de $f_{\{L_1,L_2\}}(\gamma_{L_3,L_4})$
+			\begin{itemize}
+				\item Nótese que $\gamma_{L_3,L_4}$ está determinado por $L_3$ y $L_4$
+			\end{itemize}
+			
+			\vs{10}
+			
+			\visible<2->{
+				Podemos recuperar $L_4$ de la siguiente forma:
+				\begin{itemize}
+					\item Las posiciones finales de $a_1, \dotsc, a_{k-1}$ son las mismas que sus posiciones actuales
+					\item El orden final de los elementos restantes se puede obtener directamente de $f_{\{L_1,L_2\}}(\gamma_{L_3,L_4})$    \end{itemize}
+			}
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: caminos por arco}
+		
+		{\small
+			Podemos recuperar $L_3$ notando que:
+			\vs{1}
+			\begin{itemize}
+				\item Las posiciones iniciales de $a_1, \dotsc, a_{k-1}$ se obtienen directamente de~$f_{\{L_1,L_2\}}(\gamma_{L_3,L_4})$
+				\vs{1}
+				
+				\item Las transiciones realizadas antes de $\{L_1,L_2\}$ en el camino $\gamma_{L_3,L_4}$ corresponden a poner a un elemento de $a_1, \dotsc, a_{k-1}$ en su posición~final
+				\vs{1}
+				
+				\visible<2->{\item Podemos deducir las posiciones iniciales de los $n-(k-1)$ elementos restantes a partir de las transiciones que fueron realizadas antes de $\{L_1,L_2\}$ en el camino $\gamma_{L_3,L_4}$}
+			\end{itemize}
+			
+			%    \vs{8}
+			%    
+			%    \visible<3->{
+			%    De esta forma, concluimos que
+			%    \begin{eqnarray*}
+			%        |P(t)| \leq |\Omega| = n!
+			%    \end{eqnarray*}
+			%    }
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: carga máxima}
+		
+		{\footnotesize
+			Recordemos que la carga máxima de un arco es
+			\begin{eqnarray*}
+				\rho(\Gamma) & = & \max_{e \in E_{P,\vec \pi}} \bigg(\frac{1}{Q(e)} \sum_{\gamma_{L_1,L_2} \in \Gamma \,:\, e \in \gamma_{L_1,L_2}} \vec \pi[L_1] \cdot \vec \pi[L_2] \cdot |\gamma_{L_1,L_2}|\bigg)
+			\end{eqnarray*}
+			
+			\vs{8}
+			
+			Tenemos que:
+			\begin{itemize}
+				\visible<2->{\item $\forall L \in \Omega$ : $\vec \pi [L] = \frac{1}{n!}$}
+				\visible<3->{\item $\forall e \in E_{P,\vec \pi}$ tal que $e = \{L_1,L_2\}$ : $Q(e) = P[L_1, L_2] \cdot \vec \pi[L_2] \geq \frac{1}{n \cdot (n - 1)} \cdot \frac{1}{n!}$}
+				\visible<4->{\item $\forall e \in E_{P,\vec \pi}$ tal que $e = \{L_1,L_2\}$  y $L_1 \neq L_2$ : $|\{\gamma_{L_3,L_4} \in \Gamma \mid e \in \gamma_{L_3,L_4}\}| \leq n!$}
+				\visible<5->{\item $\forall e \in E_{P,\vec \pi}$ tal que $e = \{L,L\}$ : $|\{\gamma_{L_3,L_4} \in \Gamma \mid e \in \gamma_{L_3,L_4}\}| = 1 \leq n!$}
+				\visible<6->{\item $\forall L_1, L_2 \in \Omega$ : $|\gamma_{L_1,L_2}| \leq n$}
+			\end{itemize}
+		}
+	\end{frame}
+	
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Permutaciones de un Conjunto: Carga M\'axima}
+	%    
+	%    {\small
+	%    Recordemos que la carga m\'axima de una arista es
+	%    \begin{eqnarray*}
+	%        \overline{\rho}(\Gamma) = {\displaystyle \max_{(w, w') \in E}} \frac{1}{Q(w, w')} {\displaystyle \sum_{\gamma_{xy} \ni (w, w')}} \vec \pi[x] \vec \pi[y] | \gamma_{xy} |
+	%    \end{eqnarray*}
+	%    
+	%    \vs{8}
+	%    
+	%    \visible<2->{Para el conjunto de caminos $\Gamma$ descrito,}
+	%    \begin{itemize}
+	%    \visible<3->{\item $\forall x \in \Omega \ \vec \pi [x] = (n!)^{-1}$}
+	%    \visible<4->{\item $\forall (w, w') \in E \ Q(w, w') = \vec \pi [w] P[w', w] \geq (n! \cdot n \cdot (n-1))^{-1}$}
+	%    \visible<5->{\item $\forall (w, w') \in E \ |\{\gamma_{xy} : (w, w') \in \gamma_{xy}\}| \leq n!$}
+	%    \visible<6->{\item $\forall x, y \in \Omega \ |\gamma_{xy}| = n$}
+	%    \end{itemize}
+	%    }
+	%    \end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: carga máxima}
+		
+		{\small
+			Desarrollando la expresión obtenemos:
+			\begin{eqnarray*}
+				\rho(\Gamma) & = & \max_{e \in E_{P,\vec \pi}} \bigg(\frac{1}{Q(e)} \sum_{\gamma_{L_1,L_2} \in \Gamma \,:\, e \in \gamma_{L_1,L_2}} \vec \pi[L_1] \cdot \vec \pi[L_2] \cdot |\gamma_{L_1,L_2}|\bigg)\\
+				& \leq &  \max_{e \in E_{P,\vec \pi}} \bigg(n \cdot (n-1) \cdot n! \sum_{\gamma_{L_1,L_2} \in \Gamma \,:\, e \in \gamma_{L_1,L_2}} \frac{1}{n!} \cdot \frac{1}{n!} \cdot n\bigg)\\
+				& \leq &  \max_{e \in E_{P,\vec \pi}} \bigg(n \cdot (n-1) \cdot n! \cdot \frac{1}{n!} \cdot \frac{1}{n!} \cdot n \cdot n! \bigg)\\
+				& = &  \max_{e \in E_{P,\vec \pi}} n^2 \cdot (n-1)\\
+				& = & n^2 \cdot (n-1)
+			\end{eqnarray*}
+		}
+	\end{frame}
+	
+	
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Permutaciones de un Conjunto: Carga M\'axima}
+	%    
+	%    {\small
+	%    Desarrollando la expresi\'on,
+	%    \begin{eqnarray*}
+	%        \overline{\rho}(\Gamma) & \leq & (n! \cdot n \cdot (n-1)) \cdot n! \cdot n \cdot (n!)^{-2} \\
+	%         & = & n^2 \cdot (n-1)
+	%    \end{eqnarray*}
+	%    }
+	%    \end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Permutaciones de una lista: mixing time}
+		
+		{\footnotesize
+			Recordemos que para $x \in \Omega$ y $\varepsilon \in (0,1)$:
+			\begin{eqnarray*}
+				\tau_x(\varepsilon) & \leq & \rho(\Gamma) \cdot \bigg(\ln \frac{1}{\vec \pi[x]} + \ln \frac{1}{\varepsilon}\bigg)
+			\end{eqnarray*}
+			
+			\vs{6}
+			
+			\visible<2->{
+				Por lo tanto, tenemos que:
+				\begin{multline*}
+					\tau_x(\varepsilon) \ \leq \ n^2 \cdot (n-1) \cdot \bigg(\ln \frac{1}{\vec \pi[x]} + \ln \frac{1}{\varepsilon}\bigg)
+					\ =\\  n^2 \cdot (n-1) \cdot \bigg(\ln n! + \ln \frac{1}{\varepsilon}\bigg)
+					\ \leq \  n^2 \cdot (n-1) \cdot \bigg(n \cdot \ln n + \ln \frac{1}{\varepsilon}\bigg)
+				\end{multline*}
+			}
+			
+			\vs{4}
+			
+			\visible<3->{
+				Concluimos que la cadena converge rápido desde cualquier estado inicial.
+			}
+			
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un FPAUG para las permutaciones de una lista}
+		
+		{\small
+			
+			
+			\begin{ejercicio}
+				Utilizando el resultado anterior construya un FPAUG para el problema de generar permutaciones aleatorias de una lista con $n$ elementos y sin~repeticiones.
+				\vs{1}
+				\begin{itemize}
+					{\footnotesize
+						\item Su algoritmo debe realizar a lo más la siguiente cantidad de pasos en la cadena de Markov usada: $${\displaystyle \bigg\lceil n^2 \cdot (n-1) \cdot \bigg(n \cdot \ln n + \ln \frac{2}{\varepsilon}\bigg)\bigg\rceil}$$}
+				\end{itemize}
+				\vs{-3}
+			\end{ejercicio}
+			
+			
+		}
+	\end{frame}
+	
+	
+	
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Permutaciones de un Conjunto: Mixing Time}
+	%    
+	%    {\small
+	%    Recordemos que
+	%    \begin{eqnarray*}
+	%        \tau_x(\epsilon) \leq \overline{\rho} (\ln \pi(x)^{-1} + \ln \epsilon^{-1})
+	%    \end{eqnarray*}
+	%    
+	%    \vs{8}
+	%    
+	%    \visible<2->{
+	%    Luego, para nuestra cadena, sea $x \in \Omega$ un estado arbitrario
+	%    \begin{eqnarray*}
+	%        \tau_x(\epsilon) & \leq & n^2 \cdot (n-1) (\ln \pi(x)^{-1} + \ln \epsilon^{-1}) \\
+	%         & = & n^2 \cdot (n-1) (\ln n! + \ln \epsilon^{-1}) \\
+	%         & \in & O(n^2 \cdot (n-1) (n \ln n + \ln \epsilon^{-1}))
+	%    \end{eqnarray*}
+	%    }
+	%    
+	%    \visible<3->{
+	%    Concluimos que la cadena converge r\'apidamente para cualquier estado inicial.
+	%    }
+	%    }
+	%    \end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Un tercer ejemplo: matchings de un grafo}
+		
+		{\small
+			Dado un grafo $G=(V,E)$ no dirigido, un matching en $G$ es un conjunto de arcos $M \subseteq E$ que satisface las siguientes condiciones:
+			\begin{itemize}
+				\item Ningún arco en $M$ es un loop $\{a,a\} = \{a\}$
+				
+				\item Para cada par de arcos $\{a_1,b_1\}, \{a_2, b_2\} \in M$ tales que $\{a_1,b_1\} \neq \{a_2,b_2\}$, se tiene que $\{a_1,b_1\} \cap \{a_2,b_2\} = \emptyset$
+			\end{itemize}
+			
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Matchings de un grafo: ejemplos}
+		
+		{\small
+			
+			\begin{overlayarea}{\textwidth}{4cm}
+				
+				\only<1|handout:1>{
+					\begin{center}
+						\begin{tikzpicture}
+						\node[circ] (n1) {$1$};
+						\node[circ, right=10mm of n1] (n2) {$2$}
+						edge[arrw] node[above] {} (n1);
+						\node[circ, below=10mm of n1] (n3) {$3$}
+						edge[arrw] node[below] {} (n2)
+						edge[arrw] node[left] {} (n1);
+						\node[circ, below=10mm of n2] (n4) {$4$}
+						edge[arrw] node[above] {} (n2);
+						\node[circ, below=10mm of n4] (n6) {$6$}
+						edge[arrw] node[above] {} (n1)
+						edge[arrw] node[above] {} (n4)
+						edge[arrw, bend right=30mm] node[above] {} (n2);
+						\node[circ, below=10mm of n3] (n5) {$5$}
+						edge[arrw] node[above] {} (n2)
+						edge[arrw] node[above] {} (n3)
+						edge[arrw] node[above] {} (n4)
+						edge[arrw] node[above] {} (n6);
+						\end{tikzpicture}
+					\end{center}
+				}
+				
+				\only<2|handout:2>{
+					\begin{center}
+						\begin{tikzpicture}
+						\node[circ] (n1) {$1$};
+						\node[circ, right=10mm of n1] (n2) {$2$}
+						edge[arrw] node[above] {} (n1);
+						\node[circ, below=10mm of n1] (n3) {$3$}
+						edge[arrw] node[below] {} (n2)
+						edge[arrw] node[left] {} (n1);
+						\node[circ, below=10mm of n2] (n4) {$4$}
+						edge[arrw] node[above] {} (n2);
+						\node[circ, below=10mm of n4] (n6) {$6$}
+						edge[arrw] node[above] {} (n1)
+						edge[arrw] node[above] {} (n4)
+						edge[arrw, bend right=30mm,color=red,line width=0.5mm] node[above] {} (n2);
+						\node[circ, below=10mm of n3] (n5) {$5$}
+						edge[arrw] node[above] {} (n2)
+						edge[arrw] node[above] {} (n3)
+						edge[arrw,color=red,line width=0.5mm] node[above] {} (n4)
+						edge[arrw] node[above] {} (n6);
+						\end{tikzpicture}
+					\end{center}
+				}
+				
+				\only<3|handout:3>{
+					\begin{center}
+						\begin{tikzpicture}
+						\node[circ] (n1) {$1$};
+						\node[circ, right=10mm of n1] (n2) {$2$}
+						edge[arrw] node[above] {} (n1);
+						\node[circ, below=10mm of n1] (n3) {$3$}
+						edge[arrw] node[below] {} (n2)
+						edge[arrw,color=red,line width=0.5mm] node[left] {} (n1);
+						\node[circ, below=10mm of n2] (n4) {$4$}
+						edge[arrw] node[above] {} (n2);
+						\node[circ, below=10mm of n4] (n6) {$6$}
+						edge[arrw] node[above] {} (n1)
+						edge[arrw] node[above] {} (n4)
+						edge[arrw, bend right=30mm,color=red,line width=0.5mm] node[above] {} (n2);
+						\node[circ, below=10mm of n3] (n5) {$5$}
+						edge[arrw] node[above] {} (n2)
+						edge[arrw] node[above] {} (n3)
+						edge[arrw,color=red,line width=0.5mm] node[above] {} (n4)
+						edge[arrw] node[above] {} (n6);
+						\end{tikzpicture}
+					\end{center}
+				}
+				
+				
+			\end{overlayarea}
+			
+			
+			
+		}
+	\end{frame}
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Contando el número de matchings de un grafo}
+		
+		{\small
+			Dado un grafo $G$ no dirigido, sea $\smatching(G)$ una función que retorna el número de matchings de $G$
+			
+			\vs{8}
+			
+			\visible<2->{
+				\begin{teorema}
+					$\smatching$ es $\sharpp$-completo y $L_{\smatching} \in \ptime$
+				\end{teorema}
+			}
+			
+			\vs{8}
+			
+			\visible<3->{
+				Entonces puede existir un FPRAS para $\smatching$
+				\begin{itemize}
+					\item ¿Qué herramientas podemos usar para construir este FPRAS?
+				\end{itemize}
+			}
+			
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Construyendo un FPRAS para $\smatching$}
+		
+		{\footnotesize
+			
+			Considere la siguiente relación:
+			\begin{multline*}
+				R_{\text{MATCHING}} \ =\ \{(G,M) \mid G \text{ es un grafo no dirigido y}\\
+				M \text{ es un matching de G}\}
+			\end{multline*}
+			
+			\vs{2}
+			
+			\visible<2->{
+				\begin{proposition}
+					$R_{\text{MATCHING}}$ es auto-reducible.
+					\begin{itemize}
+						\item ¿Cómo puede ser codificado $M$ para que se cumpla esta propiedad?
+					\end{itemize}
+			\end{proposition}}
+			
+			\vs{8}
+			
+			\visible<3->{
+				Por el teorema de Jerrum, Valiant \& Vazirani, necesitamos entonces un FPAUG para $R_{\text{MATCHING}}$ para obtener un FPRAS para $\smatching$
+				\begin{itemize}
+					\alert{\item Usamos una cadena de Markov para construir este FPAUG}
+			\end{itemize}}
+			
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una cadena de Markov para los matchings de un grafo}
+		
+		{\small
+			Sea $G = (V,E)$ un grafo no dirigido 
+			
+			\vs{8}
+			
+			Consideramos una cadena de Markov con conjunto de estados:
+			\begin{eqnarray*}
+				\Omega & = & \{M \subseteq E \mid M \text{ es un matching de }G\}
+			\end{eqnarray*}
+			
+		}
+		
+	\end{frame}
+	
+	
+	\definecolor{itemblue}{rgb}{0.15, 0.4, 1}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una cadena de Markov para los matchings de un grafo}
+		
+		{\footnotesize
+			
+			Dado $M \in \Omega$, el procedimiento para ejecutar una transición es el siguiente:
+			\begin{enumerate}
+				\visible<2->{\item Con probabilidad $\frac{1}{2}$ nos quedamos en $M$}
+				\visible<3->{\item En caso contrario, escogemos un arco $e \in M$, con $e = \{u, v\}$ y $u \neq v$, de manera aleatoria y con distribución uniforme, y hacemos lo siguiente:}
+				\begin{enumerate}
+					{\footnotesize 
+						\visible<4->{\item si $e \in M$, nos movemos a $M \smallsetminus \{e\}$}
+						\visible<5->{\item si $e \cap e' = \emptyset$ para cada $e' \in M$, nos movemos a $M \cup \{e\}$}
+						\visible<6->{\item si $|e \cap e'| = 1$ para algún $e' \in E$, y $e \cap e'' = \emptyset$ para todo $e'' \in M \smallsetminus \{e'\}$, entonces nos movemos a $(M \smallsetminus \{e'\}) \cup \{e\}$}
+						\visible<7->{\item en otro caso, nos quedamos en $M$}}
+				\end{enumerate}
+			\end{enumerate}
+			
+			\vs{6}
+			
+			\visible<8->{
+				Llamamos a los cambios 2.1, 2.2 y 2.3 transiciones tipo 1, 2 y 3, respectivamente
+			}
+			
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Una cadena de Markov para los matchings de un grafo}
+		
+		{\small
+			
+			\begin{exampleblock}{Ejercicios}
+				Considere la cadena de Markov definida en las transparencias anteriores.
+				\vs{1}
+				\begin{enumerate}
+					\item Demuestre que la cadena es irreducible y aperiódica
+					\vs{1}
+					\item Demuestre que la cadena es reversible y su distribución estacionaria es la distribución uniforme sobre $\Omega$
+				\end{enumerate}
+			\end{exampleblock}
+			
+			
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Matchings de un grafo: caminos canónicos}
+		
+		{\small
+			Sea $G$ un grafo no dirigido.
+			
+			\vs{8}
+			
+			Suponemos dado un orden lineal para el conjunto de los caminos y ciclos simples en $G$, y suponemos que cada uno de ellos tiene un vértice inicial.
+			\begin{itemize}
+				\visible<2->{\item Si el camino no es un ciclo, el vértice inicial tiene que ser un extremo
+					\item Si el camino es un ciclo, el vértice inicial es un nodo arbitrario}
+			\end{itemize}
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Ejemplo de un orden sobre los caminos y ciclos simples}
+		
+		{\small
+			
+			Considere el siguiente grafo:
+			\begin{center}
+				\begin{tikzpicture}
+				\node[circ] (n1) {$1$};
+				\node[circ, right=10mm of n1] (n2) {$2$}
+				edge[arrw] node[above] {} (n1);
+				\node[circ, below=10mm of n1] (n3) {$3$}
+				edge[arrw] node[below] {} (n2)
+				edge[arrw] node[above] {} (n1);
+				\node[circ, below=10mm of n2] (n4) {$4$}
+				edge[arrw] node[above] {} (n2);
+				\end{tikzpicture}
+			\end{center}
+			
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Ejemplo de un orden sobre los caminos y ciclos simples}
+		
+		
+		{\small
+			
+			
+			\only<1|handout:1>{
+				Un orden lineal para los caminos y ciclos simples:
+				\begin{columns}
+					\begin{column}{0.5\textwidth}
+						\begin{itemize}
+							\item $Q_1 = (1, 2)$
+							\item $Q_2 = (1, 3, 2)$
+							\item $Q_3 = (1, 3)$
+							\item $Q_4 = (1, 2, 3)$
+							\item $Q_5 = (1, 2, 4)$
+							\item $Q_6 = (1, 3, 2, 4)$
+							\item $Q_7 = (1, 2, 3, 1)$
+						\end{itemize}
+					\end{column}
+					\begin{column}{0.5\textwidth}
+						\begin{itemize}
+							\item $Q_8 = (2, 3)$
+							\item $Q_9 = (2, 1, 3)$
+							\item $Q_{10} = (2, 4)$
+							\item $Q_{11} = (3, 1, 2, 4)$
+							\item $Q_{12} = (3, 2, 4)$
+						\end{itemize}
+					\end{column}
+				\end{columns}
+			}
+			
+			
+			
+			\only<2|handout:2>{
+				Y un vértice inicial para cada camino:
+				\begin{columns}
+					\begin{column}{0.5\textwidth}
+						\begin{itemize}
+							\item $Q_1 = (\alert{1}, 2)$
+							\item $Q_2 = (\alert{1}, 3, 2)$
+							\item $Q_3 = (\alert{1}, 3)$
+							\item $Q_4 = (\alert{1}, 2, 3)$
+							\item $Q_5 = (\alert{1}, 2, 4)$
+							\item $Q_6 = (\alert{1}, 3, 2, 4)$
+							\item $Q_7 = (\alert{1}, 2, 3, 1)$ (ciclo)
+						\end{itemize}
+					\end{column}
+					\begin{column}{0.5\textwidth}
+						\begin{itemize}
+							\item $Q_8 = (\alert{2}, 3)$
+							\item $Q_9 = (\alert{2}, 1, 3)$
+							\item $Q_{10} = (\alert{2}, 4)$
+							\item $Q_{11} = (\alert{3}, 1, 2, 4)$
+							\item $Q_{12} = (\alert{3}, 2, 4)$
+						\end{itemize}
+					\end{column}
+				\end{columns}
+			}
+			
+			\vs{4}
+			
+			
+			
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Definición de los caminos canónicos}
+		
+		{\small
+			Sean $I, F \in \Omega$
+			
+			\vs{8}
+			
+			\visible<2->{
+				Podemos describir la diferencia simétrica $(I \smallsetminus F) \cup (F \smallsetminus I)$ como una secuencia $Q_1, \ldots, Q_r$ de caminos y ciclos simples disjuntos que respetan el orden lineal.
+				\begin{itemize}
+					\item Construimos el camino canónico de $I$ a $F$ secuencialmente a partir de estos caminos y ciclos simples
+					\begin{itemize}
+						{\footnotesize
+							\item Tenemos que tratar a los caminos y ciclos simples de distinta forma
+						}
+					\end{itemize}
+				\end{itemize}
+			}
+			
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Caso 1: $Q_i$ no es un ciclo}
+		
+		{\footnotesize
+			
+			Sea $Q_i = (v_0, v_1, \dotsc, v_\ell)$, con $v_i \in \Omega$ para todo $i \in \{0, \ldots, \ell\}$ y $v_0$ el vértice~inicial
+			
+			\vs{8}   
+			
+			\visible<2->{En primer lugar, suponemos que $\{v_0, v_1\} \in F$}
+			\vs{1}
+			\begin{itemize}
+				\visible<3->{\item Realizamos una serie de transiciones de tipo 3, remplazando $\{v_{2j+1}, v_{2j+2}\}$ por $\{v_{2j}, v_{2j+1}\}$ para $j = 0, 1, \ldots$ tal que $2j+2 \leq \ell$}
+				\visible<4->{
+					\begin{itemize}
+						{\footnotesize
+							\alert{\item En cada paso quitamos un arco $\{v_{2j+1}, v_{2j+2}\} \in I$ y agregamos el arco anterior $\{v_{2j}, v_{2j+1}\} \in F$}}
+					\end{itemize}
+				}
+				\visible<5->{\item Finalizamos con una transición de tipo 2 si $\ell$ es impar}
+				\visible<6->{
+					\begin{itemize}
+						{\footnotesize
+							\alert{\item Si $\ell$ es impar, falta considerar el arco $\{v_{\ell-1}, v_\ell\}$, que agregamos a través de una transición de tipo 2}}
+					\end{itemize}
+				}
+			\end{itemize}
+		}
+		
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Caso 1: $Q_i$ no es un ciclo}
+		
+		{\footnotesize
+			
+			Sea $Q_i = (v_0, v_1, \dotsc, v_\ell)$, con $v_i \in \Omega$ para todo $i \in \{0, \ldots, \ell\}$ y $v_0$ el vértice~inicial
+			
+			\vs{8}   
+			
+			\visible<2->{En segundo lugar, suponemos que $\{v_0, v_1\} \in I$}
+			\vs{1}
+			\begin{itemize}
+				\visible<3->{\item Partimos con una transición de tipo 1, removiendo $\{v_0, v_1\}$}
+				\visible<4->{\item Procedemos con el camino reducido $(v_1, \dotsc, v_\ell)$}
+				\visible<5->{
+					\begin{itemize}
+						{\footnotesize
+							\alert{\item Nótese que si el camino $(v_1, \dotsc, v_\ell)$ tiene a $v_\ell$ como vértice inicial y $\{v_{\ell-1}, v_\ell\} \in I$ entraremos nuevamente en este caso}}
+					\end{itemize}
+				}
+			\end{itemize}
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Caso 2: $Q_i$ es un ciclo}
+		
+		{\footnotesize
+			
+			Sea $Q_i = (v_0, v_1, \dotsc, v_{2\ell+1}, v_0)$, con $v_i \in \Omega$ para todo $i \in \{0 , \ldots, 2\ell+1\}$, $v_0$ el vértice inicial y $\{v_{2j}, v_{2j+1}\} \in I$ para todo $j \in \{0, \ldots, \ell\}$
+			\vs{1}
+			\begin{itemize}
+				\visible<2->{\item El ciclo debe tener un número par de aristas. ¿Por qué?}
+				\visible<3->{\item Nótese que el orden del ciclo no es relevante, por lo que si $\{v_{2j}, v_{2j+1}\} \in F$ para todo $j \in \{0, \ldots, \ell\}$, podemos considerar el ciclo en el orden invertido y cumplirá con las condiciones pedidas}
+			\end{itemize}
+			
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Caso 2: $Q_i$ es un ciclo}
+		
+		{\footnotesize
+			
+			Sea $Q_i = (v_0, v_1, \dotsc, v_{2\ell+1}, v_0)$, con $v_i \in \Omega$ para todo $i \in \{0 , \ldots, 2\ell+1\}$, $v_0$ el vértice inicial y $\{v_{2j}, v_{2j+1}\} \in I$ para todo $j \in \{0, \ldots, \ell\}$
+			\vs{1}
+			\begin{itemize}
+				\visible<2->{\item Partimos com una transición de tipo 1 removiendo $\{v_0, v_1\}$}
+				\visible<3->{\item Denotamos al camino simple resultante como $O = (v_1, \dotsc, v_{2j+1}, v_0)$, con extremos $v_1, v_0$}
+				\visible<4->{\item Tratamos a $O$ igual que cualquier camino simple utilizando $v_0$ o $v_1$ como el vértice inicial}
+				\visible<5->{
+					\begin{itemize}
+						{\footnotesize
+							\alert{\item Se utiliza el orden inverso para $O$ para diferenciar a los ciclos simples de los caminos simples durante el análisis del mixing time de la cadena de Markov}}
+					\end{itemize}
+				}
+			\end{itemize}
+		}
+	\end{frame}
+	
+	
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Definición de los caminos canónicos: un ejemplo}
+		
+		
+		{\small
+			
+			Consideremos el ejemplo introducido anteriormente. Supongamos que queremos encontrar el camino canónico entre los siguientes matchings:
+			
+			\vs{3}
+			
+			\begin{columns}
+				\begin{column}{0.5\textwidth}
+					\begin{center}
+						I
+					\end{center}
+					\begin{overlayarea}{\textwidth}{3.5cm}
+						
+						\begin{center}
+							\begin{tikzpicture}
+							\node[circ] (n1) {$1$};
+							\node[circ, right=10mm of n1] (n2) {$2$}
+							edge[arrw] node[above] {} (n1);
+							\node[circ, below=10mm of n1] (n3) {$3$}
+							edge[arrw] node[below] {} (n2)
+							edge[arrw, color=red,line width=0.5mm] node[above] {} (n1);
+							\node[circ, below=10mm of n2] (n4) {$4$}
+							edge[arrw, color=red,line width=0.5mm] node[above] {} (n2);
+							\end{tikzpicture}
+						\end{center}
+						
+					\end{overlayarea}
+				\end{column}
+				\begin{column}{0.5\textwidth}
+					\begin{center}
+						F
+					\end{center}
+					\begin{overlayarea}{\textwidth}{3.5cm}
+						
+						\begin{center}
+							\begin{tikzpicture}
+							\node[circ] (n1) {$1$};
+							\node[circ, right=10mm of n1] (n2) {$2$}
+							edge[arrw, color=red,line width=0.5mm] node[above] {} (n1);
+							\node[circ, below=10mm of n1] (n3) {$3$}
+							edge[arrw] node[below] {} (n2)
+							edge[arrw] node[above] {} (n1);
+							\node[circ, below=10mm of n2] (n4) {$4$}
+							edge[arrw] node[above] {} (n2);
+							\end{tikzpicture}
+						\end{center}
+						
+					\end{overlayarea}
+				\end{column}
+			\end{columns}
+			
+			
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Definición de los caminos canónicos: un ejemplo}
+		
+		{\small
+			
+			La diferencia simétrica \alert{$(I \smallsetminus F) \cup (F \smallsetminus I) = \{\{1, 3\}, \{2, 4\}, \{1, 2\}\}$}, lo que corresponde al camino simple $Q_{11} = (\alert{3}, 1, 2, 4)$
+			\begin{itemize}
+				\visible<2->{\item Este camino no es un ciclo y su primera arista es $\{3, 1\} \in I$}
+			\end{itemize}
+			
+			\vs{8}
+			
+			\visible<3->{Luego, el camino canónico entre estos estados corresponde a:}
+			\begin{itemize}
+				\visible<4->{\item Utilizar una transición de tipo 1 para remover $\{3, 1\}$}
+				\visible<5->{\item Utilizar una transición de tipo 3 para remplazar $\{2, 4\}$ por $\{1, 2\}$}
+			\end{itemize}
+			
+			
+		}
+	\end{frame}
+	
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Definición de los caminos canónicos: un ejemplo}
+		
+		{\small
+			
+			En un ejemplo más extenso, simplemente realizamos las transiciones correspondientes a cada camino y ciclo simple en el orden establecido entre ellos.
+			\begin{itemize}
+				\visible<2->{\item Nótese que, dado que los caminos y ciclos simples utilizados tienen~que ser disjuntos, solo habrá una forma de crear cada camino~canónico}
+			\end{itemize}
+			
+		}
+	\end{frame}
+	
+	%--------------------------------------------------
+	\begin{frame}
+		\frametitle{Matchings de un grafo: mixing time}
+		
+		{\small
+			A partir del conjunto de caminos canónicos descritos, podemos establecer la siguiente cota para el mixing time de la cadena.
+			
+			\vs{8}
+			
+			\visible<2->{
+				Suponiendo que el grafo (no dirigido) de entrada es $G = (V,E)$, $M \in \Omega$ es un matching arbitrario de $G$ y $\varepsilon \in (0,1)$, se tiene que:
+				\begin{eqnarray*}
+					\tau_M(\varepsilon) & \leq & 128 \cdot |E|^2 \cdot \left(\ln |\Omega| + \ln \frac{1}{\varepsilon}\right) \\
+					& \leq & 128 \cdot |E|^2 \cdot \left(\ln 2^{|E|} + \ln \frac{1}{\varepsilon}\right) \\
+					& = & 128 \cdot |E|^2 \cdot \left(|E| \cdot \ln 2 + \ln \frac{1}{\varepsilon}\right)
+				\end{eqnarray*}
+			}
+		}
+	\end{frame}
+	
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Matchings de un grafo: caminos canónicos}
+	%    
+	%    {\small
+	%    Supongamos que existe un orden entre los caminos simples del grafo y que cada uno tiene un v\'ertice inicial
+	%    \begin{itemize}
+	%    \visible<2->{\item Si el camino no es ciclo, el v\'ertice inicial tiene que ser un extremo}
+	%    \visible<3->{\item Si el camino es ciclo, el v\'ertice inicial es arbitrario}
+	%    \end{itemize}
+	%    }
+	%    \end{frame}
+	
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Matchings de un Grafo: Caminos Can\'onicos}
+	%    
+	%    {\small
+	%    Sean $I, F \in \Omega$, podemos escribir la diferencia sim\'etrica $I \oplus F$ como una secuencia $Q_1, \dotsc, Q_r$ de caminos simples disjuntos que respetan el orden
+	%    \begin{itemize}
+	%        \item Construimos el camino can\'onico secuencialmente a partir de estos caminos simples
+	%        \item Trataremos distinto a los caminos que son ciclos y a los que no lo son
+	%    \end{itemize}
+	%    }
+	%    \end{frame}
+	%    
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Matchings de un Grafo: Caminos Can\'onicos}
+	%    
+	%    {\small
+	%    \textbf{Caso 1:} $Q_i$ no es un ciclo
+	%    
+	%    \vs{4}
+	%    
+	%    Sea $Q_i = (v_0, v_1, \dotsc, v_l)$, con $v_i \in \Omega$ para todo $0 \leq i \leq l$ y $v_0$ el v\'ertice inicial
+	%    \begin{itemize}
+	%        \item Supongamos que $(v_0, v_1) \in F$
+	%        \begin{itemize}
+	%            \item Realizamos una serie de transiciones de tipo 0, remplazando $(v_{2j+1}, v_{2j+2})$ por $(v_{2j}, v_{2j+1})$ para $j = 0, 1, \dotsc$
+	%            \item Finalizamos con una transici\'on de tipo 2 si $l$ es impar
+	%        \end{itemize}
+	%        \item Si $(v_0, v_1) \in I$
+	%        \begin{itemize}
+	%            \item Partimos con una transici\'on de tipo 1, removiendo $(v_0, v_1)$
+	%            \item Procedemos como el caso anterior para el camino $(v_1, \dotsc, v_l)$
+	%        \end{itemize}
+	%    \end{itemize}
+	%    }
+	%    \end{frame}
+	%    
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Matchings de un Grafo: Caminos Can\'onicos}
+	%    
+	%    {\small
+	%    \textbf{Caso 2:} $Q_i$ es un ciclo
+	%    
+	%    \vs{4}
+	%    
+	%    Sea $Q_i = (v_0, v_1, \dotsc, v_{2l+1})$, con $v_i \in \Omega$ para todo $0 \leq i \leq 2l+1$, $v_0$ el v\'ertice inicial y $(v_{2j}, v_{2j+1}) \in I$ para $0 \leq j \leq l$
+	%    \begin{itemize}
+	%        \item Partimos por realizar una transici\'on de tipo 1, removiendo $(v_0, v_1)$
+	%        \item Denotemos al camino abierto resultante por $O$, con extremos $v_0, v_1$
+	%        \item Supongamos que $v_k$, con $k \in \{0, 1\}$ no es el v\'ertice inicial
+	%        \begin{itemize}
+	%            \item Tratamos a $O$ como en el caso 1, pero utilizando $v_k$ como el v\'ertice inicial
+	%        \end{itemize}
+	%    \end{itemize}
+	%    }
+	%    \end{frame}
+	%    
+	%    %--------------------------------------------------
+	%    \begin{frame}
+	%    \frametitle{Matchings de un Grafo: Mixing Time}
+	%    
+	%    {\small
+	%    A partir del conjunto de caminos can\'onicos descritos, podemos establecer la siguiente cota para el mixing time de la cadena.
+	%    
+	%    \vs{8}
+	%    
+	%    \visible<2->{
+	%    Sea $x \in \Omega$ un matching arbitrario,
+	%    \begin{eqnarray*}
+	%        \tau_x(\epsilon) & \leq & 128|E|^2\left(\ln |\Omega| + \ln \frac{1}{\epsilon}\right) \\
+	%         & \leq & 128|E|^2\left(\ln 2^{|E|} + \ln \frac{1}{\epsilon}\right) \\
+	%         & = & 128|E|^2\left(|E| \ln 2 + \ln \frac{1}{\epsilon}\right) \\
+	%         & \in & O\left(|E|^2\left(|E| \ln 2 + \ln \frac{1}{\epsilon}\right)\right)
+	%    \end{eqnarray*}
+	%    }
+	%    }
+	%    \end{frame}
+\end{document}
+
+
+
