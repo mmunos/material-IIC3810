@@ -1,0 +1,13 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/inner/beamerinnerthemesparql.sty,v 1.0 2006/09/29 20:53:09$
+
+\DeclareOptionBeamer{shadow}[true]{\def\beamer@themerounded@shadow{#1}}
+\ExecuteOptionsBeamer{shadow=false}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\setbeamertemplate{blocks}[rounded][shadow=\beamer@themerounded@shadow]
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+  
+\mode<all>

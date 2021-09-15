@@ -1,0 +1,73 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+
+\newcommand{\eps}{\varepsilon}
+
+\title{Cota del mixing time}
+\date{}
+
+
+\begin{document}
+	\maketitle
+	
+	Suponiendo que el grafo (no dirigido) de entrada $G = (V,E)$, $M \in \Omega$ es un matching arbitrario de $G$ y $\eps\in(0,1)$, vamos a demostrar primero la siguiente cota:
+	$$
+	\rho(\Gamma) \leq 2|E||V|.
+	$$
+	
+	Recordemos que la carga maxima esta definida como:
+	$$
+	\rho(\Gamma) = \max_{t \in E_{P,\vec \pi}} \bigg(\frac{1}{Q(t)} \sum_{\gamma_{M_x,M_y} \in \Gamma \,:\, t \in \gamma_{M_x,M_y}} \vec \pi[M_x] \cdot \vec \pi[M_y] \cdot |\gamma_{M_x,M_y}|\bigg).
+	$$
+	Donde $t = \{M_1, M_2\}$. Notamos que $\bar{\pi}[M'] = \frac{1}{|\Omega|}$ para cualquier $M'\in\Omega$. Ahora, notamos que $P[M_1,M_2] = \frac{1}{2|E|}$ debido a que para $t$ existe exactamente una arista en $E$ con la que se pasa de $M_1$ a $M_2$, y solo se llega a elegir si pasamos al paso 2 del algoritmo, por lo que $Q(t) = \frac{1}{2|E||\Omega|}$. Con esto tenemos un resultado parcial:
+	\begin{align*}
+	\rho(\Gamma) &= \max_{t \in E_{P,\vec \pi}} \bigg(2|E||\Omega| \sum_{\gamma_{M_x,M_y} \in \Gamma \,:\, t \in \gamma_{M_x,M_y}} \frac{1}{|\Omega|^2} \cdot |\gamma_{M_x,M_y}|\bigg)\\
+	&= \max_{t \in E_{P,\vec \pi}} \bigg(2\frac{|E|}{|\Omega|} \sum_{\gamma_{M_x,M_y} \in \Gamma \,:\, t \in \gamma_{M_x,M_y}} |\gamma_{M_x,M_y}|\bigg).
+	\end{align*}
+
+	Lo que nos queda es acotar el valor de $\sum_{\gamma_{M_x,M_y} \in \Gamma \,:\, t \in \gamma_{M_x,M_y}} \frac{1}{|\Omega|^2} \cdot |\gamma_{M_x,M_y}|$, y primero notamos que $|\gamma_{M_x,M_y}| \leq |V|$. Para contar la cantidad de caminos $\gamma_{M_x, M_y}$ por los que pasa $t$ usamos una técnica análoga al ejemplo anterior.
+	
+	Considere la siguiente función que depende de $t$ y que recibe un $M_x$ y un $M_y$ para los cuales $t\in\gamma_{M_x, M_y}$:
+	$$
+	\eta_t(M_x, M_y) = \begin{cases}
+		M_x \oplus M_y \oplus (M_1 \cup M_2) \setminus \{e^*\}, \ \ \ \text{si el paso de $t$ es de tipo 3 y $Q^t$ es un ciclo}\\
+		M_x \oplus M_y \oplus (M_1 \cup M_2) , \ \ \ \ \ \ \ \ \ \ \, \ \text{en otro caso.}
+		\end{cases}
+	$$
+	Por ahora, esta función no nos dice nada (y aún no definimos $e^*$ ni $Q^t$), pero nuestra idea es demostrar que es inyectiva sobre $\Omega$, y con esto, podemos mostrar que la cantidad de caminos por los que pasa $t$ está acotada por $|\Omega|$.
+	
+	En la función usamos la notación $A \oplus B = (A \setminus B) \cup (B \setminus A)$, por lo que obtenemos es un elemento $X \in 2^E$. Definimos $Q^t$ como el elemento en la secuencia $Q_1,\ldots,Q_r$ de $M_x \oplus M_y$ que se está modificando en $t$. Para ver que $X = \eta_t(M_x, M_y)$ es un matching, nos ponemos en tres casos:
+	\begin{itemize}
+		\item Si $Q^t$ es un camino, entonces la función va al segundo caso, (explicacion pendiente).
+		\item Si $Q^t$ es un ciclo y el paso de $t$ quita la primera arista o añade la última arista en $Q^t$.  (explicacion pendiente)
+		\item Si $Q^t$ es un ciclo y el paso de $t$ es de tipo 3. En este caso vamos a tener que tanto la primera arista como la última arista de $Q^t$ están ausentes tanto en $M_1$ como en $M_2$. Por lo tanto, al hacer la diferencia simétrica con $(M_1 \cup M_2)$ vamos a incluir en $X$ las dos aristas, que están conectadas por el primer vértice de $Q^t$. Para solucionar esto, quitamos la primera arista de $Q^t$, y así es como se define $e^*$.
+	\end{itemize}
+
+	Para ver que esta función es efectivamente inyectiva, vemos como recuperar $M_x$ y $M_y$ desde $X$ y $t$. Primero calculamos $M_x \oplus M_y$:
+	$$
+	M_x \oplus M_y = \begin{cases}
+		X\oplus (M_1 \cup M_2) \cup \{e^*\}, \ \ \ \text{si estábamos en el primer caso,}\\
+		X\oplus (M_1 \cup M_2),\  \ \ \ \  \ \ \ \ \ \ \ \text{en otro caso.}
+	\end{cases}
+	$$
+	Notamos que $M_x \oplus M_y$ define una secuencia de caminos y ciclos igual a $Q_1,\ldots,Q_r$, excepto por $Q^t = Q_{\ell}$. Para recuperar $M_x$ y $M_y$ basta ver que en $Q_1,\ldots,Q_{\ell-1}$ tenemos que $M_x$ es igual a $X$, y que en $Q_{\ell+1},\ldots,Q_r$ es igual a $M_1$. Para $Q^t$ podemos recuperar $M_x$ directamente desde $t$, y el resto de los casos es análogo. (creo que falta un caso)
+	
+	Para el segundo caso es más o menos directo ver que lo que resulta es un matching, . Para el primer caso hay que considerar 
+
+	Recordamos ahora la cota del mixing time que vimos anteriormente:
+	\begin{align*}
+	\tau_M(\eps) &\leq \rho(\Gamma)\cdot\left(\ln \frac{1}{\bar{\pi}[M]} + \ln \frac{1}{\eps}\right)\\
+	&= \rho(\Gamma)\cdot\left(\ln |\Omega| + \ln \frac{1}{\eps}\right)
+	\end{align*}
+	Podemos acotar la cantidad de matchings $|\Omega| \leq |V|!$. Una forma de ver esto es representar cada matching $M$ como una permutación del conjunto $\{1,...,n\}$ donde colocamos $i$ en la posición $j$ y viceversa ssi $(i,j)\in M$, y ponemos $i$ en la posición $i$ ssi no pertenece a ningún matching, y ver que cada permutación define a lo más un matching. 
+	\begin{align*}
+		\tau_M(\eps) &\leq \rho(\Gamma)\cdot\left(\ln |V|! + \ln \frac{1}{\eps}\right)\\
+		&\leq \rho(\Gamma)\cdot\left(|V|\ln |V| + \ln \frac{1}{\eps}\right)
+	\end{align*}
+	Obtenemos nuestra cota final:
+	$$
+	\tau_M(\eps) \leq 2|E||V|\cdot\left(|V|\ln |V| + \ln \frac{1}{\eps}\right)
+	$$
+	
+\end{document}
